@@ -4,6 +4,24 @@ import java.util.Date;
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 
+/**
+ * 모집정보를 처리해주는 VO입니다.
+ * @title 밭아쓰기
+ * @packagename : org.spider.batassugi.model.vo.seller
+ * @filename : RecruitVo.java
+ * @author : "GL_SangKyoung"
+ * @since : 2018. 5. 14.
+ * @version : 1.0
+ * @see 
+ * 
+ * <pre>
+ * == Modification Information ==
+ * 
+ * Date         AUTHOR           NOTE
+ * -----------  -------------    --------------------------------
+ * 2018. 5. 14.  "GL_SangKyoung"    최초작성
+ * </pre>
+ */
 public class RecruitVo {
   private Integer recruitNo;
   private Integer farmNo;
@@ -23,19 +41,20 @@ public class RecruitVo {
   }
 
   /**
-   * 설명은 직접쓰세요.
+   * 모집 정보를 가져오는 생성자.
    * 
-   * @param recruitNo 여기도 직접쓰세요.
-   * @param farmNo 여기도 직접쓰세요.
-   * @param recruitKind 여기도 직접쓰세요.
-   * @param recruitStartdate 여기도 직접쓰세요.
-   * @param recruitEnddate 여기도 직접쓰세요.
-   * @param price 여기도 직접쓰세요.
-   * @param recruitContent 여기도 직접쓰세요.
-   * @param recruitStatus 여기도 직접쓰세요.
-   * @param recruitSize 여기도 직접쓰세요.
-   * @param id 여기도 직접쓰세요.
-   * @param rentVo 여기도 직접쓰세요.
+   * @author "GL_SangKyoung"
+   * @param recruitNo   모집번호
+   * @param farmNo  농지번호
+   * @param recruitKind 농지종류(주말농장,일반)
+   * @param recruitStartdate    모집시작일
+   * @param recruitEnddate  모집종료일
+   * @param price   평당가격
+   * @param recruitContent  모집내용
+   * @param recruitStatus   모집상태
+   * @param recruitSize 대여평수 
+   * @param id  회원정보
+   * @param rentVo  대여정보 가져오기위한 rentVo
    */
   public RecruitVo(Integer recruitNo, Integer farmNo, String recruitKind, Date recruitStartdate,
       Date recruitEnddate, Integer price, String recruitContent, String recruitStatus,
