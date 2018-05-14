@@ -3,7 +3,7 @@ package org.spider.batassugi.model.service.common;
 import org.springframework.stereotype.Service;
 
 /**
- * 클래스 설명 : 공통영역에서 사용하는 서비스입니다.
+ * 공통영역에서 사용하는 서비스입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.service.common

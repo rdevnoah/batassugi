@@ -28,3 +28,4 @@ public class RecruitDao {
   @Resource
   private SqlSessionTemplate template;
 }
+
