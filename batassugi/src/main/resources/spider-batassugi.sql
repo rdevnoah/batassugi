@@ -233,7 +233,7 @@ drop table member_state;
 
 
 
--- 시퀀스 전체 삭제 쿼리문
+-- 시퀀스 전체 삭제 쿼리문입니다.
 drop sequence rent_SEQ;
 drop sequence recruit_SEQ;
 drop sequence farm_SEQ;
