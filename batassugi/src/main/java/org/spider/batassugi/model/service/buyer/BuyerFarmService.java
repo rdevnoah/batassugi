@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.model.service.buyer
- * @filename : BuyerFarmService.java
+ * @filename : BuyerFarmService.java 
  * @author : "SM HyeonGil Kim"
  * @since : 2018. 5. 14.
  * @version : 1.0

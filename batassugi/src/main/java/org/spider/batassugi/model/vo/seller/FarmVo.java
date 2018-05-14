@@ -4,6 +4,26 @@ import java.util.Date;
 import java.util.List;
 import org.spider.batassugi.model.vo.common.CropsVo;
 
+/**
+ * 농지정보VO 입니다.
+ * 
+ * @title 밭아쓰기
+ * @packagename : org.spider.batassugi.model.vo.seller
+ * @filename : FarmVo.java
+ * @author : "GL_SangKyoung"
+ * @since : 2018. 5. 14.
+ * @version : 1.0
+ * @see
+ * 
+ *      <pre>
+ * == Modification Information ==
+ * 
+ * Date         AUTHOR           NOTE
+ * -----------  -------------    --------------------------------
+ * 2018. 5. 14.  "GL_SangKyoung"    최초작성
+ * 
+ *      </pre>
+ */
 public class FarmVo {
 
   private Integer farmNo;
@@ -20,15 +40,16 @@ public class FarmVo {
   }
 
   /**
-   * 여기다 설명 쓰세요.
+   * 농지정보 및 농작물 정보를 가져오는 생성자.
    * 
-   * @param farmNo 여기다 설명 쓰세요.
-   * @param id 여기다 설명 쓰세요.
-   * @param farmSize 여기다 설명 쓰세요.
-   * @param farmAddress 여기다 설명 쓰세요.
-   * @param farmStartdate 여기다 설명 쓰세요.
-   * @param farmEnddate 여기다 설명 쓰세요.
-   * @param cropsVo 여기다 설명 쓰세요.
+   * @author "GL_SangKyoung"
+   * @param farmNo 농지번호.
+   * @param id 회원 아이디
+   * @param farmSize 농지사이즈.
+   * @param farmAddress 농지주소.
+   * @param farmStartdate 농지등록날짜.
+   * @param farmEnddate 농지계약종료날짜.
+   * @param cropsVo 농작물 정보를 가져오는 cropsVo
    */
   public FarmVo(Integer farmNo, String id, Integer farmSize, String farmAddress, Date farmStartdate,
       Date farmEnddate, List<CropsVo> cropsVo) {

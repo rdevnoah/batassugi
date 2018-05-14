@@ -5,7 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * 클래스 설명 : 반드시 마침표를 찍습니다.
+ * 관리자의 신고 처리를 위하여 신고 데이터를 불러오는 영속성 계층입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.dao.common

@@ -3,22 +3,23 @@ package org.spider.batassugi.model.service.seller;
 import org.springframework.stereotype.Service;
 
 /**
- * 클래스 설명 : 판매자가 농지 대여시 사용하는 서비스입니다.
- * @title 밭아쓰기
- * @packagename : org.spider.batassugi.service.seller
- * @filename : SellerFarmService.java
- * @author : "Team Spider"
- * @since : 2018. 5. 12.
- * @version : 1.0
- * @see 
+ * 판매자의 농지를 등록 및 수정하는 서비스와 농지를 대여중인 구매자들을 관리하는 서비스입니다.
  * 
- * <pre>
+ * @title 밭아쓰기
+ * @packagename : org.spider.batassugi.model.service.seller
+ * @filename : SellerFarmService.java
+ * @author : "PM KimYoungHo"
+ * @since : 2018. 5. 14.
+ * @version : 1.0
+ * @see
+ * 
+ *      <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 12.  "Team Spider"    최초작성
- * </pre>
+ * 2018. 5. 14.  "PM KimYoungHo"    최초작성
+ *      </pre>
  */
 @Service
 public class SellerFarmService {
