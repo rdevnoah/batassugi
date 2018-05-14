@@ -3,7 +3,7 @@ package org.spider.batassugi.model.service.admin;
 import org.springframework.stereotype.Service;
 
 /**
- * 클래스 설명 : 관리자에서 신고부분을 처리하는 서비스입니다.
+ * 관리자의 신고처리를 위한 서비스입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.service.admin

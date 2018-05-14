@@ -3,7 +3,8 @@ package org.spider.batassugi.model.service.admin;
 import org.springframework.stereotype.Service;
 
 /**
- * 클래스 설명 : 관리자 처리 내용중 신고 서비스만 제외한 나머지 서비스.
+ * 구매자의 판매자 신청 승인을 하기 위한 관리자 서비스입니다.
+ * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.service.admin
  * @filename : AdminService.java

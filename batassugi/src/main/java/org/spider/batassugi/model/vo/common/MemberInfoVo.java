@@ -21,14 +21,14 @@ public class MemberInfoVo {
   /**
    * 멤버 부가정보.
    * 
-   * @param id
-   * @param email
-   * @param tel
-   * @param address
-   * @param birthday
-   * @param gender
-   * @param regdate
-   * @param likeCrops
+   * @param id 회원 아이디.
+   * @param email 회원 이메일.
+   * @param tel 회원 전화번호.
+   * @param address 회원 주소.
+   * @param birthday 회원 생일.
+   * @param gender 회원 성별.
+   * @param regdate 회원 가입일.
+   * @param likeCrops 회원 기호 작물.
    */
   public MemberInfoVo(String id, String email, String tel, String address, Date birthday,
       String gender, Date regdate, List<CropsVo> likeCrops) {

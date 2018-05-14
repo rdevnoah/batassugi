@@ -15,7 +15,7 @@ public class CropsVo {
    * 
    * @param cropsNo 작물 번호.
    * @param cropsName 작물이름.
-   * @param cropsLevel 작물 난이도
+   * @param cropsLevel 작물 난이도.
    */
   public CropsVo(Integer cropsNo, String cropsName, String cropsLevel) {
     super();

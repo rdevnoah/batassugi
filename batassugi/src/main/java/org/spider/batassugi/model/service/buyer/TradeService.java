@@ -1,13 +1,13 @@
 package org.spider.batassugi.model.service.buyer;
 
 /**
- * 클래스 설명 : 구매자의 교환시 이용하는 서비스입니다.
+ * 구매자가 거래 게시판에 게시글을 관리(작성, 수정, 삭제, 검색) 할 수 있는 서비스 입니다.
  * 
  * @title 밭아쓰기
- * @packagename : org.spider.batassugi.service.buyer
+ * @packagename : org.spider.batassugi.model.service.buyer
  * @filename : TradeService.java
- * @author : "Team Spider"
- * @since : 2018. 5. 12.
+ * @author : "SM HyeonGil Kim"
+ * @since : 2018. 5. 14.
  * @version : 1.0
  * @see
  * 
@@ -16,7 +16,7 @@ package org.spider.batassugi.model.service.buyer;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 14.  "SM HyeonGil Kim"    최초작성
  *      </pre>
  */
 public class TradeService {

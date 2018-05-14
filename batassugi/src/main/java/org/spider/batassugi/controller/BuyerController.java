@@ -3,13 +3,13 @@ package org.spider.batassugi.controller;
 import org.springframework.stereotype.Controller;
 
 /**
- * 클래스 설명 : 구매자가 사용하는 Controller입니다.
+ * 구매자가 처리한 서비스와 뷰와 연결해주는 Controller입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.controller
  * @filename : BuyerController.java
- * @author : "Team Spider"
- * @since : 2018. 5. 12.
+ * @author : "SM HyeonGil Kim"
+ * @since : 2018. 5. 14.
  * @version : 1.0
  * @see
  * 
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Controller;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 14.  "SM HyeonGil Kim"    최초작성
  *      </pre>
  */
 @Controller
