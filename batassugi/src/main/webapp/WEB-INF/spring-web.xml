@@ -11,12 +11,12 @@
 	<mvc:annotation-driven />
 	<aop:aspectj-autoproxy />
 
-<!-- 	<mvc:resources location="/resources/css/" mapping="/css/**"/>
+	<mvc:resources location="/resources/css/" mapping="/css/**"/>
 	<mvc:resources location="/resources/img/" mapping="/img/**"/>
 	<mvc:resources location="/resources/js/" mapping="/js/**"/>
 	<mvc:resources location="/resources/font/" mapping="/font/**"/>
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
-	<mvc:resources location="/resources/favicon.ico" mapping="/favicon.ico"/> -->
+	<mvc:resources location="/resources/favicon.ico" mapping="/favicon.ico"/>
 
 	<!-- view resolver -->
 	<bean id="viewResolver"
