@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+    <package name="org.spider.batassugi.model" />
+  </typeAliases>
+  <mappers>
+    <mapper resource="mybatis/config/member.xml" /> <!-- 고객 정보에 연결되는 xml --> 
+  </mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+
