@@ -110,7 +110,7 @@ CREATE TABLE apply_seller
     apply_resultdate    date            NULL, 
     apply_reason        VARCHAR2(50)    NULL, 
     CONSTRAINT APPLY_FAMMER_PK PRIMARY KEY (apply_no),
-    CONSTRAINT FK_apply_fammer_id_member_id FOREIGN KEY (id) REFERENCES member (id)
+    CONSTRAINT FK_apply_fammer_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
 -- 판매자 지원 신청번호 시퀀스
@@ -129,7 +129,7 @@ CREATE TABLE trade_post
     id                  VARCHAR2(50)    NOT NULL, 
     trade_replycount    NUMBER          DEFAULT 0 NOT NULL, 
     CONSTRAINT TRADE_POST_PK PRIMARY KEY (trade_no),
-    CONSTRAINT FK_trade_post_id_member_id FOREIGN KEY (id) REFERENCES member (id)
+    CONSTRAINT FK_trade_post_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
 -- 교환게시판 시퀀스
@@ -145,7 +145,7 @@ CREATE TABLE trade_reply
     trade_no         NUMBER            NOT NULL, 
     reply_comment    VARCHAR2(1000)    NOT NULL, 
     CONSTRAINT TRADE_REPLY_PK PRIMARY KEY (reply_no),
-    CONSTRAINT FK_trade_reply_id_member_id FOREIGN KEY (id) REFERENCES member (id),
+    CONSTRAINT FK_trade_reply_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id),
     CONSTRAINT FK_trade_reply_trade_no_trade_ FOREIGN KEY (trade_no) REFERENCES trade_post (trade_no)
 );
 -- 교환게시판 답변 테이블 시퀀스
@@ -161,7 +161,7 @@ CREATE TABLE farm
     farm_startdate    DATE             NOT NULL, 
     farm_enddate      DATE             NOT NULL, 
     CONSTRAINT FARM_PK PRIMARY KEY (farm_no),
-    CONSTRAINT FK_farm_id_member_id FOREIGN KEY (id) REFERENCES member (id)
+    CONSTRAINT FK_farm_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
 -- 농지 테이블 시퀀스
@@ -206,7 +206,7 @@ CREATE TABLE rent
     rent_status    VARCHAR2(50)    DEFAULT '미처리' NOT NULL, 
     CONSTRAINT RENT_PK PRIMARY KEY (rent_no),
     CONSTRAINT FK_rent_recruit_no_recruit_rec FOREIGN KEY (recruit_no) REFERENCES recruit (recruit_no),
-    CONSTRAINT FK_rent_id_member_id FOREIGN KEY (id) REFERENCES member (id)
+    CONSTRAINT FK_rent_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
 CREATE SEQUENCE rent_SEQ nocache;
