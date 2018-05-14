@@ -28,7 +28,7 @@ public class AccusePostVo {
    * @param accuseReason 신고사유.
    * @param accuseProof 신고증빙.
    * @param accuseResultday 신고처리일자.
-   * @param resultReason 신고처리사유(거절시.
+   * @param resultReason 신고처리사유(거절시).
    */
   public AccusePostVo(Integer accuseNo, String accuseCategory, String accuseId, String reportedId,
       Date accuseDate, String accuseReason, String accuseProof, Date accuseResultday,
