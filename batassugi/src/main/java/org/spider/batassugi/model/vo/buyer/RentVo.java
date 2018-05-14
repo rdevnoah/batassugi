@@ -1,5 +1,25 @@
 package org.spider.batassugi.model.vo.buyer;
 
+/**
+ * 구매자가 대여한 농지 정보를 저장한 클레스 입니다.
+ * 
+ * @title 밭아쓰기
+ * @packagename : org.spider.batassugi.model.vo.buyer
+ * @filename : RentVo.java
+ * @author : "SM HyeonGil Kim"
+ * @since : 2018. 5. 14.
+ * @version : 1.0
+ * @see 
+ * 
+ * <pre>
+ * == Modification Information ==
+ * 
+ * Date         AUTHOR           NOTE
+ * -----------  -------------    --------------------------------
+ * 2018. 5. 14.  "SM HyeonGil Kim"    최초작성
+ * </pre>
+ */
+
 public class RentVo {
 
   private Integer rentNo;
@@ -15,14 +35,14 @@ public class RentVo {
   }
 
   /**
-   * 메소드 설명 : 알아서 채웁시다.
+   * 구매자가 대여한 농지VO입니다.
    * 
-   * @param rentNo 여기도요.
-   * @param cropsNo 여기도요.
-   * @param id 여기도요.
-   * @param rentSize 여기도요.
-   * @param rentMonth 여기도요.
-   * @param rentStatus 여기도요.
+   * @param rentNo 대여번호.
+   * @param cropsNo 대여작물.
+   * @param id 대여회원아이디.
+   * @param rentSize 대여 농지 사이즈.
+   * @param rentMonth 대여 개월.
+   * @param rentStatus 대여 상태.
    */
   public RentVo(Integer rentNo, Integer cropsNo, String id, Integer rentSize, Integer rentMonth,
       String rentStatus) {
@@ -34,7 +54,7 @@ public class RentVo {
     this.rentMonth = rentMonth;
     this.rentStatus = rentStatus;
   }
-
+  
   public Integer getRentNo() {
     return rentNo;
   }

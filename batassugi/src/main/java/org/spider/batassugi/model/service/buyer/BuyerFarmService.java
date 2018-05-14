@@ -3,13 +3,13 @@ package org.spider.batassugi.model.service.buyer;
 import org.springframework.stereotype.Service;
 
 /**
- * 클래스 설명 : 반드시 마침표를 찍습니다.
+ * 구매자가 자신이 대여한 농지를 관리(수확상태 확인, 신청중인 농지 취소, 대여한 농지 상세정보)를 할 수 있는 서비스입니다.
  * 
  * @title 밭아쓰기
- * @packagename : org.spider.batassugi.service.buyer
+ * @packagename : org.spider.batassugi.model.service.buyer
  * @filename : BuyerFarmService.java
- * @author : "Team Spider"
- * @since : 2018. 5. 12.
+ * @author : "SM HyeonGil Kim"
+ * @since : 2018. 5. 14.
  * @version : 1.0
  * @see
  * 
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 14.  "SM HyeonGil Kim"    최초작성
  *      </pre>
  */
 @Service

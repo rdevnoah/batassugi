@@ -5,7 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * 클래스 설명 : 반드시 마침표를 찍습니다.
+ * 구매자가 거래 게시판의 데이터를(작성, 수정, 삭제, 검색) 접근하는 영속성 계층입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.dao.buyer

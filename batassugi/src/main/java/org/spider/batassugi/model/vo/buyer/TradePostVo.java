@@ -3,7 +3,7 @@ package org.spider.batassugi.model.vo.buyer;
 import org.spider.batassugi.model.vo.common.MemberVo;
 
 /**
- * 클래스 설명 : 반드시 마침표를 찍습니다.
+ * 구매자가 거래 게시판 작성한 거래글을 저장하는 클래스입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.model.vo.buyer
@@ -35,16 +35,17 @@ public class TradePostVo {
   }
 
   /**
-   * 여기 서머리.
+   * 구매자가 거래글을 작성한 거래게시판VO입니다.
    * 
-   * @param tradeNo 파람설명.
-   * @param tradeKind 파람설명.
-   * @param tradeHits 파람설명.
-   * @param tradeTitle 파람설명.
-   * @param tradeContent 파람설명.
-   * @param tradePhoto 파람설명.
-   * @param memberVo 파람설명.
+   * @param tradeNo 거래게시판 번호.
+   * @param tradeKind 거래 종류.
+   * @param tradeHits 거래 조회수.
+   * @param tradeTitle 거래 제목.
+   * @param tradeContent 거래 게시판 내용.
+   * @param tradePhoto 거래 게시판 내용 사진.
+   * @param memberVo 거래 게시판 작성한 회원 정보.
    */
+
   public TradePostVo(Integer tradeNo, String tradeKind, Integer tradeHits, String tradeTitle,
       String tradeContent, String tradePhoto, MemberVo memberVo) {
     super();
