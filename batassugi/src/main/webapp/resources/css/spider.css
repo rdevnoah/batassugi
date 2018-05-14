@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/* 여기는 추가로 CSS설정을 하는 공간입니다. */
+
+
+/* 이상욱 : 모든 앵커 커서모양을 포인터로 변경하고 앵커의 밑줄을 없애고 글씨 색상을 검정색으로 변경합니다. */
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
+}
+
+/* 이상욱 : 패럴랙스 사진 사이즈 조정합니다. */
+.parallax-window {
+    min-height: 500px;
+    background: transparent;
+}
+
+/* 이상욱 : 슬라이드네비게이션 애니메이션을 만들기위한 설정 */
+.sidenav {
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 1;
+    top: 0%;
+    left: 0%;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0%;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
