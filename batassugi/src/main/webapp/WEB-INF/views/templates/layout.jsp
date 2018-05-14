@@ -49,30 +49,8 @@
 
 	<%-- footer --%>
 	<tiles:insertAttribute name="footer" />
+	
+	<%-- 이벤트정의 스크립트 --%>
+	<script src="js/spider.js"></script>
 </body>
-<script>
-$(function(){
-	var $closeSide = $('#closeSide'),
-		$openSide = $('#openSide'),
-		$mySidenav = $('#mySidenav'),
-		$parallax = $('#parallax'),
-		$board = $('#board'),
-		$a = $('a');
-	
-	$a.on('mouseenter',function(){
-		$(this).addClass('animated pulse');
-	}).on('mouseleave',function(){
-		$(this).removeClass('animated pulse');
-	});
-	
-	$openSide.on('click',function(){
-		$mySidenav.css('width','15%');
-	});
-
-	$closeSide.on('click',function(){
-		$mySidenav.css('width','0%');
-	});
-	
-});
-</script>
 </html>

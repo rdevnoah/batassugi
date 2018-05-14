@@ -2,18 +2,67 @@
 /* 여기는 추가로 CSS설정을 하는 공간입니다. */
 
 
-/* 이상욱 : 모든 앵커 커서모양을 포인터로 변경하고 앵커의 밑줄을 없애고 글씨 색상을 검정색으로 변경합니다. */
+/* 이상욱 : 모든 앵커 커서모양을 포인터로 변경하고 앵커의 밑줄을 없애고 글씨 색상을 검정색으로 변경 */
 a {
 	cursor: pointer;
 	text-decoration: none;
 	color: black;
 }
 
-/* 이상욱 : 패럴랙스 사진 사이즈 조정합니다. */
+/* 이상욱 : 패럴랙스 사진 사이즈 조정 */
 .parallax-window {
-    min-height: 500px;
-    background: transparent;
+    min-height: 600px;
 }
+
+/* navMenu에 선택된 메뉴 글씨색 검정색으로 변경*/
+.choice{
+	color: black !important;
+}
+
+/* 조선화 : 메인 로고 이미지 사이즈 */
+
+.mainLogo {
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+}
+.mainLogo img {
+	height: 70%;
+	width: 70%;
+}
+.navi ul{
+	margin: auto 0 !important;
+}
+
+.vcenter a {
+	font-size: 25px;
+	color: gray;
+}
+
+.vcenter ul{
+	float:right;
+}
+.vcenter ul li{
+	list-style: none;
+}
+
+.vcenter ul li { 
+	display:inline-block; /* 세로나열을 가로나열로 변경 */ 
+	border-left :1px solid lightgray; /* 각 메뉴의 왼쪽에 "|" 표시(분류 표시) */ 
+	padding:0 20px; /* 각 메뉴 간격 */ 
+}
+
+.vcenter {
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+}
+
+
+
+
+
+
 
 /* 이상욱 : 슬라이드네비게이션 애니메이션을 만들기위한 설정 */
 .sidenav {

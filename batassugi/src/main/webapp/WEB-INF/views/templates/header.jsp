@@ -9,25 +9,24 @@
 	<a>메뉴2</a>
 	<a>메뉴3</a>
 	<a>메뉴4</a>
-</div>
-<nav class="navbar navbar-default">
-	<div class="container">
-		<div class="navbar-header">
-			<img src="img/logo.png" class="img-responsive">
-		</div>
+</div> <%-- mySidenav --%>
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/">Home</a></li>
-				<li><a id="board">게시판</a></li>
-			</ul>
-			<!-- 
-			<ul class="nav navbar-nav navbar-right">
-				<li><a id="openSide">사이드메뉴</a></li>
-			</ul>
-			-->
-			
- 
-		</div><%-- collapse navbar-collapse --%>
-	</div><%-- container --%>
-</nav> <%-- navbar navbar-default --%>
+<div class="container">
+   <%-- 가장 위쪽 헤더 --%>
+	<div class="row">
+	    <div class="col-xs-4 mainLogo">
+			<a>
+				<img src="img/logo.png" class="img-responsive mainLogo" />
+			</a>
+		</div><!--
+	    --><div class="col-xs-8 vcenter">
+	         <ul>
+	            <li style="border-left:0px !important;"><a class="choice">Home</a></li>
+	            <li><a>사이트소개</a></li>
+	            <li><a>농작물사전</a></li>
+	            <li><a>회원가입</a></li>
+	            <li><a>로그인</a></li>            
+	         </ul>   
+	    </div> <%-- col-xs-8 vcenter --%>
+   </div>  <%-- row --%>
+</div> <%-- container --%>
