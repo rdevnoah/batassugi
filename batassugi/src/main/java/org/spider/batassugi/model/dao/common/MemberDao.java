@@ -2,6 +2,7 @@ package org.spider.batassugi.model.dao.common;
 
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Repository;
 
@@ -22,15 +23,28 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerBasic, registerExtend 메소드 추가
  *      </pre>
  */
 @Repository
 public class MemberDao implements MemberDaoIf {
   @Resource
   private SqlSessionTemplate template;
-  
+
   @Override
   public MemberVo login(MemberVo vo) {
-    return template.selectOne("member.login",vo);
+    return template.selectOne("member.login", vo);
   }
+
+  @Override
+  public void registerBasic(MemberInfoVo vo) {
+    template.insert("member.registerBasic",vo);    
+  }
+
+  @Override
+  public void registerExtend(MemberInfoVo vo) {
+    template.insert("member.registerExtend",vo);
+  }
+
+
 }

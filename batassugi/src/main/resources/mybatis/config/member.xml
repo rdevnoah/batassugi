@@ -5,10 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
   <select id="login" resultType="memberVo"><!-- 멤버 로그인 -->
-    select id, name, nickname, member_level as memberLevel, state_number as state
+    select id, name, nickname, member_level as memberLevel, state_number
+    as state
     from spider_member
     where id=#{id} and password =#{password}
   </select>
+  <insert id="registerBasic"><!-- 멤버 기본정보 등록 -->
+    insert into spider_member
+    (id,name,password,nickname)values(#{memberVo.id},#{memberVo.name},#{memberVo.password},#{memberVo.nickname})
+  </insert>
+  <insert id="registerExtend"><!-- 멤버 추가정보 등록 -->
+    insert into member_info(id,email,address,birthday,tel,gender,image) values(#{memberVo.id},#{email},#{address},#{birthday},#{tel},#{gender},#{image})
+  </insert>
 </mapper>
  
  

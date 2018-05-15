@@ -24,7 +24,7 @@
 	            <li style="border-left:0px !important;"><a class="choice">Home</a></li>
 	            <li><a>사이트소개</a></li>
 	            <li><a>농작물사전</a></li>
-	            <li><a>회원가입</a></li>
+	            <li><a href="${pageContext.request.contextPath}/home/registerView">회원가입</a></li>
 	            <li><a href="${pageContext.request.contextPath}/home/loginView">로그인</a></li>            
 	         </ul>   
 	    </div> <%-- col-xs-8 vcenter --%>
