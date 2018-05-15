@@ -141,6 +141,8 @@ CREATE TABLE trade_post
     CONSTRAINT TRADE_POST_PK PRIMARY KEY (trade_no),
     CONSTRAINT FK_trade_post_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+-- 교환게시판 등록일 컬럼 추가
+alter table trade_post add  regdate date default sysdate;
 
 -- 교환게시판 시퀀스
 CREATE SEQUENCE trade_post_SEQ nocache;
