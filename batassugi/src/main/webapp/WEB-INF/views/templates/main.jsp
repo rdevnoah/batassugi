@@ -6,7 +6,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="img/배경1.jpg">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="resources/img/배경1.jpg">
 			</div>
 		</div>
 	</div>
@@ -24,7 +24,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="img/배경2.jpg">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="resources/img/배경2.jpg">
 			</div>
 		</div>
 	</div>
@@ -41,7 +41,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="img/배경3.jpg">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="resources/img/배경3.jpg">
 			</div>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 			<c:forEach begin="1" end="10" var="i">
 				<h1>${i}</h1>
 			</c:forEach>
-		</div> <%-- col-xs-12 --%>
+		</div> <%-- col-xs-12 --%>l
 	</div> <%-- row --%>
 </div>
 

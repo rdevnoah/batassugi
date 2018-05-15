@@ -4,6 +4,11 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+  <select id="login" resultType="memberVo"><!-- 멤버 로그인 -->
+    select id, name, nickname, member_level as memberLevel, state_number as state
+    from spider_member
+    where id=#{id} and password =#{password}
+  </select>
 </mapper>
  
  

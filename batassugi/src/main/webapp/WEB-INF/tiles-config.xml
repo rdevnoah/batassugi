@@ -13,10 +13,11 @@
  		<put-attribute name="title" value="{1}"/>
  		<put-attribute name="main"  value="/WEB-INF/views/{1}.jsp"/>
  	</definition>
- 	<definition name="*/*.tiles" extends="home.tiles">
+ -->
+	<definition name="*/*.tiles" extends="home.tiles">
  		<put-attribute name="title" value="{1}"/>
  		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
- 	</definition> -->
+ 	</definition> 
  </tiles-definitions>
  
  
