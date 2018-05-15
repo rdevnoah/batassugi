@@ -5,7 +5,7 @@ import org.spider.batassugi.model.vo.common.PagingBean;
 
 public class TradePostListVo {
   private PagingBean pagingBean;
-  private List<TradePostVo> postList;
+  private List<TradePostVo> tradepostList;
 
   public TradePostListVo() {
     super();
@@ -17,10 +17,10 @@ public class TradePostListVo {
    * @param pagingBean 페이징을 위한 페이징빈.
    * @param postList 게시글 리스트.
    */
-  public TradePostListVo(PagingBean pagingBean, List<TradePostVo> postList) {
+  public TradePostListVo(PagingBean pagingBean, List<TradePostVo> tradepostList) {
     super();
     this.pagingBean = pagingBean;
-    this.postList = postList;
+    this.tradepostList = tradepostList;
   }
 
   public PagingBean getPagingBean() {
@@ -31,17 +31,17 @@ public class TradePostListVo {
     this.pagingBean = pagingBean;
   }
 
-  public List<TradePostVo> getPostList() {
-    return postList;
+  public List<TradePostVo> getTradepostList() {
+    return tradepostList;
   }
 
-  public void setPostList(List<TradePostVo> postList) {
-    this.postList = postList;
+  public void setTradepostList(List<TradePostVo> tradepostList) {
+    this.tradepostList = tradepostList;
   }
 
   @Override
   public String toString() {
-    return "ListVo [pagingBean=" + pagingBean + ", postList=" + postList + "]";
+    return "ListVo [pagingBean=" + pagingBean + ", postList=" + tradepostList + "]";
   }
 
 }

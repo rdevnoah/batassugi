@@ -2,7 +2,6 @@ package org.spider.batassugi.model.service.buyer;
 
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 
 /**
  * 반드시 마침표를 찍습니다.

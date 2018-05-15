@@ -1,11 +1,11 @@
 package org.spider.batassugi.model.service.buyer;
 
-import java.util.List;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.buyer.TradePostDao;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
+import org.springframework.stereotype.Service;
 
 /**
  * 구매자가 거래 게시판에 게시글을 관리(작성, 수정, 삭제, 검색) 할 수 있는 서비스 입니다.
@@ -27,6 +27,7 @@ import org.spider.batassugi.model.vo.common.PagingBean;
  * 2018. 5. 14. "SM HyeonGil Kim" getTradePostList,getTotalTradePostCount,findTradePostListByNo추가
  *      </pre>
  */
+@Service
 public class TradeService implements TradeServiceIf {
   
   @Resource

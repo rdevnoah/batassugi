@@ -35,12 +35,12 @@ public class TradePostDao implements TradePostDaoIf {
 
   @Override
   public List<TradePostVo> getTradePostList(PagingBean pb) {
-    return null;
+    return template.selectList("trade.getTradePostList", pb);
   }
 
   @Override
   public int getTotalTradePostCount() {
-    return 0;
+    return template.selectOne("trade.getTotalTradePostCount");
   }
 
   @Override

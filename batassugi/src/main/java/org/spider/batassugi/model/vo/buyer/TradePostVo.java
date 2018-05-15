@@ -22,12 +22,13 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  *      </pre>
  */
 public class TradePostVo {
-  private Integer tradeNo;
+  private int tradeNo;
   private String tradeKind;
-  private Integer tradeHits;
+  private int tradeHits;
   private String tradeTitle;
   private String tradeContent;
   private String tradePhoto;
+  private String regdate;
   private MemberVo memberVo;
 
   public TradePostVo() {
@@ -114,12 +115,19 @@ public class TradePostVo {
     this.memberVo = memberVo;
   }
 
+  public String getRegdate() {
+    return regdate;
+  }
+
+  public void setRegdate(String regdate) {
+    this.regdate = regdate;
+  }
+
   @Override
   public String toString() {
     return "TradePostVo [tradeNo=" + tradeNo + ", tradeKind=" + tradeKind + ", tradeHits="
         + tradeHits + ", tradeTitle=" + tradeTitle + ", tradeContent=" + tradeContent
-        + ", tradePhoto=" + tradePhoto + ", memberVo=" + memberVo + "]";
+        + ", tradePhoto=" + tradePhoto + ", regdate=" + regdate + ", memberVo=" + memberVo + "]";
   }
-
 
 }
