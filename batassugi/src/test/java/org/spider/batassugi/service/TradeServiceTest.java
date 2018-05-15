@@ -11,6 +11,6 @@ public class TradeServiceTest {
 
   @Test
   public void TradeServiceTest() {
-
+    
   }
 }

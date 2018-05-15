@@ -1,7 +1,10 @@
 package org.spider.batassugi.model.dao.buyer;
 
+import java.util.List;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.buyer.TradePostVo;
+import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,11 +23,29 @@ import org.springframework.stereotype.Repository;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 12. "SL SangUk Lee"  최초작성
+ * 2018. 5. 15  "SL SangUk Lee"  getPostList, getTotalPostCount, getPostListByNo 메서드 추가
  *      </pre>
  */
 @Repository
-public class TradePostDao {
+public class TradePostDao implements TradePostDaoIf {
+  
   @Resource
   private SqlSessionTemplate template;
+
+  @Override
+  public List<TradePostVo> getTradePostList(PagingBean pb) {
+    return null;
+  }
+
+  @Override
+  public int getTotalTradePostCount() {
+    return 0;
+  }
+
+  @Override
+  public TradePostVo findTradePostListByNo(String no) {
+    return null;
+  }
+  
 }
