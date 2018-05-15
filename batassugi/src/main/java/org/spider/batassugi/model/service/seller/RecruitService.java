@@ -1,5 +1,8 @@
 package org.spider.batassugi.model.service.seller;
 
+import javax.annotation.Resource;
+import org.spider.batassugi.model.dao.seller.RecruitDaoIf;
+import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +25,11 @@ import org.springframework.stereotype.Service;
  *      </pre>
  */
 @Service
-public class RecruitService {
-
+public class RecruitService implements RecruitServiceIf {
+  @Resource
+  private RecruitDaoIf recruitDao;
+  
+  public void registerRecruit(RecruitVo vo) {
+    recruitDao.registerRecruit(vo);
+  }
 }

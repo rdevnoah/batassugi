@@ -2,10 +2,10 @@ package org.spider.batassugi.model.dao.seller;
 
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Repository;
 
 /**
- * 
  * 판매자가 자신의 농지에서 구매자를 모집하는 데이터에 접근하는 영속성 계층입니다.
  * 
  * @title 밭아쓰기
@@ -25,8 +25,15 @@ import org.springframework.stereotype.Repository;
  *      </pre>
  */
 @Repository
-public class RecruitDao {
-	@Resource
-	private SqlSessionTemplate template;
+public class RecruitDao implements RecruitDaoIf {
+  
+  @Resource
+  private SqlSessionTemplate template;
+  
+  @Override
+  public void registerRecruit(RecruitVo recruitVo) {
+    template.insert("recruit.registerRecruit",recruitVo);
+  }
+  
 }
 
