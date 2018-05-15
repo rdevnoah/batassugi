@@ -34,12 +34,9 @@
 	    	<c:choose>
 			<c:when test="${sessionScope.mvo==null}">
 	         <ul>
-<<<<<<< HEAD
 	            <li style="border-left:0px !important;"><a class="choice">Home</a></li>
-=======
 	            <li style="border-left:0px !important;"><a class="choice" href="${pageContext.request.contextPath}/">Home</a></li>
 	            <li><a>사이트소개</a></li>
->>>>>>> refs/heads/feature-common
 	            <li><a>농작물사전</a></li>
 	            <li><a>거래게시판</a></li>
 	            <li><a>대여신청</a></li>
