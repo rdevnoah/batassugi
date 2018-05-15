@@ -3,6 +3,7 @@ package org.spider.batassugi.model.service.buyer;
 import java.util.List;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.buyer.TradePostDao;
+import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
 
@@ -29,16 +30,18 @@ import org.spider.batassugi.model.vo.common.PagingBean;
 public class TradeService implements TradeServiceIf {
   
   @Resource
-  private TradePostDao dao;
+  private TradePostDao tradePostDao;
 
   @Override
-  public List<TradePostVo> getTradePostList(PagingBean pb) {
-    return null;
-  }
-
-  @Override
-  public int getTotalTradePostCount() {
-    return 0;
+  public TradePostListVo getTradePostList(String pageNum) {
+    int totalPostCount = tradePostDao.getTotalTradePostCount();
+    PagingBean pb = null;
+    if (pageNum == null) {
+      pb = new PagingBean(totalPostCount);
+    } else {
+      pb = new PagingBean(totalPostCount, Integer.parseInt(pageNum));
+    }
+    return new TradePostListVo(pb, tradePostDao.getTradePostList(pb));
   }
 
   @Override

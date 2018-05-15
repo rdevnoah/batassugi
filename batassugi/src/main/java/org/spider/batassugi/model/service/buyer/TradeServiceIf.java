@@ -1,6 +1,6 @@
 package org.spider.batassugi.model.service.buyer;
 
-import java.util.List;
+import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
 
@@ -25,9 +25,7 @@ import org.spider.batassugi.model.vo.common.PagingBean;
  */
 public interface TradeServiceIf {
   
-  public List<TradePostVo> getTradePostList(PagingBean pb);
-
-  public int getTotalTradePostCount();
+  public TradePostListVo getTradePostList(String pageNum);
 
   public TradePostVo findTradePostListByNo(String no);
   

@@ -1,5 +1,8 @@
 package org.spider.batassugi.controller;
 
+import javax.annotation.Resource;
+import org.spider.batassugi.model.service.buyer.TradeService;
+import org.spider.batassugi.model.service.buyer.TradeServiceIf;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +31,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BuyerController {
 
+  @Resource
+  private TradeServiceIf tradeService;
+  
   @RequestMapping(value = "tradePost", method = RequestMethod.GET)
   public String getTradePostList(Model model, String pageNum) {
+    tradeService.getTradePostList(pageNum);
     return "buyer/Read_tradePost.tiles";
   }
 
