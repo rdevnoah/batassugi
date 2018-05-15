@@ -4,26 +4,26 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="trade">
-    <select id="findTradePostListByNo">
-    </select>
-    
+  
   <resultMap type="tradePostVo" id="tradePostVoRM">
-  <result column="id" property="memberVo.id"/>
-  <result column="name" property="memberVo.name"/>
+     <result column="id" property="memberVo.id"/>
+     <result column="name" property="memberVo.name"/>
   </resultMap>
+  
   <select id="getTradePostList" resultMap="tradePostVoRM" parameterType="pagingBean">
-    select t.trade_no as tradeNo, t.trade_kind as tradeKind, t.trade_hits as tradeHits, 
+      select t.trade_no as tradeNo, t.trade_kind as tradeKind, t.trade_hits as tradeHits, 
       t.trade_title as tradeTitle, t.trade_content as tradeContent, 
       t.trade_photo as tradePhoto, t.id, to_char(t.regdate,'yy.mm.dd') as regdate, m.name
-    from (
+      from (
       select row_number() over(order by trade_no desc) as rnum, trade_no, 
       trade_kind, trade_hits, 
       trade_title, trade_content, 
       trade_photo, id, regdate
-      from trade_post)t, spider_member m
-    where t.id = m.id
-    and rnum between #{startRowNumber} and #{endRowNumber}
-    order by rnum desc
+      from trade_post
+      ) t, spider_member m
+      where t.id = m.id
+      and rnum between #{startRowNumber} and #{endRowNumber}
+      order by tradeNo desc
   </select>
   <select id="getTotalTradePostCount" resultType="int">
     select count(*)

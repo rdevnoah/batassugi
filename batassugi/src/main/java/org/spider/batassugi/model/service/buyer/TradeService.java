@@ -40,11 +40,11 @@ public class TradeService implements TradeServiceIf {
     if (pageNum == null) {
       pb = new PagingBean(totalPostCount);
     } else {
-      pb = new PagingBean(totalPostCount, Integer.parseInt(pageNum));
+      pb = new PagingBean(Integer.parseInt(pageNum), totalPostCount);
     }
     return new TradePostListVo(pb, tradePostDao.getTradePostList(pb));
   }
-
+  
   @Override
   public TradePostVo findTradePostListByNo(String no) {
     return null;
