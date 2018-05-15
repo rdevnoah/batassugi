@@ -5,6 +5,8 @@ import org.spider.batassugi.model.vo.common.MemberVo;
 
 public interface MemberDaoIf {
 
-  MemberVo login(MemberVo vo);
+  public MemberVo login(MemberVo vo);
+
+  public MemberVo findMemberById(String id);
 
 }

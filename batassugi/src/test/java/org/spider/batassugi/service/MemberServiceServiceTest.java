@@ -18,10 +18,9 @@ public class MemberServiceServiceTest {
   @Test
   public void MemberServiceTest() {
     MemberVo vo = new MemberVo();
-    vo.setId("admin2");
+    vo.setId("admin");
     vo.setPassword("1234");
-    MemberVo mvo=memberService.login(vo);
-    System.out.println(mvo);
-
+   /* MemberVo mvo = memberService.login(vo);
+    System.out.println(mvo);*/
   }
 }
