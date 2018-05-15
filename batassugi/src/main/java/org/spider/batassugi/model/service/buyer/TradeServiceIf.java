@@ -1,4 +1,4 @@
-package org.spider.batassugi.model.dao.buyer;
+package org.spider.batassugi.model.service.buyer;
 
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
@@ -7,23 +7,23 @@ import org.spider.batassugi.model.vo.common.PagingBean;
 /**
  * 반드시 마침표를 찍습니다.
  * @title 밭아쓰기
- * @packagename : org.spider.batassugi.model.dao.buyer
- * @filename : TradePostDaoIF.java
+ * @packagename : org.spider.batassugi.model.service.buyer
+ * @filename : TradeServiceIf.java
  * @author : "LeeSangUk"
  * @since : 2018. 5. 15.
  * @version : 1.0
- * @see
+ * @see 
  * 
- *      <pre>
+ * <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 15. "SL SangUk Lee"  최초작성
  * 2018. 5. 15. "SL SangUk Lee"  getTradePostList,getTotalTradePostCount,findTradePostListByNo추가
- *      </pre>
+ * </pre>
  */
-public interface TradePostDaoIf {
+public interface TradeServiceIf {
   
   public List<TradePostVo> getTradePostList(PagingBean pb);
 
