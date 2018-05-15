@@ -2,6 +2,7 @@ package org.spider.batassugi.model.service.common;
 
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
+import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,14 @@ public class MemberService implements MemberServiceIf {
   private MemberDaoIf memberDao;
 
   @Override
-  public MemberVo login(MemberVo vo) {
+  public MemberVo login(MemberVo vo) throws LoginException {
+    MemberVo memberVo = memberDao.findMemberById(vo.getId());
+    String password = vo.getPassword();
+    if (memberVo == null) {
+      throw new LoginException("아이디가 존재하지 않습니다.");
+    } else if (!password.equals(memberVo.getPassword())) {
+      throw new LoginException("비밀번호가 다릅니다.");
+    }
     return memberDao.login(vo);
   }
   

@@ -1,5 +1,6 @@
 package org.spider.batassugi.model.service.common;
 
+import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.vo.common.MemberVo;
 
 /**
@@ -22,5 +23,5 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  *      </pre>
  */
 public interface MemberServiceIf {
-  MemberVo login(MemberVo vo);
+  MemberVo login(MemberVo vo) throws LoginException;
 }
