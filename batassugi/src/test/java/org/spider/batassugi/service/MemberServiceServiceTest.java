@@ -28,10 +28,10 @@ public class MemberServiceServiceTest {
     // 멤버 로그인 테스트
 
     MemberVo vo = new MemberVo();
-    vo.setId("admin2");
+    vo.setId("admin");
     vo.setPassword("1234");
-    MemberVo mvo = memberService.login(vo);
-    System.out.println(mvo);
+    //MemberVo mvo = memberService.login(vo);
+    //System.out.println(mvo);
 
 
     // 멤버 기본 등록 테스트

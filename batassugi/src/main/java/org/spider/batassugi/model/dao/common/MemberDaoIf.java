@@ -27,6 +27,7 @@ public interface MemberDaoIf {
 
   public MemberVo login(MemberVo vo);
 
+
   /**
    * 회원 기본정보 등록을 위한 메소드.
    * 
@@ -43,5 +44,7 @@ public interface MemberDaoIf {
    */
   public void registerExtend(MemberInfoVo vo);
 
+
+  public MemberVo findMemberById(String id);
 
 }

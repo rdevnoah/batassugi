@@ -17,6 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <insert id="registerExtend"><!-- 멤버 추가정보 등록 -->
     insert into member_info(id,email,address,birthday,tel,gender,image) values(#{memberVo.id},#{email},#{address},#{birthday},#{tel},#{gender},#{image})
   </insert>
+  <!-- 멤버 아이디찾기 - 로그인 익셉션처리를 위해 필요함 -->
+  <select id="findMemberById" resultType="memberVo">
+    select id, password from spider_member
+    where id=#{value}
+  </select>
 </mapper>
  
  

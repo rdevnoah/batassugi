@@ -13,21 +13,22 @@
 				<form action="${pageContext.request.contextPath}/login" method="POST">
 
 					<div class="input-group">
-						<span class="input-group-addon"></span> <input id="user"
+						<span class="input-group-addon">아 이 디</span> <input id="user"
 							type="text" class="form-control" name="id" value=""
 							placeholder="User">
 					</div>
 
 					<div class="input-group">
-						<span class="input-group-addon"></span> <input id="password"
+						<span class="input-group-addon">패스워드</span> <input id="password"
 							type="password" class="form-control" name="password"
 							placeholder="Password">
 					</div>
+
 					<div class="form-group">
 						<!-- Button -->
 						<div class="col-sm-12 controls">
 							<button type="submit" class="btn btn-primary pull-right">
-								<i class="glyphicon glyphicon-log-in"></i> Log in
+								Log in
 							</button>
 						</div>
 					</div>
