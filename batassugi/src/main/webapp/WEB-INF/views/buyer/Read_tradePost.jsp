@@ -75,12 +75,12 @@
 </div> <%-- container-fluid --%>
 <script src="${pageContext.request.contextPath}/resources/js/spider.js"></script>
 <script>
-$(function() {
+$(document).ready(function() {	
 	$paginationA.on('click',function() {
 		postEvent.paging($(this), '${pb.startPageOfPageGroup-1}', '${pb.endPageOfPageGroup+1}')
 	});
 	$postListA.on('click', function() {
 		postEvent.findPostDetail($(this));
 	});
-})
+});
 </script>

@@ -46,7 +46,6 @@ public class BuyerController {
    */
   @RequestMapping(value = "tradePost", method = {RequestMethod.GET,RequestMethod.POST})
   public String getTradePostList(Model model, String pageNum) {
-    System.out.println(pageNum);
     TradePostListVo lvo = tradeService.getTradePostList(pageNum);
     model.addAttribute("tradePostListVo", lvo);
     return "buyer/Read_tradePost.tiles";
