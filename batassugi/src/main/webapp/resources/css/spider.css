@@ -60,8 +60,34 @@ a {
 
 
 
+/* 조선화 : 로그인 영역 */
 
 
+#loginbox {
+    margin-top: 5%; /* 헤더와 로그인box 사이의 간격 */
+}
+
+#loginbox > div:first-child {        
+    padding-bottom: 5%;  /* 로그인 박스 아래쪽 여백 */
+}
+
+#form > div {
+    margin-bottom: 3%; /* form 안에 div(input요소들) 여백 */
+}
+
+#form > div:last-child { /* from 안에 div 중 마지막 요소의 여백 */
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.panel {    
+    background-color: transparent; /* 배경에 색상 지정시 투명도*/
+}
+
+.panel-body { /* 폼을 감싸고 있는 div */
+    padding-top: 30px;
+    background-color: rgba(2555,255,255,.3);
+}
 
 
 /* 이상욱 : 슬라이드네비게이션 애니메이션을 만들기위한 설정 */

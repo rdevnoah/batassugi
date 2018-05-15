@@ -16,25 +16,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%-- Bootstrap v3.3.7 --%>
-<link href="css/bootstrap-ukyi.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-ukyi.css" rel="stylesheet">
 <%-- Bootstrap-dialog --%>
-<link href="css/bootstrap-dialog.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css" rel="stylesheet">
 <%-- Animate --%>
-<link href="css/animate.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
 <%-- Favicon --%>
-<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="${pageContext.request.contextPath}/resources/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <%-- Spider (추가css설정 css파일)--%>
-<link href="css/spider.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/spider.css" rel="stylesheet">
 
 
 <%-- Jquery v3.3.1 --%>
-<script src="js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
 <%-- Bootstrap v3.3.7 --%>
-<script src="js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 <%-- Bootstrap-dialog --%>
-<script src="js/bootstrap-dialog.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
 <%-- Parallax --%>
-<script src="js/parallax.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
 <%-- Font-awesome v4.7.0 --%>
 <script src="https://use.fontawesome.com/a5d5d71388.js"></script>
 
@@ -51,6 +51,6 @@
 	<tiles:insertAttribute name="footer" />
 	
 	<%-- 이벤트정의 스크립트 --%>
-	<script src="js/spider.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/spider.js"></script>
 </body>
 </html>

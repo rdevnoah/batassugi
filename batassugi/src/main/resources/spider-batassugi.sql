@@ -7,6 +7,11 @@ CREATE TABLE member_state
     CONSTRAINT MEMBER_STATE_PK PRIMARY KEY (state_number)
 );
 
+-- 멤버 상태 정보 추가 : 탈퇴 로그인 안되게
+insert into member_state(state_number,state_set) values(1,'활동');
+insert into member_state(state_number,state_set) values(2,'중단');
+insert into member_state(state_number,state_set) values(3,'탈퇴'); 
+
 -- 멤버 상태 시퀀스 생성
 CREATE SEQUENCE member_state_SEQ nocache;
 
@@ -23,6 +28,11 @@ CREATE TABLE spider_member
     CONSTRAINT FK_spider_member_state_number_ FOREIGN KEY (state_number) REFERENCES member_state (state_number)
 );
 
+-- 멤버 회원 추가
+insert into spider_member values('admin','관리자','1234','관리자','관리자',1);
+
+-- 회원 확인
+select id, name, nickname, member_level as memberLevel, state_number as state from spider_member where id='admin' and password ='1234'
 
 -- 멤버 부가정보 테이블 생성
 CREATE TABLE member_info 
