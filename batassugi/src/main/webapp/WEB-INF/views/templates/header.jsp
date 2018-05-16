@@ -4,16 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%-- 이 파일은 header입니다. header에는 별도의 외부링크 추가 금지--%>
 
-    <script type="text/javascript">
-    $(document).ready(function(){
-    	$("#logout").click(function(){
-    		if(confirm("로그아웃하시겠습니까?")){
-    			location.href="${pageContext.request.contextPath}/logout";
-    		}
-    	});
-    });	
-</script>
-
 <div id="mySidenav" class="sidenav">
 	<a id="closeSide" href="javascript:void(0)" class="closebtn">&times;</a>
 	<a>메뉴1</a>
