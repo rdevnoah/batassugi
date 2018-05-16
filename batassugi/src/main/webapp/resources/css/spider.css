@@ -19,6 +19,14 @@ a {
 	color: black !important;
 }
 
+.rent {
+	margin-right: 50px; 
+	padding: 0px;
+}
+.rent>.caption {
+	color: black;
+}
+
 /* 조선화 : 메인 로고 이미지 사이즈 */
 
 .mainLogo {

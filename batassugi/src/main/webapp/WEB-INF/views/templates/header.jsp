@@ -46,7 +46,7 @@
 	            <li style="border-left:0px !important;"><a href="${pageContext.request.contextPath}/" class="choice">Home</a></li>
 	            <li><a>사이트소개</a></li>
 	            <li><a>교환게시판</a></li>
-	            <li><a>대여신청</a></li>
+	            <li><a href="${pageContext.request.contextPath}/getRentPostList">대여신청</a></li>
 	            <li><a>마이페이지</a></li>
 	            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>            
 	         </ul>

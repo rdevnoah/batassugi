@@ -7,8 +7,15 @@ var $closeSide = $('#closeSide'),
 		$mySidenav = $('#mySidenav'),
 		$parallax = $('#parallax'),
 		$board = $('#board'),
-		$vcenterLi = $('.vcenter li');
-		$vcenterA = $('.vcenter a');
+		$vcenterLi = $('.vcenter li'),
+		$vcenterA = $('.vcenter a'),
+		$like = $('.like a');
+	
+	// 좋아요
+	$like.on('click', function() {
+		var $like = $(this).parents('.like').find('i:first');
+		$like.attr('class',[$like.attr('class') == 'fa fa-heart-o fa-lg' ? 'fa fa-heart fa-lg' : 'fa fa-heart-o fa-lg'])
+	});	
 	
 	$vcenterLi.on('mouseenter',function(){
 		$(this).addClass('animated pulse');
