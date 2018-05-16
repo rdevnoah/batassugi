@@ -20,12 +20,19 @@ import org.spider.batassugi.model.vo.buyer.TradePostVo;
  * -----------  -------------    --------------------------------
  * 2018. 5. 15. "SL SangUk Lee"  최초작성
  * 2018. 5. 15. "SL SangUk Lee"  getTradePostList,getTotalTradePostCount,findTradePostListByNo추가
+ * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 추가
+ * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost 추가
+ * 
  * </pre>
  */
 public interface TradeServiceIf {
   
   public TradePostListVo getTradePostList(String pageNum);
 
-  public TradePostVo findTradePostListByNo(String no);
+  public TradePostVo findTradePostDetailByNo(int no);
+  
+  public void deleteTradePostByNo(int no);
+  
+  public void updateTradePost(TradePostVo tvo);
   
 }

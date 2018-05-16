@@ -24,7 +24,9 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12. "SL SangUk Lee"  최초작성
- * 2018. 5. 15  "SL SangUk Lee"  getPostList, getTotalPostCount, getPostListByNo 메서드 추가
+ * 2018. 5. 15  "SL SangUk Lee"  getPostList, getTotalPostCount, findTradePostDetailByNo 메서드 추가
+ * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 메서드 추가
+ * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost 추가
  *      </pre>
  */
 @Repository
@@ -44,8 +46,18 @@ public class TradePostDao implements TradePostDaoIf {
   }
 
   @Override
-  public TradePostVo findTradePostListByNo(String no) {
-    return null;
+  public TradePostVo findTradePostDetailByNo(int no) {
+    return template.selectOne("trade.findTradePostDetailByNo", no);
+  }
+
+  @Override
+  public void deleteTradePostByNo(int no) {
+    template.delete("trade.deleteTradePostByNo", no);
+  }
+
+  @Override
+  public void updateTradePost(TradePostVo tvo) {
+    template.update("trade.updateTradePostByNo", tvo);
   }
   
 }

@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row main">
 		<div class="ccol-xs-12">
-			<h3>spider-board</h3>
+			<h3></h3>
 			<table class="table table-hover text-center">
 				<thead>
 					<tr class="info">
@@ -23,14 +23,14 @@
 							<c:if test="${list.tradeKind == '판매'}">
 								<td><span class="label label-success">${list.tradeKind}</span></td>
 							</c:if>
-							<c:if test="${list.tradeKind == '구매'}">
+							<c:if test="${list.tradeKind == '교환'}">
 								<td><span class="label label-primary">${list.tradeKind}</span></td>
 							</c:if>
-							<c:if test="${list.tradeKind == '나눔'}">
+							<c:if test="${list.tradeKind == '구매'}">
 								<td><span class="label label-danger">${list.tradeKind}</span></td>
 							</c:if>
 							<td><a>${list.tradeTitle}</a></td>
-							<td>${list.memberVo.name}</td>
+							<td>${list.memberVo.nickname}</td>
 							<td>${list.tradeHits}</td>
 							<td>${list.regdate}</td>
 						</tr>
