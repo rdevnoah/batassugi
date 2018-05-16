@@ -35,6 +35,7 @@ insert into spider_member values('admin','관리자','1234','관리자','관리�
 
 -- 회원 확인
 select * from SPIDER_MEMBER
+
 select * from MEMBER_INFO
 select id, name, nickname, member_level as memberLevel, state_number as state from spider_member where id='admin' and password ='1234'
 

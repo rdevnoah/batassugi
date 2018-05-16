@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-// github.com/sangkyoung0122/batassugi.git
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,10 +66,12 @@ public class MemberService implements MemberServiceIf {
         "C:\\Users\\User\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\profile_img\\";
 
     // 이름에 현재 날짜를 붙이자
-    String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
+    // String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
+    // 파일 이름에 난수 붙이기
+    UUID uu = UUID.randomUUID();
 
     // 새로운 이름으로 파일저장
-    File f = new File(fileSavePath + now + "_" + filename);
+    File f = new File(fileSavePath + uu + "_" + filename);
 
     // 저장된 경로에 파일 생성
     multifile.transferTo(f);
@@ -81,6 +83,24 @@ public class MemberService implements MemberServiceIf {
   public void register(MemberInfoVo vo) {
     memberDao.registerBasic(vo);
     memberDao.registerExtend(vo);
+  }
+
+  @Override
+  public String checkId(String id) {
+    int number = memberDao.checkId(id);
+    if (number == 0) {
+      return "ok";
+    }
+    return "fail";
+  }
+
+  @Override
+  public String checkNickname(String nickname) {
+    int number = memberDao.checkNickname(nickname);
+    if (number == 0) {
+      return "ok";
+    }
+    return "fail";
   }
 
 
