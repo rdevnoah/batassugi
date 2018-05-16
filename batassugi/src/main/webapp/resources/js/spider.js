@@ -36,3 +36,20 @@ var $closeSide = $('#closeSide'),
 	}).on('mouseleave', function() {
 		$(this).css('color','gray')
 	});
+	
+	   function sendPost(path, params) {
+		      var $f = $('<form></form>').attr({
+		         action : path,
+		         method : 'post'
+		      });
+		      for (var key in params) {
+		         var value = params[key];
+		         var $objs = $('<input type="hidden"/>').attr({
+		            name : key,
+		            value : value
+		            });
+		         $f.append($objs);
+		      }
+		      $('body').append($f);
+		      $f.submit();
+		   } // sendPost(path, params)

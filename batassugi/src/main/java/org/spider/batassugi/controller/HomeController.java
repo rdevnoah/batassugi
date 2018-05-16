@@ -3,12 +3,13 @@ package org.spider.batassugi.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 15.  "PL_Seonhwa"     회원가입 register 메소드 추가(이미지 파일업로드)
  *      </pre>
  */
 @Controller
@@ -81,6 +83,34 @@ public class HomeController {
       return "member/login_fail";
     }
   }
+
+
+
+  /**
+   * 회원가입 처리. 이미지가 있으면 이미지 등록 후 DB 저장.
+   * 
+   * @author "PL_Seonhwa"
+   * @param vo 회원가입시 필요한 회원정보.
+   * @return
+   */
+  @RequestMapping("register")
+  public String register(@ModelAttribute("memberInfoVo") MemberInfoVo vo) {
+    String path = "default.png";
+    // 업로드할 파일이 있다면 파일업로드
+    if (vo.getFile() != null) {
+      try {
+        path = memberService.registerImg(vo);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    // DB에 내용 저장
+    // 이미지 처리 결과 경로를 vo에 넣음
+    vo.setImage(path);
+    memberService.register(vo);
+    return "redirect:home/register_success";
+  }
+
   
   /**
    * 로그아웃을 위한 메소드.
@@ -97,5 +127,6 @@ public class HomeController {
     }
     return "redirect:/";
   }
+
 
 }
