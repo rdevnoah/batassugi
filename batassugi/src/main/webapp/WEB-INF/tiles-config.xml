@@ -18,6 +18,18 @@
  		<put-attribute name="title" value="{1}"/>
  		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
  	</definition> 
+ 	
+ 	<!-- <definition name="info.tiles" template="/WEB-INF/views/infoTemplates/layout_info.jsp">
+ 		<put-attribute name="title" value="spider-info"/>
+ 		<put-attribute name="header" value="/WEB-INF/views/infoTemplates/header_info.jsp"/>
+ 		<put-attribute name="left" value="/WEB-INF/views/infoTemplates/left_info.jsp"/>
+ 		<put-attribute name="main" value="/WEB-INF/views/infoTemplates/main_info.jsp"/>
+ 		<put-attribute name="footer" value="/WEB-INF/views/infoTemplates/footer_info.jsp"/>
+ 	</definition>
+ 	<definition name="*/*.tiles" extends="info.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
+ 	</definition> -->
  </tiles-definitions>
  
  

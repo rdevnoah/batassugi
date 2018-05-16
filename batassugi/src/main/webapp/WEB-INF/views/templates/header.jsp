@@ -50,6 +50,10 @@
 	            <li><a>교환게시판</a></li>
 	            <li><a>대여신청</a></li>
 	            <li><a>마이페이지</a></li>
+	            <!-- 판매자 마이페이지 임시 창 이동 -->
+	            <c:if test="${sessionScope.mvo.memberLevel=='판매자'}">
+	            <li><a href="${pageContext.request.contextPath}/sellerInfoView">판매자페이지</a></li>
+	            </c:if>
 	            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>            
 	         </ul>
 	         </c:otherwise>

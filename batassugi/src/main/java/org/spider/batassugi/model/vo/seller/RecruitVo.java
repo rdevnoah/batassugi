@@ -69,33 +69,7 @@ public class RecruitVo {
     this.recruitSize = recruitSize;
     this.rentVo = rentVo;
   }
-  
-  /**
-   * recruitNo의 경우 시퀀스로 자동 생성되이에 그것을 제외한 인스턴스 변수를 초기화하는 생성자.
-   * @param farmNo .
-   * @param recruitKind .
-   * @param recruitStartdate .
-   * @param recruitEnddate .
-   * @param price .
-   * @param recruitContent .
-   * @param recruitStatus .
-   * @param recruitSize .
-   * @param rentVo .
-   */
-//  public RecruitVo(int farmNo, String recruitKind, String recruitStartdate, String recruitEnddate,
-//      int price, String recruitContent, String recruitStatus, int recruitSize,
-//      List<RentVo> rentVo) {
-//    super();
-//    this.farmNo = farmNo;
-//    this.recruitKind = recruitKind;
-//    this.recruitStartdate = recruitStartdate;
-//    this.recruitEnddate = recruitEnddate;
-//    this.price = price;
-//    this.recruitContent = recruitContent;
-//    this.recruitStatus = recruitStatus;
-//    this.recruitSize = recruitSize;
-//    this.rentVo = rentVo;
-//  }
+
 
   public int getRecruitNo() {
     return recruitNo;
