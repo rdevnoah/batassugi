@@ -1,5 +1,6 @@
 package org.spider.batassugi.model.service.buyer;
 
+import java.io.IOException;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 
@@ -33,6 +34,7 @@ public interface TradeServiceIf {
   
   public void deleteTradePostByNo(int no);
   
-  public void updateTradePost(TradePostVo tvo);
-  
+  public void updateTradePost(TradePostVo tvo) throws Exception, IOException;
+
+  public void createTradePost(TradePostVo tvo) throws Exception, IOException;
 }

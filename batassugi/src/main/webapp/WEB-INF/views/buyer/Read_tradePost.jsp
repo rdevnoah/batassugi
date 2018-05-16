@@ -37,7 +37,9 @@
 					</c:forEach>
 				</tbody>
 			</table> <%-- table table-hover --%>
-			
+			<div class="text-right">
+				<button class="btn btn-primary" id="wirteTradePost">글쓰기</button>
+			</div>
 			<c:set value="${tradePostListVo.pagingBean}" var="pb" />
 			<div class="text-center">
 				<nav>
@@ -69,7 +71,6 @@
 					</ul>
 				</nav>
 			</div>
-			
 		</div> <%-- col-sm-offset-2 col-sm-8 --%>
 	</div> <%-- row main --%>
 </div> <%-- container-fluid --%>
@@ -81,6 +82,9 @@ $(document).ready(function() {
 	});
 	$postListA.on('click', function() {
 		postEvent.findPostDetail($(this));
+	});
+	$("#wirteTradePost").click(function() {
+		location.href = "${pageContext.request.contextPath}/createTradePostForm";
 	});
 });
 </script>

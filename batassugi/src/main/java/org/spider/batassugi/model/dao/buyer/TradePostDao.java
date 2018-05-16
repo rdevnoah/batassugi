@@ -27,6 +27,7 @@ import org.springframework.stereotype.Repository;
  * 2018. 5. 15  "SL SangUk Lee"  getPostList, getTotalPostCount, findTradePostDetailByNo 메서드 추가
  * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 메서드 추가
  * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost 추가
+ * 2018. 5. 16. "SM HyeonGil Kim" createTradePost 추가
  *      </pre>
  */
 @Repository
@@ -58,6 +59,11 @@ public class TradePostDao implements TradePostDaoIf {
   @Override
   public void updateTradePost(TradePostVo tvo) {
     template.update("trade.updateTradePostByNo", tvo);
+  }
+
+  @Override
+  public void createTradePost(TradePostVo tvo) {
+    template.insert("trade.createTradePost", tvo);
   }
   
 }

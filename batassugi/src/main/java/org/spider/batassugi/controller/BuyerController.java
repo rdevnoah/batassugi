@@ -1,12 +1,13 @@
 package org.spider.batassugi.controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import org.spider.batassugi.model.service.buyer.TradeServiceIf;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
+import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -58,13 +59,13 @@ public class BuyerController {
    * @author "SM HyeonGil Kim"
    * @param model 뷰에 전달할 객체. 
    * @param tradeNo 게시글 번호 .
-   * @return buyer/Read_tradePostResult.tiles
+   * @return buyer/Read_tradePostDetail.tiles
    */
   @RequestMapping(value = "findTradePostListByNo", method = {RequestMethod.GET,RequestMethod.POST})
   public String findTradePostDetailByNo(Model model, String tradeNo) {
     TradePostVo tvo = tradeService.findTradePostDetailByNo(Integer.parseInt(tradeNo));
     model.addAttribute("tvo", tvo);
-    return "buyer/Read_tradePostResult.tiles";
+    return "buyer/Read_tradePostDetail.tiles";
   } 
  
   /**
@@ -83,6 +84,13 @@ public class BuyerController {
     return "redirect:tradePost";
   }
   
+  /**
+   * 게시판 수정 폼으로 이동하는 메서드 .
+   * @author "SM HyeonGil Kim"
+   * @param model 뷰에 전달할 객체.
+   * @param tvo 현재 거래 게시판 정보 전달 객체.
+   * @return buyer/Update_tradePostForm.tiles
+   */
   @RequestMapping("/updateBoardForm")
   public String updateTradePostForm(Model model, TradePostVo tvo) {
     findTradePostDetailByNo(model, Integer.toString(tvo.getTradeNo()));
@@ -95,14 +103,46 @@ public class BuyerController {
    * @author "SM HyeonGil Kim"
    * @param model 뷰에 전달할 객체.
    * @param tvo 수정한 거래 게시판 객체.
-   * @return buyer/Read_tradePostResult.tiles
+   * @return buyer/Read_tradePostDetail.tiles
    */
-  @RequestMapping("/updateBoard")
-  public String updateTradePost(Model model, TradePostVo tvo) {
-    findTradePostDetailByNo(model, Integer.toString(tvo.getTradeNo()));
-    tradeService.updateTradePost(tvo);
-    System.out.println(tvo);
+  @RequestMapping(method = RequestMethod.POST, value = "/updateBoard")
+  public String updateTradePost(Model model, @ModelAttribute TradePostVo tvo) {
+    tvo.setMemberVo(new MemberVo("spring", "1234", "김현길", "SM", null, null, null));
+    try {
+      tradeService.updateTradePost(tvo);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     model.addAttribute("tvo", tvo);
-    return "buyer/Read_tradePostResult.tiles";
+    return "buyer/Read_tradePostDetail.tiles";
   }
+  
+  /**
+   * 메소드 설명 : 여기에 설명을 쓰시오.
+   * @author "SM HyeonGil Kim"
+   * @return
+   */
+  @RequestMapping("/createTradePostForm")
+  public String createTradePostForm() {
+    return "buyer/Create_tradePost.tiles";
+  }
+  
+  /**
+   * 메소드 설명 : 여기에 설명을 쓰시오.
+   * @author "SM HyeonGil Kim"
+   * @return
+   */
+  @RequestMapping(method = RequestMethod.POST, value = "/createBoard")
+  public String createTradePost(Model model, @ModelAttribute TradePostVo tvo) {
+    tvo.setMemberVo(new MemberVo("spring", "1234", "김현길", "SM", null, null, null));
+    try {
+      tradeService.createTradePost(tvo);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    TradePostListVo lvo = tradeService.getTradePostList("1");
+    model.addAttribute("tradePostListVo", lvo);
+    return "redirect:tradePost";
+  }
+
 }

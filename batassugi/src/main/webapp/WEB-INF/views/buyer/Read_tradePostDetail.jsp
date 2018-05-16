@@ -22,19 +22,18 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2">${tvo.tradePhoto}</td>
+						<td colspan="2"><img src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}"></td>
 						<td colspan="3"><pre>${tvo.tradeContent}</pre></td>
 					<tr>
-					<tr>
-						<td colspan="5" class="btnArea">
-							<%-- <c:if test="${requestScope.pvo.memberVO.id==sessionScope.mvo.id}"> --%>
-							<button type="button" id="listBtn">목록</button>
-							<button type="button" id="updateBtn">수정</button>
-							<button type="button" id="deleteBtn">삭제</button> <%--  </c:if> --%>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			<div class="text-center">
+				<%-- <c:if test="${requestScope.pvo.memberVO.id==sessionScope.mvo.id}"> --%>
+				<button class="btn btn-primary" id="listBtn">목록</button>
+				<button class="btn btn-primary" id="updateBtn">수정</button>
+				<button class="btn btn-primary" id="deleteBtn">삭제</button> 
+				<%--  </c:if> --%>
+			</div>
 			<%-- table table-hover --%>
 		</div>
 		<%-- col-sm-offset-2 col-sm-8 --%>

@@ -1,11 +1,15 @@
 package org.spider.batassugi.model.service.buyer;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.buyer.TradePostDao;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 구매자가 거래 게시판에 게시글을 관리(작성, 수정, 삭제, 검색) 할 수 있는 서비스 입니다.
@@ -83,9 +87,47 @@ public class TradeService implements TradeServiceIf {
    * 
    * @author "SM HyeonGil Kim"
    * @param tvo 수정 정보 vo.
+   * @throws IOException 
+   * @throws Exception 
    */
   @Override
-  public void updateTradePost(TradePostVo tvo) {
+  public void updateTradePost(TradePostVo tvo) throws Exception, IOException {
+    MultipartFile multifile = tvo.getFile();
+    
+    String filename = multifile.getOriginalFilename();
+    String fileSavePath =
+        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\"
+        + "main\\webapp\\resources\\img\\trade_img\\";
+    
+    UUID uu = UUID.randomUUID();
+    
+    File f = new File(fileSavePath + uu + "_" + filename);
+    multifile.transferTo(f);
+    String path = f.getName();
+    
+    tvo.setTradePhoto(path);
+    
     tradePostDao.updateTradePost(tvo);
+  }
+
+  @Override
+  public void createTradePost(TradePostVo tvo) throws Exception, IOException {
+    
+    MultipartFile multifile = tvo.getFile();
+    
+    String filename = multifile.getOriginalFilename();
+    String fileSavePath =
+        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\"
+        + "main\\webapp\\resources\\img\\trade_img\\";
+    
+    UUID uu = UUID.randomUUID();
+    
+    File f = new File(fileSavePath + uu + "_" + filename);
+    multifile.transferTo(f);
+    String path = f.getName();
+    
+    tvo.setTradePhoto(path);
+    
+    tradePostDao.createTradePost(tvo);
   }
 }

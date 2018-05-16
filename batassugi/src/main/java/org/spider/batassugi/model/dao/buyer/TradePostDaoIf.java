@@ -23,6 +23,8 @@ import org.spider.batassugi.model.vo.common.PagingBean;
  * 2018. 5. 15. "SL SangUk Lee"  getTradePostList,getTotalTradePostCount,findTradePostDetailByNo추가
  * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 추가
  * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost 추가
+ * 2018. 5. 16. "SM HyeonGil Kim" createTradePost 추가
+ * 
  *      </pre>
  */
 public interface TradePostDaoIf {
@@ -36,4 +38,6 @@ public interface TradePostDaoIf {
   public void deleteTradePostByNo(int no);
   
   public void updateTradePost(TradePostVo tvo);
+  
+  public void createTradePost(TradePostVo tvo);
 }

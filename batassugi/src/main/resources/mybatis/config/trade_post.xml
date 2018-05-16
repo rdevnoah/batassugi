@@ -37,43 +37,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       where t.id = m.id and t.trade_no = #{value}
     </select>
     
-    <delete id="deleteTradePostByNo" parameterType="int"> <!-- 게시판 글 삭제 -->
+    <delete id="deleteTradePostByNo" parameterType="int"> <!-- 거래 게시판 글 삭제 -->
        delete from trade_post where trade_no = #{value}
     </delete>
     
-    <update id="updateTradePostByNo"  parameterType="tradePostVo">
-       update trade_post set  trade_kind = #{tradeKind} , trade_title = #{tradeTitle}, trade_content= #{tradeContent}  where trade_no = #{tradeNo}
+    <update id="updateTradePostByNo"  parameterType="tradePostVo"> <!-- 거래 게시판 글 수정 -->
+       update trade_post set  trade_kind = #{tradeKind} , trade_title = #{tradeTitle}, trade_content= #{tradeContent}, trade_photo = #{tradePhoto}  where trade_no = #{tradeNo}
     </update>
+    
+    <insert id="createTradePost" parameterType="tradePostVo"> <!--  거래 게시판 글 작성 -->
+       <selectKey keyProperty="tradeNo" resultType="int" order="BEFORE">
+          select  trade_post_SEQ.nextval from dual
+       </selectKey>
+       insert into trade_post(trade_no, trade_kind, trade_title, trade_content, trade_photo, id) 
+       values(#{tradeNo}, #{tradeKind}, #{tradeTitle}, #{tradeContent}, #{tradePhoto}, #{memberVo.id})
+    </insert>
+    
 </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
