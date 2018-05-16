@@ -1,6 +1,8 @@
 package org.spider.batassugi.model.service.seller;
 
 import java.util.List;
+import java.util.Map;
+import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 
 /**
@@ -30,4 +32,7 @@ public interface SellerFarmServiceIf {
    * @return
    */
   public List<FarmVo> getSellerFarmList(String id);
+
+  public Map<String,Object> findFarmDetail(String farmNo);
+  
 }

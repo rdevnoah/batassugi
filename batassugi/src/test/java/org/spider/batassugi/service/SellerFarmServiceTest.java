@@ -1,12 +1,11 @@
 package org.spider.batassugi.service;
 
-import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
-import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,7 +34,15 @@ public class SellerFarmServiceTest {
 //      System.out.println(list.get(i).getCropsVo());
 //      System.out.println("----");
 //    }
-    List<FarmVo> list = sellerFarmService.getSellerFarmList("aaaa");
-    System.out.println(list);
+//    List<FarmVo> list = sellerFarmService.getSellerFarmList("aaaa");
+//    System.out.println(list);
+
+    FarmVo vo = sellerFarmDao.findFarmDetail("1");
+    vo.setCropsVo(sellerFarmDao.getAvailableCropsList(1));
+    Map<String, Object> map = sellerFarmService.findFarmDetail("1");
+    System.out.println(map.get("farmVo"));
+    System.out.println(map.get("rentList"));
+    //System.out.println(sellerFarmDao.findRentByFarmNo("1"));
+    
   }
 }

@@ -19,7 +19,7 @@ public class RecruitServiceTest {
   @Test
   public void recruitServiceTest() {
     
-    RecruitVo recruitVo = new RecruitVo(0,new FarmVo(1, null, null, null, null, null, null), "대여", null, "2018-06-22", 1000,
+    RecruitVo recruitVo = new RecruitVo(0,new FarmVo(1, null, 0, null, null, null, null), "대여", null, "2018-06-22", 1000,
         "대여모집합니다. 잘 관리해드려요 많이 참여하세요", "모집중", 10, null);
     recruitDao.registerRecruit(recruitVo);
     

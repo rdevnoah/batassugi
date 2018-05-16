@@ -1,6 +1,8 @@
 package org.spider.batassugi.model.service.seller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.vo.common.CropsVo;
@@ -40,5 +42,16 @@ public class SellerFarmService implements SellerFarmServiceIf {
       farmList.get(i).setCropsVo(cropsList);
     }
     return farmList;
+  }
+
+  @Override
+  public Map<String,Object> findFarmDetail(String farmNo) {
+    Map<String,Object> map = new HashMap<String, Object>();
+    FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
+    vo.setCropsVo(sellerFarmDao.getAvailableCropsList(Integer.parseInt(farmNo)));
+    map.put("farmVo", vo);
+    map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
+    return map;
+    
   }
 }

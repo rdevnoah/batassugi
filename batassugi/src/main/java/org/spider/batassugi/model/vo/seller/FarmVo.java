@@ -26,12 +26,12 @@ import org.spider.batassugi.model.vo.common.CropsVo;
  */
 public class FarmVo {
 
-  private Integer farmNo;
+  private int farmNo;
   private String id;
-  private Integer farmSize;
+  private int farmSize;
   private String farmAddress;
-  private Date farmStartdate;
-  private Date farmEnddate;
+  private String farmStartdate;
+  private String farmEnddate;
   private List<CropsVo> cropsVo;
 
   public FarmVo() {
@@ -51,8 +51,8 @@ public class FarmVo {
    * @param farmEnddate 농지계약종료날짜.
    * @param cropsVo 농작물 정보를 가져오는 cropsVo
    */
-  public FarmVo(Integer farmNo, String id, Integer farmSize, String farmAddress, Date farmStartdate,
-      Date farmEnddate, List<CropsVo> cropsVo) {
+  public FarmVo(int farmNo, String id, int farmSize, String farmAddress, String farmStartdate,
+      String farmEnddate, List<CropsVo> cropsVo) {
     super();
     this.farmNo = farmNo;
     this.id = id;
@@ -63,11 +63,11 @@ public class FarmVo {
     this.cropsVo = cropsVo;
   }
 
-  public Integer getFarmNo() {
+  public int getFarmNo() {
     return farmNo;
   }
 
-  public void setFarmNo(Integer farmNo) {
+  public void setFarmNo(int farmNo) {
     this.farmNo = farmNo;
   }
 
@@ -79,11 +79,11 @@ public class FarmVo {
     this.id = id;
   }
 
-  public Integer getFarmSize() {
+  public int getFarmSize() {
     return farmSize;
   }
 
-  public void setFarmSize(Integer farmSize) {
+  public void setFarmSize(int farmSize) {
     this.farmSize = farmSize;
   }
 
@@ -95,19 +95,19 @@ public class FarmVo {
     this.farmAddress = farmAddress;
   }
 
-  public Date getFarmStartdate() {
+  public String getFarmStartdate() {
     return farmStartdate;
   }
 
-  public void setFarmStartdate(Date farmStartdate) {
+  public void setFarmStartdate(String farmStartdate) {
     this.farmStartdate = farmStartdate;
   }
 
-  public Date getFarmEnddate() {
+  public String getFarmEnddate() {
     return farmEnddate;
   }
 
-  public void setFarmEnddate(Date farmEnddate) {
+  public void setFarmEnddate(String farmEnddate) {
     this.farmEnddate = farmEnddate;
   }
 

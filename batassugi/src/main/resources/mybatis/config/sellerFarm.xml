@@ -19,6 +19,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     from AVAILABLE_CROPS a, crops c, farm f
     where f.farm_no=a.farm_no and a.crops_no=c.crops_no and f.farm_no=#{farmNo}
   </select>
+  
+  <select id="readFarmDetail" parameterType="string" resultType="farmVo">
+    select farm_no as farmNo, farm_size as farmSize, farm_address as farmAddress, to_char(farm_enddate, 'yyyy-mm-dd') farmEnddate, id 
+    from farm
+    where farm_no=#{farmNo}
+  </select>
+  
+  <select id="readRentByFarmNo" parameterType="string" resultType="rentVo">
+    select m.nickname as id, r.rent_size as rentSize from spider_member m, rent r, recruit c
+    where r.id=m.id and c.recruit_no=r.recruit_no and c.farm_no=#{farmNo}
+  </select>
 </mapper>
  
  

@@ -5,9 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
 import org.spider.batassugi.model.vo.common.MemberVo;
+import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 판매자가 처리한 서비스와 뷰를 연결해주는 컨트롤러입니다.
@@ -49,5 +52,13 @@ public class SellerController {
     MemberVo vo = (MemberVo)session.getAttribute("mvo");
     model.addAttribute("farmList", sellerFarmService.getSellerFarmList(vo.getId()));
     return "/infoTemplates/seller_info";
+  }
+  
+  
+  @ResponseBody
+  @RequestMapping(method=RequestMethod.POST, value="getDetailFarm")
+  public Object findFarmDetail(String farmNo) {
+    System.out.println(farmNo);
+    return sellerFarmService.findFarmDetail(farmNo);
   }
 }

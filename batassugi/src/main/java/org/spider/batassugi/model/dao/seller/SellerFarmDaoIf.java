@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.dao.seller;
 
 import java.util.List;
+import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 
@@ -39,5 +40,9 @@ public interface SellerFarmDaoIf {
    * @return
    */
   List<CropsVo> getAvailableCropsList(int farmNo);
+
+  FarmVo findFarmDetail(String farmNo);
+
+  List<RentVo> findRentByFarmNo(String farmNo);
 
 }
