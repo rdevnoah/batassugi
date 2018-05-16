@@ -29,11 +29,6 @@ public class RecruitService implements RecruitServiceIf {
   @Resource
   private RecruitDaoIf recruitDao;
   
-  /**
-   * 판매자가 농지의 대여인을 모집하는 글을 등록하는 메소드.
-   * @author "PM KimYoungHo"
-   * @param vo 모집에 필요한 데이터를 받는 매개변수
-   */
   @Override
   public void registerRecruit(RecruitVo vo) {
     recruitDao.registerRecruit(vo);

@@ -1,5 +1,10 @@
 package org.spider.batassugi.model.service.seller;
 
+import java.util.List;
+import javax.annotation.Resource;
+import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
+import org.spider.batassugi.model.vo.common.CropsVo;
+import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +27,18 @@ import org.springframework.stereotype.Service;
  *      </pre>
  */
 @Service
-public class SellerFarmService {
-
+public class SellerFarmService implements SellerFarmServiceIf {
+  
+  @Resource
+  private SellerFarmDaoIf sellerFarmDao;
+  
+  @Override
+  public List<FarmVo> getSellerFarmList(String id) {
+    List<FarmVo> farmList = sellerFarmDao.getSellerFarmList(id);
+    for (int i = 0; i < farmList.size(); i++) {
+      List<CropsVo> cropsList = sellerFarmDao.getAvailableCropsList(farmList.get(i).getFarmNo()); 
+      farmList.get(i).setCropsVo(cropsList);
+    }
+    return farmList;
+  }
 }

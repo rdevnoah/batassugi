@@ -16,7 +16,7 @@ var $closeSide = $('#closeSide'),
 		var $like = $(this).parents('.like').find('i:first');
 		$like.attr('class',[$like.attr('class') == 'fa fa-heart-o fa-lg' ? 'fa fa-heart fa-lg' : 'fa fa-heart-o fa-lg'])
 	});	
-	
+
 	$vcenterLi.on('mouseenter',function(){
 		$(this).addClass('animated pulse');
 	}).on('mouseleave',function(){

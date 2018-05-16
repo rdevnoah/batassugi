@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="recruit">
   <insert id="registerRecruit" parameterType="recruitVo">
     insert into recruit 
-    values(recruit_seq.nextval, #{farmNo}, #{recruitKind}, sysdate, #{recruitEnddate}, #{price}, #{recruitContent}, #{recruitStatus}, #{recruitSize})
+    values(recruit_seq.nextval, #{farmVo.farmNo}, #{recruitKind}, sysdate, #{recruitEnddate}, #{price}, #{recruitContent}, #{recruitStatus}, #{recruitSize})
   </insert>
 </mapper>
  <!--
