@@ -30,8 +30,8 @@ public class MemberServiceServiceTest {
     MemberVo vo = new MemberVo();
     vo.setId("admin");
     vo.setPassword("1234");
-    //MemberVo mvo = memberService.login(vo);
-    //System.out.println(mvo);
+    // MemberVo mvo = memberService.login(vo);
+    // System.out.println(mvo);
 
 
     // 멤버 기본 등록 테스트
@@ -39,5 +39,12 @@ public class MemberServiceServiceTest {
     MemberInfoVo amvo = new MemberInfoVo(vo, "teacher@kosta.com", "01012345678", "경기도 판교",
         "2018.05.15", "남성", null, "default.png", null, null);
     memberService.register(amvo);
+
+    // 멤버 아이디 중복 확인
+    System.out.println(memberService.checkId("cssKing"));
+
+    // 멤버 닉네임 중복확인
+    System.out.println(memberService.checkNickname("스승님"));
+
   }
 }

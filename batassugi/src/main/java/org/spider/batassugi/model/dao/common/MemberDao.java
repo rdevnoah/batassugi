@@ -51,5 +51,15 @@ public class MemberDao implements MemberDaoIf {
   public MemberVo findMemberById(String id) {
     return template.selectOne("member.findMemberById", id);
   }
+
+  @Override
+  public int checkId(String id) {
+    return template.selectOne("member.checkId",id);
+  }
+
+  @Override
+  public int checkNickname(String nickname) {
+    return template.selectOne("member.checkNickname",nickname);
+  }
   
 }

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 클래스 설명 : 공통내용을 담을 Controller입니다.
@@ -127,6 +128,17 @@ public class HomeController {
     }
     return "redirect:/";
   }
+  
+  @RequestMapping("checkId")
+  @ResponseBody
+  public Object checkId(String id) {
+    return memberService.checkId(id);
+  }
 
-
+  
+  @RequestMapping("checkNickname")
+  @ResponseBody
+  public Object checkNickname(String nickname) {
+    return memberService.checkNickname(nickname);
+  }
 }

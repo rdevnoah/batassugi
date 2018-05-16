@@ -34,4 +34,8 @@ public interface MemberServiceIf {
 
   MemberVo login(MemberVo vo) throws LoginException;
 
+  public String checkId(String id);
+
+  public String checkNickname(String nickname);
+
 }

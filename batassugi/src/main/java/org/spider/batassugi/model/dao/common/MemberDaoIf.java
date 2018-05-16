@@ -47,4 +47,10 @@ public interface MemberDaoIf {
 
   public MemberVo findMemberById(String id);
 
+
+  public int checkId(String id);
+
+
+  public int checkNickname(String nickname);
+
 }
