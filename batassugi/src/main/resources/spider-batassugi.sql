@@ -31,8 +31,13 @@ CREATE TABLE spider_member
 -- 멤버 회원 추가
 insert into spider_member values('admin','관리자','1234','관리자','관리자',1);
 
+
+
 -- 회원 확인
+select * from SPIDER_MEMBER
+select * from MEMBER_INFO
 select id, name, nickname, member_level as memberLevel, state_number as state from spider_member where id='admin' and password ='1234'
+
 
 -- 멤버 부가정보 테이블 생성
 CREATE TABLE member_info 
@@ -43,10 +48,13 @@ CREATE TABLE member_info
     birthday    DATE             NOT NULL, 
     tel         VARCHAR2(50)     NOT NULL, 
     gender      VARCHAR2(10)     NOT NULL, 
-    regdate     DATE             DEFAULT sysdate NOT NULL, 
+    regdate     DATE             DEFAULT sysdate NOT NULL,
+    image		varchar2(100)    not null,
     CONSTRAINT MEMBER_INFO_PK PRIMARY KEY (id),
     CONSTRAINT FK_member_info_id_spidermember FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+
+insert into member_info(id,email,address,birthday,tel,gender,image) values()
 
 -- 작물 테이블 생성
 CREATE TABLE crops
