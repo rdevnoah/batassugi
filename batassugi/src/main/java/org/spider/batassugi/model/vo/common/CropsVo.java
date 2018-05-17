@@ -32,7 +32,14 @@ public class CropsVo {
     this.cropsLevel = cropsLevel;
   }
 
-  public Integer getCropsNo() {
+  
+  public CropsVo(int cropsNo, String cropsName) {
+    super();
+    this.cropsNo = cropsNo;
+    this.cropsName = cropsName;
+  }
+
+  public int getCropsNo() {
     return cropsNo;
   }
 

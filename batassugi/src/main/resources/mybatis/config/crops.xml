@@ -4,10 +4,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="crops">
-
-	<insert id="cropsInsert" parameterType="cropsVo">
-		insert into crops
-		values(crops_SEQ.nextval,#{cropsName},#{cropsLevel})
-	</insert>
+    <insert id="cropsInsert" parameterType="cropsVo">
+      insert into crops
+      values(crops_SEQ.nextval,#{cropsName},#{cropsLevel})
+    </insert>
 
 </mapper>

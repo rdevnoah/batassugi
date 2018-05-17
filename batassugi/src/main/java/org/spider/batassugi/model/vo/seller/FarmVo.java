@@ -188,6 +188,14 @@ public class FarmVo {
     this.cropsName = cropsName;
   }
 
+  @Override
+  public String toString() {
+    return "FarmVo [farmNo=" + farmNo + ", memberInfoVo=" + memberInfoVo + ", id=" + id
+        + ", farmSize=" + farmSize + ", farmAddress=" + farmAddress + ", farmStartdate="
+        + farmStartdate + ", farmEnddate=" + farmEnddate + ", cropsName=" + cropsName + ", cropsVo="
+        + cropsVo + "]";
+  }
+
   
 
 }
