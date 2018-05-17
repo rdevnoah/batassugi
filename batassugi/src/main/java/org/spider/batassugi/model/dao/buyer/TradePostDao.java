@@ -24,10 +24,11 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12. "SL SangUk Lee"  최초작성
- * 2018. 5. 15  "SL SangUk Lee"  getPostList, getTotalPostCount, findTradePostDetailByNo 메서드 추가
+ * 2018. 5. 15  "SL SangUk Lee"  findPostList, getTotalPostCount, findTradePostDetailByNo 메서드 추가
  * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 메서드 추가
- * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost 추가
- * 2018. 5. 16. "SM HyeonGil Kim" createTradePost 추가
+ * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost, createTradePost 추가
+ * 2018. 5. 17. "SM HyeonGil Kim" updateHitsTradePost 추가
+ *
  *      </pre>
  */
 @Repository
@@ -37,7 +38,7 @@ public class TradePostDao implements TradePostDaoIf {
   private SqlSessionTemplate template;
 
   @Override
-  public List<TradePostVo> getTradePostList(PagingBean pb) {
+  public List<TradePostVo> findTradePostList(PagingBean pb) {
     return template.selectList("trade.getTradePostList", pb);
   }
 
@@ -64,6 +65,11 @@ public class TradePostDao implements TradePostDaoIf {
   @Override
   public void createTradePost(TradePostVo tvo) {
     template.insert("trade.createTradePost", tvo);
+  }
+
+  @Override
+  public void updateHitsTradePost(TradePostVo tvo) {
+    template.update("trade.updateHitsTradePost", tvo);
   }
   
 }
