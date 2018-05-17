@@ -184,7 +184,7 @@ public class FarmVo {
     return cropsNo;
   }
 
-  public void setCropsName(List<String> cropsNo) {
+  public void setCropsNo(List<String> cropsNo) {
     this.cropsNo = cropsNo;
   }
 

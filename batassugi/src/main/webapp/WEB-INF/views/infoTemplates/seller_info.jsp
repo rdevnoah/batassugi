@@ -48,7 +48,7 @@
                      	${crops.cropsName}
                      </c:forEach>
                   </p>
-                  <button class="btn btn-primary btn-block detailFarm">상세보기</button>
+                  <button class="btn btn-primary btn-block detailFarm" value="${farmVo.farmNo}">상세보기</button>
                </div> <%-- caption --%>
             </div> <%-- thumbnail --%>
          </div> <%-- col-xs-4 --%>
@@ -62,8 +62,9 @@
 	$(document).ready(function() {
 		var $detailFarm = $('.detailFarm');
 		$detailFarm.on('click', function() {
+			//alert($(this).val());
 			//alert($('.hidden').children("span:nth(0)").text());
-			var $farmNo=$('.hidden').children("span:nth(0)").text();
+			var $farmNo=$(this).val();
 			var $data;
 			 $.ajax({
 				type : 'post',
@@ -71,6 +72,7 @@
 				data : 'farmNo='+$farmNo,
 				async : false,
 				success : function(data) {
+					//alert(data.farmVo.farmEnddate);
 					$data=data;		
 				}	
 			})
