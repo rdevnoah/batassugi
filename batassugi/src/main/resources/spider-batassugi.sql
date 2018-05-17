@@ -108,6 +108,8 @@ insert into member_like_crops values('admin',3);
 -- 회원 기호 작물 확인
 select * from member_like_crops;
 
+select crops_no from  member_like_crops where id='admin' 
+
 -- 신고게시판
 CREATE TABLE accuse
 (

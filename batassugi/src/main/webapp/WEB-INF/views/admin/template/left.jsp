@@ -9,11 +9,11 @@
 	<ul class="list-unstyled components">
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
+			<a href="${pageContext.request.contextPath}"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
+			<a href="${pageContext.request.contextPath}/admin/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
 		</li>
 		
 		

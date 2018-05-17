@@ -28,6 +28,8 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerBasic, registerExtend 메소드 추가
  * 2018. 5. 16.  "PL_Seonhwa"     회원가입시 아이디 닉네임 중복확인 메소드 추가
  * 2018. 5. 17.  "PL_Seonhwa"     회원가입시 회원상태, 기호작물 입력 메소드 추가
+ *                                로그인시 멤버 기호작물 리스트에 넣어주기
+ *                                회원정보 수정 처리
  *      </pre>
  */
 public interface MemberServiceIf {
@@ -78,5 +80,22 @@ public interface MemberServiceIf {
    * @param mstVo 회원 상태 번호를 받아올 VO.
    */
   public void registerMemberState(MemberStateVo mstVo);
+
+  /**
+   * 로그인 후 멤버 기호 작물을 vo에 넣어줌.
+   * 
+   * @author "PL_Seonhwa"
+   * @param mvo
+   */
+  public void findLikeCropsById(MemberInfoVo mvo);
+
+  /**
+   * 회원 정보 update.
+   * 
+   * @author "PL_Seonhwa"
+   * @param uvo 수정할 회원정보.
+   * @return
+   */
+  public MemberInfoVo updateMemberInfo(MemberInfoVo uvo);
 
 }

@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 2018. 5. 15.  "PL_Seonhwa"     회원가입 register 메소드 추가(이미지 파일업로드)
  * 2018. 5. 16.  "PL_Seonhwa"     회원가입 시 아이디, 닉네임 중복검사 메소드 추가
  * 2018. 5. 17.  "PL_Seonhwa"     회원가입, 로그인 메소드 로직 변경
+ *                                로그인시 멤버 기호작물 리스트에 넣어주기
  *      </pre>
  */
 @Controller
@@ -82,6 +83,10 @@ public class HomeController {
     try {
       HttpSession session = request.getSession();
       MemberInfoVo mvo = memberService.login(vo);
+      
+      //멤버 기호작물 List에 넣기
+      memberService.findLikeCropsById(mvo);
+      
       session.setAttribute("mvo", mvo);
       return "redirect:/";
     } catch (LoginException e) {
@@ -168,4 +173,8 @@ public class HomeController {
   public Object checkNickname(String nickname) {
     return memberService.checkNickname(nickname);
   }
+  
+  
+  
+  
 }

@@ -174,6 +174,7 @@
 			</div>
             </div>
             <%-- 2단 --%> 
+            <%-- 기호작물 --%>
             <div class="col-md-6">
             <div class="form-group">
           	<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span class="text-danger">*</span></label>

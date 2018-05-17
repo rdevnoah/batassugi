@@ -1,5 +1,6 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
@@ -29,6 +30,8 @@ import org.springframework.stereotype.Repository;
  * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerBasic, registerExtend 메소드 추가
  * 2018. 5. 16.  "PL_Seonhwa"     회원가입시 아이디 닉네임 중복확인 메소드 추가
  * 2018. 5. 17.  "PL_Seonhwa"     회원가입시 회원상태, 기호작물 입력 메소드 추가
+ *                                로그인시 멤버 기호작물 리스트에 넣어주기
+ *                                회원정보 수정 처리
  *      </pre>
  */
 @Repository
@@ -76,6 +79,36 @@ public class MemberDao implements MemberDaoIf {
   public void registerLikeCrop(Map<String, String> map) {
     template.insert("member.registerLikeCrop",map);
     
+  }
+
+  @Override
+  public int findCropsCountById(MemberInfoVo mvo) {
+    return template.selectOne("member.countCropsCountById",mvo);
+  }
+
+  @Override
+  public List<String> findLikeCropsById(MemberInfoVo mvo) {
+    return template.selectList("member.findLikeCropsById",mvo);
+  }
+
+  @Override
+  public MemberInfoVo findMemberInfoById(String id) {
+    return template.selectOne("member.findMemberInfoById", id);
+  }
+
+  @Override
+  public void deleteLikeCrops(String id) {
+    template.delete("member.deleteLikeCrops",id);
+  }
+
+  @Override
+  public void updateMemberInfo(MemberInfoVo uvo) {
+    template.update("member.updateMemberInfo",uvo);
+  }
+
+  @Override
+  public void updateMember(MemberVo memberVo) {
+    template.update("member.updateMember",memberVo);
   }
   
 }

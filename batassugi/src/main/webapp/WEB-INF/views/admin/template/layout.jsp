@@ -19,12 +19,26 @@
 <!-- Our Custom CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet">
 
+<%-- Bootstrap-dialog --%>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css" rel="stylesheet">
+<%-- Animate --%>
+<link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
+
+
+<%-- Jquery v3.3.1 --%>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
+<%-- Bootstrap v3.3.7 --%>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+<%-- Bootstrap-dialog --%>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
+<%-- Parallax --%>
+<script src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
 </head>
 <body>
 	
 
 	<!-- jQuery CDN -->
-	<script src="https://code.jquery.com/jquery-1.12.0.min.js">
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
 	<!-- Bootstrap Js CDN -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
  	<div class="wrapper">
@@ -41,8 +55,7 @@
 	</div>
 
 	
-	        <!-- jQuery CDN -->
-         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
          <!-- Bootstrap Js CDN -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
