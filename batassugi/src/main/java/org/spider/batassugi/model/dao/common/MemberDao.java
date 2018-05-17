@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 15.  "DL KimJieun"    회원로그인을 위한 login 메소드 추가 
  * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerBasic, registerExtend 메소드 추가
  * 2018. 5. 16.  "PL_Seonhwa"     회원가입시 아이디 닉네임 중복확인 메소드 추가
  * 2018. 5. 17.  "PL_Seonhwa"     회원가입시 회원상태, 기호작물 입력 메소드 추가
@@ -109,6 +111,11 @@ public class MemberDao implements MemberDaoIf {
   @Override
   public void updateMember(MemberVo memberVo) {
     template.update("member.updateMember",memberVo);
+  }
+
+  @Override
+  public List<CropsInfoVo> getAllCropsList() {
+    return template.selectList("crops.getAllCropsList");
   }
   
 }

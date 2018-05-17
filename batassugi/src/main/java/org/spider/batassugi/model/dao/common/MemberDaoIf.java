@@ -2,6 +2,8 @@ package org.spider.batassugi.model.dao.common;
 
 import java.util.List;
 import java.util.Map;
+
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -52,6 +54,13 @@ public interface MemberDaoIf {
   public void registerExtend(MemberInfoVo vo);
 
 
+  /**
+   * 로그인 익셉션 처리를 위한 아이디 찾기 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param id 입력한 아이디가 있는지 없는지 체크하기 위해 입력받는 정보.
+   * @return
+   */
   public MemberVo findMemberById(String id);
 
 
@@ -66,8 +75,8 @@ public interface MemberDaoIf {
 
 
   /**
-   * 회원 가입시 닉네임 존재 여부 확인. .
-   * 
+   * 회원 가입시 닉네임 존재 여부 확인.
+   * .
    * @author "PL_Seonhwa"
    * @param nickname 회원이 입력한 닉네임.
    * @return
@@ -143,4 +152,11 @@ public interface MemberDaoIf {
    */
   public void updateMember(MemberVo memberVo);
 
+  /**
+   * 회원기호 작물 입력을 위하여 DB에서 작물 리스트를 가져오는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @return
+   */
+  public List<CropsInfoVo> getAllCropsList();
 }

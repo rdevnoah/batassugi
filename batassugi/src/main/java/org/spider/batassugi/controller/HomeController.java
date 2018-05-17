@@ -1,7 +1,5 @@
 package org.spider.batassugi.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -161,7 +159,6 @@ public class HomeController {
 
 
   /**
-   * 
    * ajax로 회원가입시 닉네임 체크.
    * 
    * @author "PL_Seonhwa"
@@ -174,7 +171,16 @@ public class HomeController {
     return memberService.checkNickname(nickname);
   }
   
-  
-  
-  
+  /**
+   * 회원정보 등록폼으로 이동.
+   * 
+   * @author "PL_Seonhwa"
+   * @param model
+   * @return
+   */
+  @RequestMapping("registerView")
+  public String getAllCropsList(Model model) {
+    model.addAttribute("list", memberService.getAllCropsList());
+    return "home/registerView.tiles";
+  }
 }

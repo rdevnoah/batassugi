@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.exception.LoginException;
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -33,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 15.  "DL KimJieun"    회원로그인을 위해 login 메소드 등록
  * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerImg(회원프로필사진 등록), register 메소드 등록
  * 2018. 5. 16.  "PL_Seonhwa"     회원가입시 아이디 닉네임 중복확인 메소드 추가
  * 2018. 5. 17.  "PL_Seonhwa"     회원가입시 회원상태, 기호작물 입력 메소드 추가
@@ -176,5 +178,11 @@ public class MemberService implements MemberServiceIf {
         memberDao.registerLikeCrop(map);
       }
       return uvo;
+  }
+
+  @Override
+  public List<CropsInfoVo> getAllCropsList() {
+    List<CropsInfoVo> list = memberDao.getAllCropsList();
+    return list;
   }
 }

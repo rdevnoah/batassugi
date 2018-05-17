@@ -74,5 +74,6 @@ public class MemberServiceServiceTest {
     memberDao.updateMemberInfo(memberInfoVo);
     System.out.println(memberInfoVo);
 
+
   }
 }

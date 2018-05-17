@@ -170,10 +170,9 @@
           	<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span class="text-danger">*</span></label>
                 <div class="col-md-7 col-sm-9">
                   <div class="input-group">
-                    <label> <input name="likeCrops" id="likeCrops1" type="checkbox" value="1"> 감자 </label>    
-                    <label> <input name="likeCrops" id="likeCrops2" type="checkbox" value="2"> 고구마 </label>
-                    <label> <input name="likeCrops" id="likeCrops3" type="checkbox" value="3"> 토마토 </label>
-                    <label> <input name="likeCrops" id="likeCrops4" type="checkbox" value="4"> 양배추 </label>                     
+                    <c:forEach var="item" items="${list}">
+        				<label> <input name="likeCrops" id="likeCrops${item.cropsVo.cropsNo}" type="checkbox" value="${item.cropsVo.cropsNo}"> ${item.cropsVo.cropsName} </label>
+       				 </c:forEach>                    
                   </div>
                 </div>
 			</div>

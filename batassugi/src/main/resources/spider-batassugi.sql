@@ -65,13 +65,18 @@ CREATE TABLE crops
 -- 작물 시퀀스 생성
 CREATE SEQUENCE crops_SEQ nocache;
 
--- 작물 입력
-insert into crops values(crops_SEQ.nextval,'감자','초급');
-insert into crops values(crops_SEQ.nextval,'고구마','초급');
-insert into crops values(crops_SEQ.nextval,'토마토','중급');
+-- 작물사전 테스트용 DB
+insert into crops values(crops_SEQ.nextval, '브로콜리', '하');
+insert into crops values(crops_SEQ.nextval, '땅콩', '하');
+insert into crops values(crops_SEQ.nextval, '옥수수', '중');
+insert into crops values(crops_SEQ.nextval, '부추', '하');
+insert into crops values(crops_SEQ.nextval, '깻잎', '중');
+insert into crops values(crops_SEQ.nextval, '케일', '중');
+insert into crops values(crops_SEQ.nextval, '호박', '상');
+insert into crops values(crops_SEQ.nextval, '대파', '상');
+insert into crops values(crops_SEQ.nextval, '쪽파', '하');
+insert into crops values(crops_SEQ.nextval, '마늘', '중');
 
--- 작물 테이블 확인
-select * from crops;
 
 -- 작물 부가정보 테이블 생성
 CREATE TABLE crops_info
@@ -89,6 +94,48 @@ CREATE TABLE crops_info
     CONSTRAINT CROPS_INFO_PK PRIMARY KEY (crops_no),
     CONSTRAINT FK_crops_info_crops_no_crops_c FOREIGN KEY (crops_no) REFERENCES crops (crops_no)
 );
+
+
+-- 작물사전 상세보기 테스트용 DB
+insert into crops_info values(1, 'broccoli1.jpg','broccoli2.jpg','broccoli3.jpg','broccoli4.jpg','1월~3월','4월~6월',
+'칼로 아랫잎을 4~5장 붙여서 높이 15cm 정도로 맞추어 수확한다. 적기가 지나면 꽃이 피어 버리므로 특히 수확기의 기온이 높은 봄 파종재배에서는 주의하여야 한다.',
+'iconbroccoli.jpg','브로콜리볶음,브로콜리무침');
+insert into crops_info values(2, 'peanut1.jpg','peanut2.jpg','peanut3.jpg','peanut4.jpg','4월~5월','9월~10월',
+'꼬투리에 60~80%의 그물무늬가 뚜렷해졌을 때가 수확 적기이며
+수확 후 줄기에 꼬투리가 달린 채로 7일 정도 말린 후 꼬투리를
+털어서 다시 말려 수분 10%이하가 되게 하여 수확한다. 
+씨앗용은 피콩으로 저장하여 가급적 파종기에 임박하여 탈각을 
+하는 게 발아율 향상에 좋다.',
+'iconpeanut.jpg','땅콩조림');
+insert into crops_info values(3, 'corn1.jpg','corn2.jpg','corn3.jpg','corn4.jpg','4월','7월~8월',
+'옥수수는 주로 풋옥수수를 수확하여 쪄먹기 위해 텃밭이나 주말농장에서 재배를 한다. 요새 식구도 얼마 안 되는 가정에서 한꺼번에 많은 옥수수를 수확하면 한 번에 다 먹지 못한다.
+ 수확시기를 조금 조절하려면 10일 간격으로 파종시기를 달리한다.', 'iconcorn.jpg','옥수수전,콘샐러드');
+ insert into crops_info values(4, 'chives1.jpg','chives2.jpg','chives3.jpg','chives4.jpg','4월~5월','9월~11월',
+'부추는 자라는 대로 수확이 가능하다. 키가 20㎝ 이상이 되면 
+필요한 만큼 베어 이용한다. 수확이 늦어지면 부추가 억세지는 수가 있다. 
+이때는 다시 베어주면 보드라운 부추가 자라게 된다. 
+부추를 수확하는 방법에 따라 다음 번의 수확량이 달라진다는 자료가 있다.
+부추 줄기를 바짝 잘라낼수록 다음 번의 수확량이 줄어들기
+때문에 1㎝ 정도 줄기를 남겨 두고 그 위를 잘라내는 것이 좋다고 한다.',
+'iconchives.jpg','부추전 , 부추무침 ,부추겉절이');
+ insert into crops_info values(5, 'perilla1.jpg','perilla2.jpg','perilla3.jpg','perilla4.jpg','2월~4월','8월~9월',
+'칼로 아랫잎을 4~5장 붙여서 높이 15cm 정도로 맞추어 수확한다. 적기가 지나면 꽃이 피어 버리므로 특히 수확기의 기온이 높은 봄 파종재배에서는 주의하여야 한다.',
+'iconperilla.jpg','깻잎짱아치,깻잎무침');
+ insert into crops_info values(6, '케일1.jpg','케일2.jpg','케일3.jpg','케일4.jpg','3월중 ~ 4월초, 6월중 ~ 7월중','6월중 ~ 7월중, 9월초 ~ 11월중',
+'잎이 손바닥 크지 정도 일 때 수시로 잎을 때어내 수확한다. 수개월동안 수확하게 되므로 밑거름은 충분히 넣는다. 수확 후에는 수시로 웃거름을 주는 것이 수확량을 많게 한다.',
+'icon케일.jpg','샐러드, 무침, 된장국');
+ insert into crops_info values(7, '호박1.jpg','호박2.jpg','호박3.jpg','호박4.jpg','4월말','7월중 ~ 10월중',
+'쥬키니, 애호박, 풋호박 등 청과용은 꽃이 핀 후 7~10일이면 수확할 수 있다.',
+'icon호박.jpg','전, 볶음, 샐러드, 무침, 된장국');
+ insert into crops_info values(8, '대파1.jpg','대파2.jpg','대파3.jpg','대파4.jpg','3월말, 8월중~9월초','4월중~6월말, 8월중~11월말',
+'중간 중간 대파가 자라면 수확한다. 11월경 서리 내리고 춥기 전에 모두 뽑아 갈무리 한다.',
+'icon대파.jpg','장아찌, 김치, 무침');
+ insert into crops_info values(9, '쪽파1.jpg','쪽파2.jpg','쪽파3.jpg','쪽파4.jpg','8월중~9월초','3월말~4월말, 9월중~10월중',
+'쪽파는 종구를 심고 45 ~ 50일 정도 키우는게 가장 맛이 좋은 쪽파가 된다. 쪽파는 심어 놓고 보름정도만 키워도 파전을 만들어 먹기에 알맞은 크기로 자란다. 김장배추를 심은지 10 ~ 15일후에 쪽파를 심으면 김장배추와 수확시기를 맞추게 된다.',
+'icon쪽파.jpg','쪽파강회, 쪽파숙회, 파전, 김치');
+ insert into crops_info values(10, '마늘1.jpg','마늘2.jpg','마늘3.jpg','마늘4.jpg','9월중 ~ 10월중','3월중 ~ 4월말, 6월중 ~ 6월말',
+'난지형 마늘은 5월 중, 하순경, 한지형 마늘은 6월 중순경, 마늘잎이 3분의 2이상, 또는 50 ~ 75% 정도 누렇게 변하면 수확합니다. 마늘수확시기가 빠르면 구의 비대가 불충실해지고 수분함량이 많아져 저장중에 부패가 많아집니다.',
+'icon마늘.jpg','구이, 볶음, 조림');
 
 -- 회원 기호 작물 테이블
 CREATE TABLE member_like_crops

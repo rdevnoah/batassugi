@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,6 +66,20 @@ public class AdminController {
     session.setAttribute("mvo", memberInfoVo);
     return "redirect:updateMember_success";
   }
+
+  /**
+   * 관리자회원정보 수정.
+   * 
+   * @author "PL_Seonhwa"
+   * @param model
+   * @return
+   */
+  @RequestMapping("/admin/myinfoView")
+  public String adminMyinfoView(Model model) {
+    model.addAttribute("list", memberService.getAllCropsList());
+    return "admin/myinfoView.tiles";
+  }
+
 
   /**
    * admin view 처리.
