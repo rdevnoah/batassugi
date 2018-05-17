@@ -47,7 +47,7 @@ public class SellerController {
     HttpSession session = request.getSession();
     MemberVo mvo = (MemberVo) session.getAttribute("mvo");
     if (session.getAttribute("mvo") != null) {
-      fvo.setId(mvo.getId());
+      fvo.getMemberInfoVo().setId(mvo.getId());
       sellerFarmService.farmInsert(fvo);
       return "redirect:/";
     } else {

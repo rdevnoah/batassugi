@@ -26,7 +26,6 @@ import org.spider.batassugi.model.vo.common.MemberInfoVo;
 public class FarmVo {
 
   private int farmNo;
-  private String id;
   private MemberInfoVo memberInfoVo;
   private int farmSize;
   private String farmAddress;
@@ -47,11 +46,10 @@ public class FarmVo {
    * @param cropsname 농작물 정보를 가져오는 cropsname
    */
 
-  public FarmVo(int farmNo,String id, MemberInfoVo memberInfoVo, int farmSize, String farmAddress, String farmStartdate,
+  public FarmVo(int farmNo , MemberInfoVo memberInfoVo, int farmSize, String farmAddress, String farmStartdate,
       String farmEnddate, List<String> cropsname) {
     super();
     this.farmNo = farmNo;
-    this.id=id;
     this.memberInfoVo = memberInfoVo;
     this.farmSize = farmSize;
     this.farmAddress = farmAddress;
@@ -78,15 +76,6 @@ public class FarmVo {
 public FarmVo() {
   super();
   // TODO Auto-generated constructor stub
-}
-
-
-public String getId() {
-  return id;
-}
-
-public void setId(String id) {
-  this.id = id;
 }
 
 public int getFarmNo() {
