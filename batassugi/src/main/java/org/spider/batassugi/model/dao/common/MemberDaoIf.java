@@ -1,6 +1,8 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.util.Map;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
+import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 
 /**
@@ -19,19 +21,15 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 16.  "PL_Seonhwa"    최초작성
+ * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerBasic, registerExtend 메소드 추가
+ * 2018. 5. 16.  "PL_Seonhwa"     회원가입시 아이디 닉네임 중복확인 메소드 추가
+ * 2018. 5. 17.  "PL_Seonhwa"     회원가입시 회원상태, 기호작물 입력 메소드 추가
  *      </pre>
  */
 
 public interface MemberDaoIf {
-  /**
-   * 회원 로그인을 위한 메소드.
-   * 
-   * @author "DL KimJieun"
-   * @param vo 회원이 로그인을 위해 기입한 정보.
-   * @return
-   */
-  public MemberVo login(MemberVo vo);
+
+  public MemberInfoVo login(MemberVo vo);
 
 
   /**
@@ -50,6 +48,7 @@ public interface MemberDaoIf {
    */
   public void registerExtend(MemberInfoVo vo);
 
+
   /**
    * 로그인 익셉션 처리를 위한 아이디 찾기 메소드.
    * 
@@ -58,5 +57,41 @@ public interface MemberDaoIf {
    * @return
    */
   public MemberVo findMemberById(String id);
+
+
+  /**
+   * 회원 가입시 아이디 존재 여부 확인.
+   * 
+   * @author "PL_Seonhwa"
+   * @param id 회원이 입력한 아이디.
+   * @return
+   */
+  public int checkId(String id);
+
+
+  /**
+   * 회원 가입시 닉네임 존재 여부 확인.
+   * .
+   * @author "PL_Seonhwa"
+   * @param nickname 회원이 입력한 닉네임.
+   * @return
+   */
+  public int checkNickname(String nickname);
+
+  /**
+   * 회원 가입시 회원상태 입력.
+   * 
+   * @author "PL_Seonhwa"
+   * @param mstVo
+   */
+  public void registerMemberState(MemberStateVo mstVo);
+
+  /**
+   * 회원 가입시 회원기호 작물 입력.
+   * 
+   * @author "PL_Seonhwa"
+   * @param map 아이디와 기호작물 번호를 입력한 map.
+   */
+  public void registerLikeCrop(Map<String, String> map);
 
 }

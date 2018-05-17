@@ -7,13 +7,15 @@ CREATE TABLE member_state
     CONSTRAINT MEMBER_STATE_PK PRIMARY KEY (state_number)
 );
 
--- 멤버 상태 정보 추가 : 탈퇴 로그인 안되게
-insert into member_state(state_number,state_set) values(1,'활동');
-insert into member_state(state_number,state_set) values(2,'중단');
-insert into member_state(state_number,state_set) values(3,'탈퇴'); 
-
 -- 멤버 상태 시퀀스 생성
 CREATE SEQUENCE member_state_SEQ nocache;
+
+-- 멤버 상태 정보 추가 : 탈퇴 로그인 안되게
+insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'활동',sysdate);
+
+-- 멤버 상태 테이블 확인
+select * from member_state;
+
 
 -- 멤버 테이블 생성
 CREATE TABLE spider_member
@@ -23,21 +25,10 @@ CREATE TABLE spider_member
     password        VARCHAR2(30)    NOT NULL, 
     nickname        VARCHAR2(30)    NOT NULL, 
     member_level    VARCHAR2(20)    DEFAULT '초급' NOT NULL, 
-    state_number    NUMBER          DEFAULT 1 NOT NULL, 
+    state_number    NUMBER          not null , 
     CONSTRAINT SPIDER_MEMBER_PK PRIMARY KEY (id),
     CONSTRAINT FK_spider_member_state_number_ FOREIGN KEY (state_number) REFERENCES member_state (state_number)
 );
-
--- 멤버 회원 추가
-insert into spider_member values('admin','관리자','1234','관리자','관리자',1);
-
-
-
--- 회원 확인
-select * from SPIDER_MEMBER
-select * from MEMBER_INFO
-select id, name, nickname, member_level as memberLevel, state_number as state from spider_member where id='admin' and password ='1234'
-
 
 -- 멤버 부가정보 테이블 생성
 CREATE TABLE member_info 
@@ -54,7 +45,13 @@ CREATE TABLE member_info
     CONSTRAINT FK_member_info_id_spidermember FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
-insert into member_info(id,email,address,birthday,tel,gender,image) values()
+-- 멤버 회원 추가
+insert into spider_member values('admin','관리자','1234','관리자','관리자',1);
+insert into MEMBER_INFO values('admin','admin@kosta','경기도 판교',sysdate,'01012345678','여성',sysdate,'default.png')
+
+-- 회원 확인
+select * from SPIDER_MEMBER;
+select * from MEMBER_INFO;
 
 -- 작물 테이블 생성
 CREATE TABLE crops
@@ -64,7 +61,6 @@ CREATE TABLE crops
     crops_level    VARCHAR2(20)    NOT NULL, 
     CONSTRAINT CROPS_PK PRIMARY KEY (crops_no)
 );
-
 
 -- 작물 시퀀스 생성
 CREATE SEQUENCE crops_SEQ nocache;
@@ -123,7 +119,15 @@ CREATE TABLE member_like_crops
     CONSTRAINT MEMBER_LIKE_CROPS_PK PRIMARY KEY (id, crops_no),
     CONSTRAINT FK_member_like_crops_id_member FOREIGN KEY (id) REFERENCES member_info (id),
     CONSTRAINT FK_member_like_crops_crops_no_ FOREIGN KEY (crops_no) REFERENCES crops (crops_no)
-)
+);
+
+-- 회원 기호 작물 입력
+insert into member_like_crops values('admin',1);
+insert into member_like_crops values('admin',2);
+insert into member_like_crops values('admin',3);
+
+-- 회원 기호 작물 확인
+select * from member_like_crops;
 
 -- 신고게시판
 CREATE TABLE accuse
