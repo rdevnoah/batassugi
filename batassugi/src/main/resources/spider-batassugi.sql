@@ -144,6 +144,9 @@ CREATE TABLE trade_post
 -- 교환게시판 등록일 컬럼 추가
 alter table trade_post add  regdate date default sysdate;
 
+-- 교환게시판 사진경로 컬럼 크기 수정
+ALTER TABLE trade_post MODIFY (trade_photo VARCHAR2(500));
+
 -- 교환게시판 시퀀스
 CREATE SEQUENCE trade_post_SEQ nocache;
 
