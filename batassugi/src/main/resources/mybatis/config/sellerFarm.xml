@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sellerFarm">
+  <resultMap type="farmVo" id="farmRm">
+    <result column="farm_no" property="farmNo"/>
+    <result column="farm_address" property="farmAddress"/>
+  </resultMap>
+
+  <select id="getSellerFarmList" parameterType="string" resultType="farmVo"><!-- farmVo에 밭정보 먼저 저장 -->
+    select farm_no as farmNo, farm_address as farmAddress, farm_size as farmSize, to_char(farm_Enddate, 'yyyy-mm-dd') as farmEnddate 
+    from farm
+    where id=#{id}
+  </select>
+
+  <select id="getAvailableCropsList" parameterType="int" resultType="cropsVo"><!-- 이 후 farmVo에 있는 재배가능한 작물들인 cropsVo를 저장한다. -->
+    select c.crops_no as cropsNo, c.crops_name as cropsName 
+    from AVAILABLE_CROPS a, crops c, farm f
+    where f.farm_no=a.farm_no and a.crops_no=c.crops_no and f.farm_no=#{farmNo}
+  </select>
+  
+  <select id="readFarmDetail" parameterType="string" resultType="farmVo">
+    select farm_no as farmNo, farm_size as farmSize, farm_address as farmAddress, to_char(farm_enddate, 'yyyy-mm-dd') farmEnddate, id 
+    from farm
+    where farm_no=#{farmNo}
+  </select>
+  
+  <select id="readRentByFarmNo" parameterType="string" resultType="rentVo">
+    select m.nickname as id, r.rent_size as rentSize from spider_member m, rent r, recruit c
+    where r.id=m.id and c.recruit_no=r.recruit_no and c.farm_no=#{farmNo}
+  </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

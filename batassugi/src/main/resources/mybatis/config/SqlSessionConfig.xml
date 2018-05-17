@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <mapper resource="mybatis/config/farm.xml"/>
     
     <mapper resource="mybatis/config/recruit.xml"/>
+    <mapper resource="mybatis/config/sellerFarm.xml"/>
   </mappers>
 </configuration>
 

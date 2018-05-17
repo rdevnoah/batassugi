@@ -5,10 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.vo.common.CropsVo;
-import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Service;
 
@@ -45,11 +43,32 @@ public class SellerFarmService implements SellerFarmServiceIf {
     Map<String, Integer> testmap = new HashMap<String, Integer>();
     testmap.put("farm_no", fvo.getFarmNo());
 
-    for (int i = 0; i <= fvo.getcropsname().size() - 1; i++) {
-      testmap.put("crops_no", Integer.parseInt(fvo.getcropsname().get(i)));
+    for (int i = 0; i <= fvo.getCropsName().size() - 1; i++) {
+      testmap.put("crops_no", Integer.parseInt(fvo.getCropsName().get(i)));
       sellerFarmDao.avaliableCrops(testmap);// 밭등록시 선택한 작물에 번호를 가지고 작물등록dao
-    }    
-
+    }
   }
 
+  @Override
+  public List<FarmVo> getSellerFarmList(String id) {
+    List<FarmVo> farmList = sellerFarmDao.getSellerFarmList(id);
+    for (int i = 0; i < farmList.size(); i++) {
+      List<CropsVo> cropsList = sellerFarmDao.getAvailableCropsList(farmList.get(i).getFarmNo()); 
+      farmList.get(i).setCropsVo(cropsList);
+    }
+    return farmList;
+  }
+
+  @Override
+  public Map<String,Object> findFarmDetail(String farmNo) {
+    Map<String,Object> map = new HashMap<String, Object>();
+    FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
+    vo.setCropsVo(sellerFarmDao.getAvailableCropsList(Integer.parseInt(farmNo)));
+    map.put("farmVo", vo);
+    map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
+    return map;
+    
+  }
+
+  
 }

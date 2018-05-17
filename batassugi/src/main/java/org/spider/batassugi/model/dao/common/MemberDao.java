@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.dao.common;
 
 import javax.annotation.Resource;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Repository;
@@ -28,9 +29,15 @@ import org.springframework.stereotype.Repository;
 public class MemberDao implements MemberDaoIf {
   @Resource
   private SqlSessionTemplate template;
-  
+
   @Override
   public MemberVo login(MemberVo vo) {
     return template.selectOne("member.login",vo);
   }
+  
+  @Override
+  public MemberVo findMemberById(String id) {
+    return template.selectOne("member.findMemberById", id);
+  }
+  
 }

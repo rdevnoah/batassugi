@@ -1,9 +1,11 @@
 package org.spider.batassugi.model.dao.seller;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Repository;
 
@@ -28,11 +30,10 @@ import org.springframework.stereotype.Repository;
  *      </pre>
  */
 @Repository
-public class SellerFarmDao implements SellerFarmDaoIf{
+public class SellerFarmDao implements SellerFarmDaoIf {
 
   @Resource
   private SqlSessionTemplate template;
-
   
   @Override
   public void farmInsert(FarmVo vo) {
@@ -43,4 +44,26 @@ public class SellerFarmDao implements SellerFarmDaoIf{
   public void avaliableCrops(Map<String, Integer> testmap) {
     template.insert("farm.avaliableCrops", testmap);//avaliable crop테이블 저장
   }
+  
+  @Override
+  public List<FarmVo> getSellerFarmList(String id) {
+    return template.selectList("getSellerFarmList", id);
+  }
+
+  @Override
+  public List<CropsVo> getAvailableCropsList(int farmNo) {
+    return template.selectList("getAvailableCropsList",farmNo);
+  }
+
+  @Override
+  public FarmVo findFarmDetail(String farmNo) {
+    return template.selectOne("readFarmDetail", farmNo);
+  }
+
+  @Override
+  public List<RentVo> findRentByFarmNo(String farmNo) {
+    return template.selectList("readRentByFarmNo", farmNo);
+  }
+  
+
 }

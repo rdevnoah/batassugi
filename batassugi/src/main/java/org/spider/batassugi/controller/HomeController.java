@@ -3,9 +3,12 @@ package org.spider.batassugi.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -67,14 +70,32 @@ public class HomeController {
    * @return
    */
   @RequestMapping("login")
-  public String login(HttpServletRequest request, MemberVo vo) {
-    HttpSession session = request.getSession();
-    MemberVo mvo = memberService.login(vo);
-    if (mvo != null) {
+  public String login(HttpServletRequest request, Model model, MemberVo vo) {
+    try {
+      HttpSession session = request.getSession();
+      MemberVo mvo = memberService.login(vo);
       session.setAttribute("mvo", mvo);
       return "redirect:/";
-    } else {
-      return "member/login_fail.titles";
+    } catch (LoginException e) {
+      model.addAttribute("message", e.getMessage());
+      return "member/login_fail";
     }
   }
+  
+  /**
+   * 로그아웃을 위한 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param request 세션 설정을 위한 파라미터.
+   * @return
+   */
+  @RequestMapping("logout")
+  public String logout(HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+      session.invalidate();
+    }
+    return "redirect:/";
+  }
+
 }

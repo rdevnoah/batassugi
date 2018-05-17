@@ -29,4 +29,8 @@ public interface RecruitDaoIf {
    */
   void registerRecruit(RecruitVo recruitVo);
 
+  String findRestFarmSizeByFarmNo(String farmNo);
+
+  String findMaxMonth(String farmNo);
+
 }

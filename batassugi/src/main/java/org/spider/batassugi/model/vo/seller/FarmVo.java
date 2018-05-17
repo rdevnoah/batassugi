@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.vo.seller;
 
 import java.util.List;
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 
 /**
@@ -27,11 +28,17 @@ public class FarmVo {
 
   private int farmNo;
   private MemberInfoVo memberInfoVo;
+  private String id;
   private int farmSize;
   private String farmAddress;
   private String farmStartdate;
   private String farmEnddate;
-  private List<String> cropsname;
+  private List<String> cropsName;
+  private List<CropsVo> cropsVo;
+
+  public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate) {
+    super();
+  }
   
   /**
    * 농지정보 및 농작물 정보를 가져오는 생성자.
@@ -43,11 +50,10 @@ public class FarmVo {
    * @param farmAddress 농지주소.
    * @param farmStartdate 농지등록날짜.
    * @param farmEnddate 농지계약종료날짜.
-   * @param cropsname 농작물 정보를 가져오는 cropsname
+   * @param cropsName 농작물 정보를 가져오는 cropsName
    */
-
-  public FarmVo(int farmNo , MemberInfoVo memberInfoVo, int farmSize, String farmAddress, String farmStartdate,
-      String farmEnddate, List<String> cropsname) {
+  public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
+      String farmStartdate, String farmEnddate, List<String> cropsName) {
     super();
     this.farmNo = farmNo;
     this.memberInfoVo = memberInfoVo;
@@ -55,90 +61,133 @@ public class FarmVo {
     this.farmAddress = farmAddress;
     this.farmStartdate = farmStartdate;
     this.farmEnddate = farmEnddate;
-    this.cropsname = cropsname;
+    this.cropsName = cropsName;
+
+  }
+
+  /**
+   * 기존 생성자.
+   * @param farmNo 농지번호.
+   * @param id 아이디.
+   * @param farmSize 농지크기.
+   * @param farmAddress 농지주소.
+   * @param farmStartdate 농지등록일.
+   * @param farmEnddate 농지등록마감일.
+   * @param cropsVo 재배가능작물리스트.
+   */
+  public FarmVo(int farmNo, String id, int farmSize, String farmAddress, String farmStartdate,
+      String farmEnddate, List<CropsVo> cropsVo) {
+    this.farmNo = farmNo;
+    this.id = id;
+    this.farmSize = farmSize;
+    this.farmAddress = farmAddress;
+    this.farmStartdate = farmStartdate;
+    this.farmEnddate = farmEnddate;
+    this.cropsVo = cropsVo;
+  }
+
+  /**
+   * 생성자 오버로딩.
+   * @param farmSize 밭크기.
+   * @param farmAddress 밭주소.
+   * @param farmStartdate 밭등록일.
+   * @param farmEnddate 밭등록마감일.
+   * @param cropsName 작물이름.
+   */
+  public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate,
+      List<String> cropsName) {
+    super();
+    this.farmSize = farmSize;
+    this.farmAddress = farmAddress;
+    this.farmStartdate = farmStartdate;
+    this.farmEnddate = farmEnddate;
+    this.cropsName = cropsName;
   }
   
-  public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate) {
-    super();
+  public List<CropsVo> getCropsVo() {
+    return cropsVo;
+  }
+
+  public void setCropsVo(List<CropsVo> cropsVo) {
+    this.cropsVo = cropsVo;
+  }
+
+  
+
+
+  public int getFarmNo() {
+    return farmNo;
+  }
+
+  public void setFarmNo(int farmNo) {
+    this.farmNo = farmNo;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public int getFarmSize() {
+    return farmSize;
+  }
+
+  public void setFarmSize(int farmSize) {
     this.farmSize = farmSize;
-    this.farmAddress = farmAddress;
+
+  }
+
+  public String getFarmStartdate() {
+    return farmStartdate;
+  }
+
+  public void setFarmStartdate(String farmStartdate) {
     this.farmStartdate = farmStartdate;
+  }
+
+  public String getFarmEnddate() {
+    return farmEnddate;
+  }
+
+  public void setFarmEnddate(String farmEnddate) {
     this.farmEnddate = farmEnddate;
   }
-  public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate , List<String> cropsname) {
+
+  
+
+  public FarmVo() {
     super();
-    this.farmSize = farmSize;
-    this.farmAddress = farmAddress;
-    this.farmStartdate = farmStartdate;
-    this.farmEnddate = farmEnddate;
-    this.cropsname = cropsname;
+    // TODO Auto-generated constructor stub
   }
-public FarmVo() {
-  super();
-  // TODO Auto-generated constructor stub
-}
 
-public int getFarmNo() {
-  return farmNo;
-}
+  public MemberInfoVo getMemberInfoVo() {
+    return memberInfoVo;
+  }
 
-public void setFarmNo(int farmNo) {
-  this.farmNo = farmNo;
-}
+  public void setMemberInfoVo(MemberInfoVo memberInfoVo) {
+    this.memberInfoVo = memberInfoVo;
+  }
 
-public MemberInfoVo getMemberInfoVo() {
-  return memberInfoVo;
-}
+  public String getFarmAddress() {
+    return farmAddress;
+  }
 
-public void setMemberInfoVo(MemberInfoVo memberInfoVo) {
-  this.memberInfoVo = memberInfoVo;
-}
+  public void setFarmAddress(String farmAddress) {
+    this.farmAddress = farmAddress;
+  }
 
-public int getFarmSize() {
-  return farmSize;
-}
 
-public void setFarmSize(int farmSize) {
-  this.farmSize = farmSize;
-}
+  public List<String> getCropsName() {
+    return cropsName;
+  }
 
-public String getFarmAddress() {
-  return farmAddress;
-}
+  public void setCropsName(List<String> cropsName) {
+    this.cropsName = cropsName;
+  }
 
-public void setFarmAddress(String farmAddress) {
-  this.farmAddress = farmAddress;
-}
-
-public String getFarmStartdate() {
-  return farmStartdate;
-}
-
-public void setFarmStartdate(String farmStartdate) {
-  this.farmStartdate = farmStartdate;
-}
-
-public String getFarmEnddate() {
-  return farmEnddate;
-}
-
-public void setFarmEnddate(String farmEnddate) {
-  this.farmEnddate = farmEnddate;
-}
-
-public List<String> getcropsname() {
-  return cropsname;
-}
-
-public void setcropsname(List<String> cropsname) {
-  this.cropsname = cropsname;
-}
-
-@Override
-public String toString() {
-  return "FarmVo [farmNo=" + farmNo + ", memberInfoVo=" + memberInfoVo + ", farmSize=" + farmSize
-      + ", farmAddress=" + farmAddress + ", farmStartdate=" + farmStartdate + ", farmEnddate="
-      + farmEnddate + ", cropsname=" + cropsname + "]";
-}
+  
 
 }
