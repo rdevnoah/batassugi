@@ -125,6 +125,4 @@ public class FarmVo {
         + farmAddress + ", farmStartdate=" + farmStartdate + ", farmEnddate=" + farmEnddate
         + ", cropsVo=" + cropsVo + "]";
   }
-
-
 }

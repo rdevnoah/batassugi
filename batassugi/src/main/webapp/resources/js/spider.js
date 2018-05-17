@@ -19,44 +19,41 @@ var $closeSide = $('#closeSide'),
    $openSide.on('click',function(){
       $mySidenav.css('width','15%');
    });
-
+   
    // 슬라이드 클로즈
    $closeSide.on('click',function(){
-      $mySidenav.css('width','0%');
-   });
-   
-   // 헤더 메뉴 클릭시 폰트 검정색으로 변경
-   $vcenterA.on('click', function(e) {
-      if ($(this).attr('class') != 'choice') {
-         $(this).parents().find('.choice').removeClass('choice')
-         $(this).addClass('choice')
-      }
-   });
-   
-   // 헤더 메뉴 마우스를 갖다대면 폰트 검정색으로 변경
-   $vcenterA.on('mouseenter', function() {
-      $(this).css('color','black')
-   }).on('mouseleave', function() {
-      $(this).css('color','gray')
-   });
-   
-   // post 전송을 위한 펑션
-   function sendPost(path, params) {
-      var $f = $('<form></form>').attr({
-         action : path,
-         method : 'post'
-      });
-      for (var key in params) {
-         var value = params[key];
-         var $objs = $('<input type="hidden"/>').attr({
-            name : key,
-            value : value
-            });
-         $f.append($objs);
-      }
-      $('body').append($f);
-      $f.submit();
-   } // sendPost(path, params)
+		$mySidenav.css('width','0%');
+	});
+	
+	$vcenterA.on('click', function(e) {
+		if ($(this).attr('class') != 'choice') {
+			$(this).parents().find('.choice').removeClass('choice')
+			$(this).addClass('choice')
+		}
+	});
+	
+	$vcenterA.on('mouseenter', function() {
+		$(this).css('color','black')
+	}).on('mouseleave', function() {
+		$(this).css('color','gray')
+	});
+	
+	   function sendPost(path, params) {
+		      var $f = $('<form></form>').attr({
+		         action : path,
+		         method : 'post'
+		      });
+		      for (var key in params) {
+		         var value = params[key];
+		         var $objs = $('<input type="hidden"/>').attr({
+		            name : key,
+		            value : value
+		            });
+		         $f.append($objs);
+		      }
+		      $('body').append($f);
+		      $f.submit();
+		   } // sendPost(path, params)
    
    // 페이징, 디테일 펑션
    var postEvent = {

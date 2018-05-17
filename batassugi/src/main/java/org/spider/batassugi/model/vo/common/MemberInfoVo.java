@@ -2,53 +2,81 @@ package org.spider.batassugi.model.vo.common;
 
 import java.util.Date;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * 반드시 마침표를 찍습니다.
+ * @title 밭아쓰기
+ * @packagename : org.spider.batassugi.model.vo.common
+ * @filename : MemberInfoVo.java
+ * @author : "PL_Seonhwa"
+ * @since : 2018. 5. 15.
+ * @version : 1.0
+ * @see 
+ * 
+ * <pre>
+ * == Modification Information ==
+ * 
+ * Date         AUTHOR           NOTE
+ * -----------  -------------    --------------------------------
+ * 2018. 5. 14.  "PL_Seonhwa"    최초작성
+ * 2018. 5. 15.  "PL_Seonhwa"    파일업로드를 위한 변수 file, image 추가
+ *                               회원에게서 받아오는 날짜 변수 birthday(date->String 변경)
+ * 2018. 5. 17.  "PL_Seonhwa"    회원 기호 작물 타입 변경(CropsVo -> String)
+ * </pre>
+ */
 public class MemberInfoVo {
-  private String id;
+  private MemberVo memberVo;
   private String email;
   private String tel;
   private String address;
-  private Date birthday;
+  private String birthday;
   private String gender;
   private Date regdate;
-  private List<CropsVo> likeCrops;
+  private String image;
+  private List<String> likeCrops;
+  private MultipartFile file;
 
   public MemberInfoVo() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   /**
-   * 멤버 부가정보.
+   * 회원등록 및 부가 정보를 저장하는 VO.
    * 
-   * @param id 회원 아이디.
-   * @param email 회원 이메일.
-   * @param tel 회원 전화번호.
-   * @param address 회원 주소.
-   * @param birthday 회원 생일.
-   * @param gender 회원 성별.
-   * @param regdate 회원 가입일.
-   * @param likeCrops 회원 기호 작물.
+   * @author "PL_Seonhwa"
+   * @param memberVo 사용자의 기본 회원정보.
+   * @param email 사용자 이메일 정보.
+   * @param tel 사용자 전화번호.
+   * @param address 사용자 주소.
+   * @param birthday 사용자 생년월일.
+   * @param gender 사용자 성별.
+   * @param regdate 사용자 등록일.
+   * @param image 사용자 프로필이미지.
+   * @param likeCrops 사용자 기호 작물.
+   * @param file 사용자 프로필 이미지 업로드시 사용할 파일객체.
    */
-  public MemberInfoVo(String id, String email, String tel, String address, Date birthday,
-      String gender, Date regdate, List<CropsVo> likeCrops) {
+  public MemberInfoVo(MemberVo memberVo, String email, String tel, String address, String birthday,
+      String gender, Date regdate, String image, List<String> likeCrops, MultipartFile file) {
     super();
-    this.id = id;
+    this.memberVo = memberVo;
     this.email = email;
     this.tel = tel;
     this.address = address;
     this.birthday = birthday;
     this.gender = gender;
     this.regdate = regdate;
+    this.image = image;
     this.likeCrops = likeCrops;
+    this.file = file;
   }
 
-  public String getId() {
-    return id;
+  public MemberVo getMemberVo() {
+    return memberVo;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setMemberVo(MemberVo memberVo) {
+    this.memberVo = memberVo;
   }
 
   public String getEmail() {
@@ -75,11 +103,11 @@ public class MemberInfoVo {
     this.address = address;
   }
 
-  public Date getBirthday() {
+  public String getBirthday() {
     return birthday;
   }
 
-  public void setBirthday(Date birthday) {
+  public void setBirthday(String birthday) {
     this.birthday = birthday;
   }
 
@@ -99,21 +127,36 @@ public class MemberInfoVo {
     this.regdate = regdate;
   }
 
-  public List<CropsVo> getLikeCrops() {
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+  public List<String> getLikeCrops() {
     return likeCrops;
   }
 
-  public void setLikeCrops(List<CropsVo> likeCrops) {
+  public void setLikeCrops(List<String> likeCrops) {
     this.likeCrops = likeCrops;
+  }
+
+  public MultipartFile getFile() {
+    return file;
+  }
+
+  public void setFile(MultipartFile file) {
+    this.file = file;
   }
 
   @Override
   public String toString() {
-    return "MemberInfoVo [id=" + id + ", email=" + email + ", tel=" + tel + ", address=" + address
-        + ", birthday=" + birthday + ", gender=" + gender + ", regdate=" + regdate + ", likeCrops="
-        + likeCrops + "]";
+    return "MemberInfoVo [memberVo=" + memberVo + ", email=" + email + ", tel=" + tel + ", address="
+        + address + ", birthday=" + birthday + ", gender=" + gender + ", regdate=" + regdate
+        + ", image=" + image + ", likeCrops=" + likeCrops + ", file=" + file + "]";
   }
-
 
 
 }
