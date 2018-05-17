@@ -37,6 +37,7 @@ public class SellerController {
 
   /**
    * 메소드 설명 : 밭등록.
+   * 
    * @author "GL_SangKyoung"
    * @param fvo
    * @param request
@@ -46,13 +47,8 @@ public class SellerController {
   public String farmRegister(FarmVo fvo, HttpServletRequest request) {
     HttpSession session = request.getSession();
     MemberVo mvo = (MemberVo) session.getAttribute("mvo");
-    if (session.getAttribute("mvo") != null) {
-      fvo.getMemberInfoVo().setId(mvo.getId());
-      sellerFarmService.farmInsert(fvo);
-      return "redirect:/";
-    } else {
-      return "farmRegister_error";
-    }
-
+    fvo.getMemberInfoVo().setId(mvo.getId());
+    sellerFarmService.farmInsert(fvo);
+    return "redirect:/";
   }
 }

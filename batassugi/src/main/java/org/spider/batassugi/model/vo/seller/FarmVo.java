@@ -31,7 +31,7 @@ public class FarmVo {
   private String farmAddress;
   private String farmStartdate;
   private String farmEnddate;
-  private List<String> cropsname;
+  private List<String> CropsName;
   
   /**
    * 농지정보 및 농작물 정보를 가져오는 생성자.
@@ -43,11 +43,11 @@ public class FarmVo {
    * @param farmAddress 농지주소.
    * @param farmStartdate 농지등록날짜.
    * @param farmEnddate 농지계약종료날짜.
-   * @param cropsname 농작물 정보를 가져오는 cropsname
+   * @param CropsName 농작물 정보를 가져오는 CropsName
    */
 
   public FarmVo(int farmNo , MemberInfoVo memberInfoVo, int farmSize, String farmAddress, String farmStartdate,
-      String farmEnddate, List<String> cropsname) {
+      String farmEnddate, List<String> CropsName) {
     super();
     this.farmNo = farmNo;
     this.memberInfoVo = memberInfoVo;
@@ -55,7 +55,7 @@ public class FarmVo {
     this.farmAddress = farmAddress;
     this.farmStartdate = farmStartdate;
     this.farmEnddate = farmEnddate;
-    this.cropsname = cropsname;
+    this.CropsName = CropsName;
   }
   
   public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate) {
@@ -65,13 +65,13 @@ public class FarmVo {
     this.farmStartdate = farmStartdate;
     this.farmEnddate = farmEnddate;
   }
-  public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate , List<String> cropsname) {
+  public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate , List<String> CropsName) {
     super();
     this.farmSize = farmSize;
     this.farmAddress = farmAddress;
     this.farmStartdate = farmStartdate;
     this.farmEnddate = farmEnddate;
-    this.cropsname = cropsname;
+    this.CropsName = CropsName;
   }
 public FarmVo() {
   super();
@@ -126,19 +126,19 @@ public void setFarmEnddate(String farmEnddate) {
   this.farmEnddate = farmEnddate;
 }
 
-public List<String> getcropsname() {
-  return cropsname;
+public List<String> getCropsName() {
+  return CropsName;
 }
 
-public void setcropsname(List<String> cropsname) {
-  this.cropsname = cropsname;
+public void setCropsName(List<String> CropsName) {
+  this.CropsName = CropsName;
 }
 
 @Override
 public String toString() {
   return "FarmVo [farmNo=" + farmNo + ", memberInfoVo=" + memberInfoVo + ", farmSize=" + farmSize
       + ", farmAddress=" + farmAddress + ", farmStartdate=" + farmStartdate + ", farmEnddate="
-      + farmEnddate + ", cropsname=" + cropsname + "]";
+      + farmEnddate + ", CropsName=" + CropsName + "]";
 }
 
 }
