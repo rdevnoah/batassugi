@@ -60,7 +60,6 @@ public class SellerController {
     fvo.setMemberInfoVo(new MemberInfoVo());
     System.out.println(fvo.getCropsNo());
     if (session.getAttribute("mvo") != null) {
-      //fvo.setMemberInfoVo(new MemberInfoVo(mvo.getId(), null, null, null, null, null, null, null));
       fvo.getMemberInfoVo().setId(mvo.getId());
       sellerFarmService.farmInsert(fvo);
       return "redirect:/";

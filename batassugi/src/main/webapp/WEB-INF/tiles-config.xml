@@ -3,12 +3,59 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
  <tiles-definitions>
+ 
+ <!-- 관리자 메인 -->
+ 	<definition name="admin.tiles" template="/WEB-INF/views/admin/template/layout.jsp">
+ 		<put-attribute name="admin_title" value="spider_admin" />
+ 		<put-attribute name="admin_header" value="/WEB-INF/views/admin/template/header.jsp"/>
+ 		<put-attribute name="admin_left" value="/WEB-INF/views/admin/template/left.jsp"/>
+ 		<put-attribute name="admin_main" value="/WEB-INF/views/admin/template/main.jsp"/>
+ 	</definition>
+ 	
+ 	<definition name="admin/*.tiles"  extends="admin.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="admin_main"  value="/WEB-INF/views/admin/{1}.jsp"/>
+ 	</definition>
+ 	
+ 	
+ 	 <!-- 구매자 메인 -->
+ 	<definition name="buyer.tiles" template="/WEB-INF/views/buyer/template/layout.jsp">
+ 		<put-attribute name="buyer_title" value="spider_buyer" />
+ 		<put-attribute name="buyer_header" value="/WEB-INF/views/buyer/template/header.jsp"/>
+ 		<put-attribute name="buyer_left" value="/WEB-INF/views/buyer/template/left.jsp"/>
+ 		<put-attribute name="buyer_main" value="/WEB-INF/views/buyer/template/main.jsp"/>
+ 	</definition>
+ 	
+ 	<definition name="buyer/*.tiles"  extends="buyer.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="buyer_main"  value="/WEB-INF/views/buyer/{1}.jsp"/>
+ 	</definition>
+ 	
+ 	
+ 	<!-- 판매자 메인 -->
+ 	<definition name="seller.tiles" template="/WEB-INF/views/seller/template/layout.jsp">
+ 		<put-attribute name="seller_title" value="spider_seller" />
+ 		<put-attribute name="seller_header" value="/WEB-INF/views/seller/template/header.jsp"/>
+ 		<put-attribute name="seller_left" value="/WEB-INF/views/seller/template/left.jsp"/>
+ 		<put-attribute name="seller_main" value="/WEB-INF/views/seller/template/main.jsp"/>
+ 	</definition>
+ 	
+ 	<definition name="seller/*.tiles"  extends="seller.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="seller_main"  value="/WEB-INF/views/seller/{1}.jsp"/>
+ 	</definition>
+ 	
+ 	
+ 	
+<!-- 공통메인 --> 	
  	<definition name="home.tiles" template="/WEB-INF/views/templates/layout.jsp">
  		<put-attribute name="title" value="spider" />
  		<put-attribute name="header" value="/WEB-INF/views/templates/header.jsp"/>
  		<put-attribute name="main" value="/WEB-INF/views/templates/main.jsp"/>
  		<put-attribute name="footer" value="/WEB-INF/views/templates/footer.jsp"/>
+
  	</definition>
+
 <!--  	<definition name="*.tiles"  extends="home.tiles">
  		<put-attribute name="title" value="{1}"/>
  		<put-attribute name="main"  value="/WEB-INF/views/{1}.jsp"/>
@@ -18,18 +65,6 @@
  		<put-attribute name="title" value="{1}"/>
  		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
  	</definition> 
- 	
- 	<!-- <definition name="info.tiles" template="/WEB-INF/views/infoTemplates/layout_info.jsp">
- 		<put-attribute name="title" value="spider-info"/>
- 		<put-attribute name="header" value="/WEB-INF/views/infoTemplates/header_info.jsp"/>
- 		<put-attribute name="left" value="/WEB-INF/views/infoTemplates/left_info.jsp"/>
- 		<put-attribute name="main" value="/WEB-INF/views/infoTemplates/main_info.jsp"/>
- 		<put-attribute name="footer" value="/WEB-INF/views/infoTemplates/footer_info.jsp"/>
- 	</definition>
- 	<definition name="*/*.tiles" extends="info.tiles">
- 		<put-attribute name="title" value="{1}"/>
- 		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
- 	</definition> -->
  </tiles-definitions>
  
  
