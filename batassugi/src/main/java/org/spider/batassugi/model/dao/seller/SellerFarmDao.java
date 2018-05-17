@@ -43,5 +43,4 @@ public class SellerFarmDao implements SellerFarmDaoIf{
   public void avaliableCrops(Map<String, Integer> testmap) {
     template.insert("farm.avaliableCrops", testmap);//avaliable crop테이블 저장
   }
-  
 }

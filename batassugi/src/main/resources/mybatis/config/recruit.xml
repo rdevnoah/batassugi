@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recruit">
+  <insert id="registerRecruit" parameterType="recruitVo">
+    insert into recruit 
+    values(recruit_seq.nextval, #{farmNo}, #{recruitKind}, sysdate, #{recruitEnddate}, #{price}, #{recruitContent}, #{recruitStatus}, #{recruitSize})
+  </insert>
+</mapper>
+ <!--
+ CREATE TABLE recruit
+(
+    recruit_no           NUMBER          NOT NULL, 
+    farm_no              NUMBER          NOT NULL, 
+    recruit_kind         VARCHAR2(50)    NOT NULL, 
+    recruit_startdate    DATE            NOT NULL, 
+    recruit_enddate      DATE            NOT NULL, 
+    price                NUMBER          NOT NULL, 
+    recruit_content      CLOB            NOT NULL, 
+    recruit_status       VARCHAR2(50)    NOT NULL, 
+    recruit_size         NUMBER          NOT NULL,  
+  -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

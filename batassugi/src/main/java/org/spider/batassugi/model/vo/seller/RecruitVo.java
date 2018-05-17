@@ -1,6 +1,5 @@
 package org.spider.batassugi.model.vo.seller;
 
-import java.util.Date;
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 
@@ -20,19 +19,19 @@ import org.spider.batassugi.model.vo.buyer.RentVo;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "GL_SangKyoung"    최초작성
+ * 2018. 5. 15.  "PM KimYoungHo"    Integer 타입 전체 primitive 타입인 int형으로 변경완료. Date 타입은 String으로 변경
  * </pre>
  */
 public class RecruitVo {
-  private Integer recruitNo;
-  private Integer farmNo;
+  private int recruitNo;
+  private int farmNo;
   private String recruitKind;
-  private Date recruitStartdate;
-  private Date recruitEnddate;
-  private Integer price;
+  private String recruitStartdate;
+  private String recruitEnddate;
+  private int price;
   private String recruitContent;
   private String recruitStatus;
-  private Integer recruitSize;
-  private String id;
+  private int recruitSize;
   private List<RentVo> rentVo;
 
   public RecruitVo() {
@@ -53,12 +52,11 @@ public class RecruitVo {
    * @param recruitContent  모집내용
    * @param recruitStatus   모집상태
    * @param recruitSize 대여평수 
-   * @param id  회원정보
    * @param rentVo  대여정보 가져오기위한 rentVo
    */
-  public RecruitVo(Integer recruitNo, Integer farmNo, String recruitKind, Date recruitStartdate,
-      Date recruitEnddate, Integer price, String recruitContent, String recruitStatus,
-      Integer recruitSize, String id, List<RentVo> rentVo) {
+  public RecruitVo(int recruitNo, int farmNo, String recruitKind, String recruitStartdate,
+      String recruitEnddate, int price, String recruitContent, String recruitStatus,
+      int recruitSize, List<RentVo> rentVo) {
     super();
     this.recruitNo = recruitNo;
     this.farmNo = farmNo;
@@ -69,23 +67,49 @@ public class RecruitVo {
     this.recruitContent = recruitContent;
     this.recruitStatus = recruitStatus;
     this.recruitSize = recruitSize;
-    this.id = id;
     this.rentVo = rentVo;
   }
+  
+  /**
+   * recruitNo의 경우 시퀀스로 자동 생성되이에 그것을 제외한 인스턴스 변수를 초기화하는 생성자.
+   * @param farmNo .
+   * @param recruitKind .
+   * @param recruitStartdate .
+   * @param recruitEnddate .
+   * @param price .
+   * @param recruitContent .
+   * @param recruitStatus .
+   * @param recruitSize .
+   * @param rentVo .
+   */
+//  public RecruitVo(int farmNo, String recruitKind, String recruitStartdate, String recruitEnddate,
+//      int price, String recruitContent, String recruitStatus, int recruitSize,
+//      List<RentVo> rentVo) {
+//    super();
+//    this.farmNo = farmNo;
+//    this.recruitKind = recruitKind;
+//    this.recruitStartdate = recruitStartdate;
+//    this.recruitEnddate = recruitEnddate;
+//    this.price = price;
+//    this.recruitContent = recruitContent;
+//    this.recruitStatus = recruitStatus;
+//    this.recruitSize = recruitSize;
+//    this.rentVo = rentVo;
+//  }
 
-  public Integer getRecruitNo() {
+  public int getRecruitNo() {
     return recruitNo;
   }
 
-  public void setRecruitNo(Integer recruitNo) {
+  public void setRecruitNo(int recruitNo) {
     this.recruitNo = recruitNo;
   }
 
-  public Integer getFarmNo() {
+  public int getFarmNo() {
     return farmNo;
   }
 
-  public void setFarmNo(Integer farmNo) {
+  public void setFarmNo(int farmNo) {
     this.farmNo = farmNo;
   }
 
@@ -97,27 +121,27 @@ public class RecruitVo {
     this.recruitKind = recruitKind;
   }
 
-  public Date getRecruitStartdate() {
+  public String getRecruitStartdate() {
     return recruitStartdate;
   }
 
-  public void setRecruitStartdate(Date recruitStartdate) {
+  public void setRecruitStartdate(String recruitStartdate) {
     this.recruitStartdate = recruitStartdate;
   }
 
-  public Date getRecruitEnddate() {
+  public String getRecruitEnddate() {
     return recruitEnddate;
   }
 
-  public void setRecruitEnddate(Date recruitEnddate) {
+  public void setRecruitEnddate(String recruitEnddate) {
     this.recruitEnddate = recruitEnddate;
   }
 
-  public Integer getPrice() {
+  public int getPrice() {
     return price;
   }
 
-  public void setPrice(Integer price) {
+  public void setPrice(int price) {
     this.price = price;
   }
 
@@ -137,21 +161,14 @@ public class RecruitVo {
     this.recruitStatus = recruitStatus;
   }
 
-  public Integer getRecruitSize() {
+  public int getRecruitSize() {
     return recruitSize;
   }
 
-  public void setRecruitSize(Integer recruitSize) {
+  public void setRecruitSize(int recruitSize) {
     this.recruitSize = recruitSize;
   }
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
 
   public List<RentVo> getRentVo() {
     return rentVo;
@@ -166,8 +183,7 @@ public class RecruitVo {
     return "RecruitVo [recruitNo=" + recruitNo + ", farmNo=" + farmNo + ", recruitKind="
         + recruitKind + ", recruitStartdate=" + recruitStartdate + ", recruitEnddate="
         + recruitEnddate + ", price=" + price + ", recruitContent=" + recruitContent
-        + ", recruitStatus=" + recruitStatus + ", recruitSize=" + recruitSize + ", id=" + id
-        + ", rentVo=" + rentVo + "]";
+        + ", recruitStatus=" + recruitStatus + ", recruitSize=" + recruitSize + ", rentVo=" + rentVo
+        + "]";
   }
-
 }
