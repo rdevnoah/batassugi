@@ -8,6 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     insert into recruit 
     values(recruit_seq.nextval, #{farmVo.farmNo}, #{recruitKind}, sysdate, #{recruitEnddate}, #{price}, #{recruitContent}, #{recruitStatus}, #{recruitSize})
   </insert>
+  
+  <select id="findRestFarmSizeByFarmNo" parameterType="string" resultType="string">
+  	select (farm_size-(select sum(r.rent_size) from rent r, recruit c, farm f 
+	where c.recruit_no=r.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo}))
+	from farm
+	where farm_no=#{farmNo}
+  </select>
+  
+  <select id="findMaxRecruitMonth" parameterType="string" resultType="string">
+  	select ROUND(MONTHS_BETWEEN(farm_enddate,sysdate)) AS maxRentMonth from farm
+	where farm_no=#{farmNo}
+  </select>
 </mapper>
  <!--
  CREATE TABLE recruit

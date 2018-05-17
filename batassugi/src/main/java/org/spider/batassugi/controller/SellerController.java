@@ -1,11 +1,13 @@
 package org.spider.batassugi.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.spider.batassugi.model.service.seller.RecruitServiceIf;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
 import org.spider.batassugi.model.vo.common.MemberVo;
-import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +39,9 @@ public class SellerController {
   @Resource
   private SellerFarmServiceIf sellerFarmService;
   
+  @Resource
+  private RecruitServiceIf recruitService;
+  
   /**
    * 판매자의 마이페이지로 이동하는데 사용하는 Controller입니다. 
    * 판매자 마이페이지로 이동할 경우 판매자의 현재 등록한 밭 정보들을 
@@ -54,11 +59,16 @@ public class SellerController {
     return "/infoTemplates/seller_info";
   }
   
+  @RequestMapping(method = RequestMethod.POST, value = "registerRecruitForm")
+  public String registerRecruitForm(Model model,String farmNo) {
+    Map<String,Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
+    model.addAttribute("recruitMap", map);
+    return "infoTemplates/registerRecruit";
+  }
   
   @ResponseBody
-  @RequestMapping(method=RequestMethod.POST, value="getDetailFarm")
+  @RequestMapping(method = RequestMethod.POST, value = "getDetailFarm")
   public Object findFarmDetail(String farmNo) {
-    System.out.println(farmNo);
     return sellerFarmService.findFarmDetail(farmNo);
   }
 }

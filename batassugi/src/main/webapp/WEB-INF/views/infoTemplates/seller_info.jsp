@@ -30,34 +30,42 @@
 <title>"PM KimYoungHo"</title>
 </head>
 <body>
-   <div class="container">
-      <div class="row main">
-         <div class="col-xs-4">
-            <c:import url="left_info.jsp"/>
-         </div> <%-- col-xs-4 left --%>
-         <div class="col-xs-8">
-         	<c:forEach items="${requestScope.farmList}" var="farm">
-				<span>${farm.farmNo}</span><br>
-				<span>${farm.farmAddress}</span><br>
-				<c:forEach items="${farm.cropsVo}" var="crops">
-					<span>${crops.cropsNo}</span><br>
-					<span>${crops.cropsName}</span><br>
-				</c:forEach>		
-				<input class="detailFarm" type="submit" value="상세정보">
-			</c:forEach>
-         </div>
-      </div> <%-- row main --%>
-   </div> <%-- container --%>
+<div class="container">
+   <div class="row">
+      <div class="col-xs-12">
+         <c:forEach items="${farmList}" var="farmVo">
+         <div class="col-xs-3">
+            <div class="thumbnail rent">
+               <img src="${pageContext.request.contextPath}/resources/img/대여신청_밭사진1.png" class="img-responsive">
+               <div class="caption">
+                  <div class="hidden"><span>${farmVo.farmNo}</span></div>
+                  <div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${farmVo.farmEnddate}</span> 까지</div>
+                  <div><i class="fa fa-fort-awesome fa-lg"></i> <span>${farmVo.farmSize}평</span></div>
+                  <!-- <div><i class="fa fa-comment-o fa-lg"></i> <span>서현에 위치한 농장을 대여 해드립니다</span></div> -->
+                  <div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${farmVo.farmAddress}</span></div>
+                  <p>
+                     <c:forEach items="${farmVo.cropsVo}" var="crops">
+                     	${crops.cropsName}
+                     </c:forEach>
+                  </p>
+                  <button class="btn btn-primary btn-block detailFarm">상세보기</button>
+               </div> <%-- caption --%>
+            </div> <%-- thumbnail --%>
+         </div> <%-- col-xs-4 --%>
+         </c:forEach>
+      </div> <%-- col-xs-12 --%>
+   </div> <%-- row --%>
+</div> <%-- container --%>
    <script src="${pageContext.request.contextPath}/resources/js/spider.js"></script>
 </body>
 <script>
 	$(document).ready(function() {
 		var $detailFarm = $('.detailFarm');
 		$detailFarm.on('click', function() {
-			
-			var $farmNo=$(this).parents().children("span:nth(0)").text();
+			//alert($('.hidden').children("span:nth(0)").text());
+			var $farmNo=$('.hidden').children("span:nth(0)").text();
 			var $data;
-			$.ajax({
+			 $.ajax({
 				type : 'post',
 				url:'getDetailFarm',
 				data : 'farmNo='+$farmNo,
@@ -73,7 +81,10 @@
 				buttons : [{
 	                label: '대여모집',
 	                action : function() {
-						
+	                	sendPost('registerRecruitForm', {
+	                		'farmNo' : $data.farmVo.farmNo
+	                	})
+						//location.href="registerRecruitForm";
 					}
 	            },{
 	            	label:'주말농장모집',
@@ -99,10 +110,10 @@
 			}
 			appendString+="<div class='col-xs-5'>asdf";
 			appendString+="</div>";
-			appendString+="<div class='col-xs-7'>평수 : "+ $data.farmVo.farmSize+"<br>";
-			appendString+="밭 주소 : "+$data.farmVo.farmAddress+"<br>";
-			appendString+="등록만료일 : "+$data.farmVo.farmEnddate+"<br>";
-			appendString+="농지주인 : "+$data.farmVo.id+"<br>";
+			appendString+="<div class='col-xs-7'>평수 : "+ $data.farmVo.farmSize+"<hr>";
+			appendString+="밭 주소 : "+$data.farmVo.farmAddress+"<hr>";
+			appendString+="등록만료일 : "+$data.farmVo.farmEnddate+"<hr>";
+			appendString+="농지주인 : "+$data.farmVo.id+"<hr>";
 			appendString+="재배가능농작물 : "+crops+"<br><br><br><br>";
 			appendString+="</div><hr>";
 			
@@ -110,7 +121,7 @@
 			//alert($myModalBody.html());
 			$detailModal.open();
 			//alert(($data).farmVo.farmAddress);
-			//
+			// 
 		})
 	})
 </script>

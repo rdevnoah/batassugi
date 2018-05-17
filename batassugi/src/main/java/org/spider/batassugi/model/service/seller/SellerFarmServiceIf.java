@@ -34,5 +34,7 @@ public interface SellerFarmServiceIf {
   public List<FarmVo> getSellerFarmList(String id);
 
   public Map<String,Object> findFarmDetail(String farmNo);
+
+  
   
 }

@@ -1,7 +1,6 @@
 package org.spider.batassugi.model.dao.seller;
 
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.buyer.RentVo;
