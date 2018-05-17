@@ -33,7 +33,7 @@ public class FarmVo {
   private String farmAddress;
   private String farmStartdate;
   private String farmEnddate;
-  private List<String> cropsName;
+  private List<String> cropsNo;
   private List<CropsVo> cropsVo;
 
   public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate) {
@@ -53,7 +53,7 @@ public class FarmVo {
    * @param cropsName 농작물 정보를 가져오는 cropsName
    */
   public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
-      String farmStartdate, String farmEnddate, List<String> cropsName) {
+      String farmStartdate, String farmEnddate, List<String> cropsNo) {
     super();
     this.farmNo = farmNo;
     this.memberInfoVo = memberInfoVo;
@@ -61,7 +61,7 @@ public class FarmVo {
     this.farmAddress = farmAddress;
     this.farmStartdate = farmStartdate;
     this.farmEnddate = farmEnddate;
-    this.cropsName = cropsName;
+    this.cropsNo = cropsNo;
 
   }
 
@@ -95,13 +95,13 @@ public class FarmVo {
    * @param cropsName 작물이름.
    */
   public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate,
-      List<String> cropsName) {
+      List<String> cropsNo) {
     super();
     this.farmSize = farmSize;
     this.farmAddress = farmAddress;
     this.farmStartdate = farmStartdate;
     this.farmEnddate = farmEnddate;
-    this.cropsName = cropsName;
+    this.cropsNo = cropsNo;
   }
   
   public List<CropsVo> getCropsVo() {
@@ -180,19 +180,19 @@ public class FarmVo {
   }
 
 
-  public List<String> getCropsName() {
-    return cropsName;
+  public List<String> getCropsNo() {
+    return cropsNo;
   }
 
-  public void setCropsName(List<String> cropsName) {
-    this.cropsName = cropsName;
+  public void setCropsName(List<String> cropsNo) {
+    this.cropsNo = cropsNo;
   }
 
   @Override
   public String toString() {
     return "FarmVo [farmNo=" + farmNo + ", memberInfoVo=" + memberInfoVo + ", id=" + id
         + ", farmSize=" + farmSize + ", farmAddress=" + farmAddress + ", farmStartdate="
-        + farmStartdate + ", farmEnddate=" + farmEnddate + ", cropsName=" + cropsName + ", cropsVo="
+        + farmStartdate + ", farmEnddate=" + farmEnddate + ", cropsNo=" + cropsNo + ", cropsVo="
         + cropsVo + "]";
   }
 

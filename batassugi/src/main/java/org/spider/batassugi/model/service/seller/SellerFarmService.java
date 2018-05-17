@@ -43,8 +43,8 @@ public class SellerFarmService implements SellerFarmServiceIf {
     Map<String, Integer> testmap = new HashMap<String, Integer>();
     testmap.put("farm_no", fvo.getFarmNo());
 
-    for (int i = 0; i <= fvo.getCropsName().size() - 1; i++) {
-      testmap.put("crops_no", Integer.parseInt(fvo.getCropsName().get(i)));
+    for (int i = 0; i <= fvo.getCropsNo().size() - 1; i++) {
+      testmap.put("crops_no", Integer.parseInt(fvo.getCropsNo().get(i)));
       sellerFarmDao.avaliableCrops(testmap);// 밭등록시 선택한 작물에 번호를 가지고 작물등록dao
     }
   }

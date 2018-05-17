@@ -47,22 +47,22 @@ public class SellerFarmDao implements SellerFarmDaoIf {
   
   @Override
   public List<FarmVo> getSellerFarmList(String id) {
-    return template.selectList("getSellerFarmList", id);
+    return template.selectList("sellerFarm.getSellerFarmList", id);
   }
 
   @Override
   public List<CropsVo> getAvailableCropsList(int farmNo) {
-    return template.selectList("getAvailableCropsList",farmNo);
+    return template.selectList("sellerFarm.getAvailableCropsList",farmNo);
   }
 
   @Override
   public FarmVo findFarmDetail(String farmNo) {
-    return template.selectOne("readFarmDetail", farmNo);
+    return template.selectOne("sellerFarm.readFarmDetail", farmNo);
   }
 
   @Override
   public List<RentVo> findRentByFarmNo(String farmNo) {
-    return template.selectList("readRentByFarmNo", farmNo);
+    return template.selectList("sellerFarm.readRentByFarmNo", farmNo);
   }
   
 

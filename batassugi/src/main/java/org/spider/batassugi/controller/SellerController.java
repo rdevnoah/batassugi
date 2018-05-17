@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.service.seller.RecruitServiceIf;
 import org.spider.batassugi.model.service.seller.SellerFarmService;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Controller;
@@ -56,7 +57,10 @@ public class SellerController {
   public String farmRegister(FarmVo fvo, HttpServletRequest request) {
     HttpSession session = request.getSession();
     MemberVo mvo = (MemberVo) session.getAttribute("mvo");
+    fvo.setMemberInfoVo(new MemberInfoVo());
+    System.out.println(fvo.getCropsNo());
     if (session.getAttribute("mvo") != null) {
+      //fvo.setMemberInfoVo(new MemberInfoVo(mvo.getId(), null, null, null, null, null, null, null));
       fvo.getMemberInfoVo().setId(mvo.getId());
       sellerFarmService.farmInsert(fvo);
       return "redirect:/";

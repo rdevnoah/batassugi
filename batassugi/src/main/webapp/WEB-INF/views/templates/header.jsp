@@ -41,7 +41,6 @@
 	            <li><a>대여신청</a></li>
 	            <li><a>회원가입</a></li>
 	            <li><a href="${pageContext.request.contextPath}/home/loginView">로그인</a></li>            
-	            <li><a href="${pageContext.request.contextPath}/home/farmRegister">밭등록</a></li>            
 	         </ul>   
 	         </c:when>
 	         <c:otherwise>
@@ -50,6 +49,7 @@
 	            <li><a>사이트소개</a></li>
 	            <li><a>교환게시판</a></li>
 	            <li><a>대여신청</a></li>
+	            <li><a href="${pageContext.request.contextPath}/home/farmRegister">밭등록</a></li>
 	            <li><a>마이페이지</a></li>
 	            <!-- 판매자 마이페이지 임시 창 이동 -->
 	            <c:if test="${sessionScope.mvo.memberLevel=='판매자'}">
