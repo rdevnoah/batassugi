@@ -69,6 +69,13 @@ CREATE TABLE crops
 -- 작물 시퀀스 생성
 CREATE SEQUENCE crops_SEQ nocache;
 
+-- 작물사전 테스트용 DB
+insert into crops values(crops_SEQ.nextval, '브로콜리', '하');
+insert into crops values(crops_SEQ.nextval, '땅콩', '하');
+insert into crops values(crops_SEQ.nextval, '옥수수', '중');
+insert into crops values(crops_SEQ.nextval, '부추', '하');
+insert into crops values(crops_SEQ.nextval, '깻잎', '중');
+
 
 -- 작물 부가정보 테이블 생성
 CREATE TABLE crops_info
@@ -86,6 +93,27 @@ CREATE TABLE crops_info
     CONSTRAINT CROPS_INFO_PK PRIMARY KEY (crops_no),
     CONSTRAINT FK_crops_info_crops_no_crops_c FOREIGN KEY (crops_no) REFERENCES crops (crops_no)
 );
+
+
+-- 작물사전 상세보기 테스트용 DB
+insert into crops_info values(1, 'broccoli1.jpg','broccoli2.jpg','broccoli3.jpg','broccoli4.jpg','1월~3월','4월~6월',
+'칼로 아랫잎을 4~5장 붙여서 높이 15cm 정도로 맞추어 수확한다. 적기가 지나면 꽃이 피어 버리므로 특히 수확기의 기온이 높은 봄 파종재배에서는 주의하여야 한다.',
+'iconbroccoli.jpg','브로콜리볶음,브로콜리무침');
+insert into crops_info values(3, 'corn1.jpg','corn2.jpg','corn3.jpg','corn4.jpg','4월','7월~8월',
+'옥수수는 주로 풋옥수수를 수확하여 쪄먹기 위해 텃밭이나 주말농장에서 재배를 한다. 요새 식구도 얼마 안 되는 가정에서 한꺼번에 많은 옥수수를 수확하면 한 번에 다 먹지 못한다.
+ 수확시기를 조금 조절하려면 10일 간격으로 파종시기를 달리한다.', 'iconcorn.jpg','옥수수전,콘샐러드');
+ insert into crops_info values(4, 'chives1.jpg','chives2.jpg','chives3.jpg','chives4.jpg','4월~5월','9월~11월',
+'부추는 자라는 대로 수확이 가능하다. 키가 20㎝ 이상이 되면 
+필요한 만큼 베어 이용한다. 수확이 늦어지면 부추가 억세지는 수가 있다. 
+이때는 다시 베어주면 보드라운 부추가 자라게 된다. 
+부추를 수확하는 방법에 따라 다음 번의 수확량이 달라진다는 자료가 있다.
+부추 줄기를 바짝 잘라낼수록 다음 번의 수확량이 줄어들기
+때문에 1㎝ 정도 줄기를 남겨 두고 그 위를 잘라내는 것이 좋다고 한다.',
+'iconchives.jpg','부추전 , 부추무침 ,부추겉절이');
+ insert into crops_info values(5, 'perilla1.jpg','perilla2.jpg','perilla3.jpg','perilla4.jpg','2월~4월','8월~9월',
+'칼로 아랫잎을 4~5장 붙여서 높이 15cm 정도로 맞추어 수확한다. 적기가 지나면 꽃이 피어 버리므로 특히 수확기의 기온이 높은 봄 파종재배에서는 주의하여야 한다.',
+'iconperilla.jpg','깻잎짱아치,깻잎무침');
+
 
 -- 회원 기호 작물 테이블
 CREATE TABLE member_like_crops

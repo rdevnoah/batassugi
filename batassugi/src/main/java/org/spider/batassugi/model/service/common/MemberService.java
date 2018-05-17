@@ -31,7 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
- * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerImg(회원프로필사진 등록), register 메소드 등록
+ * 2018. 5. 15.  "PL_Seonhwa"    회원등록을 위해 registerImg(회원프로필사진 등록), register 메소드 등록
+ * 2018. 5. 15.  "DL KimJieun"    회원로그인을 위해 login 메소드 등록
  *      </pre>
  */
 @Service
@@ -62,9 +63,10 @@ public class MemberService implements MemberServiceIf {
     String filename = multifile.getOriginalFilename();
 
     // 저장할 위치를 지정
-    String fileSavePath =
+  /*  String fileSavePath =
         "C:\\Users\\User\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\profile_img\\";
-
+*/
+    String fileSavePath = "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\profile_img\\";
     // 이름에 현재 날짜를 붙이자
     String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
 

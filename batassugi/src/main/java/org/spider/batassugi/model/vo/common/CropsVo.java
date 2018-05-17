@@ -1,7 +1,7 @@
 package org.spider.batassugi.model.vo.common;
 
 public class CropsVo {
-  private Integer cropsNo;
+  private String cropsNo;
   private String cropsName;
   private String cropsLevel;
 
@@ -17,18 +17,18 @@ public class CropsVo {
    * @param cropsName 작물이름.
    * @param cropsLevel 작물 난이도.
    */
-  public CropsVo(Integer cropsNo, String cropsName, String cropsLevel) {
+  public CropsVo(String cropsNo, String cropsName, String cropsLevel) {
     super();
     this.cropsNo = cropsNo;
     this.cropsName = cropsName;
     this.cropsLevel = cropsLevel;
   }
 
-  public Integer getCropsNo() {
+  public String getCropsNo() {
     return cropsNo;
   }
 
-  public void setCropsNo(Integer cropsNo) {
+  public void setCropsNo(String cropsNo) {
     this.cropsNo = cropsNo;
   }
 

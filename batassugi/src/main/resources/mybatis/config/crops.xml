@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crops">
+  <resultMap type="cropsInfoVo" id="cropsDetailRm">
+    <result column="crops_no" property="cropsVo.cropsNo"/>
+    <result column="crops_icon" property="cropsIcon"/>
+    <result column="crops_profileImg" property="cropsProfileimg"/>
+    <result column="crops_img1" property="cropsImg1"/>
+    <result column="crops_img2" property="cropsImg2"/>
+    <result column="crops_img3" property="cropsImg3"/>
+    <result column="seed_season" property="seedSeason"/>
+    <result column="crops_season" property="cropsSeason"/>
+    <result column="crops_method" property="cropsMethod"/>
+    <result column="crops_food" property="cropsFood"/>
+    <result column="crops_name" property="cropsVo.cropsName"/>
+    <result column="crops_level" property="cropsVo.cropsLevel"/>
+  </resultMap>
+  
+  <!-- 농작물 사전 헤더 메뉴 클릭시 농작물사전 아이콘 리스트를 가져옴-->
+  <select id = "getIconList" resultMap = "cropsDetailRm">
+    select crops_no, crops_icon from crops_info
+  </select>
+  
+  <!-- 농작물 사전에서 아이콘을 클릭시 농작물 정보를 가져옴 -->
+  <select id = "getCropsDetail" resultMap = "cropsDetailRm">
+    select c.crops_no, c.crops_name, c.crops_level, ci.crops_profileImg, ci.crops_img1, ci.crops_img2, ci.crops_img3, ci.seed_season, ci.crops_season, ci.crops_method, ci.crops_food
+    from CROPS_INFO ci, CROPS c where c.crops_no=#{cropsNo} and c.crops_no=ci.crops_no
+  </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

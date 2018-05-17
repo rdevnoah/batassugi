@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="container">
-
 	<div id="loginbox"
 		class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 		<div class="panel panel-default">
@@ -15,13 +14,13 @@
 					<div class="input-group">
 						<span class="input-group-addon">아 이 디</span> <input id="user"
 							type="text" class="form-control" name="id" value=""
-							placeholder="User">
+							placeholder="User" required="required">
 					</div>
 
 					<div class="input-group">
 						<span class="input-group-addon">패스워드</span> <input id="password"
 							type="password" class="form-control" name="password"
-							placeholder="Password">
+							placeholder="Password" required="required">
 					</div>
 
 					<div class="form-group">
@@ -32,7 +31,6 @@
 							</button>
 						</div>
 					</div>
-
 				</form>
 
 			</div>

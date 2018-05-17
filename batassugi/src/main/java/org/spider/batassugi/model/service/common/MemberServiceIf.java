@@ -31,7 +31,14 @@ public interface MemberServiceIf {
   public String registerImg(MemberInfoVo vo) throws Exception, IOException;
 
   public void register(MemberInfoVo vo);
-
-  MemberVo login(MemberVo vo) throws LoginException;
+  
+  /**
+   * 회원 로그인을 위한 서비스.
+   * 
+   * @author "DL KimJieun"
+   * @param vo 회원 로그인을 위하여 입력받은 vo입니다.
+   * @return
+   */
+  public MemberVo login(MemberVo vo) throws LoginException;
 
 }

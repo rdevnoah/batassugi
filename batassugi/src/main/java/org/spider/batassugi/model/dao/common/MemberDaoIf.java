@@ -24,7 +24,13 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  */
 
 public interface MemberDaoIf {
-
+  /**
+   * 회원 로그인을 위한 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param vo 회원이 로그인을 위해 기입한 정보.
+   * @return
+   */
   public MemberVo login(MemberVo vo);
 
 
@@ -44,7 +50,13 @@ public interface MemberDaoIf {
    */
   public void registerExtend(MemberInfoVo vo);
 
-
+  /**
+   * 로그인 익셉션 처리를 위한 아이디 찾기 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param id 입력한 아이디가 있는지 없는지 체크하기 위해 입력받는 정보.
+   * @return
+   */
   public MemberVo findMemberById(String id);
 
 }

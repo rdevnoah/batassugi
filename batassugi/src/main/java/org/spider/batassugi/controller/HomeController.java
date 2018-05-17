@@ -1,10 +1,14 @@
 package org.spider.batassugi.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.exception.LoginException;
+import org.spider.batassugi.model.service.common.CommonServiceIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Controller;
@@ -127,6 +131,5 @@ public class HomeController {
     }
     return "redirect:/";
   }
-
 
 }

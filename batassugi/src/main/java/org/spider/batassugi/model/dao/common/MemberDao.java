@@ -24,7 +24,8 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
- * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerBasic, registerExtend 메소드 추가
+ * 2018. 5. 15.  "PL_Seonhwa"    회원등록을 위해 registerBasic, registerExtend 메소드 추가
+ * 2018. 5. 15.  "DL KimJieun"    회원로그인을 위한 login 메소드 추가 
  *      </pre>
  */
 @Repository
