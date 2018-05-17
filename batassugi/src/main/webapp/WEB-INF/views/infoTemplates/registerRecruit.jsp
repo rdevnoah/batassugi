@@ -86,7 +86,8 @@
                   <div class="form-group col-xs-offset-1 col-xs-10">
                      <br>
                      <h5>상세내용</h5>
-                     <div style="white-space: pre-line; color: #dddddd; border: solid 1px; height: 100px; overflow-y: scroll;">
+                     <textarea style="width : 100%; border: solid 1px; height: 100px; overflow-y: scroll;"></textarea>
+                     <!-- <div style="white-space: pre-line; color: #dddddd; border: solid 1px; height: 100px; overflow-y: scroll;"> -->
                      </div>
                   </div> <%-- form-group col-xs-offset-1 col-xs-10 --%>
                   
