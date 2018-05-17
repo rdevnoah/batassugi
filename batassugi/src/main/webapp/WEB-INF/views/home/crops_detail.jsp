@@ -27,5 +27,6 @@
         		</tbody>
         	</table>
 		      </form><%-- form 영역 --%>
+		      </div>
   </div><%-- 전체 row --%>
 </div><%-- 전체 container --%>

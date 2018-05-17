@@ -159,7 +159,6 @@ public class HomeController {
 
 
   /**
-   * 
    * ajax로 회원가입시 닉네임 체크.
    * 
    * @author "PL_Seonhwa"
@@ -170,5 +169,11 @@ public class HomeController {
   @ResponseBody
   public Object checkNickname(String nickname) {
     return memberService.checkNickname(nickname);
+  }
+
+  @RequestMapping("registerView")
+  public String getAllCropsList(Model model) {
+    model.addAttribute("list", memberService.getAllCropsList());
+    return "home/registerView.tiles";
   }
 }

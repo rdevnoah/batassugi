@@ -1,9 +1,11 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -77,6 +79,11 @@ public class MemberDao implements MemberDaoIf {
   public void registerLikeCrop(Map<String, String> map) {
     template.insert("member.registerLikeCrop",map);
     
+  }
+
+  @Override
+  public List<CropsInfoVo> getAllCropsList() {
+    return template.selectList("crops.getAllCropsList");
   }
   
 }

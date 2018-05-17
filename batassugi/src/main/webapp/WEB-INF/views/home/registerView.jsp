@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -180,9 +180,9 @@
                 <div class="col-md-7 col-sm-9">
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="1"> 감자 </label>    
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="2"> 고구마 </label>
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="3"> 토마토 </label>                    
+                    <c:forEach var="item" items="${list}">
+        				<label> <input name="likeCrops" id="likeCrops${item.cropsVo.cropsNo}" type="checkbox" value="${item.cropsVo.cropsNo}"> ${item.cropsVo.cropsName} </label>
+       				 </c:forEach> 
                   </div>
                 </div>
 			</div>

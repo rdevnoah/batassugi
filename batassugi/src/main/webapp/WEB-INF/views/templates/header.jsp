@@ -25,9 +25,9 @@
 			<c:when test="${sessionScope.mvo==null}">
 	         <ul>
 	            <li style="border-left:0px !important;"><a class="choice" href="${pageContext.request.contextPath}/">Home</a></li>
-	            <li><a>사이트소개</a></li>
+	            <li><a href="${pageContext.request.contextPath}/home/introduction_website">사이트소개</a></li>
 	            <li><a href="${pageContext.request.contextPath}/home/crops_dictionary">농작물사전</a></li>
-	            <li><a href="${pageContext.request.contextPath}/home/registerView">회원가입</a></li>
+	            <li><a href="${pageContext.request.contextPath}/registerView">회원가입</a></li>
 	            <li><a href="${pageContext.request.contextPath}/home/loginView">로그인</a></li>            
 	         </ul>   
 	         </c:when>

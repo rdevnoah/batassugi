@@ -4,7 +4,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="crops">
-  <resultMap type="cropsInfoVo" id="cropsDetailRm">
+  <resultMap type="cropsInfoVo" id="cropsRm">
     <result column="crops_no" property="cropsVo.cropsNo"/>
     <result column="crops_icon" property="cropsIcon"/>
     <result column="crops_profileImg" property="cropsProfileimg"/>
@@ -20,14 +20,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </resultMap>
   
   <!-- 농작물 사전 헤더 메뉴 클릭시 농작물사전 아이콘 리스트를 가져옴-->
-  <select id = "getIconList" resultMap = "cropsDetailRm">
+  <select id = "getIconList" resultMap = "cropsRm">
     select crops_no, crops_icon from crops_info
   </select>
   
   <!-- 농작물 사전에서 아이콘을 클릭시 농작물 정보를 가져옴 -->
-  <select id = "getCropsDetail" resultMap = "cropsDetailRm">
+  <select id = "getCropsDetail" resultMap = "cropsRm">
     select c.crops_no, c.crops_name, c.crops_level, ci.crops_profileImg, ci.crops_img1, ci.crops_img2, ci.crops_img3, ci.seed_season, ci.crops_season, ci.crops_method, ci.crops_food
     from CROPS_INFO ci, CROPS c where c.crops_no=#{cropsNo} and c.crops_no=ci.crops_no
+  </select>
+  
+    <!-- 회원가입시 기호 작물 체크를 위해 데이터 불러옴 -->
+   <select id = "getAllCropsList" resultMap="cropsRm">
+    select ci.crops_no, c.crops_name from CROPS_INFO ci, CROPS c
+    where c.crops_no=ci.crops_no
   </select>
 </mapper>
  

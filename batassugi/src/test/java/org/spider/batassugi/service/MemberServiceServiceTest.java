@@ -59,7 +59,8 @@ public class MemberServiceServiceTest {
     // 멤버 상태 등록
     MemberStateVo mstVo=new MemberStateVo(null,"활동",null);
     memberService.registerMemberState(mstVo);
-    System.out.println(mstVo.getStateNumber()); 
+    System.out.println(mstVo.getStateNumber());
+    
 
   }
 }

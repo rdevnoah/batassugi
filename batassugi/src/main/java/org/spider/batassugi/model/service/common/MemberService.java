@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.exception.LoginException;
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -123,5 +124,11 @@ public class MemberService implements MemberServiceIf {
       return "ok";
     }
     return "fail";
+  }
+
+  @Override
+  public List<CropsInfoVo> getAllCropsList() {
+    List<CropsInfoVo> list = memberDao.getAllCropsList();
+    return list;
   }
 }

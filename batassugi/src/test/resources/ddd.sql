@@ -1,6 +1,9 @@
 select id, password from spider_member where id='admin'
 
+select * from member_info
+select * from MEMBER_STATE
 
+select *from SPIDER_MEMBER
 select crops_info
     crops_no            NUMBER           NOT NULL, 
     crops_profileImg    VARCHAR2(300)    NOT NULL, 
@@ -36,3 +39,7 @@ select crops_profileImg, crops_img1, crops_img2,
     crops_img3, seed_season, crops_season, crops_method, crops_food
     from CROPS_INFO where crops_no=1
     
+select ci.crops_no, c.crops_name from CROPS_INFO ci, CROPS c
+where c.crops_no=ci.crops_no
+
+update SPIDER_MEMBER set id='ii' where id='spring';

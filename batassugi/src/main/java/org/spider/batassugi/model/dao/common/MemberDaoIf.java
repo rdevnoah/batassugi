@@ -1,6 +1,9 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.util.List;
 import java.util.Map;
+
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -94,4 +97,11 @@ public interface MemberDaoIf {
    */
   public void registerLikeCrop(Map<String, String> map);
 
+  /**
+   * 회원기호 작물 입력을 위하여 DB에서 작물 리스트를 가져오는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @return
+   */
+  public List<CropsInfoVo> getAllCropsList();
 }

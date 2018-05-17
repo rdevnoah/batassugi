@@ -2,7 +2,11 @@ package org.spider.batassugi.model.service.common;
 
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.exception.LoginException;
@@ -85,5 +89,12 @@ public interface MemberServiceIf {
    * @param mstVo 회원 상태 번호를 받아올 VO.
    */
   public void registerMemberState(MemberStateVo mstVo);
-
+  
+  /**
+   * 회원기호 작물 입력을 위하여 DB에서 작물 리스트를 가져오는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @return
+   */
+  public List<CropsInfoVo> getAllCropsList();
 }
