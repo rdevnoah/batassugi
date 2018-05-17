@@ -27,6 +27,7 @@
 	            <li><a>대여신청</a></li>
 	            <li><a>회원가입</a></li>
 	            <li><a href="${pageContext.request.contextPath}/home/loginView">로그인</a></li>            
+	            <li><a href="${pageContext.request.contextPath}/home/farmRegister">밭등록</a></li>            
 	         </ul>   
 	    </div> <%-- col-xs-8 vcenter --%>
    </div>  <%-- row --%>

@@ -1,7 +1,10 @@
 package org.spider.batassugi.model.dao.seller;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,10 +24,24 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "PM KimYoungHo"    최초작성
+ * 2018. 5. 16.   "GL_SangKyoung"    밭등록 및 작물등록작업(작물작업때 parameterMap대신해서 Map이용하여 작업 진행하였습니다. 추후 parameterMap공부후 변경하도록 하겠습니다.)
  *      </pre>
  */
 @Repository
-public class SellerFarmDao {
-	@Resource
-	private SqlSessionTemplate template;
+public class SellerFarmDao implements SellerFarmDaoIf{
+
+  @Resource
+  private SqlSessionTemplate template;
+
+  
+  @Override
+  public void farmInsert(FarmVo vo) {
+    template.insert("farm.FarmInsert",vo);  //밭등록
+  } 
+
+  @Override
+  public void avaliableCrops(Map<String, Integer> testmap) {
+    template.insert("farm.avaliableCrops", testmap);//avaliable crop테이블 저장
+  }
+  
 }

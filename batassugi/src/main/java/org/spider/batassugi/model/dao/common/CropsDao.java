@@ -2,6 +2,7 @@ package org.spider.batassugi.model.dao.common;
 
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -25,6 +26,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class CropsDao {
-  @Resource
-  private SqlSessionTemplate template;
 }
