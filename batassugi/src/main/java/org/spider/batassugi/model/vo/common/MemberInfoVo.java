@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 2018. 5. 14.  "PL_Seonhwa"    최초작성
  * 2018. 5. 15.  "PL_Seonhwa"    파일업로드를 위한 변수 file, image 추가
  *                               회원에게서 받아오는 날짜 변수 birthday(date->String 변경)
+ * 2018. 5. 17.  "PL_Seonhwa"    회원 기호 작물 타입 변경(CropsVo -> String)
  * </pre>
  */
 public class MemberInfoVo {
@@ -33,7 +34,7 @@ public class MemberInfoVo {
   private String gender;
   private Date regdate;
   private String image;
-  private List<CropsVo> likeCrops;
+  private List<String> likeCrops;
   private MultipartFile file;
 
   public MemberInfoVo() {
@@ -56,7 +57,7 @@ public class MemberInfoVo {
    * @param file 사용자 프로필 이미지 업로드시 사용할 파일객체.
    */
   public MemberInfoVo(MemberVo memberVo, String email, String tel, String address, String birthday,
-      String gender, Date regdate, String image, List<CropsVo> likeCrops, MultipartFile file) {
+      String gender, Date regdate, String image, List<String> likeCrops, MultipartFile file) {
     super();
     this.memberVo = memberVo;
     this.email = email;
@@ -134,11 +135,11 @@ public class MemberInfoVo {
     this.image = image;
   }
 
-  public List<CropsVo> getLikeCrops() {
+  public List<String> getLikeCrops() {
     return likeCrops;
   }
 
-  public void setLikeCrops(List<CropsVo> likeCrops) {
+  public void setLikeCrops(List<String> likeCrops) {
     this.likeCrops = likeCrops;
   }
 

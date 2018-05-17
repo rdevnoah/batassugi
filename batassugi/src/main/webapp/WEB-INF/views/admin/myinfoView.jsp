@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8"%>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -176,15 +175,7 @@
             <%-- 2단 --%> 
             <div class="col-md-6">
             <div class="form-group">
-          	<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span class="text-danger">*</span></label>
-                <div class="col-md-7 col-sm-9">
-                  <div class="input-group">
-                    <span class="input-group-addon"></span> 
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="1"> 감자 </label>    
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="2"> 고구마 </label>
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="3"> 토마토 </label>                    
-                  </div>
-                </div>
+          	<label class="control-label col-sm-3">하와유</label>
 			</div>
             </div>
             
