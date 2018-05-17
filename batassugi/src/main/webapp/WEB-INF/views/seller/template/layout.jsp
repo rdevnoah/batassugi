@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title><tiles:insertAttribute name="buyer_title" ignore="true" /></title>
+<title><tiles:insertAttribute name="seller_title" ignore="true" /></title>
 <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -30,13 +30,13 @@
  	<div class="wrapper">
 		
 		<%-- 사이드바 --%>
-		<tiles:insertAttribute name="buyer_left" />
+		<tiles:insertAttribute name="seller_left" />
 		
 		<div id="content">
 			<%-- 헤더 --%>
-			<tiles:insertAttribute name="buyer_header" />
+			<tiles:insertAttribute name="seller_header" />
 			<%-- 본문 --%>
-       		<tiles:insertAttribute name="buyer_main" />
+       		<tiles:insertAttribute name="seller_main" />
     	</div>
 	</div>
 

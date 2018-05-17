@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.service.seller.RecruitServiceIf;
-import org.spider.batassugi.model.service.seller.SellerFarmService;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -45,6 +44,11 @@ public class SellerController {
   @Resource
   private RecruitServiceIf recruitService;
 
+  
+  @RequestMapping("seller_Home")
+  public String sellerHome() {
+    return "seller.tiles";
+  }
   
   /**
    * 메소드 설명 : 밭등록.
