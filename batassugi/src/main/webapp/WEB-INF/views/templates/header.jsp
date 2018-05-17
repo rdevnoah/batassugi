@@ -50,6 +50,7 @@
 	            <li><a>교환게시판</a></li>
 	            <li><a>대여신청</a></li>
 	            <li><a href="seller_Home">마이페이지</a></li>
+	            <li><a href="sellerInfoView">판매자페이지(타일즈전)</a>
 	            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>            
 	         </ul>
 	         </c:otherwise>

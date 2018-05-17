@@ -31,9 +31,9 @@ public interface SellerFarmServiceIf {
    * @param id 현재 세션에 로그인되어있는 사용자의 아이디를 저장하는 매개변수입니다.
    * @return
    */
-  public List<FarmVo> getSellerFarmList(String id);
+  public List<FarmVo> findSellerFarmList(String id);
   
-  void farmInsert(FarmVo fvo);
+  public void farmInsert(FarmVo fvo);
 
   public Map<String,Object> findFarmDetail(String farmNo);
 

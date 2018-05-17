@@ -22,25 +22,25 @@ public class SellerFarmServiceTest {
   private SellerFarmServiceIf sellerFarmService;
   @Test
   public void SellerFarmServiceTest() {
-//    List<FarmVo> list = sellerFarmDao.getSellerFarmList("aaaa");
+//    List<FarmVo> list = sellerFarmDao.findSellerFarmList("aaaa");
 //    List<CropsVo> listCrops = null;
 //    for (int i=0 ; i<list.size() ; i++) {
 //      System.out.println(list.get(i));
 //    }
-    System.out.println(sellerFarmDao.getAvailableCropsList(1));
+    System.out.println(sellerFarmDao.findAvailableCropsList(1));
 //    for (int i=0 ; i<list.size() ; i++) {
-//      listCrops = sellerFarmDao.getAvailableCropsList(list.get(i).getFarmNo());
+//      listCrops = sellerFarmDao.findAvailableCropsList(list.get(i).getFarmNo());
 //      //list.get(i).setCropsVo(listCrops);
 //    }
 //    for (int i=0 ; i<list.size() ; i++) {
 //      System.out.println(list.get(i).getCropsVo());
 //      System.out.println("----");
 //    }
-//    List<FarmVo> list = sellerFarmService.getSellerFarmList("aaaa");
+//    List<FarmVo> list = sellerFarmService.findSellerFarmList("aaaa");
 //    System.out.println(list);
 
 //    FarmVo vo = sellerFarmDao.findFarmDetail("1");
-//    vo.setCropsVo(sellerFarmDao.getAvailableCropsList(1));
+//    vo.setCropsVo(sellerFarmDao.findAvailableCropsList(1));
 //    Map<String, Object> map = sellerFarmService.findFarmDetail("1");
 //    System.out.println(map.get("farmVo"));
 //    System.out.println(map.get("rentList"));

@@ -1,6 +1,5 @@
 package org.spider.batassugi.model.service.seller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +36,6 @@ public class SellerFarmService implements SellerFarmServiceIf {
 
   @Override
   public void farmInsert(FarmVo fvo) {
-
-    List<CropsVo> cvo = new ArrayList<CropsVo>();
     sellerFarmDao.farmInsert(fvo);
     Map<String, Integer> testmap = new HashMap<String, Integer>();
     testmap.put("farm_no", fvo.getFarmNo());
@@ -49,21 +46,33 @@ public class SellerFarmService implements SellerFarmServiceIf {
     }
   }
 
+  /**
+   * 판매자가 등록한 현재 농지의 리스트를 반환받는 비즈니스 로직입니다.
+   * @author "PM KimYoungHo"
+   * @param id 로그인한 사용자의 id.
+   * @return
+   */
   @Override
-  public List<FarmVo> getSellerFarmList(String id) {
-    List<FarmVo> farmList = sellerFarmDao.getSellerFarmList(id);
+  public List<FarmVo> findSellerFarmList(String id) {
+    List<FarmVo> farmList = sellerFarmDao.findSellerFarmList(id);
     for (int i = 0; i < farmList.size(); i++) {
-      List<CropsVo> cropsList = sellerFarmDao.getAvailableCropsList(farmList.get(i).getFarmNo()); 
+      List<CropsVo> cropsList = sellerFarmDao.findAvailableCropsList(farmList.get(i).getFarmNo()); 
       farmList.get(i).setCropsVo(cropsList);
     }
     return farmList;
   }
 
+  /**
+   * 사용자가 등록한 농지의 상세정보를 반환받는 비즈니스 로직입니다.
+   * @author "PM KimYoungHo"
+   * @param farmNo 농지 번호.
+   * @return
+   */
   @Override
   public Map<String,Object> findFarmDetail(String farmNo) {
     Map<String,Object> map = new HashMap<String, Object>();
     FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
-    vo.setCropsVo(sellerFarmDao.getAvailableCropsList(Integer.parseInt(farmNo)));
+    vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
     map.put("farmVo", vo);
     map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
     return map;

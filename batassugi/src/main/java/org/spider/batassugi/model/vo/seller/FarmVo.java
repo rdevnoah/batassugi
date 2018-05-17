@@ -50,7 +50,7 @@ public class FarmVo {
    * @param farmAddress 농지주소.
    * @param farmStartdate 농지등록날짜.
    * @param farmEnddate 농지계약종료날짜.
-   * @param cropsName 농작물 정보를 가져오는 cropsName
+   * @param cropsNo 농작물 정보를 가져오는 cropsNo.
    */
   public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
       String farmStartdate, String farmEnddate, List<String> cropsNo) {
@@ -92,7 +92,7 @@ public class FarmVo {
    * @param farmAddress 밭주소.
    * @param farmStartdate 밭등록일.
    * @param farmEnddate 밭등록마감일.
-   * @param cropsName 작물이름.
+   * @param cropsNo 작물번호.
    */
   public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate,
       List<String> cropsNo) {
@@ -111,9 +111,6 @@ public class FarmVo {
   public void setCropsVo(List<CropsVo> cropsVo) {
     this.cropsVo = cropsVo;
   }
-
-  
-
 
   public int getFarmNo() {
     return farmNo;

@@ -31,14 +31,14 @@ public interface SellerFarmDaoIf {
    * @author "GL_SangKyoung"
    * @param vo 농지정보.
    */
-  void farmInsert(FarmVo vo);
+  public void farmInsert(FarmVo vo);
   
   /**
    * 메소드 설명 : 해당밭에 재배가능작물 데이터추가하기위하여 사용.
    * @author "GL_SangKyoung"
    * @param testmap parameterMap비사용으로 인하여 crops_no 와 farm_no를 키값으로해서 available_crops 테이블에 전송.
    */
-  void avaliableCrops(Map<String, Integer> testmap);
+  public void avaliableCrops(Map<String, Integer> testmap);
   
   /**
    * DB에서 판매자가 등록한 자신의 농지 리스트를 불러오는 메소드입니다.
@@ -46,7 +46,7 @@ public interface SellerFarmDaoIf {
    * @param id 현재 세션에 로그인되어있는 사용자의 아이디가 입력됩니다.
    * @return
    */
-  List<FarmVo> getSellerFarmList(String id);
+  public List<FarmVo> findSellerFarmList(String id);
 
   /**
    * 등록한 농지의 재배가능작물 값을 세팅해주기 위해 available_crops 테이블에서 정보를 가져오는 메소드입니다.
@@ -54,10 +54,22 @@ public interface SellerFarmDaoIf {
    * @param farmNo 현재 선택한 농지에서 재배 가능한 작물을 가져와야 하기 때문에 그 농지의 번호를 매개변수로 받습니다. 
    * @return
    */
-  List<CropsVo> getAvailableCropsList(int farmNo);
+  public List<CropsVo> findAvailableCropsList(int farmNo);
 
-  FarmVo findFarmDetail(String farmNo);
-
-  List<RentVo> findRentByFarmNo(String farmNo);
+  /**
+   * farmNo에 따른 농지의 상세정보를 불러오는 메소드입니다.
+   * @author "PM KimYoungHo"
+   * @param farmNo 농지 번호.
+   * @return
+   */
+  public FarmVo findFarmDetail(String farmNo);
+  
+  /**
+   * farmNo의 농지를 대여중인 구매자들의 List를 반환하는 메소드입니다.
+   * @author "PM KimYoungHo"
+   * @param farmNo 농지 번호.
+   * @return
+   */
+  public List<RentVo> findRentByFarmNo(String farmNo);
 
 }

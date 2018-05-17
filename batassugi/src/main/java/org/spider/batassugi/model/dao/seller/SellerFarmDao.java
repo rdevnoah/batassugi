@@ -26,7 +26,8 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "PM KimYoungHo"    최초작성
- * 2018. 5. 16.   "GL_SangKyoung"    밭등록 및 작물등록작업(작물작업때 parameterMap대신해서 Map이용하여 작업 진행하였습니다. 추후 parameterMap공부후 변경하도록 하겠습니다.)
+ * 2018. 5. 16.   "GL_SangKyoung"   밭등록 및 작물등록작업(작물작업때 parameterMap대신해서 Map이용하여 작업 진행하였습니다. 
+ *                                  추후 parameterMap공부후 변경하도록 하겠습니다.)
  *      </pre>
  */
 @Repository
@@ -34,36 +35,36 @@ public class SellerFarmDao implements SellerFarmDaoIf {
 
   @Resource
   private SqlSessionTemplate template;
-  
+
   @Override
   public void farmInsert(FarmVo vo) {
-    template.insert("farm.FarmInsert",vo);  //밭등록
-  } 
+    template.insert("farm.FarmInsert", vo); // 밭등록
+  }
 
   @Override
   public void avaliableCrops(Map<String, Integer> testmap) {
-    template.insert("farm.avaliableCrops", testmap);//avaliable crop테이블 저장
-  }
-  
-  @Override
-  public List<FarmVo> getSellerFarmList(String id) {
-    return template.selectList("sellerFarm.getSellerFarmList", id);
+    template.insert("farm.avaliableCrops", testmap);// avaliable crop테이블 저장
   }
 
   @Override
-  public List<CropsVo> getAvailableCropsList(int farmNo) {
-    return template.selectList("sellerFarm.getAvailableCropsList",farmNo);
+  public List<FarmVo> findSellerFarmList(String id) {
+    return template.selectList("sellerFarm.findSellerFarmList", id);
+  }
+
+  @Override
+  public List<CropsVo> findAvailableCropsList(int farmNo) {
+    return template.selectList("sellerFarm.findAvailableCropsList", farmNo);
   }
 
   @Override
   public FarmVo findFarmDetail(String farmNo) {
-    return template.selectOne("sellerFarm.readFarmDetail", farmNo);
+    return template.selectOne("sellerFarm.findFarmDetail", farmNo);
   }
 
   @Override
   public List<RentVo> findRentByFarmNo(String farmNo) {
-    return template.selectList("sellerFarm.readRentByFarmNo", farmNo);
+    return template.selectList("sellerFarm.findRentByFarmNo", farmNo);
   }
-  
+
 
 }

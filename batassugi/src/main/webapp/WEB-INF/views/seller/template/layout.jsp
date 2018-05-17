@@ -12,12 +12,13 @@
 <title><tiles:insertAttribute name="seller_title" ignore="true" /></title>
 <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
 
 <%-- Favicon --%>
 <%-- <link href="${pageContext.request.contextPath}/resources/favicon.ico" rel="shortcut icon" type="image/x-icon"> --%>
 
 <!-- Our Custom CSS -->
-<link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/seller.css" rel="stylesheet">
 
 </head>
 <body>
@@ -54,7 +55,75 @@
                  });
              });
          </script>
-
+		<script>
+	$(document).ready(function() {
+		var $detailFarm = $('.detailFarm');
+		$detailFarm.on('click', function() {
+			//alert($(this).val());
+			//alert($('.hidden').children("span:nth(0)").text());
+			var $farmNo=$(this).val();
+			var $data;
+			 $.ajax({
+				type : 'post',
+				url:'getDetailFarm',
+				data : 'farmNo='+$farmNo,
+				async : false,
+				success : function(data) {
+					//alert(data.farmVo.farmEnddate);
+					$data=data;		
+				}	
+			})
+			var $detailModal = new BootstrapDialog({
+				type : 'default',
+				title : '내 농지 정보',
+				body : 'asdfasdfasdfasdf',
+				buttons : [{
+	                label: '대여모집',
+	                action : function() {
+	                	sendPost('registerRecruitForm', {
+	                		'farmNo' : $data.farmVo.farmNo
+	                	})
+						//location.href="registerRecruitForm";
+					}
+	            },{
+	            	label:'주말농장모집',
+	            	action : function(){
+	            		
+	            	}
+	            },
+	            {
+	            	label: '닫기',
+	            	action: function(dialogRef) {
+						dialogRef.close();
+					}            	
+	            }],
+				closable : true,
+			})
+			$detailModal.realize();
+			$detailModal.getModalHeader().parents().find(".modal-header").append("<hr>");
+			var $myModalBody=$detailModal.getModalBody().parents().find(".bootstrap-dialog-body");
+			var appendString='';
+			var crops='';
+			for (var i=0 ; i < $data.farmVo.cropsVo.length ; i++){
+				crops+=$data.farmVo.cropsVo[i].cropsName+' ';
+			}
+			appendString+="<div class='col-xs-5'>asdf";
+			appendString+="</div>";
+			appendString+="<div class='col-xs-7'>평수 : "+ $data.farmVo.farmSize+"<hr>";
+			appendString+="밭 주소 : "+$data.farmVo.farmAddress+"<hr>";
+			appendString+="등록만료일 : "+$data.farmVo.farmEnddate+"<hr>";
+			appendString+="농지주인 : "+$data.farmVo.id+"<hr>";
+			appendString+="재배가능농작물 : "+crops+"<br><br><br><br>";
+			appendString+="</div><hr>";
+			
+			$myModalBody.append(appendString);
+			//alert($myModalBody.html());
+			$detailModal.open();
+			//alert(($data).farmVo.farmAddress);
+			// 
+		})
+	})
+</script>
 	
     
 </body>

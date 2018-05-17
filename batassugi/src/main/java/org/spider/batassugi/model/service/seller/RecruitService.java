@@ -54,7 +54,7 @@ public class RecruitService implements RecruitServiceIf {
     
     Map<String,Object> map2 = new HashMap<String, Object>();
     FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
-    vo.setCropsVo(sellerFarmDao.getAvailableCropsList(Integer.parseInt(farmNo)));
+    vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
     map2.put("farmVo", vo);
     map2.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
     

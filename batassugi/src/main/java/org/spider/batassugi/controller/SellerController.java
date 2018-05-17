@@ -33,20 +33,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "PM KimYoungHo"    최초작성
+ * 2018. 5. 17.  "PM KimYoungHo"    seller.tile 기초 적용 완료. 완벽하지 않으므로 테스트를 위해 기존 방식은 미삭제
  *      </pre>
  */
 @Controller
 public class SellerController {
 
+  
   @Resource
   private SellerFarmServiceIf sellerFarmService;
 
   @Resource
   private RecruitServiceIf recruitService;
 
-  
+  /**
+   * 판매자의 마이페이지로 이동하는 메소드입니다.
+   * tiles가 적용되어 있으며 tiles-config.xml 내부에 seller.tiles 설정이 이뤄져 있습니다.
+   * @author "PM KimYoungHo"
+   * @param request HttpServletRequest 객체.
+   * @param model Model 객체.
+   * @return
+   */
   @RequestMapping("seller_Home")
-  public String sellerHome() {
+  public String sellerHome(HttpServletRequest request, Model model) {
+    HttpSession session = request.getSession(false);
+    MemberVo vo = (MemberVo)session.getAttribute("mvo");
+    model.addAttribute("farmList", sellerFarmService.findSellerFarmList(vo.getId()));
     return "seller.tiles";
   }
   
@@ -88,10 +100,18 @@ public class SellerController {
   public String sellerInfoView(HttpServletRequest request, Model model) {
     HttpSession session = request.getSession(false);
     MemberVo vo = (MemberVo)session.getAttribute("mvo");
-    model.addAttribute("farmList", sellerFarmService.getSellerFarmList(vo.getId()));
+    model.addAttribute("farmList", sellerFarmService.findSellerFarmList(vo.getId()));
     return "/infoTemplates/seller_info";
   }
   
+  /**
+   * 모집 등록하는 View 이동 메소드입니다. 기본적으로 필요한 데이터인 
+   * 대여가능 평수와 최대로 대여가능기간을 model에 map 타입으로 전송합니다.
+   * @author "PM KimYoungHo"
+   * @param model Model 객체.
+   * @param farmNo 농지 번호.
+   * @return
+   */
   @RequestMapping(method = RequestMethod.POST, value = "registerRecruitForm")
   public String registerRecruitForm(Model model,String farmNo) {
     Map<String,Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
@@ -99,6 +119,15 @@ public class SellerController {
     return "infoTemplates/registerRecruit";
   }
   
+  
+  /**
+   * 판매자가 자신이 선택한 농지의 상세정보를 Modal로 확인하기 위해
+   * Ajax 방식으로 데이터를 전송합니다. 선택한 농지번호를 통해 상세정보를 조회 후
+   * 그 정보를 ResponseBody를 통해 전송합니다.
+   * @author "PM KimYoungHo"
+   * @param farmNo 농지 번호.
+   * @return
+   */
   @ResponseBody
   @RequestMapping(method = RequestMethod.POST, value = "getDetailFarm")
   public Object findFarmDetail(String farmNo) {
