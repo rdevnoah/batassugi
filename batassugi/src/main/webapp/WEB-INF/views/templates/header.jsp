@@ -21,7 +21,6 @@
 			</a>
 		</div>
 		<div class="col-xs-8 vcenter">
-	        <ul>
         	<c:choose>
 			<c:when test="${sessionScope.mvo==null}">
 	         <ul>

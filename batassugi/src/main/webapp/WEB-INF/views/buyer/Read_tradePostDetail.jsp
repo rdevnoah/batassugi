@@ -26,15 +26,23 @@
 						<td colspan="3"><pre>${tvo.tradeContent}</pre></td>
 					<tr>
 				</tbody>
-			</table>
-			<div class="text-center">
-				<%-- <c:if test="${requestScope.pvo.memberVO.id==sessionScope.mvo.id}"> --%>
+			</table><%-- table table-hover --%>
+			<%-- 댓글 영역 --%>
+			<div id="listReply"></div>			
+			<div class ="text-center">
+				<c:if test="${sessionScope.mvo.memberVo.nickname != null}">    
+				<textarea rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
+				<button class="btn btn-primary" type="button" id="btnReply">댓글 작성</button>
+				</c:if>
+			</div>
+			<%-- 목록 수정 삭제 버튼 --%>
+			<div class="text-center">	
 				<button class="btn btn-primary" id="listBtn">목록</button>
+				<c:if test="${requestScope.tvo.memberVo.nickname == sessionScope.mvo.memberVo.nickname}">
 				<button class="btn btn-primary" id="updateBtn">수정</button>
 				<button class="btn btn-primary" id="deleteBtn">삭제</button> 
-				<%--  </c:if> --%>
+				</c:if>
 			</div>
-			<%-- table table-hover --%>
 		</div>
 		<%-- col-sm-offset-2 col-sm-8 --%>
 	</div>
@@ -69,6 +77,48 @@
     	$("#deleteBtn").click(function(){ 
     		modalConfrim("게시물을 삭제하시겠습니까?","${pageContext.request.contextPath}/deleteBoard" , {"tradeNo": "${requestScope.tvo.tradeNo}"});
   	 	 }); // $("#deleteBtn").click(function()	
-  	 			 
+    	
+  	 	$("#btnReply").click(function(){
+            var replytext=$("#replytext").val();
+            var tradeNo="${requestScope.tvo.tradeNo}"
+            var param="replytext="+replytext+"&tradeNo="+tradeNo;
+            $.ajax({                
+                type: "post",
+                url: "${pageContext.request.contextPath}/createReply",
+                data: param,
+                success: function(){
+                    alert("댓글이 등록되었습니다.");
+                    listReply();
+                }
+            });
+        });
+  	  /* function listReply2(){
+          $.ajax({
+              type: "get",
+              url: "${pageContext.request.contextPath}/findReplylist?tradeNo=${requestScope.tvo.tradeNo}",
+              success: function(result){
+                  var output = "<table>";
+                  for(var i in result){
+                      output += "<tr>";
+                      output += "<td>"+result[i].userName;
+                      output += result[i].regdate+"<br>";
+                      output += result[i].replytext+"</td>";
+                      output += "<tr>";
+                  }
+                  output += "</table>";
+                  $("#listReply").html(output);
+              }
+          });
+      } */
 }); //  $(document).ready(function(){}
+function listReply(){
+    $.ajax({
+        type: "get",
+        url: "${pageContext.request.contextPath}/findReplylist?tradeNo=${requestScope.tvo.tradeNo}",
+        success: function(result){
+        // responseText가 result에 저장됨.
+            $("#listReply").html(result);
+        }
+    });
+}
 </script>

@@ -54,6 +54,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <update id="updateHitsTradePost" parameterType="tradePostVo"> <!-- 거래 게시판 조회수 증가 -->
-       update trade_post set trade_hits = #{tradeHits}+1 where trade_no = #{tradeNo}
-    </update>
+       update trade_post set trade_hits = trade_hits+1 where trade_no = #{tradeNo}
+     </update>
 </mapper>

@@ -131,9 +131,11 @@ public class TradePostVo {
   public MultipartFile getFile() {
     return file;
   }
+  
   public void setFile(MultipartFile file) {
     this.file = file;
   }
+  
   @Override
   public String toString() {
     return "TradePostVo [tradeNo=" + tradeNo + ", tradeKind=" + tradeKind + ", tradeHits="

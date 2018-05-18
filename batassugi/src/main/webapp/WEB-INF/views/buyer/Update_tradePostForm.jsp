@@ -5,7 +5,8 @@
 	<div class="row main">
 		<div class="ccol-xs-12">
 			<h3></h3>
-			<form action="${pageContext.request.contextPath}/updateBoard?tradeNo=${tvo.tradeNo}&regdate=${tvo.regdate}" method="post" enctype="multipart/form-data" id="updateSuccess">
+			<form action="${pageContext.request.contextPath}/updateBoard?tradeNo=${tvo.tradeNo}&regdate=${tvo.regdate}&memberVo.nickname=${tvo.memberVo.nickname }&tradeHits=${tvo.tradeHits}" 
+			method="post" enctype="multipart/form-data" id="updateSuccess">
 			<table class="table table-hover text-center">
 				<thead>
 					<tr class="info">

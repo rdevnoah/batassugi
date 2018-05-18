@@ -4,10 +4,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.service.buyer.TradeServiceIf;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
-import org.spider.batassugi.model.vo.common.MemberVo;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -72,16 +73,11 @@ public class BuyerController {
   @RequestMapping(value = "findTradePostListByNo", method = {RequestMethod.GET,RequestMethod.POST})
   public String findTradePostDetailByNo(Model model, String tradeNo, HttpServletRequest request,
       HttpServletResponse response) {
-
-    Cookie[ ] cookies = request.getCookies();
-    for (int i = 0; i < cookies.length; i++) {
-      if (cookies[i].getName().equals("tradeHits")) {
-        break;
-      } else {
-        Cookie tradeHits = new Cookie("tradeHits", "!!");
-        response.addCookie(tradeHits);
-      }
+    HttpSession session = request.getSession(false);
+    if (session == null || session.getAttribute("mvo") == null) {
+      return "redirect:/";
     }
+    Cookie[ ] cookies = request.getCookies();
     for (int i = 0; i < cookies.length; i++) {
       if (cookies[i].getName().equals("tradeHits")) {
         if (!(cookies[i].getValue().contains("!!" + tradeNo + "!!"))) {
@@ -89,11 +85,13 @@ public class BuyerController {
           vp += tradeNo + "!!";
           cookies[i].setValue(vp);
           response.addCookie(cookies[i]);
-          return "redirect:hit.do?tradeNo=" + tradeNo;
+          return "redirect:hit?tradeNo=" + tradeNo;
+        } else {
+          return "redirect:nohit?tradeNo=" + tradeNo;
         }
       }
     }
-    return "redirect:nohit.do?tradeNo=" + tradeNo;
+    return "error";
   }
  
   /**
@@ -122,7 +120,7 @@ public class BuyerController {
    */
   @RequestMapping("/updateBoardForm")
   public String updateTradePostForm(Model model, TradePostVo tvo) {
-    findTradePostDetailByNo(model, Integer.toString(tvo.getTradeNo()), null, null);
+    noHitdetailViewCheck(tvo, model);
     return "buyer/Update_tradePostForm.tiles";
   }
   
@@ -136,7 +134,6 @@ public class BuyerController {
    */
   @RequestMapping(method = RequestMethod.POST, value = "/updateBoard")
   public String updateTradePost(Model model, @ModelAttribute TradePostVo tvo) {
-    tvo.setMemberVo(new MemberVo("spring", "1234", "김현길", "SM", null, null, null));
     try {
       tradeService.updateTradePost(tvo);
     } catch (Exception e) {
@@ -164,8 +161,16 @@ public class BuyerController {
    * @return redirect:tradePost
    */
   @RequestMapping(method = RequestMethod.POST, value = "/createBoard")
-  public String createTradePost(Model model, @ModelAttribute TradePostVo tvo) {
-    tvo.setMemberVo(new MemberVo("spring", "1234", "김현길", "SM", null, null, null));
+  public String createTradePost(HttpServletRequest request, Model model,
+      @ModelAttribute TradePostVo tvo) {
+    
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+      MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
+      if (mvo != null) {
+        tvo.setMemberVo(mvo.getMemberVo());
+      }
+    }
     try {
       tradeService.createTradePost(tvo);
     } catch (Exception e) {
@@ -184,7 +189,7 @@ public class BuyerController {
    * @param model 뷰에 전달할 객체.
    * @return buyer/Read_tradePostDetail.tiles
    */
-  @RequestMapping("hit.do")
+  @RequestMapping("/hit")
   public String hitdetailViewCheck(TradePostVo tvo, Model model) {
     tradeService.updateHitsTradePost(tvo);
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
@@ -199,7 +204,7 @@ public class BuyerController {
    * @param model 뷰에 전달할 객체.
    * @return buyer/Read_tradePostDetail.tiles
    */
-  @RequestMapping("nohit.do")
+  @RequestMapping("/nohit")
   public String noHitdetailViewCheck(TradePostVo tvo, Model model) {
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
