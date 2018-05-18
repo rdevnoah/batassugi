@@ -7,10 +7,10 @@ var $closeSide = $('#closeSide'),
 		$mySidenav = $('#mySidenav'),
 		$parallax = $('#parallax'),
 		$board = $('#board'),
-		$a = $('a');
+		$vcenterLi = $('.vcenter li');
 		$vcenterA = $('.vcenter a');
 	
-	$a.on('mouseenter',function(){
+	$vcenterLi.on('mouseenter',function(){
 		$(this).addClass('animated pulse');
 	}).on('mouseleave',function(){
 		$(this).removeClass('animated pulse');

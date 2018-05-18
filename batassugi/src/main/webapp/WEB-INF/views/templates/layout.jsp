@@ -22,10 +22,10 @@
 <%-- Animate --%>
 <link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
 <%-- Favicon --%>
+<link href="${pageContext.request.contextPath}/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <%-- <link href="${pageContext.request.contextPath}/resources/favicon.ico" rel="shortcut icon" type="image/x-icon"> --%>
 <%-- Spider (추가css설정 css파일)--%>
 <link href="${pageContext.request.contextPath}/resources/css/spider.css" rel="stylesheet">
-
 
 <%-- Jquery v3.3.1 --%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>

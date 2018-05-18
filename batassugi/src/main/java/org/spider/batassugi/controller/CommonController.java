@@ -42,8 +42,6 @@ public class CommonController {
   public String getCropsDetail(Model model, String cropsNo) {
     CropsInfoVo cropsInfoVo = commonService.getCropsDetail(cropsNo);
     model.addAttribute("info", cropsInfoVo);
-    System.out.println(cropsNo);
-    System.out.println(cropsInfoVo);
     return "home/crops_detail.tiles";
   }
 

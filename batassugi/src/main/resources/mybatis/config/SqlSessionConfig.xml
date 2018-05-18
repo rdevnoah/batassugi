@@ -4,11 +4,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <package name="org.spider.batassugi.model" />
+    <package name="org.spider.batassugi.model"/>
   </typeAliases>
   <mappers>
     <mapper resource="mybatis/config/member.xml"/> <!-- 고객 정보에 연결되는 xml -->
     <mapper resource="mybatis/config/crops.xml"/> <!--  농작물 정보에 연결되는 xml -->  
+    <mapper resource="mybatis/config/recruit.xml"/>
   </mappers>
 </configuration>
 
