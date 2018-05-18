@@ -12,20 +12,24 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * @author : "SM HyeonGil Kim"
  * @since : 2018. 5. 14.
  * @version : 1.0
- * @see 
+ * @see
  * 
- * <pre>
+ *      <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "SM HyeonGil Kim"    최초작성
- * </pre>
+ *      </pre>
  */
 public class ApplySellerVo {
-  private Integer applyNo;
+  private String applyNo;
   private MemberVo memberVo;
   private String farmerDocument;
+  private String applyDate;
+  private String applyState;
+  private String applyResultdate;
+  private String applyReason;
 
   public ApplySellerVo() {
     super();
@@ -33,24 +37,34 @@ public class ApplySellerVo {
   }
 
   /**
-   * 구매자가 판매자 신청하는 VO입니다.
+   * 구매자가 판매자로 신청 및 처리를 위한 VO.
    * 
-   * @param applyNo 지원번호.
-   * @param memberVo 회원정보.
-   * @param farmerDocument 농업확인서류(이미지경로).
+   * @author "PL_Seonhwa"
+   * @param applyNo 판매자 지원번호.
+   * @param memberVo 지원자 정보.
+   * @param farmerDocument 농업증명 서류.
+   * @param applyDate 지원 날짜.
+   * @param applyState 지원 신청 상태.
+   * @param applyResultdate 지원 처리 날짜.
+   * @param applyReason
    */
-  public ApplySellerVo(Integer applyNo, MemberVo memberVo, String farmerDocument) {
+  public ApplySellerVo(String applyNo, MemberVo memberVo, String farmerDocument, String applyDate,
+      String applyState, String applyResultdate, String applyReason) {
     super();
     this.applyNo = applyNo;
     this.memberVo = memberVo;
     this.farmerDocument = farmerDocument;
+    this.applyDate = applyDate;
+    this.applyState = applyState;
+    this.applyResultdate = applyResultdate;
+    this.applyReason = applyReason;
   }
 
-  public Integer getApplyNo() {
+  public String getApplyNo() {
     return applyNo;
   }
 
-  public void setApplyNo(Integer applyNo) {
+  public void setApplyNo(String applyNo) {
     this.applyNo = applyNo;
   }
 
@@ -70,11 +84,42 @@ public class ApplySellerVo {
     this.farmerDocument = farmerDocument;
   }
 
+  public String getApplyDate() {
+    return applyDate;
+  }
+
+  public void setApplyDate(String applyDate) {
+    this.applyDate = applyDate;
+  }
+
+  public String getApplyState() {
+    return applyState;
+  }
+
+  public void setApplyState(String applyState) {
+    this.applyState = applyState;
+  }
+
+  public String getApplyResultdate() {
+    return applyResultdate;
+  }
+
+  public void setApplyResultdate(String applyResultdate) {
+    this.applyResultdate = applyResultdate;
+  }
+
+  public String getApplyReason() {
+    return applyReason;
+  }
+
+  public void setApplyReason(String applyReason) {
+    this.applyReason = applyReason;
+  }
+
   @Override
   public String toString() {
     return "ApplySellerVo [applyNo=" + applyNo + ", memberVo=" + memberVo + ", farmerDocument="
-        + farmerDocument + "]";
+        + farmerDocument + ", applyDate=" + applyDate + ", applyState=" + applyState
+        + ", applyResultdate=" + applyResultdate + ", applyReason=" + applyReason + "]";
   }
-
-
 }

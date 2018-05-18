@@ -234,6 +234,21 @@
 	}
      
     $(document).ready(function() {
+    	
+    	
+		//checkbox 개수제한
+		
+		$("input[name='likeCrops']").on("click" , function(){
+			var cnt = $("input:checked[name='likeCrops']").length;
+			if(cnt > 3){
+				
+				$(this).prop("checked" , false);
+				alert("선택은 3개까지 가능합니다.");
+			}
+		});
+    	
+    	
+    	
     	   // 아이디 중복확인
     		$("#id").keyup(function(){
     	      var id=$(this).val().trim();

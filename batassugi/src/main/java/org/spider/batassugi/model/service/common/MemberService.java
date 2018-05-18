@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.exception.LoginException;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
@@ -177,7 +178,8 @@ public class MemberService implements MemberServiceIf {
         map.put("crops", crops);
         memberDao.registerLikeCrop(map);
       }
-      return uvo;
+      MemberInfoVo memberInfoVo=memberDao.login(uvo.getMemberVo());
+      return memberInfoVo;
   }
 
   @Override
@@ -185,4 +187,5 @@ public class MemberService implements MemberServiceIf {
     List<CropsInfoVo> list = memberDao.getAllCropsList();
     return list;
   }
+
 }

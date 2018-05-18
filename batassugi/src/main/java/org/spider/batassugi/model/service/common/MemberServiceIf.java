@@ -3,13 +3,11 @@ package org.spider.batassugi.model.service.common;
 
 import java.io.IOException;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import org.spider.batassugi.model.exception.LoginException;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
-import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.vo.common.MemberVo;
 
 /**
@@ -117,5 +115,6 @@ public interface MemberServiceIf {
    * @return
    */
   public List<CropsInfoVo> getAllCropsList();
-  
+
+ 
 }

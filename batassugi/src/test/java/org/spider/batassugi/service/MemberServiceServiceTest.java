@@ -68,12 +68,11 @@ public class MemberServiceServiceTest {
     System.out.println(orgMvo)*/;
     
     // 멤버 업데이트 확인
-    MemberVo memberVo=new MemberVo("admin","1234","관리자","관리자a", null, null, null);
+    /*MemberVo memberVo=new MemberVo("admin","1234","관리자","관리자a", null, null, null);
     memberDao.updateMember(memberVo);
     MemberInfoVo memberInfoVo=new MemberInfoVo(memberVo, "admin@kosta.com", "01012345679", "경기도 판교", null, null, null, "default.png", null, null);
     memberDao.updateMemberInfo(memberInfoVo);
-    System.out.println(memberInfoVo);
-
-
+    System.out.println(memberInfoVo);*/
+    System.out.println(memberDao.findMemberInfoById("admin"));
   }
 }

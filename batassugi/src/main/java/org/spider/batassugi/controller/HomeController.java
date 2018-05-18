@@ -81,7 +81,6 @@ public class HomeController {
     try {
       HttpSession session = request.getSession();
       MemberInfoVo mvo = memberService.login(vo);
-      
       //멤버 기호작물 List에 넣기
       memberService.findLikeCropsById(mvo);
       

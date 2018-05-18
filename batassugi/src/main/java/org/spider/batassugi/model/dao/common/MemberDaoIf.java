@@ -2,7 +2,7 @@ package org.spider.batassugi.model.dao.common;
 
 import java.util.List;
 import java.util.Map;
-
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
@@ -159,4 +159,6 @@ public interface MemberDaoIf {
    * @return
    */
   public List<CropsInfoVo> getAllCropsList();
+
+
 }

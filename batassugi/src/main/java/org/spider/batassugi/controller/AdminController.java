@@ -1,15 +1,20 @@
 package org.spider.batassugi.controller;
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.spider.batassugi.model.service.admin.AdminServiceIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
+import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 클래스 설명 : 관리자에서 사용하는 Controller입니다.
@@ -37,6 +42,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
   @Resource
   private MemberServiceIf memberService;
+  @Resource
+  private AdminServiceIf adminService;
 
   /**
    * 마이페이지 - 관리자 페이지로 이동.
@@ -62,13 +69,12 @@ public class AdminController {
       HttpServletRequest request) {
     MemberInfoVo memberInfoVo = memberService.updateMemberInfo(uvo);
     HttpSession session = request.getSession();
-    memberInfoVo.setFile(null);
     session.setAttribute("mvo", memberInfoVo);
     return "redirect:updateMember_success";
   }
 
   /**
-   * 관리자회원정보 수정.
+   * 관리자회원정보 수정폼으로 이동.
    * 
    * @author "PL_Seonhwa"
    * @param model
@@ -80,6 +86,38 @@ public class AdminController {
     return "admin/myinfoView.tiles";
   }
 
+  @RequestMapping("admin/applySellerView")
+  public String applySellerView(Model model, String nowPage) {
+    if (nowPage == null) {
+      nowPage = "1";
+    }
+    PagingBean pb = adminService.paging(nowPage);
+    List<ApplySellerVo> aList = adminService.findApplyListByPb(pb);
+    model.addAttribute("paging", pb);
+    model.addAttribute("applyList", aList);
+    // model.addAttribute("applyList", adminService.getAllApplyList());
+    return "admin/applySellerView.tiles";
+  }
+
+  /**
+   * 판매신청 상세정보를 ajax로 전송.
+   * 
+   * @author "PL_Seonhwa"
+   * @param applyNo
+   * @return
+   */
+  @RequestMapping("detailapply")
+  @ResponseBody
+  public Object detailApply(String applyNo) {
+    return adminService.findDetailApplyByNO(applyNo);
+  }
+
+
+  @RequestMapping("applySellerPro")
+  public Object applySellerPro(ApplySellerVo avo) {
+    adminService.updateMemberLevel(avo);
+    return "redirect:admin/applySellerPro_success";
+  }
 
   /**
    * admin view 처리.
@@ -92,5 +130,4 @@ public class AdminController {
   public String updateMemberSuccess(@PathVariable String viewName) {
     return "admin/" + viewName + ".tiles";
   }
-
 }

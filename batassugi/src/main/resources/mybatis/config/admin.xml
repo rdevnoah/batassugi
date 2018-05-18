@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+<!-- 판매자신청 리스트 -->
+<resultMap type="applySellerVo" id="applysellerRM">
+	<result property="memberVo.id" column="id" />
+  	<result property="memberVo.password" column="password" />
+  	<result property="memberVo.name" column="name" />
+  	<result property="memberVo.nickname" column="nickname" />
+  	<result property="memberVo.memberLevel" column="member_level" />
+  	<result property="memberVo.state" column="state_number" />
+  	<result property="memberVo.stopdate" column="stopdate" />
+</resultMap>
+<select id="getAllApplyList" resultMap="applysellerRM">
+select s.apply_no as applyNo, m.id, s.farmer_document as farmerDocument, 
+		s.apply_date as applyDate, s.apply_state as applyState, m.nickname
+from apply_seller s, spider_member m
+where m.id=s.id
+</select>
+<!-- 페이징을 위한 전체 포스트수 -->
+<select id="getTotalApplyCount" resultType="int">
+select count(apply_no) from apply_seller
+</select>
+
+
+<!-- 페이징 처리에 따른 리스트 -->
+<resultMap type="applySellerVo" id="applyseller">
+	<result property="memberVo.id" column="id" />
+  	<result property="memberVo.password" column="password" />
+  	<result property="memberVo.name" column="name" />
+  	<result property="memberVo.nickname" column="nickname" />
+  	<result property="memberVo.memberLevel" column="member_level" />
+  	<result property="memberVo.state" column="state_number" />
+  	<result property="memberVo.stopdate" column="stopdate" />
+</resultMap>
+<select id="findApplyListByPb" resultMap="applyseller">
+select s.apply_no as applyNo, m.id, s.farmer_document as farmerDocument, s.apply_date as applyDate, s.apply_state as applyState, m.nickname
+from (select row_number() over(order by apply_no desc) as rnum,apply_no ,id,farmer_document,apply_date,apply_state from apply_seller) s,spider_member m
+where m.id=s.id and s.rnum between #{startRowNumber} and #{endRowNumber}
+order by s.apply_no desc
+ </select>
+ 
+ <!-- 판매자 신청 상세정보 -->
+ <resultMap type="applySellerVo" id="applysellerDetail">
+	<result property="memberVo.id" column="id" />
+  	<result property="memberVo.password" column="password" />
+  	<result property="memberVo.name" column="name" />
+  	<result property="memberVo.nickname" column="nickname" />
+  	<result property="memberVo.memberLevel" column="member_level" />
+  	<result property="memberVo.state" column="state_number" />
+  	<result property="memberVo.stopdate" column="stopdate" />
+</resultMap>
+<select id="findDetailApplyByNO" resultMap="applysellerDetail">
+select s.apply_no as applyNo, m.id, s.farmer_document as farmerDocument, m.member_level,
+		s.apply_date as applyDate, s.apply_state as applyState, m.nickname, m.name, s.apply_resultdate as applyResultdate, s.apply_reason as applyReason
+from apply_seller s, spider_member m
+where m.id=s.id and s.apply_no=#{value}
+</select>
+
+<!-- 판매자 레벨 변경 -->
+<update id="updateMemberLevel">
+	update  SPIDER_MEMBER set member_level='판매자' where id=#{value}
+</update>
+<!-- 판매자 신청 이력 변경 -->
+<update id="updateApplySellerDate">
+	update apply_seller set apply_state=#{applyState}, apply_resultdate=sysdate, apply_reason=#{applyReason} where id=#{memberVo.id}
+</update>
+</mapper>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

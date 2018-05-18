@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
@@ -117,5 +118,5 @@ public class MemberDao implements MemberDaoIf {
   public List<CropsInfoVo> getAllCropsList() {
     return template.selectList("crops.getAllCropsList");
   }
-  
+
 }
