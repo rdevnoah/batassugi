@@ -9,14 +9,22 @@
 	<ul class="list-unstyled components">
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
+			<a href="${pageContext.request.contextPath}"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
+			<a href="${pageContext.request.contextPath}/admin/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
 		</li>
 		
+		<li>		
+			<a href="${pageContext.request.contextPath}/admin/applySellerView"> <i class="glyphicon glyphicon-grain"></i>판매자 승인</a> 
+		</li>
 		
+		<li>		
+			<a href="${pageContext.request.contextPath}/adminAccuse"> <i class="glyphicon glyphicon-bullhorn"></i>신고관리</a> 
+		</li>
+		
+
 		<!-- <li class="active">
 		<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"> <i class="glyphicon glyphicon-home"></i>
 				Home

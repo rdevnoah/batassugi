@@ -1,7 +1,11 @@
 package org.spider.batassugi.model.dao.admin;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,7 +28,39 @@ import org.springframework.stereotype.Repository;
  *      </pre>
  */
 @Repository
-public class AccusePostDao {
+public class AccusePostDao implements AccusePostDaoIf {
   @Resource
   private SqlSessionTemplate template;
+
+  @Override
+  public List<MemberInfoVo> getAllMemberList() {
+    return template.selectList("member.getAllMemberList");
+  }
+
+  @Override
+  public void registerAccuseInfo(AccusePostVo accusePostVo) {
+    template.insert("member.registerAccuseInfo", accusePostVo);
+  }
+
+  @Override
+  public List<AccusePostVo> getAllAccuseList() {
+    return template.selectList("member.getAllAccuseList");
+  }
+  
+
+  @Override
+  public AccusePostVo findDetailaccuseByNo(String accuseNo) {
+    return template.selectOne("admin.findDetailaccuseByNo",accuseNo);
+  }
+
+  @Override
+  public void updateAccuseStateInfo(AccusePostVo accusePostVo) {
+    template.update("admin.AccusePostVo", accusePostVo);
+  }
+
+  @Override
+  public int findMemberAccuseListById(String reportedId) {
+    return template.selectOne("admin.findMemberAccuseListById",reportedId);
+  }
+  
 }

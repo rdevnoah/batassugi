@@ -53,44 +53,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     where id=#{value}
   </select>
   
+  <!-- 회원기호 작물 존재 여부 확인 count -->
+  <select id="countCropsCountById" resultType="int">
+  	select count(id) from  member_like_crops where id=#{memberVo.id}
+  </select>
+  
+  <!-- 회원 기호 작물 리스트로 가져오기 -->
+  <select id="findLikeCropsById" resultType="String">
+	select crops_no from  member_like_crops where id=#{memberVo.id}
+  </select>
+  
   <!-- 멤버 아이디 중복확인 -->
   <select id="checkId" resultType="int"> 
     select count(id) from spider_member where id=#{value}
   </select>
+  
    <!-- 멤버 닉네임 중복확인 -->
    <select id="checkNickname" resultType="int">
     select count(nickname) from spider_member where nickname=#{value}
   </select>
+
+  <!-- 신고게시판에서 모든 멤버 아이디 불러오기 -->
+  <select id="getAllMemberList" resultMap="detailMemberRM">
+	select mi.id, m.nickname
+	from MEMBER_INFO mi, SPIDER_MEMBER m
+	where m.id=mi.id
+  </select>
+  
+   <resultMap type="memberInfoVo" id="detailMember" >
+  	<result property="memberVo.id" column="id" />
+  	<result property="memberVo.password" column="password" />
+  	<result property="memberVo.name" column="name" />
+  	<result property="memberVo.nickname" column="nickname" />
+  	<result property="memberVo.memberLevel" column="member_level" />
+  	<result property="memberVo.state" column="state_number" />
+  	<result property="memberVo.stopdate" column="stopdate" />
+  </resultMap>
+  
+  <!-- 신고신청하기 -->
+  <insert id="registerAccuseInfo">
+  insert into accuse(accuse_no, accuse_category, accuse_id, reported_id, accuse_reason, accuse_proof)
+  values(accuse_seq.nextval, #{accuseCategory}, #{accuseId}, #{reportedId}, #{accuseReason}, #{accuseProof})
+  </insert>
+  
+  <!-- 신고게시판 리스트 불러오기 -->
+  <select id="getAllAccuseList" resultType="accusePostVo">
+    select accuse_no as accuseNo, accuse_category as accuseCategory, accuse_id as accuseId,accuse_resultday as accuseResultday,
+     reported_id as reportedId, accuse_date as accuseDate,accuse_reason as accuseReason, 
+     accuse_state as accuseState,accuse_proof as accuseProof, accuse_resultday as accuseResultday, result_reason as resultReason from accuse
+     order by accuse_no desc
+  </select>
+  
+  <!-- 멤버 전체 정보 반환(패스워드까지) -->
+   <select id="findMemberInfoById" resultMap="detailMember">
+  	select s.id,s.password,s.name,s.nickname,s.member_level, s.state_number, ms.stopdate ,m.email, m.tel, m.address, m.birthday, m.gender, m.regdate, m.image
+  	from spider_member s, member_info m, member_state ms 
+  	where s.id=#{value}
+  	and s.id=m.id
+  	and ms.state_number=s.state_number
+  </select>
+  <!-- 멤버 작물 리스트 삭제 -->
+  <delete id="deleteLikeCrops">
+  	DELETE FROM member_like_crops WHERE id=#{value}
+  </delete>
+  <!-- 멤버 부가정보 업데이트 -->
+  <update id="updateMemberInfo">
+  	update member_info 
+  	set email=#{email}, address=#{address}, tel=#{tel}, image=#{image}    
+  	where id=#{memberVo.id}
+  </update>
+  <!-- 멤버 정보 업데이트 -->
+  <update id="updateMember">
+  	update spider_member 
+  	set password=#{password}, nickname=#{nickname} 
+  	where id=#{id}
+  </update>
+  <!-- 멤버 상태 업데이트 -->
+  <update id="updateMemberState">
+  	update member_state
+  	set state_set=#{state}, stopdate=sysdate
+  	where state_number=#{stateNumber}
+  </update>
+  
+  <!-- 멤버 상태 번호 가져오기 -->
+  <select id="findStateNumberById" resultType="String">
+  	select state_number from spider_member where id=#{value}
+  </select>
 </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

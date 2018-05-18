@@ -8,7 +8,7 @@ public class CropsInfoVo {
   private String cropsImg3;
   private String cropsSeason;
   private String cropsMethod;
-  private String cropsCondition;
+  private String seedSeason;
   private String cropsIcon;
   private String cropsFood;
 
@@ -25,14 +25,14 @@ public class CropsInfoVo {
    * @param cropsImg1 작물이미지1.
    * @param cropsImg2 작물이미지2.
    * @param cropsImg3 작물이미지3.
-   * @param cropsSeason 작물수확기간.
+   * @param cropsSeason 작물수확시기.
    * @param cropsMethod 작물수확방법.
-   * @param cropsCondition 작물수확조건.
+   * @param seedSeason 작물파종시기.
    * @param cropsIcon 작물 아이콘.
    * @param cropsFood 작물로 만들수 있는 대표음식.
    */
   public CropsInfoVo(CropsVo cropsVo, String cropsProfileimg, String cropsImg1, String cropsImg2,
-      String cropsImg3, String cropsSeason, String cropsMethod, String cropsCondition,
+      String cropsImg3, String cropsSeason, String cropsMethod, String seedSeason,
       String cropsIcon, String cropsFood) {
     super();
     this.cropsVo = cropsVo;
@@ -42,7 +42,7 @@ public class CropsInfoVo {
     this.cropsImg3 = cropsImg3;
     this.cropsSeason = cropsSeason;
     this.cropsMethod = cropsMethod;
-    this.cropsCondition = cropsCondition;
+    this.seedSeason = seedSeason;
     this.cropsIcon = cropsIcon;
     this.cropsFood = cropsFood;
   }
@@ -103,12 +103,12 @@ public class CropsInfoVo {
     this.cropsMethod = cropsMethod;
   }
 
-  public String getCropsCondition() {
-    return cropsCondition;
+  public String getSeedSeason() {
+    return seedSeason;
   }
 
-  public void setCropsCondition(String cropsCondition) {
-    this.cropsCondition = cropsCondition;
+  public void setSeedSeason(String seedSeason) {
+    this.seedSeason = seedSeason;
   }
 
   public String getCropsIcon() {
@@ -131,7 +131,7 @@ public class CropsInfoVo {
   public String toString() {
     return "CropsInfoVo [cropsVo=" + cropsVo + ", cropsProfileimg=" + cropsProfileimg
         + ", cropsImg1=" + cropsImg1 + ", cropsImg2=" + cropsImg2 + ", cropsImg3=" + cropsImg3
-        + ", cropsSeason=" + cropsSeason + ", cropsMethod=" + cropsMethod + ", cropsCondition="
-        + cropsCondition + ", cropsIcon=" + cropsIcon + ", cropsFood=" + cropsFood + "]";
+        + ", cropsSeason=" + cropsSeason + ", cropsMethod=" + cropsMethod + ", seedSeason="
+        + seedSeason + ", cropsIcon=" + cropsIcon + ", cropsFood=" + cropsFood + "]";
   }
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -174,15 +174,16 @@
 			</div>
             </div>
             <%-- 2단 --%> 
+            <%-- 기호작물 --%>
             <div class="col-md-6">
             <div class="form-group">
           	<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span class="text-danger">*</span></label>
                 <div class="col-md-7 col-sm-9">
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="1"> 감자 </label>    
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="2"> 고구마 </label>
-                    <label> <input name="likeCrops" id="likeCrops" type="checkbox" value="3"> 토마토 </label>                    
+                    <c:forEach var="item" items="${list}">
+        				<label> <input name="likeCrops" id="likeCrops${item.cropsVo.cropsNo}" type="checkbox" value="${item.cropsVo.cropsNo}"> ${item.cropsVo.cropsName} </label>
+       				 </c:forEach> 
                   </div>
                 </div>
 			</div>
@@ -233,6 +234,21 @@
 	}
      
     $(document).ready(function() {
+    	
+    	
+		//checkbox 개수제한
+		
+		$("input[name='likeCrops']").on("click" , function(){
+			var cnt = $("input:checked[name='likeCrops']").length;
+			if(cnt > 3){
+				
+				$(this).prop("checked" , false);
+				alert("선택은 3개까지 가능합니다.");
+			}
+		});
+    	
+    	
+    	
     	   // 아이디 중복확인
     		$("#id").keyup(function(){
     	      var id=$(this).val().trim();

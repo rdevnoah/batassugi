@@ -1,6 +1,9 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.util.List;
 import java.util.Map;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -24,6 +27,8 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerBasic, registerExtend 메소드 추가
  * 2018. 5. 16.  "PL_Seonhwa"     회원가입시 아이디 닉네임 중복확인 메소드 추가
  * 2018. 5. 17.  "PL_Seonhwa"     회원가입시 회원상태, 기호작물 입력 메소드 추가
+ *                                로그인시 멤버 기호작물 리스트에 넣어주기
+ *                                회원정보 수정 처리
  *      </pre>
  */
 
@@ -49,6 +54,13 @@ public interface MemberDaoIf {
   public void registerExtend(MemberInfoVo vo);
 
 
+  /**
+   * 로그인 익셉션 처리를 위한 아이디 찾기 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param id 입력한 아이디가 있는지 없는지 체크하기 위해 입력받는 정보.
+   * @return
+   */
   public MemberVo findMemberById(String id);
 
 
@@ -63,8 +75,8 @@ public interface MemberDaoIf {
 
 
   /**
-   * 회원 가입시 닉네임 존재 여부 확인.
-   * .
+   * 회원 가입시 닉네임 존재 여부 확인. .
+   * 
    * @author "PL_Seonhwa"
    * @param nickname 회원이 입력한 닉네임.
    * @return
@@ -86,5 +98,87 @@ public interface MemberDaoIf {
    * @param map 아이디와 기호작물 번호를 입력한 map.
    */
   public void registerLikeCrop(Map<String, String> map);
+
+  /**
+   * 회원 기호 작물 존재 여부 확인.
+   * 
+   * @author "PL_Seonhwa"
+   * @param mvo 회원정보를 위한 vo.
+   * @return
+   */
+  public int findCropsCountById(MemberInfoVo mvo);
+
+
+  /**
+   * 회원기호 작물 리스트에 넣기.
+   * 
+   * @author "PL_Seonhwa"
+   * @param mvo 회원 정보를 위한 vo.
+   * @return
+   */
+  public List<String> findLikeCropsById(MemberInfoVo mvo);
+
+
+  /**
+   * 기존 회원의 전체 정보 가져오기(회원 업데이트용).
+   * 
+   * @author "PL_Seonhwa"
+   * @param id 정보를 가져올 아이디.
+   * @return
+   */
+  public MemberInfoVo findMemberInfoById(String id);
+
+  /**
+   * 회원정보 수정시 수정할 작물정보가 있으면 기존 작물정보를 지움.
+   * 
+   * @author "PL_Seonhwa"
+   * @param id 지울 아이디.
+   */
+  public void deleteLikeCrops(String id);
+
+  /**
+   * 회원 부가 정보 update.
+   * 
+   * @author "PL_Seonhwa"
+   * @param uvo
+   */
+  public void updateMemberInfo(MemberInfoVo uvo);
+
+  /**
+   * 회원 기본 정보 update.
+   * 
+   * @author "PL_Seonhwa"
+   * @param uvo
+   */
+  public void updateMember(MemberVo memberVo);
+
+  /**
+   * 회원기호 작물 입력을 위하여 DB에서 작물 리스트를 가져오는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @return
+   */
+  public List<CropsInfoVo> getAllCropsList();
+
+
+  /**
+   * 회원 상태를 변경해주는 메소드.
+   * 
+   * @author "PL_Seonhwa"
+   * @param map 변경할 회원 상태+회원아이디
+   */
+  public void updateMemberState(Map<String, String> map);
+
+
+  /**
+   * 회원 아이디로 회원 상태번호 가져오기.
+   * 
+   * @author "PL_Seonhwa"
+   * @param reportedId
+   * @return
+   */
+  public String findStateNumberById(String reportedId);
+
+
 
 }

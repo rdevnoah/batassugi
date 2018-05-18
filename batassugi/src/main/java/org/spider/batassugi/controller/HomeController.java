@@ -1,12 +1,14 @@
 package org.spider.batassugi.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.exception.LoginException;
+import org.spider.batassugi.model.service.admin.AccuseServiceIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
@@ -37,13 +39,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 2018. 5. 15.  "PL_Seonhwa"     회원가입 register 메소드 추가(이미지 파일업로드)
  * 2018. 5. 16.  "PL_Seonhwa"     회원가입 시 아이디, 닉네임 중복검사 메소드 추가
  * 2018. 5. 17.  "PL_Seonhwa"     회원가입, 로그인 메소드 로직 변경
+ *                                로그인시 멤버 기호작물 리스트에 넣어주기
  *      </pre>
  */
 @Controller
 public class HomeController {
   @Resource
   private MemberServiceIf memberService;
-
+  @Resource
+  private AccuseServiceIf accuseService;
+  
   /**
    * 기본 페이지로 이동.
    * 
@@ -82,6 +87,9 @@ public class HomeController {
     try {
       HttpSession session = request.getSession();
       MemberInfoVo mvo = memberService.login(vo);
+      //멤버 기호작물 List에 넣기
+      memberService.findLikeCropsById(mvo);
+      
       session.setAttribute("mvo", mvo);
       return "redirect:/";
     } catch (LoginException e) {
@@ -156,7 +164,6 @@ public class HomeController {
 
 
   /**
-   * 
    * ajax로 회원가입시 닉네임 체크.
    * 
    * @author "PL_Seonhwa"
@@ -168,4 +175,42 @@ public class HomeController {
   public Object checkNickname(String nickname) {
     return memberService.checkNickname(nickname);
   }
+  
+  /**
+   * 회원정보 등록폼으로 이동.
+   * 
+   * @author "PL_Seonhwa"
+   * @param model
+   * @return
+   */
+  @RequestMapping("registerView")
+  public String getAllCropsList(Model model) {
+    model.addAttribute("list", memberService.getAllCropsList());
+    return "home/registerView.tiles";
+  }
+  
+
+  @RequestMapping("accuse")
+  public String registerAccuseInfo(AccusePostVo accusePostVo) {
+    String path = "default.png";
+    // - 업로드할 파일이 있다면 파일업로드
+    if (accusePostVo.getFile() != null) {
+      try {
+        path = accuseService.registerImg(accusePostVo);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    // - 이미지 처리 결과 경로를 vo에 넣음
+    accusePostVo.setAccuseProof(path);
+    accuseService.registerAccuseInfo(accusePostVo);
+    return "home/accuse_success.tiles";
+  }
+  
+  @RequestMapping("home/accuse_board")
+  public String getAllMemberList(Model model) {
+   List<MemberInfoVo> list = accuseService.getAllMemberList();
+   model.addAttribute("list", list);
+  return "home/accuse_board.tiles";
+ }
 }
