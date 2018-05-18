@@ -44,4 +44,5 @@ public class CommonController {
     model.addAttribute("info", cropsInfoVo);
     return "home/crops_detail.tiles";
   }
+
 }

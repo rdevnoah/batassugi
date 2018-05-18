@@ -43,3 +43,27 @@ select ci.crops_no, c.crops_name from CROPS_INFO ci, CROPS c
 where c.crops_no=ci.crops_no
 
 update SPIDER_MEMBER set id='ii' where id='spring';
+
+select mi.id, m.nickname
+from MEMBER_INFO mi, SPIDER_MEMBER m
+where m.id=mi.id
+
+CREATE TABLE accuse
+(
+    accuse_no , accuse_category ,accuse_id,reported_id,accuse_date ,accuse_reason,accuse_proof, accuse_resultday, result_reason         VARCHAR2(500) ,
+    CONSTRAINT ACCUSE_PK PRIMARY KEY (accuse_no),
+    CONSTRAINT FK_accuse_accuse_id_spider_mem FOREIGN KEY (accuse_id) REFERENCES spider_member (id),
+    CONSTRAINT FK_accuse_reported_id_spider_m FOREIGN KEY (reported_id) REFERENCES spider_member (id)   
+);
+insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'활동',sysdate);
+
+insert into accuse(accuse_no, accuse_category, accuse_id, reported_id, accuse_reason, accuse_proof)
+values(accuse_seq.nextval, '노쇼', 'qing52', 'admin', '노쇼했어요','첨부파일')
+
+select * from ACCUSE
+select accuse_no , accuse_category ,accuse_id,reported_id,accuse_date ,accuse_reason,accuse_proof, accuse_resultday, result_reason
+from accuse
+
+select accuse_no, accuse_category ,accuse_id,reported_id,accuse_date ,accuse_reason,accuse_proof, accuse_resultday, result_reason from accuse
+
+select accuse_no, accuse_category ,accuse_id, reported_id, accuse_date ,accuse_reason,accuse_proof, accuse_resultday, result_reason from accuse

@@ -3,6 +3,7 @@ package org.spider.batassugi.model.service.admin;
 import java.util.List;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.admin.AdminDaoIf;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.stereotype.Service;
@@ -68,6 +69,19 @@ public class AdminService implements AdminServiceIf {
       avo.setApplyReason("승인거절 처리되었습니다");
     }
     adminDao.updateApplySellerDate(avo);
+  }
+
+  @Override
+  public List<AccusePostVo> findAccuseListByPb(PagingBean pb) {
+    return adminDao.findAccuseListByPb(pb.getStartRowNumber(), pb.getEndRowNumber());
+  }
+
+  @Override
+  public PagingBean paging2(String nowPage) {
+    int page = Integer.parseInt(nowPage);
+    int totalPostCount = adminDao.getTotalAccuseCount();
+    PagingBean pb = new PagingBean(page, totalPostCount);
+    return pb;
   }
 
 }

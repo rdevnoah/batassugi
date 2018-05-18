@@ -68,13 +68,41 @@ where m.id=s.id and s.apply_no=#{value}
 <update id="updateApplySellerDate">
 	update apply_seller set apply_state=#{applyState}, apply_resultdate=sysdate, apply_reason=#{applyReason} where id=#{memberVo.id}
 </update>
+
+<!-- 신고번호로 신고 상세내역 조회 -->
+<select id="findDetailaccuseByNo" resultType="accusePostVo">
+select accuse_no as accuseNo, accuse_category as accuseCategory, accuse_id as accuseId,accuse_resultday as accuseResultday,
+reported_id as reportedId, accuse_date as accuseDate,accuse_reason as accuseReason, 
+accuse_state as accuseState,accuse_proof as accuseProof, accuse_resultday as accuseResultday, result_reason as resultReason 
+from accuse
+where accuse_no=#{value}
+</select>
+
+<!-- 신고처리내용 업데이트:신고상태, 신고처리날짜,신고사유 -->
+<update id="AccusePostVo">
+update accuse 
+set accuse_state=#{accuseState}, accuse_resultday=sysdate, result_reason=#{resultReason}
+where accuse_no=#{accuseNo}
+</update>
+
+<!-- 신고대상의 신고 승인 카운트 반환 -->
+<select id="findMemberAccuseListById" resultType="int">
+select count(accuse_no) from accuse where reported_id=#{value} and accuse_state='신고승인'
+</select>
+
+<select id="findAccuseListByPb" resultType="AccusePostVo">
+select ac.accuse_no as accuseNo, ac.accuse_category as accuseCategory, ac.accuse_Id as accuseId,ac.reported_Id as reportedId,
+       ac.accuse_Date as accuseDate, ac.accuse_Reason as accuseReason, ac.accuse_Proof as accuseProof, ac.accuse_State as accuseState,
+       ac.accuse_Resultday as accuseResultday, ac.result_Reason as resultReason
+from (select row_number() over(order by accuse_no desc) as rnum,accuse_no,accuse_category,accuse_id,reported_id,accuse_date,accuse_reason,accuse_proof,accuse_state,accuse_resultday,result_reason from accuse) ac
+where ac.rnum between #{startRowNumber} and #{endRowNumber}
+order by ac.accuse_no desc
+</select>
+<select id="getTotalAccuseCount" resultType="int">
+select count(accuse_no) from accuse
+</select>
 </mapper>
 
- 
- 
- 
- 
- 
  
  
  

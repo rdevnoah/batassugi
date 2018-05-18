@@ -17,8 +17,14 @@
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/admin/applySellerView"> <i class="glyphicon glyphicon-grain"></i>판매자 신청</a> 
+			<a href="${pageContext.request.contextPath}/admin/applySellerView"> <i class="glyphicon glyphicon-grain"></i>판매자 승인</a> 
 		</li>
+		
+		<li>		
+			<a href="${pageContext.request.contextPath}/adminAccuse"> <i class="glyphicon glyphicon-bullhorn"></i>신고관리</a> 
+		</li>
+		
+
 		<!-- <li class="active">
 		<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"> <i class="glyphicon glyphicon-home"></i>
 				Home

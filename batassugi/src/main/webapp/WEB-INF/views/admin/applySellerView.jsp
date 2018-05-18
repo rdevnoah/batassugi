@@ -74,7 +74,7 @@ table, th, td {
 				신청 처리 상태 :<span id="applyState_value">d</span><br>
 				신청자 서류 : <span id="farmdoc"></span>
 				<div id="reason"></div>
-				
+				<div id="resultDate"></div>
 				<!-- 지원신청 폼 -->
 				<form name="applySellerPro" method="post" id="applySeller" action="${pageContext.request.contextPath}/applySellerPro">
 				<div id="applyForm">
@@ -131,6 +131,8 @@ table, th, td {
 							 +data.farmerDocument+"\" width=\"100px\" onclick=\"doImgPop('${pageContext.request.contextPath}/resources/img/farmDoc_img/"+data.farmerDocument+"')\">");
 					 $("#applyNo_val").val(data.applyNo);
 					 $("#applyId_val").val(data.memberVo.id);
+					 $("#applyForm").show();
+					 $("#applySellerProBtn").show();
 					 
 					}else{
 						$("#applyNo").html(data.applyNo);
@@ -144,6 +146,7 @@ table, th, td {
 						 if(data.applyState=="승인거절"){
 							 $("#reason").html("승인거절 사유 : "+data.applyReason)
 						 }
+						 $("#resultDate").html("처리 날짜 : "+data.applyResultdate )
 						 $("#applyForm").hide();
 						 $("#applySellerProBtn").hide();
 						 

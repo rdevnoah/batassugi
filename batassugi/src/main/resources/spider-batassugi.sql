@@ -50,7 +50,8 @@ insert into spider_member values('admin','관리자','1234','관리자','관리�
 insert into MEMBER_INFO values('admin','admin@kosta','경기도 판교',sysdate,'01012345678','여성',sysdate,'default.png')
 
 -- 회원 확인
-select * from SPIDER_MEMBER;
+select * from SPIDER_MEMBER where id='Tottenham1';
+select * from member_state where state_number=2
 select * from MEMBER_INFO;
 
 -- 작물 테이블 생성
@@ -161,12 +162,13 @@ select crops_no from  member_like_crops where id='admin'
 CREATE TABLE accuse
 (
     accuse_no             NUMBER           NOT NULL, 
-    accuse_category_no    VARCHAR2(50)     NOT NULL, 
+    accuse_category    VARCHAR2(50)     NOT NULL, 
     accuse_id             VARCHAR2(50)     NOT NULL, 
     reported_id           VARCHAR2(50)     NOT NULL, 
     accuse_date           DATE             DEFAULT sysdate NOT NULL, 
     accuse_reason         VARCHAR2(500)    NOT NULL, 
     accuse_proof          VARCHAR2(500)    NOT NULL, 
+    accuse_state		  VARCHAR2(50) 	   DEFAULT '미처리' NOT NULL,
     accuse_resultday      DATE             ,
     result_reason         VARCHAR2(500) ,
     CONSTRAINT ACCUSE_PK PRIMARY KEY (accuse_no),
@@ -177,6 +179,17 @@ CREATE TABLE accuse
 
 -- 크롭 시퀀스 생성
 CREATE SEQUENCE  accuse_SEQ nocache;
+
+-- 신고 게시판 확인
+select * from accuse
+
+-- 신고 처리상태 변경 확인
+update accuse 
+set accuse_state='신고거절', accuse_resultday=sysdate, result_reason='자꾸신고하지 마시오'
+where accuse_no=2;
+
+-- 신고대상 회원의 신고 승인 횟수 확인
+select count(accuse_no) from accuse where reported_id='Tottenham3' and accuse_state='신고승인';
 
 -- 판메자 지원 게시판
 CREATE TABLE apply_seller

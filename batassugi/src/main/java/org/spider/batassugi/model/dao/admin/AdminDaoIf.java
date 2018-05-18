@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.dao.admin;
 
 import java.util.List;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 
 /**
@@ -74,6 +75,24 @@ public interface AdminDaoIf {
    * @param avo
    */
   public void updateApplySellerDate(ApplySellerVo avo);
+
+  /**
+   * 신고게시판 페이징처리 리스트.
+   * 
+   * @author "PL_Seonhwa"
+   * @param startRowNumber
+   * @param endRowNumber
+   * @return
+   */
+  public List<AccusePostVo> findAccuseListByPb(int startRowNumber, int endRowNumber);
+
+  /**
+   * 신고게시판 글 총 갯수.
+   * @author "PL_Seonhwa"
+   * @return
+   */
+  public int getTotalAccuseCount();
+
 
 
 }

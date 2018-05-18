@@ -20,6 +20,7 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "SM HyeonGil Kim"    최초작성
+ * 2018. 5. 18.  "PL_Seonhwa"         판매자 승인처리를 위해 변수 추가
  *      </pre>
  */
 public class ApplySellerVo {

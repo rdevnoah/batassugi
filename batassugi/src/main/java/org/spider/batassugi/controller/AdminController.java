@@ -1,6 +1,8 @@
 package org.spider.batassugi.controller;
 
 import java.util.List;
+import org.spider.batassugi.model.service.admin.AccuseServiceIf;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 2018. 5. 12.  "Team Spider"    최초작성
  * 2018. 5. 17.  "PL_Seonhwa"     admin 마이페이지, 정보 수정 페이지 이동 메소드 추가
  *                                admin 페이지 이동 부분 Home에서 이동
+ * 2018. 5. 18.  "PL_Seonhwa"     판매자 승인처리
  *      </pre>
  */
 
@@ -44,6 +47,9 @@ public class AdminController {
   private MemberServiceIf memberService;
   @Resource
   private AdminServiceIf adminService;
+
+  @Resource
+  private AccuseServiceIf accuseService;
 
   /**
    * 마이페이지 - 관리자 페이지로 이동.
@@ -100,6 +106,26 @@ public class AdminController {
   }
 
   /**
+   * 페이징 처리해서 리스트 전송.
+   * 
+   * @author "PL_Seonhwa"
+   * @param model
+   * @return
+   */
+  @RequestMapping("adminAccuse")
+  public String getAllAccuseList(Model model, String nowPage) {
+    
+    if (nowPage == null) {
+      nowPage = "1";
+    }
+    PagingBean pb = adminService.paging2(nowPage);
+    List<AccusePostVo> acList = adminService.findAccuseListByPb(pb);
+    model.addAttribute("paging", pb);
+    model.addAttribute("accuseList", acList);
+    return "admin/accuse_management.tiles";
+  }
+
+  /**
    * 판매신청 상세정보를 ajax로 전송.
    * 
    * @author "PL_Seonhwa"
@@ -112,13 +138,45 @@ public class AdminController {
     return adminService.findDetailApplyByNO(applyNo);
   }
 
-
+  /**
+   * 판매 신청 처리.
+   * 
+   * @author "PL_Seonhwa"
+   * @param avo
+   * @return
+   */
   @RequestMapping("applySellerPro")
   public Object applySellerPro(ApplySellerVo avo) {
     adminService.updateMemberLevel(avo);
     return "redirect:admin/applySellerPro_success";
   }
 
+  /**
+   * 신고신청 상세정보를 ajax로 전송.
+   * 
+   * @author "PL_Seonhwa"
+   * @param accuseNo
+   * @return
+   */
+  @RequestMapping("admin/detailaccuse")
+  @ResponseBody
+  public Object detailaccuse(String accuseNo) {
+    return accuseService.findDetailaccuseByNo(accuseNo);
+  }
+
+  /**
+   * 신고처리 메소드.
+   * 
+   * @author "PL_Seonhwa"
+   * @param accusePostVo
+   * @return
+   */
+  @RequestMapping("accusePro")
+  public String accusePro(AccusePostVo accusePostVo) {
+    accuseService.accusePro(accusePostVo);
+    return "redirect:admin/accusePro_success";
+  }
+  
   /**
    * admin view 처리.
    * 
@@ -130,4 +188,5 @@ public class AdminController {
   public String updateMemberSuccess(@PathVariable String viewName) {
     return "admin/" + viewName + ".tiles";
   }
+
 }

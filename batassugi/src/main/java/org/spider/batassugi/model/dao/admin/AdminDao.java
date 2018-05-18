@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.springframework.stereotype.Repository;
 @Repository
@@ -45,5 +46,19 @@ public class AdminDao implements AdminDaoIf {
   public void updateApplySellerDate(ApplySellerVo avo) {
     template.update("admin.updateApplySellerDate",avo);
   }
+
+  @Override
+  public List<AccusePostVo> findAccuseListByPb(int startRowNumber, int endRowNumber) {
+    Map<String, Integer> map=new HashMap<String,Integer>();
+    map.put("startRowNumber", startRowNumber);
+    map.put("endRowNumber", endRowNumber);
+    return template.selectList("admin.findAccuseListByPb", map);
+  }
+
+  @Override
+  public int getTotalAccuseCount() {
+    return template.selectOne("admin.getTotalAccuseCount");
+  }
+
 
 }

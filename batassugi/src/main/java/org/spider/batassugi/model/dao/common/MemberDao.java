@@ -119,4 +119,14 @@ public class MemberDao implements MemberDaoIf {
     return template.selectList("crops.getAllCropsList");
   }
 
+  @Override
+  public void updateMemberState(Map<String, String> map) {
+    template.update("member.updateMemberState",map);
+  }
+
+  @Override
+  public String findStateNumberById(String reportedId) {
+    return template.selectOne("member.findStateNumberById", reportedId);
+  }
+
 }

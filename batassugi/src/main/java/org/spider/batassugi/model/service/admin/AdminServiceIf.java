@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.service.admin;
 
 import java.util.List;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
 
@@ -67,6 +68,24 @@ public interface AdminServiceIf {
    * @param avo
    */
   public void updateMemberLevel(ApplySellerVo avo);
+
+  /**
+   * 신고게시판 페이징 처리.
+   * 
+   * @author "PL_Seonhwa"
+   * @param pb
+   * @return
+   */
+  public List<AccusePostVo> findAccuseListByPb(PagingBean pb);
+
+  /**
+   * 신고게시판 페이징빈 계산.
+   * 
+   * @author "PL_Seonhwa"
+   * @param nowPage
+   * @return
+   */
+  public PagingBean paging2(String nowPage);
 
 
 }

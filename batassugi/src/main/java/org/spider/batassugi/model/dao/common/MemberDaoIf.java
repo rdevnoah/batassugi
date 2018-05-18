@@ -75,8 +75,8 @@ public interface MemberDaoIf {
 
 
   /**
-   * 회원 가입시 닉네임 존재 여부 확인.
-   * .
+   * 회원 가입시 닉네임 존재 여부 확인. .
+   * 
    * @author "PL_Seonhwa"
    * @param nickname 회원이 입력한 닉네임.
    * @return
@@ -127,7 +127,7 @@ public interface MemberDaoIf {
    * @return
    */
   public MemberInfoVo findMemberInfoById(String id);
-  
+
   /**
    * 회원정보 수정시 수정할 작물정보가 있으면 기존 작물정보를 지움.
    * 
@@ -159,6 +159,26 @@ public interface MemberDaoIf {
    * @return
    */
   public List<CropsInfoVo> getAllCropsList();
+
+
+  /**
+   * 회원 상태를 변경해주는 메소드.
+   * 
+   * @author "PL_Seonhwa"
+   * @param map 변경할 회원 상태+회원아이디
+   */
+  public void updateMemberState(Map<String, String> map);
+
+
+  /**
+   * 회원 아이디로 회원 상태번호 가져오기.
+   * 
+   * @author "PL_Seonhwa"
+   * @param reportedId
+   * @return
+   */
+  public String findStateNumberById(String reportedId);
+
 
 
 }
