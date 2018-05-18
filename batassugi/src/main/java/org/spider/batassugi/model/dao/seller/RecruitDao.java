@@ -34,6 +34,6 @@ public class RecruitDao implements RecruitDaoIf {
   public void registerRecruit(RecruitVo recruitVo) {
     template.insert("recruit.registerRecruit",recruitVo);
   }
-  
+
 }
 

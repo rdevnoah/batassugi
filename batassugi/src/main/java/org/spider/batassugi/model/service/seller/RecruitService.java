@@ -33,4 +33,5 @@ public class RecruitService implements RecruitServiceIf {
   public void registerRecruit(RecruitVo vo) {
     recruitDao.registerRecruit(vo);
   }
+  
 }

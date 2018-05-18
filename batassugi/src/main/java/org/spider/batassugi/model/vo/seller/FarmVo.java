@@ -1,8 +1,8 @@
 package org.spider.batassugi.model.vo.seller;
 
-import java.util.Date;
 import java.util.List;
 import org.spider.batassugi.model.vo.common.CropsVo;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 
 /**
  * 농지정보VO 입니다.
@@ -20,23 +20,23 @@ import org.spider.batassugi.model.vo.common.CropsVo;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 14.  "GL_SangKyoung"    최초작성
+ * 2018. 5. 14. "GL_SangKyoung"  최초작성
+ * 2018. 5. 16  "SL SangUk Lee"  id를 제거하고 memberInfoVo 추가(has a)
  * 
  *      </pre>
  */
 public class FarmVo {
 
-  private Integer farmNo;
-  private String id;
-  private Integer farmSize;
+  private int farmNo;
+  private MemberInfoVo memberInfoVo;
+  private int farmSize;
   private String farmAddress;
-  private Date farmStartdate;
-  private Date farmEnddate;
+  private String farmStartdate;
+  private String farmEnddate;
   private List<CropsVo> cropsVo;
 
   public FarmVo() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   /**
@@ -44,18 +44,18 @@ public class FarmVo {
    * 
    * @author "GL_SangKyoung"
    * @param farmNo 농지번호.
-   * @param id 회원 아이디
+   * @param memberInfoVo 회원정보가 담겨있는 객체.
    * @param farmSize 농지사이즈.
    * @param farmAddress 농지주소.
    * @param farmStartdate 농지등록날짜.
    * @param farmEnddate 농지계약종료날짜.
    * @param cropsVo 농작물 정보를 가져오는 cropsVo
    */
-  public FarmVo(Integer farmNo, String id, Integer farmSize, String farmAddress, Date farmStartdate,
-      Date farmEnddate, List<CropsVo> cropsVo) {
+  public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
+      String farmStartdate, String farmEnddate, List<CropsVo> cropsVo) {
     super();
     this.farmNo = farmNo;
-    this.id = id;
+    this.memberInfoVo = memberInfoVo;
     this.farmSize = farmSize;
     this.farmAddress = farmAddress;
     this.farmStartdate = farmStartdate;
@@ -63,27 +63,27 @@ public class FarmVo {
     this.cropsVo = cropsVo;
   }
 
-  public Integer getFarmNo() {
+  public int getFarmNo() {
     return farmNo;
   }
 
-  public void setFarmNo(Integer farmNo) {
+  public void setFarmNo(int farmNo) {
     this.farmNo = farmNo;
   }
 
-  public String getId() {
-    return id;
+  public MemberInfoVo getMemberInfoVo() {
+    return memberInfoVo;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setMemberVo(MemberInfoVo memberInfoVo) {
+    this.memberInfoVo = memberInfoVo;
   }
 
-  public Integer getFarmSize() {
+  public int getFarmSize() {
     return farmSize;
   }
 
-  public void setFarmSize(Integer farmSize) {
+  public void setFarmSize(int farmSize) {
     this.farmSize = farmSize;
   }
 
@@ -95,19 +95,19 @@ public class FarmVo {
     this.farmAddress = farmAddress;
   }
 
-  public Date getFarmStartdate() {
+  public String getFarmStartdate() {
     return farmStartdate;
   }
 
-  public void setFarmStartdate(Date farmStartdate) {
+  public void setFarmStartdate(String farmStartdate) {
     this.farmStartdate = farmStartdate;
   }
 
-  public Date getFarmEnddate() {
+  public String getFarmEnddate() {
     return farmEnddate;
   }
 
-  public void setFarmEnddate(Date farmEnddate) {
+  public void setFarmEnddate(String farmEnddate) {
     this.farmEnddate = farmEnddate;
   }
 
@@ -121,8 +121,9 @@ public class FarmVo {
 
   @Override
   public String toString() {
-    return "FarmVo [farmNo=" + farmNo + ", id=" + id + ", farmSize=" + farmSize + ", farmAddress="
-        + farmAddress + ", farmStartdate=" + farmStartdate + ", farmEnddate=" + farmEnddate
-        + ", cropsVo=" + cropsVo + "]";
+    return "FarmVo [farmNo=" + farmNo + ", MemberVo=" + memberInfoVo + ", farmSize=" + farmSize
+        + ", farmAddress=" + farmAddress + ", farmStartdate=" + farmStartdate + ", farmEnddate="
+        + farmEnddate + ", cropsVo=" + cropsVo + "]";
   }
+
 }

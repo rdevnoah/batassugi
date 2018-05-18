@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <mapper resource="mybatis/config/member.xml"/> <!-- 고객 정보에 연결되는 xml --> 
     <mapper resource="mybatis/config/recruit.xml"/>
     <mapper resource="mybatis/config/sellerFarm.xml"/>
+    <mapper resource="mybatis/config/rent.xml"/>
   </mappers>
 </configuration>
 
