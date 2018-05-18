@@ -8,5 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       insert into crops
       values(crops_SEQ.nextval,#{cropsName},#{cropsLevel})
     </insert>
-
+	<select id="getCropsData" resultType="cropsVo">
+      select crops_no as cropsNo , crops_name as cropsName, crops_level as cropsLevel from crops 
+   </select>
+	
 </mapper>

@@ -66,5 +66,16 @@ public class SellerFarmDao implements SellerFarmDaoIf {
     return template.selectList("sellerFarm.findRentByFarmNo", farmNo);
   }
 
+  @Override
+  public List<CropsVo> getCropsData() {
+    List<CropsVo> list = template.selectList("crops.getCropsData");
+    return list;
+  }
+
+  @Override
+  public String getNow_Date() {
+    return template.selectOne("farm.getNow_Date");
+  }
+
 
 }

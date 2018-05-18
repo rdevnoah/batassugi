@@ -2,6 +2,7 @@ package org.spider.batassugi.model.service.seller;
 
 import java.util.List;
 import java.util.Map;
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 
 
@@ -36,6 +37,12 @@ public interface SellerFarmServiceIf {
   public void farmInsert(FarmVo fvo);
 
   public Map<String,Object> findFarmDetail(String farmNo);
+
+  public List<CropsVo> getCropsData();
+
+  public String getNow_Date();
+
+  
 
   
   

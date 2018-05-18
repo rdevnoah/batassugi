@@ -1,11 +1,13 @@
 package org.spider.batassugi.controller;
 
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.service.seller.RecruitServiceIf;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
@@ -85,7 +87,11 @@ public class SellerController {
   }
  
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerFarmForm")
-  public String registerFarmForm() {
+  public String registerFarmForm(Model model) {
+    List<CropsVo> list = sellerFarmService.getCropsData();
+    String date = sellerFarmService.getNow_Date();
+    model.addAttribute("cropsList",list);
+    model.addAttribute("date",date);
     return "seller/farmRegister.tiles";
   }
   

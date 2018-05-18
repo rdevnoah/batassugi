@@ -72,4 +72,8 @@ public interface SellerFarmDaoIf {
    */
   public List<RentVo> findRentByFarmNo(String farmNo);
 
+  public List<CropsVo> getCropsData();
+
+  public String getNow_Date();
+
 }

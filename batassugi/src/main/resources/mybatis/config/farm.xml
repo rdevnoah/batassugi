@@ -19,6 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="avaliableCrops" parameterType="map">
     insert into available_crops values(#{crops_no},#{farm_no})
     </insert>
+    
+    <select id="getNow_Date" resultType="String">
+   	select to_char(SYSDATE, 'YYYY.MM.DD') from dual
+   
+   </select>
+    
 </mapper>
  
  

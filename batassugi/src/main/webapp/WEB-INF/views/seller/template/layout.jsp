@@ -10,20 +10,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><tiles:insertAttribute name="seller_title" ignore="true" /></title>
-<!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<%-- Favicon --%>
-<%-- <link href="${pageContext.request.contextPath}/resources/favicon.ico" rel="shortcut icon" type="image/x-icon"> --%>
-
-<!-- Our Custom CSS -->
-<link href="${pageContext.request.contextPath}/resources/css/seller.css" rel="stylesheet">
-
+<%-- Bootstrap v3.3.7 --%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <%-- Bootstrap-dialog --%>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css" rel="stylesheet">
 <%-- Animate --%>
 <link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
+<%-- Favicon --%>
+<link href="${pageContext.request.contextPath}/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<!-- Our Custom CSS -->
+<link href="${pageContext.request.contextPath}/resources/css/seller.css" rel="stylesheet">
 
 <%-- Jquery v3.3.1 --%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
@@ -33,7 +30,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
 <%-- Parallax --%>
 <script src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
-
+<%-- Font-awesome v4.7.0 --%>
+<script src="https://use.fontawesome.com/a5d5d71388.js"></script>
 
 </head>
 <body>

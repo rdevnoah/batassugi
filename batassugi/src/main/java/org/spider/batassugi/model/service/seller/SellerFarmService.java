@@ -79,5 +79,17 @@ public class SellerFarmService implements SellerFarmServiceIf {
     
   }
 
+  @Override
+  public List<CropsVo> getCropsData() {
+    List <CropsVo> list = sellerFarmDao.getCropsData();
+    return list;
+  }
+
+  @Override
+  public String getNow_Date() {
+    return sellerFarmDao.getNow_Date();
+    
+  }
+
   
 }
