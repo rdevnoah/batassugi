@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   <mappers>
     <mapper resource="mybatis/config/member.xml"/> <!-- 고객 정보에 연결되는 xml --> 
     <mapper resource="mybatis/config/trade_post.xml"/> <!-- 거래 게시판에 연결되는 xml --> 
+    <mapper resource="mybatis/config/trade_post_reply.xml"/> <!-- 거래 게시판 댓글 연결되는 xml -->
     <mapper resource="mybatis/config/recruit.xml"/>
  </mappers>
 </configuration>

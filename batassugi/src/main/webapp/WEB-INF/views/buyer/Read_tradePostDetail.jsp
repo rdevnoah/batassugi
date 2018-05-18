@@ -28,8 +28,19 @@
 				</tbody>
 			</table><%-- table table-hover --%>
 			<%-- 댓글 영역 --%>
-			<div id="listReply"></div>			
-			<div class ="text-center">
+			<div>
+			<table class="table table-hover">
+				<c:forEach items="${list}" var="list">
+				<tr>
+					<td colspan="1" >${list.memberVo.nickname} (${list.replyRegdate})</td>
+					<td colspan="4">${list.replyComment}</td>
+				</tr>
+				</c:forEach>
+				<tr id=listReply>
+				<tr>
+			</table>
+			</div>			
+			<div class ="text-center ">
 				<c:if test="${sessionScope.mvo.memberVo.nickname != null}">    
 				<textarea rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
 				<button class="btn btn-primary" type="button" id="btnReply">댓글 작성</button>
@@ -79,46 +90,24 @@
   	 	 }); // $("#deleteBtn").click(function()	
     	
   	 	$("#btnReply").click(function(){
-            var replytext=$("#replytext").val();
-            var tradeNo="${requestScope.tvo.tradeNo}"
-            var param="replytext="+replytext+"&tradeNo="+tradeNo;
+  	 		var userNickname = "${ sessionScope.mvo.memberVo.nickname}"
+  	 		alert(userNickname)
+            var replyComment=$("#replytext").val();
+            var tradeNo="${requestScope.tvo.tradeNo}";
+            var param="replyComment="+replyComment+"&tradeNo="+tradeNo +"&memberVo.nickname="+userNickname;
             $.ajax({                
                 type: "post",
                 url: "${pageContext.request.contextPath}/createReply",
                 data: param,
-                success: function(){
+                success: function(data){
                     alert("댓글이 등록되었습니다.");
-                    listReply();
+                    var output = "<td>"+data.memberVo.nickname +" ("+ data.replyRegdate +")"+"</td>" +"<td>"+ data.replyComment+"</td>";
+                    $("#listReply").html(output);
+                    $("#replytext").val("");
+                },   error:function(request,status,error){
+                    BootstrapDialog.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             });
         });
-  	  /* function listReply2(){
-          $.ajax({
-              type: "get",
-              url: "${pageContext.request.contextPath}/findReplylist?tradeNo=${requestScope.tvo.tradeNo}",
-              success: function(result){
-                  var output = "<table>";
-                  for(var i in result){
-                      output += "<tr>";
-                      output += "<td>"+result[i].userName;
-                      output += result[i].regdate+"<br>";
-                      output += result[i].replytext+"</td>";
-                      output += "<tr>";
-                  }
-                  output += "</table>";
-                  $("#listReply").html(output);
-              }
-          });
-      } */
 }); //  $(document).ready(function(){}
-function listReply(){
-    $.ajax({
-        type: "get",
-        url: "${pageContext.request.contextPath}/findReplylist?tradeNo=${requestScope.tvo.tradeNo}",
-        success: function(result){
-        // responseText가 result에 저장됨.
-            $("#listReply").html(result);
-        }
-    });
-}
 </script>
