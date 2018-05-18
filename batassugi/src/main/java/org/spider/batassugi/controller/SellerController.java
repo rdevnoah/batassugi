@@ -78,7 +78,7 @@ public class SellerController {
     if (session.getAttribute("mvo") != null) {
       fvo.getMemberInfoVo().setId(mvo.getId());
       sellerFarmService.farmInsert(fvo);
-      return "redirect:/";
+      return "redirect:seller_Home";
     } else {
       return "farmRegister_error";
     }
@@ -128,7 +128,7 @@ public class SellerController {
     vo.setFarmVo(new FarmVo(farmNo, null, 0, null, null, null));
     System.out.println(vo);
     recruitService.registerRecruit(vo);
-    return "seller_home";
+    return "redirect:seller_Home";
   }
   
   
