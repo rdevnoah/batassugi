@@ -23,7 +23,7 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * </pre>
  */
 public class ApplySellerVo {
-  private Integer applyNo;
+  private String applyNo;
   private MemberVo memberVo;
   private String farmerDocument;
 
@@ -39,18 +39,18 @@ public class ApplySellerVo {
    * @param memberVo 회원정보.
    * @param farmerDocument 농업확인서류(이미지경로).
    */
-  public ApplySellerVo(Integer applyNo, MemberVo memberVo, String farmerDocument) {
+  public ApplySellerVo(String applyNo, MemberVo memberVo, String farmerDocument) {
     super();
     this.applyNo = applyNo;
     this.memberVo = memberVo;
     this.farmerDocument = farmerDocument;
   }
 
-  public Integer getApplyNo() {
+  public String getApplyNo() {
     return applyNo;
   }
 
-  public void setApplyNo(Integer applyNo) {
+  public void setApplyNo(String applyNo) {
     this.applyNo = applyNo;
   }
 

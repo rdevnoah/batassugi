@@ -35,9 +35,10 @@
 	         <ul>
 	         
 	            <li style="border-left:0px !important;"><a href="${pageContext.request.contextPath}/" class="choice">Home</a></li>
-	            <li><a>사이트소개</a></li>
+	            <li><a href="${pageContext.request.contextPath}/home/introduction_website">사이트소개</a></li>
 	            <li><a>교환게시판</a></li>
 	            <li><a>대여신청</a></li>
+	            <li><a href="${pageContext.request.contextPath}/home/accuse_board">신고게시판</a></li>
  		            <c:if test="${sessionScope.mvo.memberVo.memberLevel == '관리자'}">
 		            	<li><a href="${pageContext.request.contextPath}/admin_Home">마이페이지</a></li>	            
 		            </c:if>

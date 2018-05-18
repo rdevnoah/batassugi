@@ -46,4 +46,5 @@ public class CommonController {
     System.out.println(cropsInfoVo);
     return "home/crops_detail.tiles";
   }
+
 }

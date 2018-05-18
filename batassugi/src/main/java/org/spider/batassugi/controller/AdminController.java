@@ -1,7 +1,16 @@
 package org.spider.batassugi.controller;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.spider.batassugi.model.service.admin.AccuseServiceIf;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 /**
  * 클래스 설명 : 관리자에서 사용하는 Controller입니다.
@@ -23,9 +32,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 2018. 5. 17.  "PL_Seonhwa"     admin 마이페이지, 정보 수정 페이지 이동 메소드 추가
  *      </pre>
  */
-
 @Controller
 public class AdminController {
+
+	@Resource
+	private AccuseServiceIf accuseService;
 
   /**
    * 마이페이지 - 관리자 페이지로 이동.
@@ -47,4 +58,12 @@ public class AdminController {
   public String myinfoView() {
     return "admin/myinfoView.tiles";
   }
+  
+  @RequestMapping("adminAccuse")
+  public String getAllAccuseList(Model model) {
+    List<AccusePostVo> list = accuseService.getAllAccuseList();
+    model.addAttribute("list",list);
+	return "admin/accuse_management.tiles";
+  }
+  
 }

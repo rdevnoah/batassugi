@@ -15,7 +15,9 @@
 		<li>		
 			<a href="${pageContext.request.contextPath}/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
 		</li>
-		
+		<li>		
+			<a href="${pageContext.request.contextPath}/adminAccuse"> <i class="glyphicon glyphicon-user"></i>신고관리</a> 
+		</li>
 		
 		<!-- <li class="active">
 		<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"> <i class="glyphicon glyphicon-home"></i>

@@ -159,7 +159,7 @@ select * from member_like_crops;
 CREATE TABLE accuse
 (
     accuse_no             NUMBER           NOT NULL, 
-    accuse_category_no    VARCHAR2(50)     NOT NULL, 
+    accuse_category    VARCHAR2(50)     NOT NULL, 
     accuse_id             VARCHAR2(50)     NOT NULL, 
     reported_id           VARCHAR2(50)     NOT NULL, 
     accuse_date           DATE             DEFAULT sysdate NOT NULL, 

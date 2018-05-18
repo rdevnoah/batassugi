@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.exception.LoginException;
+import org.spider.batassugi.model.service.admin.AccuseServiceIf;
 import org.spider.batassugi.model.service.common.CommonServiceIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
@@ -46,7 +48,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
   @Resource
   private MemberServiceIf memberService;
-
+  @Resource
+  private AccuseServiceIf accuseService;
+  
   /**
    * 기본 페이지로 이동.
    * 
@@ -176,4 +180,30 @@ public class HomeController {
     model.addAttribute("list", memberService.getAllCropsList());
     return "home/registerView.tiles";
   }
+  
+  @RequestMapping("home/accuse_board")
+  public String getAllMemberList(Model model) {
+    List<MemberInfoVo> list = accuseService.getAllMemberList();
+    model.addAttribute("list", list);
+    return "home/accuse_board.tiles";
+  }
+  
+  @RequestMapping("accuse")
+  public String registerAccuseInfo(AccusePostVo accusePostVo) {
+	  System.out.println("여기 오니");
+	  String path = "default.png";
+	    // - 업로드할 파일이 있다면 파일업로드
+	    if (accusePostVo.getFile() != null) {
+	      try {
+	        path = accuseService.registerImg(accusePostVo);
+	      } catch (Exception e) {
+	        e.printStackTrace();
+	      }
+	    }
+	    // - 이미지 처리 결과 경로를 vo에 넣음
+	    accusePostVo.setAccuseProof(path);
+    accuseService.registerAccuseInfo(accusePostVo);
+    return "home/accuse_success.tiles";
+  }
+  
 }

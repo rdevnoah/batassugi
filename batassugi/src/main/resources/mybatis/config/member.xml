@@ -63,9 +63,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select count(nickname) from spider_member where nickname=#{value}
   </select>
   
-
+  <!-- 신고게시판에서 모든 멤버 아이디 불러오기 -->
+  <select id="getAllMemberList" resultMap="detailMemberRM">
+	select mi.id, m.nickname
+	from MEMBER_INFO mi, SPIDER_MEMBER m
+	where m.id=mi.id
+  </select>
+  
+  <!-- 신고신청하기 -->
+  <insert id="registerAccuseInfo">
+  insert into accuse(accuse_no, accuse_category, accuse_id, reported_id, accuse_reason, accuse_proof)
+  values(accuse_seq.nextval, #{accuseCategory}, #{accuseId}, #{reportedId}, #{accuseReason}, #{accuseProof})
+  </insert>
+  
+  <!-- 신고게시판 리스트 불러오기 -->
+  <select id="getAllAccuseList" resultType="accusePostVo">
+    select accuse_no as accuseNo, accuse_category as accuseCategory, accuse_id as accuseId,
+     reported_id as reportedId, accuse_date as accuseDate,accuse_reason as accuseReason,
+     accuse_proof as accuseProof, accuse_resultday as accuseResultday, result_reason as resultReason from accuse
+  </select>
+  
 </mapper>
- 
+
  
  
  
