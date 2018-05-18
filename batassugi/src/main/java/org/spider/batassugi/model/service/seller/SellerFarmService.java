@@ -60,9 +60,7 @@ public class SellerFarmService implements SellerFarmServiceIf {
       farmList.get(i).setCropsVo(cropsList);
       List<String> labels = sellerFarmDao.findLabels(farmList.get(i).getFarmNo());
       farmList.get(i).setLabels(labels);
-      System.out.println(labels);
     }
-    
     return farmList;
   }
 
@@ -76,6 +74,7 @@ public class SellerFarmService implements SellerFarmServiceIf {
   public Map<String,Object> findFarmDetail(String farmNo) {
     Map<String,Object> map = new HashMap<String, Object>();
     FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
+    vo.setLabels(sellerFarmDao.findLabels(Integer.parseInt(farmNo)));
     vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
     map.put("farmVo", vo);
     map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));

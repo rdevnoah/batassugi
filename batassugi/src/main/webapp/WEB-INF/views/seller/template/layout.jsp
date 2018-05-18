@@ -22,6 +22,10 @@
 <!-- Our Custom CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/seller.css" rel="stylesheet">
 
+
+
+
+
 <%-- Jquery v3.3.1 --%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
 <%-- Bootstrap v3.3.7 --%>
@@ -74,6 +78,9 @@
          </script>
 		<script>
 	$(document).ready(function() {
+		
+		
+		
 		var $detailFarm = $('.detailFarm');
 		$detailFarm.on('click', function() {
 			//alert($(this).val());
@@ -94,13 +101,25 @@
 				type : 'default',
 				title : '내 농지 정보',
 				body : 'asdfasdfasdfasdf',
-				buttons : [{
+				buttons : [
+					{
+					label: '신청현황',
+					action : function(){
+						sendPost('recruitList',{
+							'farmNo' : $data.farmVo.farmNo
+						})
+					}
+						
+						
+					}
+					
+					
+					,{
 	                label: '대여모집',
 	                action : function() {
 	                	sendPost('registerRecruitForm', {
 	                		'farmNo' : $data.farmVo.farmNo
 	                	})
-						//location.href="registerRecruitForm";
 					}
 	            },{
 	            	label:'주말농장모집',
@@ -117,7 +136,7 @@
 				closable : true,
 			})
 			$detailModal.realize();
-			$detailModal.getModalHeader().parents().find(".modal-header").append("<hr>");
+			//$detailModal.getModalHeader().parents().find(".modal-header").append("<hr>");
 			var $myModalBody=$detailModal.getModalBody().parents().find(".bootstrap-dialog-body");
 			var appendString='';
 			var crops='';
@@ -134,10 +153,9 @@
 			appendString+="</div><hr>";
 			
 			$myModalBody.append(appendString);
-			//alert($myModalBody.html());
+			
 			$detailModal.open();
-			//alert(($data).farmVo.farmAddress);
-			// 
+			 
 		})
 	})
 </script>

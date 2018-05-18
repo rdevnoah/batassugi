@@ -129,6 +129,10 @@ public class SellerController {
     return "seller/registerRecruit.tiles";
   }
   
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "recruitList")
+  public String recruitListView(Model model, String farmNo) {
+    return "seller/recruit_List.tiles";
+  }
   
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruit")
   public String registerRecruit(RecruitVo vo, int farmNo) {
