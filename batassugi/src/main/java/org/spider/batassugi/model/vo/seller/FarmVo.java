@@ -35,7 +35,8 @@ public class FarmVo {
   private String farmEnddate;
   private List<String> cropsNo;
   private List<CropsVo> cropsVo;
-
+  private List<String> labels;
+  
   public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate) {
     super();
   }
@@ -209,6 +210,19 @@ public class FarmVo {
   public void setCropsNo(List<String> cropsNo) {
     this.cropsNo = cropsNo;
   }
+
+  
+  public List<String> getLabels() {
+    return labels;
+  }
+
+
+
+  public void setLabels(List<String> labels) {
+    this.labels = labels;
+  }
+
+
 
   @Override
   public String toString() {

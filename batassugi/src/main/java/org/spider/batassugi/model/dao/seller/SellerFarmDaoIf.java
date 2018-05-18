@@ -76,4 +76,6 @@ public interface SellerFarmDaoIf {
 
   public String getNow_Date();
 
+  public List<String> findLabels(int farmNo);
+
 }

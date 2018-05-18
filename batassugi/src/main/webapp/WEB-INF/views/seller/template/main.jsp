@@ -4,7 +4,7 @@
 <div class="container">
    <div class="row">
       <div class="col-xs-12">
-         <c:forEach items="${farmList}" var="farmVo">
+         <c:forEach items="${farmList}" var="farmVo" varStatus="i">
          <div class="col-xs-3">
             <div class="thumbnail rent">
                <img src="${pageContext.request.contextPath}/resources/img/대여신청_밭사진1.png" class="img-responsive">
@@ -19,6 +19,24 @@
                      	${crops.cropsName}
                      </c:forEach>
                   </p>
+                  <div>
+                    <h4>
+                      <c:if test="${farmVo.labels.size()==0 }">
+                      	<span class="label label-danger">미사용</span>
+                      </c:if>
+	                  <c:forEach items="${farmVo.labels}" var="label">
+	                  	<c:choose>
+	                  	  <c:when test="${label=='승인'}">
+	                  	  	<span class="label label-success">대여중</span>
+	                  	  </c:when>
+	                  	  <c:otherwise>
+	                  	  	<span class="label label-warning">모집중</span>	                  	  
+	                  	  </c:otherwise>
+	                  	  	
+	                  	</c:choose>
+	                  </c:forEach>
+	                </h4>
+                  </div>
                   <button class="btn btn-primary btn-block detailFarm" value="${farmVo.farmNo}">상세보기</button>
                </div> <%-- caption --%>
             </div> <%-- thumbnail --%>
@@ -29,3 +47,4 @@
 </div> <%-- container --%>
    <script src="${pageContext.request.contextPath}/resources/js/spider.js"></script>
 </body>
+

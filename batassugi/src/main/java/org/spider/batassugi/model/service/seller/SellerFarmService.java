@@ -58,7 +58,11 @@ public class SellerFarmService implements SellerFarmServiceIf {
     for (int i = 0; i < farmList.size(); i++) {
       List<CropsVo> cropsList = sellerFarmDao.findAvailableCropsList(farmList.get(i).getFarmNo()); 
       farmList.get(i).setCropsVo(cropsList);
+      List<String> labels = sellerFarmDao.findLabels(farmList.get(i).getFarmNo());
+      farmList.get(i).setLabels(labels);
+      System.out.println(labels);
     }
+    
     return farmList;
   }
 

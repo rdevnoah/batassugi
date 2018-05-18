@@ -61,6 +61,7 @@ public class SellerController {
     HttpSession session = request.getSession(false);
     MemberVo vo = (MemberVo)session.getAttribute("mvo");
     model.addAttribute("farmList", sellerFarmService.findSellerFarmList(vo.getId()));
+    
     return "seller.tiles";
   }
   

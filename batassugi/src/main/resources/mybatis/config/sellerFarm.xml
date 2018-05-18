@@ -31,6 +31,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select m.nickname as id, r.rent_size as rentSize from spider_member m, rent r, recruit c
     where r.id=m.id and c.recruit_no=r.recruit_no and c.farm_no=#{farmNo}
   </select>
+  
+  <select id="findLabels" parameterType="int" resultType="string">
+    select distinct recruit_status from recruit where farm_no=#{farmNo} union all select distinct r.rent_status 
+	from rent r, recruit c, farm f 
+	where r.recruit_no=c.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo}
+  </select>
 </mapper>
  
  
