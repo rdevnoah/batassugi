@@ -37,6 +37,13 @@ public class RecruitVo {
   private List<RentVo> rentVo;
   private int maxRentMonth; // recruit와 farm 이 조인 farm 테이블의 enddate 와 sysdate를 차이를 달로 계산해서 저장하고 있는다.
 
+  
+  
+  public RecruitVo() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
+
   /**
    * 전체 데이터 모두 포함(maxRentMonth)한 생성자입니다. 주로 구매자의 대여신청 페이지에서 사용하게 될 생성자입니다.
    * @param recruitNo 모집번호입니다.

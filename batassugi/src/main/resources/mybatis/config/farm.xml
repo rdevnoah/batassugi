@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       insert into
       farm(farm_no,id,farm_size,farm_address,farm_startdate,farm_enddate)
       values(#{farmNo},#{memberInfoVo.id},#{farmSize},#{farmAddress},#{farmStartdate},#{farmEnddate})
-      </insert>
+    </insert>
 
 <!-- 해당밭에 재배가능작물을 테이블에 넣는다. -->
     <insert id="avaliableCrops" parameterType="map">

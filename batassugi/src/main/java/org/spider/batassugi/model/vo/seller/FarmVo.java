@@ -40,6 +40,31 @@ public class FarmVo {
     super();
   }
   
+  
+  
+  /**
+   * 생성자 오버로딩.
+   * @param farmNo 농지번호.
+   * @param memberInfoVo 멤버정보.
+   * @param farmSize 농지크기.
+   * @param farmAddress 농지주소.
+   * @param farmStartdate 농지 등록일.
+   * @param farmEnddate 농지 등록 마감일.
+   */
+  public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
+      String farmStartdate, String farmEnddate) {
+    super();
+    this.farmNo = farmNo;
+    this.memberInfoVo = memberInfoVo;
+    this.farmSize = farmSize;
+    this.farmAddress = farmAddress;
+    this.farmStartdate = farmStartdate;
+    this.farmEnddate = farmEnddate;
+  }
+
+
+
+
   /**
    * 농지정보 및 농작물 정보를 가져오는 생성자.
    * 

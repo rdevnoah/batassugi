@@ -16,7 +16,7 @@
 			<a href="${pageContext.request.contextPath}/seller_myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
 		</li>
 		<li>
-		<a href="${pageContext.request.contextPath}/registerFarmView"> <i class="glyphicon glyphicon-leaf"></i>농지등록</a>
+		<a href="registerFarmForm"> <i class="glyphicon glyphicon-leaf"></i>농지등록</a>
 			<ul class="collapse list-unstyled" id="homeSubmenu">
 				<li><a href="#">Home 1</a></li>
 				<li><a href="#">Home 2</a></li>

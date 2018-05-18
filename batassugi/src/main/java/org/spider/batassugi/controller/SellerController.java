@@ -1,6 +1,5 @@
 package org.spider.batassugi.controller;
 
-
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +9,7 @@ import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
+import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +69,7 @@ public class SellerController {
    * @param request
    * @return
    */
-  @RequestMapping(method = RequestMethod.POST, value = "farm_register")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "farm_register")
   public String farmRegister(FarmVo fvo, HttpServletRequest request) {
     HttpSession session = request.getSession();
     MemberVo mvo = (MemberVo) session.getAttribute("mvo");
@@ -83,8 +83,11 @@ public class SellerController {
       return "farmRegister_error";
     }
   }
-
-
+ 
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerFarmForm")
+  public String registerFarmForm() {
+    return "seller/farmRegister.tiles";
+  }
   
   
   /**
@@ -112,11 +115,20 @@ public class SellerController {
    * @param farmNo 농지 번호.
    * @return
    */
-  @RequestMapping(method = RequestMethod.POST, value = "registerRecruitForm")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruitForm")
   public String registerRecruitForm(Model model,String farmNo) {
     Map<String,Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
     model.addAttribute("recruitMap", map);
-    return "infoTemplates/registerRecruit";
+    return "seller/registerRecruit.tiles";
+  }
+  
+  
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruit")
+  public String registerRecruit(RecruitVo vo, int farmNo) {
+    vo.setFarmVo(new FarmVo(farmNo, null, 0, null, null, null));
+    System.out.println(vo);
+    recruitService.registerRecruit(vo);
+    return "seller_home";
   }
   
   

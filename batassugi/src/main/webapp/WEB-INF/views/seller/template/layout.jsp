@@ -12,13 +12,28 @@
 <title><tiles:insertAttribute name="seller_title" ignore="true" /></title>
 <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
 
 <%-- Favicon --%>
 <%-- <link href="${pageContext.request.contextPath}/resources/favicon.ico" rel="shortcut icon" type="image/x-icon"> --%>
 
 <!-- Our Custom CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/seller.css" rel="stylesheet">
+
+<%-- Bootstrap-dialog --%>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css" rel="stylesheet">
+<%-- Animate --%>
+<link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
+
+
+<%-- Jquery v3.3.1 --%>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
+<%-- Bootstrap v3.3.7 --%>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+<%-- Bootstrap-dialog --%>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
+<%-- Parallax --%>
+<script src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
+
 
 </head>
 <body>
@@ -34,6 +49,10 @@
 		<tiles:insertAttribute name="seller_left" />
 		
 		<div id="content">
+		
+		
+					
+			
 			<%-- 헤더 --%>
 			<tiles:insertAttribute name="seller_header" />
 			<%-- 본문 --%>

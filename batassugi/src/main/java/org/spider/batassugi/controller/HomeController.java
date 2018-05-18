@@ -57,7 +57,7 @@ public class HomeController {
    */
   @RequestMapping("{dirName}/{viewName}")
   public String showView(@PathVariable String dirName, @PathVariable String viewName) {
-    // System.out.println("여기들어왔다.");
+     System.out.println("여기들어왔다.");
     return dirName + "/" + viewName + ".tiles";
   }
 
