@@ -25,6 +25,7 @@ import org.springframework.stereotype.Repository;
  * 2018. 5. 18.  "SM HyeonGil Kim"    findReplyListByTradeNo(int tradeNo), 
  *                                                    createReply(TradeCommentVo tcvo) 추가
  *                                                    findReplyByReplyNo(int replyNo) 추가
+ * 2018. 5. 19.  "SM HyeonGil Kim"    deleteReplyByTradNo(int tradeNo) 추가
  * </pre>
  */
 
@@ -44,8 +45,13 @@ public class TradePostCommentDao implements TradePostCommentDaoIf {
   }
 
   @Override
-  public String findRegdateByReplyNo(Integer replyNo) {
+  public String findRegdateByReplyNo(int replyNo) {
     return template.selectOne("comment.findRegdateByReplyNo", replyNo);
+  }
+
+  @Override
+  public void deleteReplyByTradNo(int tradeNo) {
+    template.delete("comment.deleteReplyByTradNo", tradeNo);
   }
   
 }

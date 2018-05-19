@@ -21,6 +21,8 @@ import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
  * 2018. 5. 18.  "SM HyeonGil Kim"    findReplyListByTradeNo(int tradeNo), 
  *                                                    createReply(TradeCommentVo tcvo) 추가
  *                                                    findRegdateByReplyNo(int replyNo) 추가
+ * 2018. 5. 19.  "SM HyeonGil Kim"    deleteReplyByTradNo(int tradeNo) 추가
+ *                                             
  * </pre>
  */
 
@@ -49,5 +51,13 @@ public interface TradePostCommentDaoIf {
    * @param replyNo 댓글 번호
    * @return
    */
-  public String findRegdateByReplyNo(Integer replyNo);
+  public String findRegdateByReplyNo(int replyNo);
+  
+  /**
+   * 게시글 삭제시 댓글도 같이 삭제.
+   * 
+   * @author "SM HyeonGil Kim"
+   * @param tradeNo 게시글 번호.
+   */
+  public void deleteReplyByTradNo(int tradeNo);
 }

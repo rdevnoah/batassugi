@@ -26,5 +26,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       </selectKey>
        insert into trade_reply(reply_no, id, trade_no, reply_comment) values(#{replyNo}, #{memberVo.id}, #{tradeNo}, #{replyComment})
    </insert>
+   
+   <delete id="deleteReplyByTradNo" parameterType="int"> <!-- 게시판 글 삭제시 댓글도 같이 삭제 -->
+      delete TRADE_REPLY where trade_no=#{value}
+   </delete>
 </mapper>
 

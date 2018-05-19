@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 import javax.annotation.Resource;
+import org.spider.batassugi.model.dao.buyer.TradePostCommentDaoIf;
 import org.spider.batassugi.model.dao.buyer.TradePostDaoIf;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
@@ -39,6 +40,8 @@ public class TradeService implements TradeServiceIf {
 
   @Resource
   private TradePostDaoIf tradePostDao;
+  @Resource
+  private TradePostCommentDaoIf tradePostCommentDao;
 
   @Override
   public TradePostListVo findTradePostList(String pageNum) {
@@ -59,6 +62,7 @@ public class TradeService implements TradeServiceIf {
   
   @Override
   public void deleteTradePostByNo(int no) {
+    tradePostCommentDao.deleteReplyByTradNo(no);
     tradePostDao.deleteTradePostByNo(no);
   }
 

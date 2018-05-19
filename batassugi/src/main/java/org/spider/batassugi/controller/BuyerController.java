@@ -289,7 +289,6 @@ public class BuyerController {
   public String hitdetailViewCheck(TradePostVo tvo, Model model) {
     tradeService.updateHitsTradePost(tvo);
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
-    model.addAttribute("list", findReplyListByTradeNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
   
@@ -304,7 +303,6 @@ public class BuyerController {
   @RequestMapping("/nohit")
   public String noHitdetailViewCheck(TradePostVo tvo, Model model) {
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
-    model.addAttribute("list", findReplyListByTradeNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
   
@@ -315,6 +313,8 @@ public class BuyerController {
    * @param tradeNo 게시판 번호.
    * @return list
    */
+  @RequestMapping("commentList")
+  @ResponseBody
   public List<TradeCommentVo> findReplyListByTradeNo(int tradeNo) {
     List<TradeCommentVo> list = tradeCommentService.findReplyListByTradeNo(tradeNo);
     return list;

@@ -29,17 +29,9 @@
 			</table><%-- table table-hover --%>
 			<%-- 댓글 영역 --%>
 			<div>
-			<table class="table table-hover">
-				<c:forEach items="${list}" var="list">
-				<tr>
-					<td colspan="1" >${list.memberVo.nickname} (${list.replyRegdate})</td>
-					<td colspan="4">${list.replyComment}</td>
-				</tr>
-				</c:forEach>
-				<tr id=listReply>
-				<tr>
-			</table>
-			</div>			
+				<table class="table table-hover" id=listReply>
+				</table>
+			</div>
 			<div class ="text-center ">
 				<c:if test="${sessionScope.mvo.memberVo.nickname != null}">    
 				<textarea rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
@@ -62,6 +54,7 @@
 <%-- container-fluid --%>
 <script type="text/javascript">
     $(document).ready(function(){
+    	listReply2();
     	$("#listBtn").click(function() {
     		location.href="${pageContext.request.contextPath}/tradePost";
     	});
@@ -91,7 +84,6 @@
     	
   	 	$("#btnReply").click(function(){
   	 		var userNickname = "${ sessionScope.mvo.memberVo.nickname}"
-  	 		alert(userNickname)
             var replyComment=$("#replytext").val();
             var tradeNo="${requestScope.tvo.tradeNo}";
             var param="replyComment="+replyComment+"&tradeNo="+tradeNo +"&memberVo.nickname="+userNickname;
@@ -101,13 +93,28 @@
                 data: param,
                 success: function(data){
                     alert("댓글이 등록되었습니다.");
-                    var output = "<td>"+data.memberVo.nickname +" ("+ data.replyRegdate +")"+"</td>" +"<td>"+ data.replyComment+"</td>";
-                    $("#listReply").html(output);
-                    $("#replytext").val("");
+                    listReply2();
+ 	                $("#replytext").val("");
                 },   error:function(request,status,error){
                     BootstrapDialog.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             });
         });
+  	 	function listReply2(){
+  	 	    $.ajax({
+  	 	        type: "get",
+  	 	        url: "${pageContext.request.contextPath}/commentList?tradeNo=${requestScope.tvo.tradeNo}",
+  	 	        success: function(result){
+  	 	      	  var output = "<tr>";
+  	 	            for(var i in result){
+  	 	                output += "<td colspan='1'>"+result[i].memberVo.nickname;
+  	 	                output += " ("+ result[i].replyRegdate +")</td>";
+  	 	                output += "<td colspan='4'>"+ result[i].replyComment+"</td>";
+	 	                output += "<tr>";
+  	 	            }
+  	 	            $("#listReply").html(output);
+  	 	        }
+  	 	    });
+  	 	}
 }); //  $(document).ready(function(){}
 </script>
