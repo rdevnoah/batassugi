@@ -45,4 +45,8 @@ public interface RecruitServiceIf {
    * @return
    */
   public Map<String, Object> findRentSizeAndFarmNoAndCropsAndMaxMonth(String farmNo);
+
+  public void updateRentStatusConfirm(String[] rentNo);
+  
+  public void updateRentStatusReject(String[] rentNo);
 }

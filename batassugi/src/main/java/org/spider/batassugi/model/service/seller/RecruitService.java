@@ -63,4 +63,19 @@ public class RecruitService implements RecruitServiceIf {
     map.put("maxMonth", recruitDao.findMaxMonth(farmNo));
     return map;
   }
+
+  @Override
+  public void updateRentStatusConfirm(String[] rentNo) {
+    for (int i=0 ; i< rentNo.length ; i++) {
+      recruitDao.updateRentStatusConfirm(rentNo[i]);
+    }
+  }
+
+  @Override
+  public void updateRentStatusReject(String[] rentNo) {
+    for (int i=0 ; i<rentNo.length ; i++) {
+      recruitDao.updateRentStatusReject(rentNo[i]);
+    }
+    
+  }
 }

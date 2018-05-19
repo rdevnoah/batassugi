@@ -81,6 +81,9 @@
 		
 		
 		
+		
+		
+		
 		var $detailFarm = $('.detailFarm');
 		$detailFarm.on('click', function() {
 			//alert($(this).val());

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
+import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Repository;
 
@@ -80,6 +81,16 @@ public class SellerFarmDao implements SellerFarmDaoIf {
   @Override
   public List<String> findLabels(int farmNo) {
     return template.selectList("sellerFarm.findLabels",farmNo);
+  }
+
+  @Override
+  public int getTotalRentListByFarmNo(String farmNo) {
+    return template.selectOne("sellerFarm.getTotalRentListByFarmNo", farmNo);
+  }
+
+  @Override
+  public List<RentVo> findRentPagingList(Map<String, Object> map) {
+    return template.selectList("sellerFarm.findRentPagingList", map);
   }
 
 

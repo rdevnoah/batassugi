@@ -44,6 +44,18 @@ public class RecruitDao implements RecruitDaoIf {
   public String findMaxMonth(String farmNo) {
     return template.selectOne("recruit.findMaxRecruitMonth",farmNo);
   }
+
+  @Override
+  public void updateRentStatusConfirm(String rentNo) {
+    template.update("updateRentStatusConfirm", rentNo);
+    
+  }
+
+  @Override
+  public void updateRentStatusReject(String rentNo) {
+    template.update("updateRentStatusReject", rentNo);
+    
+  }
   
 }
 

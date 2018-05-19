@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
+import org.spider.batassugi.model.vo.seller.ListVo;
 
 
 /**
@@ -41,6 +42,8 @@ public interface SellerFarmServiceIf {
   public List<CropsVo> getCropsData();
 
   public String getNow_Date();
+
+  public ListVo findRecruitListByFarmNo(String farmNo, String nowPage);
 
   
 

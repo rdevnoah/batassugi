@@ -11,6 +11,7 @@ import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
+import org.spider.batassugi.model.vo.seller.ListVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -129,8 +130,18 @@ public class SellerController {
     return "seller/registerRecruit.tiles";
   }
   
+  /**
+   * 농지의 세부정보에서 현재 농지에 대여나 모집을 신청한 회원을 확인하는 Controller.
+   * @author "PM KimYoungHo"
+   * @param model Model 객체
+   * @param farmNo 농지 번호.
+   * @return
+   */
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "recruitList")
-  public String recruitListView(Model model, String farmNo) {
+  public String recruitListView(Model model, String farmNo, String nowPage) {
+    ListVo listVo = sellerFarmService.findRecruitListByFarmNo(farmNo, nowPage);
+    model.addAttribute("pagingList", listVo);
+    model.addAttribute("farmNo", farmNo);
     return "seller/recruit_List.tiles";
   }
   
@@ -142,6 +153,19 @@ public class SellerController {
     return "redirect:seller_Home";
   }
   
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "updateRentStatusConfirm")
+  public String updateRentStatusConform(Model model, String[] rentNo, String farmNo) {
+    recruitService.updateRentStatusConfirm(rentNo);
+    
+    return "redirect:recruitList?farmNo="+farmNo;
+  }
+  
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "updateRentStatusReject")
+  public String updateRentStatusReject(Model model, String[] rentNo, String farmNo) {
+    recruitService.updateRentStatusReject(rentNo);
+    
+    return "redirect:recruitList?farmNo="+farmNo;
+  }
   
   /**
    * 판매자가 자신이 선택한 농지의 상세정보를 Modal로 확인하기 위해

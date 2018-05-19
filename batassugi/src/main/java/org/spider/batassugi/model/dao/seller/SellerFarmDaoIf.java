@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
+import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 
 
@@ -77,5 +78,9 @@ public interface SellerFarmDaoIf {
   public String getNow_Date();
 
   public List<String> findLabels(int farmNo);
+
+  public int getTotalRentListByFarmNo(String farmNo);
+
+  public List<RentVo> findRentPagingList(Map<String, Object> map);
 
 }

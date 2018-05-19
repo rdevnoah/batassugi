@@ -29,9 +29,9 @@
 	                  	  <c:when test="${label=='승인'}">
 	                  	  	<span class="label label-success">대여중</span>
 	                  	  </c:when>
-	                  	  <c:otherwise>
+	                  	  <c:when test="${label=='모집중'}">
 	                  	  	<span class="label label-warning">모집중</span>	                  	  
-	                  	  </c:otherwise>
+	                  	  </c:when>
 	                  	  	
 	                  	</c:choose>
 	                  </c:forEach>

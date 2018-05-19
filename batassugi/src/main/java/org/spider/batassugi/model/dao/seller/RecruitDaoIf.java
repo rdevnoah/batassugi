@@ -45,4 +45,8 @@ public interface RecruitDaoIf {
    */
   String findMaxMonth(String farmNo);
 
+  void updateRentStatusConfirm(String rentNo);
+  
+  void updateRentStatusReject(String rentNo);
+
 }

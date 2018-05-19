@@ -6,7 +6,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.vo.common.CropsVo;
+import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.FarmVo;
+import org.spider.batassugi.model.vo.seller.ListVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -60,6 +62,7 @@ public class SellerFarmService implements SellerFarmServiceIf {
       farmList.get(i).setCropsVo(cropsList);
       List<String> labels = sellerFarmDao.findLabels(farmList.get(i).getFarmNo());
       farmList.get(i).setLabels(labels);
+      System.out.println(labels);
     }
     return farmList;
   }
@@ -78,6 +81,9 @@ public class SellerFarmService implements SellerFarmServiceIf {
     vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
     map.put("farmVo", vo);
     map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
+    
+   // findRentRecruitFarmSize(String farmNo);
+    
     return map;
     
   }
@@ -91,6 +97,25 @@ public class SellerFarmService implements SellerFarmServiceIf {
   @Override
   public String getNow_Date() {
     return sellerFarmDao.getNow_Date();
+    
+  }
+
+  @Override
+  public ListVo findRecruitListByFarmNo(String farmNo, String nowPage) {
+    ListVo listVo = new ListVo();
+    int totalCount = sellerFarmDao.getTotalRentListByFarmNo(farmNo);
+    if (nowPage == null) {
+      listVo.setPb(new PagingBean(totalCount));
+    } else {
+      listVo.setPb(new PagingBean(Integer.parseInt(nowPage), totalCount));
+    }
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("farmNo", farmNo);
+    map.put("pagingBean", listVo.getPb());
+   
+    listVo.setRentList(sellerFarmDao.findRentPagingList(map));
+    
+    return listVo;
     
   }
 

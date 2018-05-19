@@ -1,13 +1,15 @@
 package org.spider.batassugi.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
-import org.spider.batassugi.model.vo.common.CropsVo;
-import org.spider.batassugi.model.vo.seller.FarmVo;
+import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -27,7 +29,7 @@ public class SellerFarmServiceTest {
 //    for (int i=0 ; i<list.size() ; i++) {
 //      System.out.println(list.get(i));
 //    }
-    System.out.println(sellerFarmDao.findAvailableCropsList(1));
+//    System.out.println(sellerFarmDao.findAvailableCropsList(1));
 //    for (int i=0 ; i<list.size() ; i++) {
 //      listCrops = sellerFarmDao.findAvailableCropsList(list.get(i).getFarmNo());
 //      //list.get(i).setCropsVo(listCrops);
@@ -45,6 +47,10 @@ public class SellerFarmServiceTest {
 //    System.out.println(map.get("farmVo"));
 //    System.out.println(map.get("rentList"));
 //    //System.out.println(sellerFarmDao.findRentByFarmNo("1"));
-    
+    Map<String, Object> map = new HashMap<String,Object>();
+    map.put("farmNo", "1");
+    map.put("pagingBean", new PagingBean(sellerFarmDao.getTotalRentListByFarmNo("1")));
+    List<RentVo> list = sellerFarmDao.findRentPagingList(map);
+    System.out.println(list);
   }
 }

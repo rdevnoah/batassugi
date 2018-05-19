@@ -22,6 +22,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select ROUND(MONTHS_BETWEEN(farm_enddate,sysdate)) AS maxRentMonth from farm
     where farm_no=#{farmNo}
   </select>
+  
+  <update id="updateRentStatusConfirm" parameterType="string">
+  	update rent set rent_Status='승인' where rent_no=#{rentNo} 
+  </update>
+  
+  <update id="updateRentStatusReject" parameterType="string">
+  	update rent set rent_Status='거절' where rent_no=#{rentNo} 
+  </update>
 </mapper>
  <!--
  CREATE TABLE recruit
