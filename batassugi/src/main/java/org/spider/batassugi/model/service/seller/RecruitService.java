@@ -1,7 +1,11 @@
 package org.spider.batassugi.model.service.seller;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.seller.RecruitDaoIf;
+import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
+import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +33,49 @@ public class RecruitService implements RecruitServiceIf {
   @Resource
   private RecruitDaoIf recruitDao;
   
-  /**
-   * 판매자가 농지의 대여인을 모집하는 글을 등록하는 메소드.
-   * @author "PM KimYoungHo"
-   * @param vo 모집에 필요한 데이터를 받는 매개변수
-   */
+  @Resource
+  private SellerFarmDaoIf sellerFarmDao;
+  
   @Override
   public void registerRecruit(RecruitVo vo) {
     recruitDao.registerRecruit(vo);
+  }
+
+  @Override
+  public String findRestFarmSizeByFarmNo(String farmNo) {
+    return recruitDao.findRestFarmSizeByFarmNo(farmNo);
+  }
+
+  @Override
+  public Map<String, Object> findRentSizeAndFarmNoAndCropsAndMaxMonth(String farmNo) {
+    Map<String, Object> map = new HashMap<String,Object>();
+    map.put("farmNo", farmNo);
+    map.put("rentSize", recruitDao.findRestFarmSizeByFarmNo(farmNo));
+    
+    Map<String,Object> map2 = new HashMap<String, Object>();
+    FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
+    vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
+    map2.put("farmVo", vo);
+    map2.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
+    
+    map.put("farmVo", map2);
+    
+    map.put("maxMonth", recruitDao.findMaxMonth(farmNo));
+    return map;
+  }
+
+  @Override
+  public void updateRentStatusConfirm(String[] rentNo) {
+    for (int i=0 ; i< rentNo.length ; i++) {
+      recruitDao.updateRentStatusConfirm(rentNo[i]);
+    }
+  }
+
+  @Override
+  public void updateRentStatusReject(String[] rentNo) {
+    for (int i=0 ; i<rentNo.length ; i++) {
+      recruitDao.updateRentStatusReject(rentNo[i]);
+    }
+    
   }
 }

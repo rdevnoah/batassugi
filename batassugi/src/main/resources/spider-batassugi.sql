@@ -308,7 +308,7 @@ insert into spider_member values('Tottenham21','토비 알데르베이럴트','1
 insert into spider_member values('Tottenham22','크리스챤 에릭슨','1234','토튼햄22','초급',23);
 insert into spider_member values('Tottenham23','세르주 오리어','1234','토튼햄23','초급',24);
 insert into spider_member values('Tottenham24','빅토르 완야마','1234','토튼햄24','초급',25);
-insert into spider_member values('Tottenham25','페르난도 요렌테 토레스','1234','토튼햄25','초급',26);
+insert into spider_member values('Tottenham25','페르난도 토레스','1234','토튼햄25','초급',26);
 insert into spider_member values('Tottenham26','헤리 케인','1234','토튼햄26','초급',27);
 insert into spider_member values('Tottenham27','키어란 트리피어','1234','토튼햄27','초급',28);
 insert into spider_member values('Tottenham28','루카스 호드리게스','1234','토튼햄28','초급',29);
@@ -346,7 +346,6 @@ insert into MEMBER_INFO values('Tottenham28','Tottenham28@kosta.com','잉글랜�
 
 -- 판매자 레벨 변경 테스트
 update  SPIDER_MEMBER set member_level='판매자' where id='Tottenham26';
-
 
 
 -- 교환 게시판 테이블
@@ -434,12 +433,15 @@ CREATE TABLE rent
     id             VARCHAR2(50)    NOT NULL, 
     recruit_no     NUMBER          NOT NULL, 
     rent_size      NUMBER          NOT NULL, 
-    rent_month     NUMBER          NOT NULL, 
-    rent_status    VARCHAR2(50)    DEFAULT '미처리' NOT NULL, 
+    rent_month     NUMBER          NOT NULL,
+    rent_status    VARCHAR2(50)    DEFAULT '대기' NOT NULL, 
     CONSTRAINT RENT_PK PRIMARY KEY (rent_no),
     CONSTRAINT FK_rent_recruit_no_recruit_rec FOREIGN KEY (recruit_no) REFERENCES recruit (recruit_no),
     CONSTRAINT FK_rent_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+
+--startdate 칼럼 추가
+ alter table rent add rent_startdate date default sysdate;
 
 CREATE SEQUENCE rent_SEQ nocache;
 

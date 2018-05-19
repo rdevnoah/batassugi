@@ -32,6 +32,22 @@
  	</definition>
  	
  	
+
+ 	<!-- 판매자 메인 -->
+ 	<definition name="seller.tiles" template="/WEB-INF/views/seller/template/layout.jsp">
+ 		<put-attribute name="seller_title" value="spider_seller" />
+ 		<put-attribute name="seller_header" value="/WEB-INF/views/seller/template/header.jsp"/>
+ 		<put-attribute name="seller_left" value="/WEB-INF/views/seller/template/left.jsp"/>
+ 		<put-attribute name="seller_main" value="/WEB-INF/views/seller/template/main.jsp"/>
+ 	</definition>
+ 	
+ 	<definition name="seller/*.tiles"  extends="seller.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="seller_main"  value="/WEB-INF/views/seller/{1}.jsp"/>
+ 	</definition>
+ 	
+ 	
+
  	
 <!-- 공통메인 --> 	
  	<definition name="home.tiles" template="/WEB-INF/views/templates/layout.jsp">

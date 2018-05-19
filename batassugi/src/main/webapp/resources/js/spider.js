@@ -3,22 +3,20 @@
  */
 
 var $closeSide = $('#closeSide'),
-		$openSide = $('#openSide'),
-		$mySidenav = $('#mySidenav'),
-		$parallax = $('#parallax'),
-		$board = $('#board'),
-		$vcenterLi = $('.vcenter li');
-		$vcenterA = $('.vcenter a');
-	
-	$vcenterLi.on('mouseenter',function(){
-		$(this).addClass('animated pulse');
-	}).on('mouseleave',function(){
-		$(this).removeClass('animated pulse');
-	});
-	
-	$openSide.on('click',function(){
-		$mySidenav.css('width','15%');
-	});
+      $openSide = $('#openSide'),
+      $mySidenav = $('#mySidenav'),
+      $parallax = $('#parallax'),
+      $board = $('#board'),
+      $vcenterLi = $('.vcenter li'),
+      $vcenterA = $('.vcenter a'),
+      $like = $('.like a');
+   
+   // 좋아요
+   $like.on('click', function() {
+      var $like = $(this).parents('.like').find('i:first');
+      $like.attr('class',[$like.attr('class') == 'fa fa-heart-o fa-lg' ? 'fa fa-heart fa-lg' : 'fa fa-heart-o fa-lg'])
+   });   
+
 
 	$closeSide.on('click',function(){
 		$mySidenav.css('width','0%');
@@ -30,6 +28,17 @@ var $closeSide = $('#closeSide'),
 			$(this).addClass('choice')
 		}
 	});
+	
+   $vcenterLi.on('mouseenter',function(){
+	      $(this).addClass('animated pulse');
+	   }).on('mouseleave',function(){
+	      $(this).removeClass('animated pulse');
+	   });
+	   
+	   $openSide.on('click',function(){
+	      $mySidenav.css('width','15%');
+	   });
+
 	
 	$vcenterA.on('mouseenter', function() {
 		$(this).css('color','black')
@@ -53,3 +62,6 @@ var $closeSide = $('#closeSide'),
 		      $('body').append($f);
 		      $f.submit();
 		   } // sendPost(path, params)
+
+
+

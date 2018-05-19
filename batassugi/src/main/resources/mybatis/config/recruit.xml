@@ -6,8 +6,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="recruit">
   <insert id="registerRecruit" parameterType="recruitVo">
     insert into recruit 
-    values(recruit_seq.nextval, #{farmNo}, #{recruitKind}, sysdate, #{recruitEnddate}, #{price}, #{recruitContent}, #{recruitStatus}, #{recruitSize})
+    values(recruit_seq.nextval, #{farmVo.farmNo}, #{recruitKind}, 
+    sysdate, #{recruitEnddate}, #{price}, #{recruitContent}, '모집중', #{recruitSize})
   </insert>
+  
+  <select id="findRestFarmSizeByFarmNo" parameterType="string" resultType="string">
+    select (farm_size-(select coalesce(sum(r.rent_size),0) from rent r, recruit c, farm f 
+    where c.recruit_no=r.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo})-(
+    select coalesce(sum(recruit_size),0) from recruit where farm_no=#{farmNo}))
+    from farm
+    where farm_no=#{farmNo}
+  </select>
+  
+  <select id="findMaxRecruitMonth" parameterType="string" resultType="string">
+    select ROUND(MONTHS_BETWEEN(farm_enddate,sysdate)) AS maxRentMonth from farm
+    where farm_no=#{farmNo}
+  </select>
+  
+  <update id="updateRentStatusConfirm" parameterType="string">
+    update rent set rent_Status='승인', rent_startdate=sysdate where rent_no=#{rentNo} 
+  </update>
+  
+  <update id="updateRentStatusReject" parameterType="string">
+    update rent set rent_Status='거절' where rent_no=#{rentNo} 
+  </update>
 </mapper>
  <!--
  CREATE TABLE recruit

@@ -5,26 +5,28 @@ import org.spider.batassugi.model.vo.buyer.RentVo;
 
 /**
  * 모집정보를 처리해주는 VO입니다.
+ * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.model.vo.seller
  * @filename : RecruitVo.java
  * @author : "GL_SangKyoung"
  * @since : 2018. 5. 14.
  * @version : 1.0
- * @see 
+ * @see
  * 
- * <pre>
+ *      <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "GL_SangKyoung"    최초작성
  * 2018. 5. 15.  "PM KimYoungHo"    Integer 타입 전체 primitive 타입인 int형으로 변경완료. Date 타입은 String으로 변경
- * </pre>
+ * 2018. 5. 15.  "PM KimYoungHo"    모집 등록 시 최대 대여 기간을 농지 등록의 마감날짜와 현재날짜의 월 계산을 통해 저장하는 변수 추가
+ *      </pre>
  */
 public class RecruitVo {
   private int recruitNo;
-  private int farmNo;
+  private FarmVo farmVo;
   private String recruitKind;
   private String recruitStartdate;
   private String recruitEnddate;
@@ -33,33 +35,65 @@ public class RecruitVo {
   private String recruitStatus;
   private int recruitSize;
   private List<RentVo> rentVo;
+  private int maxRentMonth; // recruit와 farm 이 조인 farm 테이블의 enddate 와 sysdate를 차이를 달로 계산해서 저장하고 있는다.
 
+  
+  
   public RecruitVo() {
     super();
     // TODO Auto-generated constructor stub
   }
 
   /**
-   * 모집 정보를 가져오는 생성자.
-   * 
-   * @author "GL_SangKyoung"
-   * @param recruitNo   모집번호
-   * @param farmNo  농지번호
-   * @param recruitKind 농지종류(주말농장,일반)
-   * @param recruitStartdate    모집시작일
-   * @param recruitEnddate  모집종료일
-   * @param price   평당가격
-   * @param recruitContent  모집내용
-   * @param recruitStatus   모집상태
-   * @param recruitSize 대여평수 
-   * @param rentVo  대여정보 가져오기위한 rentVo
+   * 전체 데이터 모두 포함(maxRentMonth)한 생성자입니다. 주로 구매자의 대여신청 페이지에서 사용하게 될 생성자입니다.
+   * @param recruitNo 모집번호입니다.
+   * @param farmVo 모집하는 밭의 정보가 저장된 객체입니다.
+   * @param recruitKind 모집종류입니다.
+   * @param recruitStartdate 모집 시작일입니다. 
+   * @param recruitEnddate 모집 마감일입니다.
+   * @param price 평당 월 가격입니다.
+   * @param recruitContent 모집 내용입니다.
+   * @param recruitStatus 모집 상태입니다. 모집중인지, 모집완료인지를 표현합니다.
+   * @param recruitSize 모집하는 총 평수입니다.
+   * @param rentVo 대여를 신청한 구매자들의 rentVo의 List변수입니다.
+   * @param maxRentMonth 최대 대여 개월수를 저장합니다. 주로 구매자에서 사용합니다.
    */
-  public RecruitVo(int recruitNo, int farmNo, String recruitKind, String recruitStartdate,
+  public RecruitVo(int recruitNo, FarmVo farmVo, String recruitKind, String recruitStartdate,
+      String recruitEnddate, int price, String recruitContent, String recruitStatus,
+      int recruitSize, List<RentVo> rentVo, int maxRentMonth) {
+    super();
+    this.recruitNo = recruitNo;
+    this.farmVo = farmVo;
+    this.recruitKind = recruitKind;
+    this.recruitStartdate = recruitStartdate;
+    this.recruitEnddate = recruitEnddate;
+    this.price = price;
+    this.recruitContent = recruitContent;
+    this.recruitStatus = recruitStatus;
+    this.recruitSize = recruitSize;
+    this.rentVo = rentVo;
+    this.maxRentMonth = maxRentMonth;
+  }
+
+  /**
+   * maxRentMonth를 제외한 생성자입니다. 주로 판매자가 모집을 insert 할 때 사용합니다.
+   * @param recruitNo 모집번호입니다.
+   * @param farmVo 모집하는 밭의 정보가 저장된 객체입니다.
+   * @param recruitKind 모집종류입니다.
+   * @param recruitStartdate 모집 시작일입니다. 
+   * @param recruitEnddate 모집 마감일입니다.
+   * @param price 평당 월 가격입니다.
+   * @param recruitContent 모집 내용입니다.
+   * @param recruitStatus 모집 상태입니다. 모집중인지, 모집완료인지를 표현합니다.
+   * @param recruitSize 모집하는 총 평수입니다.
+   * @param rentVo 대여를 신청한 구매자들의 rentVo의 List변수입니다.
+   */
+  public RecruitVo(int recruitNo, FarmVo farmVo, String recruitKind, String recruitStartdate,
       String recruitEnddate, int price, String recruitContent, String recruitStatus,
       int recruitSize, List<RentVo> rentVo) {
     super();
     this.recruitNo = recruitNo;
-    this.farmNo = farmNo;
+    this.farmVo = farmVo;
     this.recruitKind = recruitKind;
     this.recruitStartdate = recruitStartdate;
     this.recruitEnddate = recruitEnddate;
@@ -69,33 +103,6 @@ public class RecruitVo {
     this.recruitSize = recruitSize;
     this.rentVo = rentVo;
   }
-  
-  /**
-   * recruitNo의 경우 시퀀스로 자동 생성되이에 그것을 제외한 인스턴스 변수를 초기화하는 생성자.
-   * @param farmNo .
-   * @param recruitKind .
-   * @param recruitStartdate .
-   * @param recruitEnddate .
-   * @param price .
-   * @param recruitContent .
-   * @param recruitStatus .
-   * @param recruitSize .
-   * @param rentVo .
-   */
-//  public RecruitVo(int farmNo, String recruitKind, String recruitStartdate, String recruitEnddate,
-//      int price, String recruitContent, String recruitStatus, int recruitSize,
-//      List<RentVo> rentVo) {
-//    super();
-//    this.farmNo = farmNo;
-//    this.recruitKind = recruitKind;
-//    this.recruitStartdate = recruitStartdate;
-//    this.recruitEnddate = recruitEnddate;
-//    this.price = price;
-//    this.recruitContent = recruitContent;
-//    this.recruitStatus = recruitStatus;
-//    this.recruitSize = recruitSize;
-//    this.rentVo = rentVo;
-//  }
 
   public int getRecruitNo() {
     return recruitNo;
@@ -105,12 +112,12 @@ public class RecruitVo {
     this.recruitNo = recruitNo;
   }
 
-  public int getFarmNo() {
-    return farmNo;
+  public FarmVo getFarmVo() {
+    return farmVo;
   }
 
-  public void setFarmNo(int farmNo) {
-    this.farmNo = farmNo;
+  public void setFarmVo(FarmVo farmVo) {
+    this.farmVo = farmVo;
   }
 
   public String getRecruitKind() {
@@ -169,7 +176,6 @@ public class RecruitVo {
     this.recruitSize = recruitSize;
   }
 
-
   public List<RentVo> getRentVo() {
     return rentVo;
   }
@@ -178,12 +184,22 @@ public class RecruitVo {
     this.rentVo = rentVo;
   }
 
+  public int getMaxRentMonth() {
+    return maxRentMonth;
+  }
+
+  public void setMaxRentMonth(int maxRentMonth) {
+    this.maxRentMonth = maxRentMonth;
+  }
+
   @Override
   public String toString() {
-    return "RecruitVo [recruitNo=" + recruitNo + ", farmNo=" + farmNo + ", recruitKind="
+    return "RecruitVo [recruitNo=" + recruitNo + ", farmVo=" + farmVo + ", recruitKind="
         + recruitKind + ", recruitStartdate=" + recruitStartdate + ", recruitEnddate="
         + recruitEnddate + ", price=" + price + ", recruitContent=" + recruitContent
         + ", recruitStatus=" + recruitStatus + ", recruitSize=" + recruitSize + ", rentVo=" + rentVo
-        + "]";
+        + ", maxRentMonth=" + maxRentMonth + "]";
   }
+
+
 }

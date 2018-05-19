@@ -22,11 +22,12 @@ package org.spider.batassugi.model.vo.buyer;
 
 public class RentVo {
 
-  private Integer rentNo;
-  private Integer cropsNo;
+  private int rentNo;
+  private int cropsNo;
+  private String rentStartdate;
   private String id;
-  private Integer rentSize;
-  private Integer rentMonth;
+  private int rentSize;
+  private int rentMonth;
   private String rentStatus;
 
   public RentVo() {
@@ -44,7 +45,7 @@ public class RentVo {
    * @param rentMonth 대여 개월.
    * @param rentStatus 대여 상태.
    */
-  public RentVo(Integer rentNo, Integer cropsNo, String id, Integer rentSize, Integer rentMonth,
+  public RentVo(int rentNo, int cropsNo, String id, int rentSize, int rentMonth,
       String rentStatus) {
     super();
     this.rentNo = rentNo;
@@ -55,19 +56,33 @@ public class RentVo {
     this.rentStatus = rentStatus;
   }
   
-  public Integer getRentNo() {
+  
+  
+  public RentVo(int rentNo, int cropsNo, String rentStartdate, String id, int rentSize,
+      int rentMonth, String rentStatus) {
+    super();
+    this.rentNo = rentNo;
+    this.cropsNo = cropsNo;
+    this.rentStartdate = rentStartdate;
+    this.id = id;
+    this.rentSize = rentSize;
+    this.rentMonth = rentMonth;
+    this.rentStatus = rentStatus;
+  }
+
+  public int getRentNo() {
     return rentNo;
   }
 
-  public void setRentNo(Integer rentNo) {
+  public void setRentNo(int rentNo) {
     this.rentNo = rentNo;
   }
 
-  public Integer getCropsNo() {
+  public int getCropsNo() {
     return cropsNo;
   }
 
-  public void setCropsNo(Integer cropsNo) {
+  public void setCropsNo(int cropsNo) {
     this.cropsNo = cropsNo;
   }
 
@@ -79,19 +94,19 @@ public class RentVo {
     this.id = id;
   }
 
-  public Integer getRentSize() {
+  public int getRentSize() {
     return rentSize;
   }
 
-  public void setRentSize(Integer rentSize) {
+  public void setRentSize(int rentSize) {
     this.rentSize = rentSize;
   }
 
-  public Integer getRentMonth() {
+  public int getRentMonth() {
     return rentMonth;
   }
 
-  public void setRentMonth(Integer rentMonth) {
+  public void setRentMonth(int rentMonth) {
     this.rentMonth = rentMonth;
   }
 
@@ -103,11 +118,21 @@ public class RentVo {
     this.rentStatus = rentStatus;
   }
 
+  public String getRentStartdate() {
+    return rentStartdate;
+  }
+
+  public void setRentStartdate(String rentStartdate) {
+    this.rentStartdate = rentStartdate;
+  }
+
   @Override
   public String toString() {
-    return "RentVo [rentNo=" + rentNo + ", cropsNo=" + cropsNo + ", id=" + id + ", rentSize="
-        + rentSize + ", rentMonth=" + rentMonth + ", rentStatus=" + rentStatus + "]";
+    return "RentVo [rentNo=" + rentNo + ", cropsNo=" + cropsNo + ", rentStartdate=" + rentStartdate
+        + ", id=" + id + ", rentSize=" + rentSize + ", rentMonth=" + rentMonth + ", rentStatus="
+        + rentStatus + "]";
   }
+
 
 
 

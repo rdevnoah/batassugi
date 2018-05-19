@@ -25,6 +25,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class SellerScheduleDao {
-	@Resource
-	private SqlSessionTemplate template;
+  
+  @Resource
+  private SqlSessionTemplate template;
 }
