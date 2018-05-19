@@ -1,7 +1,6 @@
 package org.spider.batassugi.model.vo.buyer;
 
 import java.util.List;
-import org.spider.batassugi.model.vo.common.PagingBean;
 
 public class TradePostListVo {
   private BuyerPagingBean pagingBean;
