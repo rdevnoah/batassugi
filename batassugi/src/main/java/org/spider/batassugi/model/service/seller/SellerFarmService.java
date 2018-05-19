@@ -119,5 +119,28 @@ public class SellerFarmService implements SellerFarmServiceIf {
     
   }
 
+  @Override
+  public Object findBuyerDetailByRentNo(String rentNo) {
+    Map<String,String> map = sellerFarmDao.findBuyerDetailByRentNo(rentNo);
+    
+    int harvest = Integer.parseInt(String.valueOf(map.get("HARVESTSTATUS")));
+    map.remove("HARVESTSTATUS");
+
+    if (harvest < 25) {
+      harvest = 1;
+    } else if (harvest < 50) {
+      harvest = 2;
+    } else if (harvest < 75) {
+      harvest = 3;
+    } else {
+      harvest = 4;
+    }
+    
+    String harv = String.valueOf(harvest);
+    map.put("HARVESTSTATUS", harv);
+
+    return map;
+  }
+
   
 }

@@ -93,5 +93,10 @@ public class SellerFarmDao implements SellerFarmDaoIf {
     return template.selectList("sellerFarm.findRentPagingList", map);
   }
 
+  @Override
+  public Map<String, String> findBuyerDetailByRentNo(String rentNo) {
+    return template.selectOne("sellerFarm.findBuyerDetailByRentNo", rentNo);
+  }
+
 
 }

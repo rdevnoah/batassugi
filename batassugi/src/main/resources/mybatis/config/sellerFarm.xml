@@ -43,12 +43,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     from rent r, farm f, recruit rc
     where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo}
   </select>
+  
   <select id="findRentPagingList" parameterType="map" resultType="rentVo">
     select r.rent_no as rentNo, r.recruit_no as recruitNo, r.rent_size as rentSize, r.id, r.rent_month as rentMonth, 
     r.rent_status as rentStatus from (
     select row_number() over(order by rent_no desc) as rnum, rent_no, id, recruit_no, rent_size, rent_month, rent_status from rent
     )r, recruit rc, farm f where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo} and
     rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+  </select>
+  
+  <select id="findBuyerDetailByRentNo" parameterType="string" resultType="map">
+    select m.nickname as NICKNAME, mi.tel as TEL, 
+    to_char(ADD_MONTHS(r.rent_startdate,r.rent_month),'yyyy-mm-dd') as RENTENDDATE, c.crops_name as CROPSNAME, 
+    round(((sysdate-r.rent_startdate)/(30*r.rent_month))*100) as harvestStatus 
+    from spider_member m, member_info mi, rent r, crops c
+    where m.id=mi.id and r.id=m.id and c.crops_no=r.crops_no and r.rent_no=#{rentNo}
   </select>
 </mapper>
  

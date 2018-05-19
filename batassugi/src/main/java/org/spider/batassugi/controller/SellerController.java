@@ -180,4 +180,11 @@ public class SellerController {
   public Object findFarmDetail(String farmNo) {
     return sellerFarmService.findFarmDetail(farmNo);
   }
+  
+  @ResponseBody
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "findBuyerDetailByRentNo")
+  public Object findBuyerDetailByRentNo(String rentNo) {
+    return sellerFarmService.findBuyerDetailByRentNo(rentNo);
+  }
+  
 }

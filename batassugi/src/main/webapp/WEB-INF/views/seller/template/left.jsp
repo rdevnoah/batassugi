@@ -7,13 +7,11 @@
 	</div>
 
 	<ul class="list-unstyled components">
-		
 		<li>		
 			<a href="${pageContext.request.contextPath}/"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
 		</li>
-		
 		<li>		
-			<a href="${pageContext.request.contextPath}/seller_myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
+			<a href="#"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
 		</li>
 		<li>
 		<a href="registerFarmForm"> <i class="glyphicon glyphicon-leaf"></i>농지등록</a>

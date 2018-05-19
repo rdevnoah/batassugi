@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><tiles:insertAttribute name="seller_title" ignore="true" /></title>
 <%-- Bootstrap v3.3.7 --%>
+<%-- <link href="${pageContext.request.contextPath}/resources/css/bootstrap-ukyi.css" rel="stylesheet"> --%>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <%-- Bootstrap-dialog --%>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css" rel="stylesheet">
@@ -22,10 +23,6 @@
 <!-- Our Custom CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/seller.css" rel="stylesheet">
 
-
-
-
-
 <%-- Jquery v3.3.1 --%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
 <%-- Bootstrap v3.3.7 --%>
@@ -36,133 +33,37 @@
 <script src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
 <%-- Font-awesome v4.7.0 --%>
 <script src="https://use.fontawesome.com/a5d5d71388.js"></script>
-
+<!-- Bootstrap Js CDN -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
 </head>
 <body>
-	
-
-	<!-- jQuery CDN -->
-	<script src="https://code.jquery.com/jquery-1.12.0.min.js">
-	<!-- Bootstrap Js CDN -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
- 	<div class="wrapper">
+<div class="wrapper">
 		
 		<%-- 사이드바 --%>
 		<tiles:insertAttribute name="seller_left" />
 		
-		<div id="content">
-		
-		
-					
-			
-			<%-- 헤더 --%>
-			<tiles:insertAttribute name="seller_header" />
-			<%-- 본문 --%>
-       		<tiles:insertAttribute name="seller_main" />
-    	</div>
-	</div>
+	<div id="content">
+		<%-- 헤더 --%>
+		<tiles:insertAttribute name="seller_header" />
+		<%-- 본문 --%>
+	     <tiles:insertAttribute name="seller_main" />
+  	</div>
+</div>
 
 	
 	        <!-- jQuery CDN -->
-         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-         <!-- Bootstrap Js CDN -->
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-                  <script type="text/javascript">
-             $(document).ready(function () {
-                 $('#sidebarCollapse').on('click', function () {
-                     $('#sidebar').toggleClass('active');
-                     $(this).toggleClass('active');
-                 });
-             });
-         </script>
-		<script>
-	$(document).ready(function() {
-		
-		
-		
-		
-		
-		
-		var $detailFarm = $('.detailFarm');
-		$detailFarm.on('click', function() {
-			//alert($(this).val());
-			//alert($('.hidden').children("span:nth(0)").text());
-			var $farmNo=$(this).val();
-			var $data;
-			 $.ajax({
-				type : 'post',
-				url:'getDetailFarm',
-				data : 'farmNo='+$farmNo,
-				async : false,
-				success : function(data) {
-					//alert(data.farmVo.farmEnddate);
-					$data=data;		
-				}	
-			})
-			var $detailModal = new BootstrapDialog({
-				type : 'default',
-				title : '내 농지 정보',
-				body : 'asdfasdfasdfasdf',
-				buttons : [
-					{
-					label: '신청현황',
-					action : function(){
-						sendPost('recruitList',{
-							'farmNo' : $data.farmVo.farmNo
-						})
-					}
-						
-						
-					}
-					
-					
-					,{
-	                label: '대여모집',
-	                action : function() {
-	                	sendPost('registerRecruitForm', {
-	                		'farmNo' : $data.farmVo.farmNo
-	                	})
-					}
-	            },{
-	            	label:'주말농장모집',
-	            	action : function(){
-	            		
-	            	}
-	            },
-	            {
-	            	label: '닫기',
-	            	action: function(dialogRef) {
-						dialogRef.close();
-					}            	
-	            }],
-				closable : true,
-			})
-			$detailModal.realize();
-			//$detailModal.getModalHeader().parents().find(".modal-header").append("<hr>");
-			var $myModalBody=$detailModal.getModalBody().parents().find(".bootstrap-dialog-body");
-			var appendString='';
-			var crops='';
-			for (var i=0 ; i < $data.farmVo.cropsVo.length ; i++){
-				crops+=$data.farmVo.cropsVo[i].cropsName+' ';
-			}
-			appendString+="<div class='col-xs-5'>asdf";
-			appendString+="</div>";
-			appendString+="<div class='col-xs-7'>평수 : "+ $data.farmVo.farmSize+"<hr>";
-			appendString+="밭 주소 : "+$data.farmVo.farmAddress+"<hr>";
-			appendString+="등록만료일 : "+$data.farmVo.farmEnddate+"<hr>";
-			appendString+="농지주인 : "+$data.farmVo.id+"<hr>";
-			appendString+="재배가능농작물 : "+crops+"<br><br><br><br>";
-			appendString+="</div><hr>";
-			
-			$myModalBody.append(appendString);
-			
-			$detailModal.open();
-			 
-		})
-	})
-</script>
-	
     
 </body>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap Js CDN -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#sidebarCollapse').on('click', function () {
+		$('#sidebar').toggleClass('active');
+		$(this).toggleClass('active');
+	});
+});
+</script>
 </html>

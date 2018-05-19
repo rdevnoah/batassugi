@@ -1,5 +1,6 @@
 package org.spider.batassugi.service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,10 +48,29 @@ public class SellerFarmServiceTest {
 //    System.out.println(map.get("farmVo"));
 //    System.out.println(map.get("rentList"));
 //    //System.out.println(sellerFarmDao.findRentByFarmNo("1"));
-    Map<String, Object> map = new HashMap<String,Object>();
-    map.put("farmNo", "1");
-    map.put("pagingBean", new PagingBean(sellerFarmDao.getTotalRentListByFarmNo("1")));
-    List<RentVo> list = sellerFarmDao.findRentPagingList(map);
-    System.out.println(list);
+//    Map<String, Object> map = new HashMap<String,Object>();
+//    map.put("farmNo", "1");
+//    map.put("pagingBean", new PagingBean(sellerFarmDao.getTotalRentListByFarmNo("1")));
+//    List<RentVo> list = sellerFarmDao.findRentPagingList(map);
+//    System.out.println(list);
+    
+    Map<String, String> map = sellerFarmDao.findBuyerDetailByRentNo("4");
+    int harvest = Integer.parseInt(String.valueOf(map.get("HARVESTSTATUS")));
+    map.remove("HARVESTSTATUS");
+
+    if (harvest <25) {
+      harvest=1;
+    }else if (harvest < 50) {
+      harvest=2;
+    }else if (harvest < 75) {
+      harvest=3;
+    }else
+      harvest=4;
+    
+    String harv = String.valueOf(harvest);
+    map.put("HARVESTSTATUS", harv);
+    
+    System.out.println(harvest);
+    
   }
 }
