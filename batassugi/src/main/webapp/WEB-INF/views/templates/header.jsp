@@ -4,16 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%-- 이 파일은 header입니다. header에는 별도의 외부링크 추가 금지--%>
 
-    <script type="text/javascript">
-    $(document).ready(function(){
-    	$("#logout").click(function(){
-    		if(confirm("로그아웃하시겠습니까?")){
-    			location.href="${pageContext.request.contextPath}/logout";
-    		}
-    	});
-    });	
-</script>
-
 <div id="mySidenav" class="sidenav">
 	<a id="closeSide" href="javascript:void(0)" class="closebtn">&times;</a>
 	<a>메뉴1</a>
@@ -29,12 +19,12 @@
 			<a href="${pageContext.request.contextPath}/">
 				<img src=" ${pageContext.request.contextPath}/resources/img/logo.png" class="img-responsive mainLogo" />
 			</a>
-		</div><!--
-	    --><div class="col-xs-8 vcenter">
-	    	<c:choose>
+		</div>
+		<div class="col-xs-8 vcenter">
+        	<c:choose>
 			<c:when test="${sessionScope.mvo==null}">
 	         <ul>
-	            <li style="border-left:0px !important;"><a class="choice" href="${pageContext.request.contextPath}/">Home</a></li>
+	           <li style="border-left:0px !important;"><a class="choice" href="${pageContext.request.contextPath}/">Home</a></li>
 	            <li><a>사이트소개</a></li>
 	            <li><a>농작물사전</a></li>
 	            <li><a href="${pageContext.request.contextPath}/home/registerView">회원가입</a></li>
@@ -45,13 +35,17 @@
 	         <ul>
 	            <li style="border-left:0px !important;"><a href="${pageContext.request.contextPath}/" class="choice">Home</a></li>
 	            <li><a>사이트소개</a></li>
-	            <li><a>교환게시판</a></li>
+	            <li><a href="${pageContext.request.contextPath}/tradePost">거래게시판</a></li>
 	            <li><a href="${pageContext.request.contextPath}/getRentList">대여신청</a></li>
-	            <li><a>마이페이지</a></li>
-	            <!-- 판매자 마이페이지 임시 창 이동 -->
-	            <c:if test="${sessionScope.mvo.memberLevel=='판매자'}">
-	            <li><a href="${pageContext.request.contextPath}/sellerInfoView">판매자페이지</a></li>
-	            </c:if>
+ 		            <c:if test="${sessionScope.mvo.memberVo.memberLevel == '관리자'}">
+		            	<li><a href="${pageContext.request.contextPath}/admin_Home">마이페이지</a></li>	            
+		            </c:if>
+		            <c:if test="${sessionScope.mvo.memberVo.memberLevel == '판매자'}">
+		            	<li><a href="${pageContext.request.contextPath}/seller_Home">마이페이지</a></li>	            
+		            </c:if>
+		             <c:if test="${sessionScope.mvo.memberVo.memberLevel == '초급'||sessionScope.mvo.memberVo.memberLevel == '중급'||sessionScope.mvo.memberVo.memberLevel == '고급'}">
+		            	<li><a href="${pageContext.request.contextPath}/buyer_Home">마이페이지</a></li>	            
+		            </c:if>
 	            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>            
 	         </ul>
 	         </c:otherwise>

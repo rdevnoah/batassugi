@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+
+   <resultMap type="TradeCommentVo" id="TradeCommentVoRm">
+      <result column="id" property="memberVo.id"/>
+      <result column="nickname" property="memberVo.nickname"/>
+   </resultMap>
+
+   <select id="findReplyListByTradeNo" resultMap="TradeCommentVoRm" >
+     select r.id as id, r.trade_no as tradeNo, r.reply_regdate as replyRegdate,  r.reply_comment as replyComment, m.nickname as nickname
+     from TRADE_REPLY r, SPIDER_MEMBER m
+     where r.trade_no = t.trade_no and r.id=m.id
+   </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

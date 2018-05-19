@@ -2,13 +2,15 @@ package org.spider.batassugi.model.service.common;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-// github.com/sangkyoung0122/batassugi.git
+import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
  * 2018. 5. 15.  "PL_Seonhwa"     회원등록을 위해 registerImg(회원프로필사진 등록), register 메소드 등록
+ * 2018. 5. 16.  "PL_Seonhwa"     회원가입시 아이디 닉네임 중복확인 메소드 추가
+ * 2018. 5. 17.  "PL_Seonhwa"     회원가입시 회원상태, 기호작물 입력 메소드 추가
  *      </pre>
  */
 @Service
@@ -41,7 +45,7 @@ public class MemberService implements MemberServiceIf {
   private MemberDaoIf memberDao;
 
   @Override
-  public MemberVo login(MemberVo vo) throws LoginException {
+  public MemberInfoVo login(MemberVo vo) throws LoginException {
     MemberVo memberVo = memberDao.findMemberById(vo.getId());
     String password = vo.getPassword();
     if (memberVo == null) {
@@ -50,6 +54,11 @@ public class MemberService implements MemberServiceIf {
       throw new LoginException("비밀번호가 다릅니다.");
     }
     return memberDao.login(vo);
+  }
+
+  @Override
+  public void registerMemberState(MemberStateVo mstVo) {
+    memberDao.registerMemberState(mstVo);
   }
 
   @Override
@@ -66,10 +75,12 @@ public class MemberService implements MemberServiceIf {
         "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\profile_img\\";
 
     // 이름에 현재 날짜를 붙이자
-    String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
+    // String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
+    // 파일 이름에 난수 붙이기
+    UUID uu = UUID.randomUUID();
 
     // 새로운 이름으로 파일저장
-    File f = new File(fileSavePath + now + "_" + filename);
+    File f = new File(fileSavePath + uu + "_" + filename);
 
     // 저장된 경로에 파일 생성
     multifile.transferTo(f);
@@ -81,8 +92,34 @@ public class MemberService implements MemberServiceIf {
   public void register(MemberInfoVo vo) {
     memberDao.registerBasic(vo);
     memberDao.registerExtend(vo);
+
+    if (vo.getLikeCrops() != null) {
+      List<String> likeCrops = vo.getLikeCrops();
+
+      for (String crops : likeCrops) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("id", vo.getMemberVo().getId());
+        map.put("crops", crops);
+        memberDao.registerLikeCrop(map);
+      }
+    }
   }
 
+  @Override
+  public String checkId(String id) {
+    int number = memberDao.checkId(id);
+    if (number == 0) {
+      return "ok";
+    }
+    return "fail";
+  }
 
-
+  @Override
+  public String checkNickname(String nickname) {
+    int number = memberDao.checkNickname(nickname);
+    if (number == 0) {
+      return "ok";
+    }
+    return "fail";
+  }
 }
