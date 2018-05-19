@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <select id="findRentByFarmNo" parameterType="string" resultType="rentVo">
     select m.nickname as id, r.rent_size as rentSize from spider_member m, rent r, recruit c
-    where r.id=m.id and c.recruit_no=r.recruit_no and c.farm_no=#{farmNo}
+    where r.id=m.id and c.recruit_no=r.recruit_no and c.farm_no=#{farmNo} and r.rent_status='승인'
   </select>
   
   <select id="findLabels" parameterType="int" resultType="string">

@@ -85,4 +85,6 @@ public interface SellerFarmDaoIf {
 
   public Map<String, String> findBuyerDetailByRentNo(String rentNo);
 
+ 
+
 }

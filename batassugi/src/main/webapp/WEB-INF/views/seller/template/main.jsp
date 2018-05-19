@@ -35,7 +35,7 @@
 								</c:forEach>
 								</h4>
 							</div>
-							<button class="btn btn-primary btn-block detailFarm" value="${farmVo.farmNo}">상세보기</button>
+							<button class="btn btn-primary btn-block detailFarm" value="${farmVo.farmNo}">상세보기${farmVo.farmNo}</button>
 						</div> <%-- caption --%>
 					</div> <%-- thumbnail --%>
 				</div> <%-- col-xs-4 --%>
@@ -58,7 +58,27 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-xs-5">
-						사진영역
+						통계영역<br>
+						<table class="table table-hover text-center">
+							<thead>
+								<tr>
+									<td colspan="2">
+										대여인 목록
+									</td>
+								</tr>
+								<tr>
+									<td>
+										대여인
+									</td>
+									<td>
+										사용량
+									</td>
+								</tr>
+							</thead>
+							<tbody id="buyerTable">
+								<%--ajax 데이터 입력 --%>
+							</tbody>
+						</table>
 					</div>
 					<div class="col-xs-7">
 						평수 : <span id="farmSize"></span><br>
@@ -105,12 +125,26 @@ $(document).ready(function() {
 					$("#farmOwner").html(data.farmVo.id);
 					$("#farmEnddate").html(data.farmVo.farmEnddate);
 					$("#crops").html(crops);
+					var buyerTable='';
+					for (var i=0 ; i< data.rentList.length ; i++){
+						buyerTable+="<tr>";
+						buyerTable+="<td>"
+						buyerTable+=data.rentList[i].id;
+						buyerTable+="</td>";
+						buyerTable+="<td>";
+						buyerTable+=data.rentList[i].rentSize;
+						buyerTable+="</td>";
+						buyerTable+="</tr>";
+					}
+					$("#buyerTable").append(buyerTable);
 				}	
 			}) 
 	 })	
 	 
+	 
 	 $('#myModalFarmDetail').on('hidden.bs.modal', function () {
         $(this).removeData('bs.modal');
+        $('#buyerTable').html('');
      });
 	
 	 $("#recruitStatusBtn").on('click', function(){

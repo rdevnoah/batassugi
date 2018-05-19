@@ -98,5 +98,7 @@ public class SellerFarmDao implements SellerFarmDaoIf {
     return template.selectOne("sellerFarm.findBuyerDetailByRentNo", rentNo);
   }
 
+  
+
 
 }

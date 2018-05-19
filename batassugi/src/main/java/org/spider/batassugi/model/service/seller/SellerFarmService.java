@@ -79,8 +79,11 @@ public class SellerFarmService implements SellerFarmServiceIf {
     FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
     vo.setLabels(sellerFarmDao.findLabels(Integer.parseInt(farmNo)));
     vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
+    System.out.println(farmNo);
+    
     map.put("farmVo", vo);
     map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
+    
     
    // findRentRecruitFarmSize(String farmNo);
     
