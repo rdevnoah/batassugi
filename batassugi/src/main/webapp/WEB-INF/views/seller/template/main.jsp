@@ -9,7 +9,6 @@
 					<div class="thumbnail rent">
 						<img src="${pageContext.request.contextPath}/resources/img/대여신청_밭사진1.png" class="img-responsive">
 						<div class="caption">
-							<div class="hidden"><span>${farmVo.farmNo}</span></div>
 							<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${farmVo.farmEnddate}</span> 까지</div>
 							<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${farmVo.farmSize}평</span></div>
 							<div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${farmVo.farmAddress}</span></div>
@@ -35,7 +34,7 @@
 								</c:forEach>
 								</h4>
 							</div>
-							<button class="btn btn-primary btn-block detailFarm" value="${farmVo.farmNo}">상세보기${farmVo.farmNo}</button>
+							<button class="btn btn-primary btn-block detailFarm" value="${farmVo.farmNo}">상세보기</button>
 						</div> <%-- caption --%>
 					</div> <%-- thumbnail --%>
 				</div> <%-- col-xs-4 --%>
@@ -103,12 +102,12 @@
 <script>
 $(document).ready(function() {
 	var $data;
-	var $detailFarm = $('.detailFarm');
-	$detailFarm.on('click', function() {
+	var $farmNo;
+	$(".detailFarm").on('click', function(e) {
+		$farmNo=e.target.value;
 		$("#myModalFarmDetail").modal();
 	})
 	 $("#myModalFarmDetail").on('show.bs.modal', function(e){
-		 var $farmNo=$detailFarm.val();
 			 $.ajax({
 				type : 'post',
 				url:'getDetailFarm',

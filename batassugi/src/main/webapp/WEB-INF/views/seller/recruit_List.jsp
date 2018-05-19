@@ -121,9 +121,10 @@ $(document).ready(function() {
      		})
      	});
      	
-     	
-     	$('.detailBuyerBtn').on('click', function(){
+     	var $rentNo;
+     	$('.detailBuyerBtn').on('click', function(e){
      		var $data;
+     		$rentNo=e.target.value;
 			$("#myModalBuyerDetail").modal();
 			$(this).removeData('bs.modal');
      	})
@@ -132,7 +133,7 @@ $(document).ready(function() {
      		$.ajax({
 				type : 'post',
 				url:'findBuyerDetailByRentNo',
-				data : 'rentNo='+$('.detailBuyerBtn').val(),
+				data : 'rentNo='+$rentNo,
 				async : false,
 				success : function(data) {
 					$("#buyerNick").html(data.NICKNAME);
