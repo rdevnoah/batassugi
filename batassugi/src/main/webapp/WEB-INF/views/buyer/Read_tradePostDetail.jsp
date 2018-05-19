@@ -33,7 +33,13 @@
 				<c:forEach items="${list}" var="list">
 				<tr>
 					<td colspan="1" >${list.memberVo.nickname} (${list.replyRegdate})</td>
-					<td colspan="4">${list.replyComment}</td>
+					<td colspan="3">${list.replyComment}</td>
+					<td align="right" >
+					<c:if test="${requestScope.tvo.memberVo.nickname == sessionScope.mvo.memberVo.nickname}">
+						<a href="${pageContext.request.contextPath}/updateReply">수정</a>
+						<a href="${pageContext.request.contextPath}/updateReply">삭제</a> 
+					</c:if>
+					</td>
 				</tr>
 				</c:forEach>
 				<tr id=listReply>
