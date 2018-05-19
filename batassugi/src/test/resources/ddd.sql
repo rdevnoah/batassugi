@@ -138,6 +138,9 @@ SELECT farm_no, id, farm_size, farm
 select * from recruit
 select * from farm
 select * from rent
+select * from AVAILABLE_CROPS
+
+insert into AVAILABLE_CROPS values(2,94)
 
 delete recruit
 delete farm
@@ -177,7 +180,31 @@ FROM recruit)R
 WHERE rnum BETWEEN 1 AND 4
 ORDER BY rnum DESC
 
+    SELECT 
+    RT.crops_no AS cropsNo, 
+    R.recruit_kind AS recruitKind, 
+    R.recruit_size AS recruitSize, 
+    F.farm_address AS farmAddress, 
+    M.name AS name, 
+    RT. rent_size AS rentSize, 
+    RT.rent_month AS rentMonth, 
+    RT.rent_status AS rentStatus, 
+    to_char(RT.rent_startdate,'yy.mm.dd') AS rentStartdate
+    FROM rent RT, recruit R, spider_member M, member_info I, farm F
+    WHERE RT.recruit_no = R.recruit_no
+    AND R.farm_no = F.farm_no 
+    AND F.id = I.id 
+    AND RT.id = M.id 
+    AND RT.id = 'ukyi'
+    ORDER BY RT.rent_startdate DESC
 
+    
+    SELECT crops_no, crops_name, crops_level
+    FROM  crops
+    WHERE crops_no = 1
+    
+    
+	
 
 SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 

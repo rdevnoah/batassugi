@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="rent">
   <insert id="registerRentByRentVo" parameterType="rentVo">
     INSERT INTO rent(rent_no, crops_no, id, recruit_no, rent_size, rent_month) 
-    VALUES(rent_SEQ.nextval, #{cropsNo}, #{id}, #{recruitVo.recruitNo}, #{rentSize}, #{rentMonth})
+    VALUES(rent_SEQ.nextval, #{cropsVo.cropsNo}, #{id}, #{recruitVo.recruitNo}, #{rentSize}, #{rentMonth})
   </insert>
 </mapper>
  

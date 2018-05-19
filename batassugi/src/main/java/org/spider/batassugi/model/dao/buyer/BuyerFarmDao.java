@@ -22,17 +22,25 @@ import org.springframework.stereotype.Repository;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 14.  "SM HyeonGil Kim"    최초작성
+ * 2018. 5. 14.  "SM HyeonGil Kim"  최초작성
+ * 2018. 5. 19.  "SL SangUk Lee"    findRentFarmInfoById 메서드 추가
+ * 2018. 5. 19.  "SL SangUk Lee"    deleteRentByRentNo 메서드 추가
  *      </pre>
  */
 @Repository
 public class BuyerFarmDao implements BuyerFarmDaoIf {
-  
+
   @Resource
   private SqlSessionTemplate template;
-  
+
   @Override
   public List<RentVo> findRentFarmInfoById(String id) {
-    return template.selectList("buyerFarm.findRentFarmInfoById",id);
+    return template.selectList("buyerFarm.findRentFarmInfoById", id);
   }
+
+  @Override
+  public void deleteRentByRentNo(int rentNo) {
+    template.delete("buyerFarm.deleteRentByRentNo", rentNo);
+  }
+
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.spider.batassugi.model.service.buyer.BuyerFarmServiceIf;
 import org.spider.batassugi.model.service.buyer.RentServiceIf;
 import org.spider.batassugi.model.service.buyer.TradeCommentServiceIf;
 import org.spider.batassugi.model.service.buyer.TradeServiceIf;
@@ -64,26 +65,62 @@ public class BuyerController {
 
   @Resource
   private TradeServiceIf tradeService;
+
   @Resource
   private TradeCommentServiceIf tradeCommentService;
-  
+
   @Resource
   private RecruitServiceIf recruitService;
 
   @Resource
   private RentServiceIf rentService;
-  
+
+  @Resource
+  private BuyerFarmServiceIf buyerService;
+
+  /**
+   * 구매자가 대여한 농지정보 조회 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param model 구매자가 대여한 농지정보를 전달하기 위함.
+   * @param request 세션의 아이디값을 가져오기 위함.
+   * @return mapping url
+   */
   @RequestMapping(value = "buyer_Home", method = RequestMethod.GET)
-  public String buyerHome() {
+  public String buyerHome(Model model, HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session == null) {
+      return "redirect:/";
+    }
+    MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
+    String id = mvo.getMemberVo().getId();
+    List<RentVo> rentList = buyerService.findRentFarmInfoById(id);
+    model.addAttribute("rentList", rentList);
     return "buyer.tiles";
   }
 
-  
+  /**
+   * 구매자가 신청한 농지대여를 취소하는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param rentNo 대여신청번호.
+   * @param rttr 신청취소 완료시 성공메세지를 뛰어주기 위함.
+   * @return maaping Url
+   */
+  @RequestMapping(value = "deleteRentByRentNo", method = RequestMethod.POST)
+  public String deleteRentByRentNo(String rentNo, RedirectAttributes rttr) {
+    buyerService.deleteRentByRentNo(Integer.parseInt(rentNo));
+    rttr.addFlashAttribute("success", "신청취소되었습니다.");
+    return "redirect:buyer_Home";
+  }
+
+
+
   /**
    * 대여신청 게시판뷰 출력 메서드.
    * 
    * @author "SL SangUk Lee"
-   * @return MappingUrl
+   * @return Mapping Url
    */
   @RequestMapping(value = "getRentList", method = { RequestMethod.POST, RequestMethod.GET })
   public String getRentList(HttpServletRequest request, Model model, String pageNum) {
@@ -101,7 +138,7 @@ public class BuyerController {
    * @author "SL SangUk Lee"
    * @param model 상세정보뷰에 뿌려질 데이터를 전달하기 위함.
    * @param recruitNo 대여신청번호.
-   * @return MappingUrl
+   * @return Mapping Url
    */
   @RequestMapping(value = "findRentDetailByRecruitNo",
       method = { RequestMethod.POST, RequestMethod.GET })
@@ -123,13 +160,13 @@ public class BuyerController {
    * @param rentVo 대여신청에 필요한 정보.
    * @param rttr 대여신청 성공시 성공메세지 출력하기 위함.
    * @param request 세션에 저장된 로그인정보를 가져오기 위함.
-   * @return mappingUrl
+   * @return mapping Url
    */
   @RequestMapping(value = "registerRentByRentVo", method = RequestMethod.POST)
   public String registerRentByRentVo(RentVo rentVo, RedirectAttributes rttr,
       HttpServletRequest request) {
     HttpSession session = request.getSession(false);
-    RentVo rvo = rentVo; 
+    RentVo rvo = rentVo;
     if (session == null || rvo == null) {
       return "redirect:/";
     }
@@ -139,7 +176,7 @@ public class BuyerController {
     rttr.addFlashAttribute("success", "대여신청이 완료되었습니다.");
     return "redirect:getRentList";
   }
-  
+
   /**
    * 거래 게시판 목록 출력 메서드.
    * 
@@ -148,31 +185,32 @@ public class BuyerController {
    * @param pageNum 페이징번호.
    * @return buyer/Read_tradePost.tiles
    */
-  @RequestMapping(value = "tradePost", method = {RequestMethod.GET,RequestMethod.POST})
+  @RequestMapping(value = "tradePost", method = { RequestMethod.GET, RequestMethod.POST })
   public String getTradePostList(Model model, String pageNum) {
     TradePostListVo lvo = tradeService.findTradePostList(pageNum);
     model.addAttribute("tradePostListVo", lvo);
     return "buyer/Read_tradePost.tiles";
   }
-  
+
   /**
    * 거래 게시판 상세 보기 메서드.
    * 
    * @author "SM HyeonGil Kim"
-   * @param model 뷰에 전달할 객체. 
+   * @param model 뷰에 전달할 객체.
    * @param tradeNo 게시글 번호.
    * @param request 데이터 요청.
    * @param response 데이터 전송.
    * @return
    */
-  @RequestMapping(value = "findTradePostListByNo", method = {RequestMethod.GET,RequestMethod.POST})
+  @RequestMapping(value = "findTradePostListByNo",
+      method = { RequestMethod.GET, RequestMethod.POST })
   public String findTradePostDetailByNo(Model model, String tradeNo, HttpServletRequest request,
       HttpServletResponse response) {
     HttpSession session = request.getSession(false);
     if (session == null || session.getAttribute("mvo") == null) {
       return "redirect:/";
     }
-    Cookie[ ] cookies = request.getCookies();
+    Cookie[] cookies = request.getCookies();
     for (int i = 0; i < cookies.length; i++) {
       if (cookies[i].getName().equals("tradeHits")) {
         if (!(cookies[i].getValue().contains("!!" + tradeNo + "!!"))) {
@@ -188,13 +226,13 @@ public class BuyerController {
     }
     return "error";
   }
- 
+
   /**
    * 거래 게시판 글 삭제 메서드.
    * 
    * @author "SM HyeonGil Kim"
    * @param model 뷰에 전달할 객체.
-   * @param tradeNo 게시글 번호. 
+   * @param tradeNo 게시글 번호.
    * @return buyer/Read_tradePost.tiles
    */
   @RequestMapping("/deleteBoard")
@@ -204,7 +242,7 @@ public class BuyerController {
     model.addAttribute("tradePostListVo", lvo);
     return "redirect:tradePost";
   }
-  
+
   /**
    * 게시판 수정 폼으로 이동하는 메서드 .
    * 
@@ -218,7 +256,7 @@ public class BuyerController {
     noHitdetailViewCheck(tvo, model);
     return "buyer/Update_tradePostForm.tiles";
   }
-  
+
   /**
    * 거래 게시판 수정 메서드.
    * 
@@ -238,7 +276,7 @@ public class BuyerController {
     model.addAttribute("list", findReplyListByTradeNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
-  
+
   /**
    * 게시판 글 쓰기 폼으로 이동하는 메서드.
    * 
@@ -249,7 +287,7 @@ public class BuyerController {
   public String createTradePostForm() {
     return "buyer/Create_tradePost.tiles";
   }
-  
+
   /**
    * 거래 게시판 글 쓰기 메서드.
    * 
@@ -259,7 +297,7 @@ public class BuyerController {
   @RequestMapping(method = RequestMethod.POST, value = "/createBoard")
   public String createTradePost(HttpServletRequest request, Model model,
       @ModelAttribute TradePostVo tvo) {
-    
+
     HttpSession session = request.getSession(false);
     if (session != null) {
       MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
@@ -276,7 +314,7 @@ public class BuyerController {
     model.addAttribute("tradePostListVo", lvo);
     return "redirect:tradePost";
   }
-  
+
   /**
    * 거래 게시판 글 상세보기 후 조회수 증가 메서드.
    * 
@@ -291,7 +329,7 @@ public class BuyerController {
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
-  
+
   /**
    * 거래 게시판 글 상세보기 후 조회수 증가하지 않는 메서드.
    * 
@@ -305,7 +343,7 @@ public class BuyerController {
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
-  
+
   /**
    * 댓글 출력 메서드.
    *
@@ -319,7 +357,7 @@ public class BuyerController {
     List<TradeCommentVo> list = tradeCommentService.findReplyListByTradeNo(tradeNo);
     return list;
   }
-  
+
   /**
    * 댓글 작성 메서드.
    * 
