@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buyerFarm">
+  <resultMap type="rentVo" id="rentVoRM">
+    <collection column="recruitKind" property="recruitVo.recruitKind"/>
+    <collection column="name" property="recruitVo.farmVo.memberInfoVo.memberVo.name"/>
+    <collection column="farmAddress" property="recruitVo.farmVo.farmAddress"/>
+    <collection column="recruitSize" property="recruitVo.recruitSize"/>
+  </resultMap>
+  <select id="findRentFarmInfoById" resultMap="rentVoRM" parameterType="string">
+    SELECT R.recruit_kind AS recruitKind, M.name AS name, 
+    F.farm_address AS farmAddress, R.recruit_size AS recruitSize, 
+    RT.rent_month, RT.crops_no AS cropsNo, RT.rent_status AS rentStatus, 
+    RT.rent_startdate AS rentStartdate
+    FROM rent RT, recruit R, spider_member M, member_info I, farm F
+    WHERE RT.recruit_no = R.recruit_no
+    AND R.farm_no = F.farm_no 
+    AND F.id = i.id 
+    AND RT.id = M.id
+    AND RT.id = #{id}
+    ORDER BY RT.rent_startdate DESC
+  </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

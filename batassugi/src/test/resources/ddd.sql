@@ -73,8 +73,18 @@ INSERT INTO recruit(recruit_no, farm_no, recruit_kind, recruit_startdate, recrui
 VALUES(recruit_SEQ.nextval, 17, '대여', to_date('18.02.5','yy.mm.dd'), to_date('18.02.20','yy.mm.dd'), 10000, '농지대여 @!','모집중',10000);
 
 
+    SELECT R.recruit_kind AS recruitKind, M.name AS name, 
+    F.farm_address AS farmAddress, R.recruit_size AS recruitSize, 
+    RT.rent_month, RT.crops_no AS cropsNo, RT.rent_status AS rentStatus, 
+    RT.rent_startdate AS rentStartdate
+    FROM rent RT, recruit R, spider_member M, member_info I, farm F
+    WHERE RT.recruit_no = R.recruit_no
+    AND R.farm_no = F.farm_no 
+    AND F.id = i.id 
+    AND RT.id = M.id
+    AND RT.id = 'test1'
+    ORDER BY RT.rent_startdate DESC
 
-select count(*) from recruit;
 
 INSERT INTO recruit SELECT recruit_SEQ.nextval, farm_no, recruit_kind, recruit_startdate, 
 recruit_enddate, price, recruit_content, recruit_status, recruit_size
@@ -181,4 +191,22 @@ SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind,
     AND rnum BETWEEN 1 AND 3
     ORDER BY rnum DESC
 
+INSERT INTO TRADE_POST (trade_no, trade_hits, trade_kind, 
+trade_title, trade_content, trade_photo, id, trade_replycount, regdate)
+SELECT trade_post_SEQ.nextval, trade_hits, trade_kind, 
+trade_title, trade_content, trade_photo, id, trade_replycount, regdate
+from TRADE_POST;
+
+select * from TRADE_POST
+
+trade_no            NUMBER          NOT NULL, 
+    trade_hits          NUMBER          DEFAULT 0 NOT NULL, 
+    trade_kind          VARCHAR2(50)    NOT NULL, 
+    trade_title         VARCHAR2(50)    NOT NULL, 
+    trade_content       CLOB            NOT NULL, 
+    trade_photo         VARCHAR2(50)    NULL, 
+    id                  VARCHAR2(50)    NOT NULL, 
+    trade_replycount
+
     
+    select 

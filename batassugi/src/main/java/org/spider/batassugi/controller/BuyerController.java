@@ -12,7 +12,6 @@ import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-import org.spider.batassugi.model.vo.common.MemberVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +62,13 @@ public class BuyerController {
 
   @Resource
   private RentServiceIf rentService;
+  
+  @RequestMapping(value = "buyer_Home", method = RequestMethod.GET)
+  public String buyerHome() {
+    return "buyer.tiles";
+  }
 
+  
   /**
    * 대여신청 게시판뷰 출력 메서드.
    * 
@@ -118,11 +123,11 @@ public class BuyerController {
     if (session == null || rvo == null) {
       return "redirect:/";
     }
-    MemberVo mvo = (MemberVo) session.getAttribute("mvo");
-    rvo.setId(mvo.getId());
+    MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
+    rvo.setId(mvo.getMemberVo().getId());
     rentService.registerRentByRentVo(rentVo);
     rttr.addFlashAttribute("success", "대여신청이 완료되었습니다.");
-    return "redirect:getRentPostList";
+    return "redirect:getRentList";
   }
   
   /**

@@ -1,7 +1,9 @@
 package org.spider.batassugi.model.dao.buyer;
 
+import java.util.List;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,7 +26,13 @@ import org.springframework.stereotype.Repository;
  *      </pre>
  */
 @Repository
-public class BuyerFarmDao {
+public class BuyerFarmDao implements BuyerFarmDaoIf {
+  
   @Resource
   private SqlSessionTemplate template;
+  
+  @Override
+  public List<RentVo> findRentFarmInfoById(String id) {
+    return template.selectList("buyerFarm.findRentFarmInfoById",id);
+  }
 }

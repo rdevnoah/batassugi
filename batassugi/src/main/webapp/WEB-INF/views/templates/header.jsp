@@ -19,8 +19,8 @@
 			<a href="${pageContext.request.contextPath}/">
 				<img src=" ${pageContext.request.contextPath}/resources/img/logo.png" class="img-responsive mainLogo" />
 			</a>
-		</div>
-		<div class="col-xs-8 vcenter">
+		</div><!--
+	 --><div class="col-xs-8 vcenter">
         	<c:choose>
 			<c:when test="${sessionScope.mvo==null}">
 	         <ul>

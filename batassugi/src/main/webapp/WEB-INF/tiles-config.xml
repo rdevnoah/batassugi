@@ -35,6 +35,20 @@
  		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
  	</definition> 
  	
+ 	<!-- 구매자 메인 -->
+ 	<definition name="buyer.tiles" template="/WEB-INF/views/buyer/template/layout.jsp">
+ 		<put-attribute name="buyer_title" value="spider_buyer" />
+ 		<put-attribute name="buyer_header" value="/WEB-INF/views/buyer/template/header.jsp"/>
+ 		<put-attribute name="buyer_left" value="/WEB-INF/views/buyer/template/left.jsp"/>
+ 		<put-attribute name="buyer_main" value="/WEB-INF/views/buyer/template/main.jsp"/>
+ 	</definition>
+ 	
+ 	<definition name="buyer/*.tiles"  extends="buyer.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="buyer_main"  value="/WEB-INF/views/buyer/{1}.jsp"/>
+ 	</definition>
+ 	
+ 	
  	<!-- <definition name="info.tiles" template="/WEB-INF/views/infoTemplates/layout_info.jsp">
  		<put-attribute name="title" value="spider-info"/>
  		<put-attribute name="header" value="/WEB-INF/views/infoTemplates/header_info.jsp"/>

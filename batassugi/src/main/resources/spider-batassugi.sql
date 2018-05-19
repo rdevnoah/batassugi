@@ -150,8 +150,8 @@ CREATE SEQUENCE apply_fammer_SEQ nocache;
 CREATE TABLE trade_post
 (
     trade_no            NUMBER          NOT NULL, 
-    trade_kind          VARCHAR2(50)    NOT NULL, 
     trade_hits          NUMBER          DEFAULT 0 NOT NULL, 
+    trade_kind          VARCHAR2(50)    NOT NULL, 
     trade_title         VARCHAR2(50)    NOT NULL, 
     trade_content       CLOB            NOT NULL, 
     trade_photo         VARCHAR2(50)    NULL, 
@@ -242,6 +242,7 @@ CREATE TABLE rent
     CONSTRAINT FK_rent_recruit_no_recruit_rec FOREIGN KEY (recruit_no) REFERENCES recruit (recruit_no),
     CONSTRAINT FK_rent_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+alter table rent add rent_startdate date default sysdate;
 
 CREATE SEQUENCE rent_SEQ nocache;
 
