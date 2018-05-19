@@ -5,7 +5,8 @@ import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
 
 /**
- * 반드시 마침표를 찍습니다.
+ * 거래게시판.
+ * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.model.dao.buyer
  * @filename : TradePostDaoIF.java

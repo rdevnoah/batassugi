@@ -1,13 +1,13 @@
-package org.spider.batassugi.model.dao.buyer;
+package org.spider.batassugi.model.service.buyer;
 
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
 /**
- * 댓글.
- * 
+ * 댓글 서비스.
+ * .
  * @title 밭아쓰기
- * @packagename : org.spider.batassugi.model.dao.buyer
- * @filename : TradePostCommentDaoIf.java
+ * @packagename : org.spider.batassugi.model.service.buyer
+ * @filename : TradeCommentServiceIf.java
  * @author : "SM HyeonGil Kim"
  * @since : 2018. 5. 18.
  * @version : 1.0
@@ -20,16 +20,16 @@ import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
  * -----------  -------------    --------------------------------
  * 2018. 5. 18.  "SM HyeonGil Kim"    findReplyListByTradeNo(int tradeNo), 
  *                                                    createReply(TradeCommentVo tcvo) 추가
- *                                                    findRegdateByReplyNo(int replyNo) 추가
+ *                                          
  * </pre>
  */
 
-public interface TradePostCommentDaoIf {
+public interface TradeCommentServiceIf {
   /**
-   * 댓글 리스트 출력 메서드
-   * .
+   * 댓글 리스트 출력.
+   * 
    * @author "SM HyeonGil Kim"
-   * @param tradeNo 게시글 번호.
+   * @param tradeNo 게시판 번호.
    * @return
    */
   public List<TradeCommentVo> findReplyListByTradeNo(int tradeNo);
@@ -39,15 +39,8 @@ public interface TradePostCommentDaoIf {
    * 
    * @author "SM HyeonGil Kim"
    * @param tcvo 댓글 생성자.
+   * @return 
    */
-  public int createReply(TradeCommentVo tcvo);
+  public TradeCommentVo createReply(TradeCommentVo tcvo);
   
-  /**
-  * 댓글 날짜 출력.
-  *
-   * @author "SM HyeonGil Kim"
-   * @param replyNo 댓글 번호
-   * @return
-   */
-  public String findRegdateByReplyNo(Integer replyNo);
 }

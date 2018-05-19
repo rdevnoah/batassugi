@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 import javax.annotation.Resource;
-import org.spider.batassugi.model.dao.buyer.TradePostDao;
+import org.spider.batassugi.model.dao.buyer.TradePostDaoIf;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
@@ -38,7 +38,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class TradeService implements TradeServiceIf {
 
   @Resource
-  private TradePostDao tradePostDao;
+  private TradePostDaoIf tradePostDao;
 
   @Override
   public TradePostListVo findTradePostList(String pageNum) {

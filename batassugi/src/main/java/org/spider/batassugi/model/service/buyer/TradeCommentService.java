@@ -1,16 +1,16 @@
-package org.spider.batassugi.model.dao.buyer;
+package org.spider.batassugi.model.service.buyer;
 
 import java.util.List;
 import javax.annotation.Resource;
-import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.dao.buyer.TradePostCommentDaoIf;
 import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 /**
- * 거래 게시판 댓글(작성, 수정, 삭제, 검색) 접근하는 영속성 계층입니다 .
- * 
+ * 거래 게시판 댓글(작성, 수정, 삭제, 검색) 접근하는 서비스 계층입니다 .
+ * .
  * @title 밭아쓰기
- * @packagename : org.spider.batassugi.model.dao.buyer
- * @filename : TradePostCommentDao.java
+ * @packagename : org.spider.batassugi.model.service.buyer
+ * @filename : TradeCommentService.java
  * @author : "SM HyeonGil Kim"
  * @since : 2018. 5. 18.
  * @version : 1.0
@@ -28,24 +28,22 @@ import org.springframework.stereotype.Repository;
  * </pre>
  */
 
-@Repository
-public class TradePostCommentDao implements TradePostCommentDaoIf {
+@Service
+public class TradeCommentService implements TradeCommentServiceIf {
+  
   @Resource
-  private SqlSessionTemplate template;
+  private TradePostCommentDaoIf tradePostCommentDao;
 
   @Override
   public List<TradeCommentVo> findReplyListByTradeNo(int tradeNo) {
-    return template.selectList("comment.findReplyListByTradeNo", tradeNo);
+    return tradePostCommentDao.findReplyListByTradeNo(tradeNo);
   }
 
   @Override
-  public int createReply(TradeCommentVo tcvo) {
-    return template.insert("comment.createReply", tcvo);
+  public TradeCommentVo createReply(TradeCommentVo tcvo) {
+    tradePostCommentDao.createReply(tcvo);
+    tcvo.setReplyRegdate(tradePostCommentDao.findRegdateByReplyNo(tcvo.getReplyNo()));
+    return tcvo;
   }
 
-  @Override
-  public String findRegdateByReplyNo(Integer replyNo) {
-    return template.selectOne("comment.findRegdateByReplyNo", replyNo);
-  }
-  
 }

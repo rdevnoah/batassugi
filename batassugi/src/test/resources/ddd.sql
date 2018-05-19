@@ -199,14 +199,3 @@ from TRADE_POST;
 
 select * from TRADE_POST
 
-trade_no            NUMBER          NOT NULL, 
-    trade_hits          NUMBER          DEFAULT 0 NOT NULL, 
-    trade_kind          VARCHAR2(50)    NOT NULL, 
-    trade_title         VARCHAR2(50)    NOT NULL, 
-    trade_content       CLOB            NOT NULL, 
-    trade_photo         VARCHAR2(50)    NULL, 
-    id                  VARCHAR2(50)    NOT NULL, 
-    trade_replycount
-
-    
-    select 

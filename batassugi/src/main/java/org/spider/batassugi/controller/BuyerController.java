@@ -1,14 +1,17 @@
 package org.spider.batassugi.controller;
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.service.buyer.RentServiceIf;
+import org.spider.batassugi.model.service.buyer.TradeCommentServiceIf;
 import org.spider.batassugi.model.service.buyer.TradeServiceIf;
 import org.spider.batassugi.model.service.seller.RecruitServiceIf;
 import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
@@ -18,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -48,6 +52,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * 2018. 5. 15.  "SM HyeonGil Kim"  거래게시판 글 상세 보기, 삭제 완료
  * 2018. 5. 16.  "SM HyeonGil Kim"  거래게시판 글 쓰기, 수정 완료
  * 2018. 5. 17.  "SM HyeonGil Kim"  거래게시판 글 조회수 처리 완료
+<<<<<<< HEAD
+>>>>>>> refs/heads/buyer
+=======
+ * 2018. 5. 18.  "SM HyeonGil Kim"  거래게시판 댓글 리스트, 댓글 작성 완료
 >>>>>>> refs/heads/buyer
  *      </pre>
  */
@@ -56,6 +64,8 @@ public class BuyerController {
 
   @Resource
   private TradeServiceIf tradeService;
+  @Resource
+  private TradeCommentServiceIf tradeCommentService;
   
   @Resource
   private RecruitServiceIf recruitService;
@@ -225,6 +235,7 @@ public class BuyerController {
       e.printStackTrace();
     }
     model.addAttribute("tvo", tvo);
+    model.addAttribute("list", findReplyListByTradeNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
   
@@ -278,6 +289,7 @@ public class BuyerController {
   public String hitdetailViewCheck(TradePostVo tvo, Model model) {
     tradeService.updateHitsTradePost(tvo);
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
+    model.addAttribute("list", findReplyListByTradeNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
   
@@ -292,7 +304,40 @@ public class BuyerController {
   @RequestMapping("/nohit")
   public String noHitdetailViewCheck(TradePostVo tvo, Model model) {
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
+    model.addAttribute("list", findReplyListByTradeNo(tvo.getTradeNo()));
     return "buyer/Read_tradePostDetail.tiles";
   }
   
+  /**
+   * 댓글 출력 메서드.
+   *
+   * @author "SM HyeonGil Kim"
+   * @param tradeNo 게시판 번호.
+   * @return list
+   */
+  public List<TradeCommentVo> findReplyListByTradeNo(int tradeNo) {
+    List<TradeCommentVo> list = tradeCommentService.findReplyListByTradeNo(tradeNo);
+    return list;
+  }
+  
+  /**
+   * 댓글 작성 메서드.
+   * 
+   * @author "SM HyeonGil Kim"
+   * @param tcvo 댓글 정보.
+   * @param request 데이터 요청.
+   */
+  @RequestMapping("/createReply")
+  @ResponseBody
+  public TradeCommentVo createReply(TradeCommentVo tcvo, HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+      MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
+      if (mvo != null) {
+        tcvo.setMemberVo(mvo.getMemberVo());
+      }
+    }
+    tradeCommentService.createReply(tcvo);
+    return tcvo;
+  }
 }
