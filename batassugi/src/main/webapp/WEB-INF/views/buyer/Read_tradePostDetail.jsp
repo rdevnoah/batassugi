@@ -34,7 +34,7 @@
 			</div>
 			<div class ="text-center ">
 				<c:if test="${sessionScope.mvo.memberVo.nickname != null}">    
-				<textarea rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요"></textarea>
+				<textarea rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요" ></textarea>
 				<button class="btn btn-primary" type="button" id="btnReply">댓글 작성</button>
 				</c:if>
 			</div>
@@ -83,6 +83,13 @@
   	 	 }); // $("#deleteBtn").click(function()	
     	
   	 	$("#btnReply").click(function(){
+  	 		if ($("#replytext").val() == "") {
+				BootstrapDialog.alert({
+    				type : "danger",
+    				message: "댓글을 입력하세요!"
+    			});
+				return false;
+			}
   	 		var userNickname = "${ sessionScope.mvo.memberVo.nickname}"
             var replyComment=$("#replytext").val();
             var tradeNo="${requestScope.tvo.tradeNo}";
@@ -92,9 +99,13 @@
                 url: "${pageContext.request.contextPath}/createReply",
                 data: param,
                 success: function(data){
-                    alert("댓글이 등록되었습니다.");
-                    listReply2();
- 	                $("#replytext").val("");
+                	BootstrapDialog.alert({
+                        message : "댓글이 등록되었습니다.",
+                        onhide: function() {
+                           listReply2();
+                           $("#replytext").val("");
+                   }
+                 });
                 },   error:function(request,status,error){
                     BootstrapDialog.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
