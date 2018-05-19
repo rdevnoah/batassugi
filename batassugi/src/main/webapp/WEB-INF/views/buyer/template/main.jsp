@@ -19,20 +19,28 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="">
-							<td>여기는종류다</td>
-							<td>여기는이름이다</td>
-							<td>여기는주소다</td>
-							<td>여기는평수다</td>
-							<td>여기는대여기간이다</td>
-							<td>여기는작물이다</td>
+					<c:forEach items="${rentList}" var="list">
+						<tr class="rentList">
+							<td class="hidden">${list.rentNo}</td>
+							<td>${list.recruitVo.recruitKind}</td>
+							<td>${list.recruitVo.farmVo.memberInfoVo.memberVo.name}</td>
+							<td>${list.recruitVo.farmVo.farmAddress}</td>
+							<td>${list.rentSize}</td>
+							<td>${list.rentMonth}개월</td>
+							<td>${list.cropsVo.cropsName}</td>
 							<td><a>여기는작물진행상태다</a></td>
-							<td>여기는신청일이다</td>
-							<td><a>여기는처리상태다</a></td>
+							<td>${list.rentStartdate}</td>
+							<td><a>${list.rentStatus}<c:if test="${list.rentStatus == '미처리'}"> <span class="text-danger">(취소하기)</span></c:if></a></td>
 						</tr>
+					</c:forEach>
 					</tbody>
 				</table> <%-- table table-hover --%>
-				
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
+<script>
+var result = '${success}';
+if(result !== '') {
+	BootstrapDialog.alert(result).setType('danger')
+}
+</script>

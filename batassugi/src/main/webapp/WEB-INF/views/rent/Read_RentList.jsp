@@ -75,21 +75,21 @@
 	</div> <%-- row --%>
 </div> <%-- container --%>
 <script>
-var result = '${success}';
+// 대여신청 성공시 메세지 출력
+var result = '${success}'; // addflashAttribute
 if(result !== '') {
 	BootstrapDialog.alert(result)
 }
 $(document).ready(function() {
-	
+	// 대여신청게시판 페이징
 	$rentPaginationA.on('click',function() {
 		rentList.paging($(this), '${pb.startPageOfPageGroup-1}', '${pb.endPageOfPageGroup+1}', 'getRentList');
 	});
 	
+	// 대여신청하기 버튼 이벤트 상세정보페이지로 이동
 	$rent.on('click', function() {
 		var $recruitNo = $(this).parents('.content').find('span:nth(0)').text();
 		rentList.detail($(this), 'findRentDetailByRecruitNo', {'recruitNo' : $recruitNo});
 	});
-
-	
 });
 </script>

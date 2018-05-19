@@ -52,4 +52,5 @@ public interface RentServiceIf {
    * @return List
    */
   public RentListVo getRentList(String pageNum);
+  
 }

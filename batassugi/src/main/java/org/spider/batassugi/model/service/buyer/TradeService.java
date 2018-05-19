@@ -68,7 +68,8 @@ public class TradeService implements TradeServiceIf {
     
     String filename = multifile.getOriginalFilename();
     String fileSavePath =
-        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\trade_img";
+        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
+        + "img\\trade_img\\";
     
     UUID uu = UUID.randomUUID();
     
@@ -88,7 +89,8 @@ public class TradeService implements TradeServiceIf {
     
     String filename = multifile.getOriginalFilename();
     String fileSavePath =
-        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\trade_img";
+        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
+        + "img\\trade_img\\";
     
     UUID uu = UUID.randomUUID();
     

@@ -1,5 +1,6 @@
 package org.spider.batassugi.model.vo.buyer;
 
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 
 /**
@@ -25,13 +26,14 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
 
 public class RentVo {
   private int rentNo;
-  private int cropsNo;
+  private CropsVo cropsVo;
   private RecruitVo recruitVo;
   private String id;
   private int rentSize;
   private int rentMonth;
   private String rentStatus;
-
+  private String rentStartdate;
+  
   public RentVo() {
     super();
   }
@@ -40,45 +42,48 @@ public class RentVo {
    * 구매자가 대여한 농지VO입니다.
    * 
    * @param rentNo 대여번호.
-   * @param cropsNo 대여작물.
+   * @param cropsVo 대여작물.
    * @param recruitVo 모집정보.
    * @param id 대여회원아이디.
    * @param rentSize 대여 농지 사이즈.
    * @param rentMonth 대여 개월.
    * @param rentStatus 대여 상태.
    */
-  public RentVo(int rentNo, int cropsNo, RecruitVo recruitVo, String id, int rentSize,
-      int rentMonth, String rentStatus) {
+  public RentVo(int rentNo, CropsVo cropsVo, RecruitVo recruitVo, String id, int rentSize,
+      int rentMonth, String rentStatus, String rentStartdate) {
     super();
     this.rentNo = rentNo;
-    this.cropsNo = cropsNo;
+    this.cropsVo = cropsVo;
     this.recruitVo = recruitVo;
     this.id = id;
     this.rentSize = rentSize;
     this.rentMonth = rentMonth;
     this.rentStatus = rentStatus;
+    this.rentStartdate = rentStartdate;
   }
-  
+
   /**
    * 구매자가 대여한 농지VO입니다.
    * 
    * @param rentNo 대여번호.
-   * @param cropsNo 대여작물.
+   * @param cropsVo 대여작물.
    * @param recruitVo 모집정보.
    * @param id 대여회원아이디.
    * @param rentSize 대여 농지 사이즈.
    * @param rentMonth 대여 개월.
    */
-  public RentVo(int rentNo, int cropsNo, RecruitVo recruitVo, String id, int rentSize,
+  public RentVo(int rentNo, CropsVo cropsVo, RecruitVo recruitVo, String id, int rentSize,
       int rentMonth) {
     super();
     this.rentNo = rentNo;
-    this.cropsNo = cropsNo;
+    this.cropsVo = cropsVo;
     this.recruitVo = recruitVo;
     this.id = id;
     this.rentSize = rentSize;
     this.rentMonth = rentMonth;
   }
+
+
 
   public int getRentNo() {
     return rentNo;
@@ -88,12 +93,12 @@ public class RentVo {
     this.rentNo = rentNo;
   }
 
-  public int getCropsNo() {
-    return cropsNo;
+  public CropsVo getCropsVo() {
+    return cropsVo;
   }
 
-  public void setCropsNo(int cropsNo) {
-    this.cropsNo = cropsNo;
+  public void setCropsVo(CropsVo cropsVo) {
+    this.cropsVo = cropsVo;
   }
 
   public RecruitVo getRecruitVo() {
@@ -136,9 +141,17 @@ public class RentVo {
     this.rentStatus = rentStatus;
   }
 
+  public String getRentStartdate() {
+    return rentStartdate;
+  }
+
+  public void setRentStartdate(String rentStartdate) {
+    this.rentStartdate = rentStartdate;
+  }
+
   @Override
   public String toString() {
-    return "RentVo [rentNo=" + rentNo + ", cropsNo=" + cropsNo + ", recruitVo=" + recruitVo
+    return "RentVo [rentNo=" + rentNo + ", cropsVo=" + cropsVo + ", recruitVo=" + recruitVo
         + ", id=" + id + ", rentSize=" + rentSize + ", rentMonth=" + rentMonth + ", rentStatus="
         + rentStatus + "]";
   }

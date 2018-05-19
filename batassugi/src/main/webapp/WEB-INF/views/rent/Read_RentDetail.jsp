@@ -16,13 +16,13 @@
 						<%-- 평수 --%>
 						<div class="form-group col-xs-offset-1 col-xs-3">
 							<label>평수 : </label>
-							<input type="number" class="form-control" min="1000" max="${recruitVo.recruitSize}" required style="width: 30%;"><label class="text-danger">/ ${recruitVo.recruitSize}</label>
+							<input name="rentSize" type="number" class="form-control" min="1000" max="${recruitVo.recruitSize}" required style="width: 30%;"><label class="text-danger">/ ${recruitVo.recruitSize}</label>
 						</div> <%-- form-group col-xs-offset-1 col-xs-3 --%>
 						
 						<%-- 재배가능작물 --%>
 						<div class="form-group col-xs-4">
 							<label>작물 : </label>
-							<select name="cropsNo" class="form-control" required style="width: 40%;">
+							<select name="cropsVo.cropsNo" class="form-control" required style="width: 40%;">
 								<option value="">&nbsp;------- 선택 -------</option>
 								<c:forEach items="${recruitVo.farmVo.cropsVo}" var="cropsVo">
 									<option value="${cropsVo.cropsNo}">${cropsVo.cropsName}</option>
@@ -33,7 +33,7 @@
 						<%-- 대여기간 --%>
 						<div class="form-group col-xs-4">
 							<label>대여기간 : </label>
-							<select name="rentSize" class="form-control" required style="width: 50%;">
+							<select name="rentMonth" class="form-control" required style="width: 50%;">
 								<option value="">&nbsp;------- 선택 -------</option>
 								<c:forEach begin="1" end="${recruitVo.maxRentMonth}" var="i">
 								<option value="${i}">${i}개월</option>

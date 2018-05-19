@@ -1,4 +1,5 @@
-var $a = $('a');
+var $a = $('a'),
+	$rentListA = $('.rentList a');
 
 // 헤더 애니메이션 이벤트 추가
 $a.on('mouseenter', function() {
@@ -25,24 +26,6 @@ function sendPost(path, params) {
 	$f.submit();
 } // sendPost(path, params)
 
-function sendPost(path) {
-	var $f = $('<form></form>').attr({
-		action : path,
-		method : 'post'
-	});
-	for ( var key in params) {
-		var value = params[key];
-		var $objs = $('<input type="hidden"/>').attr({
-			name : key,
-			value : value
-		});
-		$f.append($objs);
-	}
-	$('body').append($f);
-	$f.submit();
-} // sendPost(path, params)
-
-
 /**
  * 대여신청 상세정보 뷰 출력 event
  * 
@@ -67,3 +50,19 @@ var rentList = {
 		sendPost(path, params)
 	} // detail
 } // rentList
+
+// 대여신청 취소하기 이벤트
+$rentListA.click(function() {
+	var flag = '';
+	var $rentNo = $(this).parents().children('td:nth(0)').text()
+	BootstrapDialog.confirm({
+		type : 'danger',
+		message : "신청취소 하시겠습니까?",
+		onhidden: function() {
+			flag == 'true' ? sendPost('deleteRentByRentNo', {'rentNo':$rentNo}) : '';
+		},
+		callback: function(result) {
+			flag = [result == true ? 'true' : '']
+		}
+	})
+}) 
