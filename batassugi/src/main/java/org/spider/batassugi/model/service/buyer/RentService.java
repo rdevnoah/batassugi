@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.buyer.RentDaoIf;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.RentListVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Service;
 
@@ -54,11 +54,11 @@ public class RentService implements RentServiceIf {
   @Override
   public RentListVo getRentList(String pageNum) {
     int totalRentListCount = rentDao.totalRentListCount();
-    PagingBean pb = null;
+    BuyerPagingBean pb = null;
     if (pageNum == null) {
-      pb = new PagingBean(totalRentListCount);
+      pb = new BuyerPagingBean(totalRentListCount);
     } else {
-      pb = new PagingBean(Integer.parseInt(pageNum), totalRentListCount);
+      pb = new BuyerPagingBean(Integer.parseInt(pageNum), totalRentListCount);
     }
     pb.setContentNumberPerPage(4);
     pb.setPageNumberPerPageGroup(2);

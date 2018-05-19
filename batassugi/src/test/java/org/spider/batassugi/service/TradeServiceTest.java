@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.buyer.TradePostDao;
-import org.spider.batassugi.model.vo.common.PagingBean;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,6 +23,6 @@ public class TradeServiceTest {
   public void TradeServiceTest(){
     int totalCount = tradePostDao.getTotalTradePostCount();
     System.out.println("거래게시판 총 개수 : " + totalCount);
-    System.out.println("페이징테스트 : " + tradePostDao.findTradePostList(new PagingBean(totalCount,2)));
+    System.out.println("페이징테스트 : " + tradePostDao.findTradePostList(new BuyerPagingBean(totalCount,2)));
   }
 }

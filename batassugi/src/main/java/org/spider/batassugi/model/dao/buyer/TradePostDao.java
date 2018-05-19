@@ -3,8 +3,8 @@ package org.spider.batassugi.model.dao.buyer;
 import java.util.List;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -38,7 +38,7 @@ public class TradePostDao implements TradePostDaoIf {
   private SqlSessionTemplate template;
 
   @Override
-  public List<TradePostVo> findTradePostList(PagingBean pb) {
+  public List<TradePostVo> findTradePostList(BuyerPagingBean pb) {
     return template.selectList("trade.getTradePostList", pb);
   }
 

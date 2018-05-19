@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.vo.buyer;
 
 import org.spider.batassugi.model.vo.common.MemberVo;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -23,34 +24,51 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * </pre>
  */
 public class ApplySellerVo {
-  private Integer applyNo;
+  private String applyNo;
   private MemberVo memberVo;
   private String farmerDocument;
+  private String applyDate;
+  private String applyState;
+  private String applyResultdate;
+  private String applyReason;
+  private MultipartFile file;
 
   public ApplySellerVo() {
     super();
-    // TODO Auto-generated constructor stub
   }
-
+  
   /**
-   * 구매자가 판매자 신청하는 VO입니다.
+   * 구매자가 판매자 신청하는 Vo객체.
    * 
-   * @param applyNo 지원번호.
-   * @param memberVo 회원정보.
-   * @param farmerDocument 농업확인서류(이미지경로).
+   * @author "SL SangUk Lee"
+   * @param applyNo 신청번호.
+   * @param memberVo 구매자 정보.
+   * @param farmerDocument 판매자신청하기 위한 문서정보.
+   * @param applyDate 신청한 날짜.
+   * @param applyState 신청 상태.
+   * @param applyResultdate 판매자승인 날짜.
+   * @param applyReason 신청 사유.
+   * @param file 문서정보를 받기위한 파일 객체.
    */
-  public ApplySellerVo(Integer applyNo, MemberVo memberVo, String farmerDocument) {
+  public ApplySellerVo(String applyNo, MemberVo memberVo, String farmerDocument, String applyDate,
+      String applyState, String applyResultdate, String applyReason, MultipartFile file) {
     super();
     this.applyNo = applyNo;
     this.memberVo = memberVo;
     this.farmerDocument = farmerDocument;
+    this.applyDate = applyDate;
+    this.applyState = applyState;
+    this.applyResultdate = applyResultdate;
+    this.applyReason = applyReason;
+    this.file = file;
   }
-
-  public Integer getApplyNo() {
+  
+  public String getApplyNo() {
     return applyNo;
   }
 
-  public void setApplyNo(Integer applyNo) {
+
+  public void setApplyNo(String applyNo) {
     this.applyNo = applyNo;
   }
 
@@ -70,11 +88,51 @@ public class ApplySellerVo {
     this.farmerDocument = farmerDocument;
   }
 
+  public String getApplyDate() {
+    return applyDate;
+  }
+
+  public void setApplyDate(String applyDate) {
+    this.applyDate = applyDate;
+  }
+
+  public String getApplyState() {
+    return applyState;
+  }
+
+  public void setApplyState(String applyState) {
+    this.applyState = applyState;
+  }
+
+  public String getApplyResultdate() {
+    return applyResultdate;
+  }
+
+  public void setApplyResultdate(String applyResultdate) {
+    this.applyResultdate = applyResultdate;
+  }
+
+  public String getApplyReason() {
+    return applyReason;
+  }
+
+  public void setApplyReason(String applyReason) {
+    this.applyReason = applyReason;
+  }
+
+  public MultipartFile getFile() {
+    return file;
+  }
+
+  public void setFile(MultipartFile file) {
+    this.file = file;
+  }
+
   @Override
   public String toString() {
     return "ApplySellerVo [applyNo=" + applyNo + ", memberVo=" + memberVo + ", farmerDocument="
-        + farmerDocument + "]";
+        + farmerDocument + ", applyDate=" + applyDate + ", applyState=" + applyState
+        + ", applyResultdate=" + applyResultdate + ", applyReason=" + applyReason + "]";
   }
-
 
 }

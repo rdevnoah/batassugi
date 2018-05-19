@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     AND r.recruit_no = #{recruitNo}
   </select>
   
-  <select id="getRentList" resultMap="recruitVoRM" parameterType="pagingBean">
+  <select id="getRentList" resultMap="recruitVoRM" parameterType="buyerPagingBean">
     SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
     R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,

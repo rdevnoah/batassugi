@@ -3,9 +3,9 @@ package org.spider.batassugi.model.dao.buyer;
 import java.util.List;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Repository;
 
@@ -55,7 +55,7 @@ public class RentDao implements RentDaoIf {
   }
 
   @Override
-  public List<RecruitVo> getRentList(PagingBean pb) {
+  public List<RecruitVo> getRentList(BuyerPagingBean pb) {
     return template.selectList("recruit.getRentList",pb);
   }
 

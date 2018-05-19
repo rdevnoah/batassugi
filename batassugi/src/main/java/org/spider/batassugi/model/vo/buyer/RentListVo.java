@@ -1,7 +1,6 @@
 package org.spider.batassugi.model.vo.buyer;
 
 import java.util.List;
-import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 
 /**
@@ -24,7 +23,7 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
  *      </pre>
  */
 public class RentListVo {
-  private PagingBean pagingBean;
+  private BuyerPagingBean pagingBean;
   private List<RecruitVo> recruitList;
 
   public RentListVo() {
@@ -38,17 +37,17 @@ public class RentListVo {
    * @param pagingBean 페이징을 위한 빈즈.
    * @param recruitList 대여신청 게시판 정보를 list에 담음.
    */
-  public RentListVo(PagingBean pagingBean, List<RecruitVo> recruitList) {
+  public RentListVo(BuyerPagingBean pagingBean, List<RecruitVo> recruitList) {
     super();
     this.pagingBean = pagingBean;
     this.recruitList = recruitList;
   }
 
-  public PagingBean getPagingBean() {
+  public BuyerPagingBean getPagingBean() {
     return pagingBean;
   }
 
-  public void setPagingBean(PagingBean pagingBean) {
+  public void setPagingBean(BuyerPagingBean pagingBean) {
     this.pagingBean = pagingBean;
   }
 

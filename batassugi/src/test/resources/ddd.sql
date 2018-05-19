@@ -202,9 +202,11 @@ ORDER BY rnum DESC
     SELECT crops_no, crops_name, crops_level
     FROM  crops
     WHERE crops_no = 1
-    
-    
+
+	select farmer_document, apply_state, apply_reason, to_char(apply_date,'yy.mm.dd')  from apply_seller
+	where id = 'test1'
 	
+	delete apply_seller
 
 SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
@@ -226,3 +228,9 @@ from TRADE_POST;
 
 select * from TRADE_POST
 
+    
+	insert into apply_seller(apply_no, id, farmer_document, apply_date, apply_reason)
+	values (apply_fammer_SEQ.nextval, 'test1', 'fasdf', sysdate, '신청원함!')
+	
+	delete apply_seller
+	

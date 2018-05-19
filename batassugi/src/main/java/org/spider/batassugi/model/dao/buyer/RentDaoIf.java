@@ -1,9 +1,9 @@
 package org.spider.batassugi.model.dao.buyer;
 
 import java.util.List;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 
 /**
@@ -60,7 +60,7 @@ public interface RentDaoIf {
    * @author "SL SangUk Lee"
    * @return List
    */
-  public List<RecruitVo> getRentList(PagingBean pb);
+  public List<RecruitVo> getRentList(BuyerPagingBean pb);
 
   /**
    * 대여신청게시판 총게시글 수. 페이징을 위해 만든 메서드.

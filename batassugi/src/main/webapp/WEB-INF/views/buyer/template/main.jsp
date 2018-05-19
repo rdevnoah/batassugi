@@ -35,12 +35,22 @@
 					</c:forEach>
 					</tbody>
 				</table> <%-- table table-hover --%>
+				
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
 <script>
 var result = '${success}';
-if(result !== '') {
-	BootstrapDialog.alert(result).setType('danger')
+var applyVo = {
+	'farmerDocument' : '${pageContext.request.contextPath}/resources/img/farmer_doc/${applySellerVo.farmerDocument}',
+	'applyDate' : '${applySellerVo.applyDate}',
+	'applyState' : '${applySellerVo.applyState}',
+	'applyReason' : '${applySellerVo.applyReason}'
 }
+if(result !== '') {
+	BootstrapDialog.alert(result)
+}
+$(document).ready(function() {
+	applyInfo(applyVo)
+})
 </script>

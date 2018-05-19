@@ -6,9 +6,9 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.buyer.TradePostCommentDaoIf;
 import org.spider.batassugi.model.dao.buyer.TradePostDaoIf;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,11 +46,11 @@ public class TradeService implements TradeServiceIf {
   @Override
   public TradePostListVo findTradePostList(String pageNum) {
     int totalPostCount = tradePostDao.getTotalTradePostCount();
-    PagingBean pb = null;
+    BuyerPagingBean pb = null;
     if (pageNum == null) {
-      pb = new PagingBean(totalPostCount);
+      pb = new BuyerPagingBean(totalPostCount);
     } else {
-      pb = new PagingBean(Integer.parseInt(pageNum), totalPostCount);
+      pb = new BuyerPagingBean(Integer.parseInt(pageNum), totalPostCount);
     }
     return new TradePostListVo(pb, tradePostDao.findTradePostList(pb));
   }

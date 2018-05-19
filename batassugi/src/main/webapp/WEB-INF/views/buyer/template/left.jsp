@@ -13,10 +13,10 @@
 		</li>
 		
 		<li>		
-			<a> <i class="fa fa-user-plus fa-lg"></i>판매자신청</a> 
+			<a id="applySeller" class="applySeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청</a> 
 		</li>
 		<li>		
-			<a> <i class="fa fa-fort-awesome fa-lg"></i>내밭리스트</a> 
+			<a href="${pageContext.request.contextPath}/buyer_Home"> <i class="fa fa-fort-awesome fa-lg"></i>내밭리스트</a> 
 		</li>
 		
 		<li>		

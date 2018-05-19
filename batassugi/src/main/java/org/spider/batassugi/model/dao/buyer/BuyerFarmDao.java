@@ -3,6 +3,7 @@ package org.spider.batassugi.model.dao.buyer;
 import java.util.List;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +26,8 @@ import org.springframework.stereotype.Repository;
  * 2018. 5. 14.  "SM HyeonGil Kim"  최초작성
  * 2018. 5. 19.  "SL SangUk Lee"    findRentFarmInfoById 메서드 추가
  * 2018. 5. 19.  "SL SangUk Lee"    deleteRentByRentNo 메서드 추가
+ * 2018. 5. 20.  "SL SangUk Lee"    registerApplySeller 메서드 추가
+ * 2018. 5. 20.  "SL SangUk Lee"    findApplySellerById 메서드 추가
  *      </pre>
  */
 @Repository
@@ -41,6 +44,16 @@ public class BuyerFarmDao implements BuyerFarmDaoIf {
   @Override
   public void deleteRentByRentNo(int rentNo) {
     template.delete("buyerFarm.deleteRentByRentNo", rentNo);
+  }
+
+  @Override
+  public void registerApplySeller(ApplySellerVo applySellerVo) {
+    template.insert("buyerFarm.registerApplySeller", applySellerVo);
+  }
+
+  @Override
+  public ApplySellerVo findApplySellerById(String id) {
+    return template.selectOne("buyerFarm.findApplySellerById", id);
   }
 
 }

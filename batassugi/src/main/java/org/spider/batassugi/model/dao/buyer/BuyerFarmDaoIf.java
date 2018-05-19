@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.dao.buyer;
 
 import java.util.List;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 
 
@@ -22,6 +23,9 @@ import org.spider.batassugi.model.vo.buyer.RentVo;
  * -----------  -------------    --------------------------------
  * 2018. 5. 18.  "SL SangUk Lee"    최초작성
  * 2018. 5. 19.  "SL SangUk Lee"    findRentFarmInfoById 메서드 추가
+ * 2018. 5. 19.  "SL SangUk Lee"    deleteRentByRentNo 메서드 추가
+ * 2018. 5. 20.  "SL SangUk Lee"    registerApplySeller 메서드 추가
+ * 2018. 5. 20.  "SL SangUk Lee"    findApplySellerById 메서드 추가
  *      </pre>
  */
 public interface BuyerFarmDaoIf {
@@ -42,4 +46,21 @@ public interface BuyerFarmDaoIf {
    * @param rentNo 대여신청번호.
    */
   public void deleteRentByRentNo(int rentNo);
+
+  /**
+   * 구매자에서 판매자신청하는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param applySellerVo 판매자신청에 필요한 Vo객체.
+   */
+  public void registerApplySeller(ApplySellerVo applySellerVo);
+
+  /**
+   * 구매자가 판매자 신청한 정보를 조회하는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param id 세션에 저장된 아이디.
+   * @return ApplySellerVo
+   */
+  public ApplySellerVo findApplySellerById(String id);
 }

@@ -1,8 +1,8 @@
 package org.spider.batassugi.model.dao.buyer;
 
 import java.util.List;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 
 /**
  * 거래게시판.
@@ -30,7 +30,7 @@ import org.spider.batassugi.model.vo.common.PagingBean;
  */
 public interface TradePostDaoIf {
   
-  public List<TradePostVo> findTradePostList(PagingBean pb);
+  public List<TradePostVo> findTradePostList(BuyerPagingBean pb);
 
   public int getTotalTradePostCount();
 

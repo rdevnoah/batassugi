@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.buyer.RentDaoIf;
 import org.spider.batassugi.model.service.buyer.RentServiceIf;
-import org.spider.batassugi.model.vo.common.PagingBean;
+import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -33,7 +33,7 @@ public class RentServiceTest {
 
     // 대여신청 게시판목록 리스트Dao 테스트
     System.out.println("대여신청 게시판목록 리스트Dao\n"
-        + rentDao.getRentList(new PagingBean(1, 4)).get(1).getFarmVo().getCropsVo());
+        + rentDao.getRentList(new BuyerPagingBean(1, 4)).get(1).getFarmVo().getCropsVo());
 
     // 대여신청 게시판목록 리스트Service 테스트
     System.out

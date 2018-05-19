@@ -33,6 +33,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE rent 
     WHERE rent_no = #{rentNo}
   </delete>
+  <insert id="registerApplySeller" parameterType="applySellerVo">
+    <selectKey resultType="string" keyProperty="applyNo" order="BEFORE">
+      SELECT apply_fammer_SEQ.nextval 
+      FROM dual
+    </selectKey>
+    INSERT INTO apply_seller(apply_no, id, farmer_document, apply_date, apply_reason)
+    VALUES (#{applyNo}, #{memberVo.id}, #{farmerDocument}, sysdate, #{applyReason})
+  </insert>
+  <select id="findApplySellerById" resultType="applySellerVo" parameterType="string">
+    SELECT farmer_document AS farmerDocument, apply_state AS applyState, 
+    apply_reason AS applyReason, to_char(apply_date,'yy.mm.dd') AS applyDate
+    FROM apply_seller
+    WHERE id = #{id}
+  </select>
 </mapper>
  
  

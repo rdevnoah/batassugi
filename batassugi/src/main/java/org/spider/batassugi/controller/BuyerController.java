@@ -11,6 +11,7 @@ import org.spider.batassugi.model.service.buyer.RentServiceIf;
 import org.spider.batassugi.model.service.buyer.TradeCommentServiceIf;
 import org.spider.batassugi.model.service.buyer.TradeServiceIf;
 import org.spider.batassugi.model.service.seller.RecruitServiceIf;
+import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
@@ -95,7 +96,9 @@ public class BuyerController {
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
     String id = mvo.getMemberVo().getId();
     List<RentVo> rentList = buyerService.findRentFarmInfoById(id);
+    ApplySellerVo applySellerVo = buyerService.findApplySellerById(id);
     model.addAttribute("rentList", rentList);
+    model.addAttribute("applySellerVo",applySellerVo);
     return "buyer.tiles";
   }
 
@@ -104,13 +107,42 @@ public class BuyerController {
    * 
    * @author "SL SangUk Lee"
    * @param rentNo 대여신청번호.
-   * @param rttr 신청취소 완료시 성공메세지를 뛰어주기 위함.
+   * @param rttr 신청취소 완료시 성공메세지를 출력해주기 위함.
    * @return maaping Url
    */
   @RequestMapping(value = "deleteRentByRentNo", method = RequestMethod.POST)
   public String deleteRentByRentNo(String rentNo, RedirectAttributes rttr) {
     buyerService.deleteRentByRentNo(Integer.parseInt(rentNo));
     rttr.addFlashAttribute("success", "신청취소되었습니다.");
+    return "redirect:buyer_Home";
+  }
+
+  /**
+   * 구매자에서 판매자신청 하는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param applySellerVo 판매자 신청 정보 Vo객체.
+   * @param rttr 신청 후 성공 메세지를 출력해주기 위함.
+   * @return
+   */
+  @RequestMapping(value = "registerApplySeller", method = RequestMethod.POST)
+  public String rgisterApplySeller(@ModelAttribute ApplySellerVo applySellerVo,
+      HttpServletRequest request, RedirectAttributes rttr) {
+    HttpSession session = request.getSession(false);
+    if (session == null) {
+      return "redirect:buyer_Home";
+    }
+    String path = "";
+    try {
+      path = buyerService.farmerDocument(applySellerVo);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    applySellerVo.setFarmerDocument(path);
+    MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
+    applySellerVo.setMemberVo(mvo.getMemberVo());
+    buyerService.registerApplySeller(applySellerVo);
+    rttr.addFlashAttribute("success", "판매자신청이 완료되었습니다.");
     return "redirect:buyer_Home";
   }
 
