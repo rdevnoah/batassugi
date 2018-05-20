@@ -146,6 +146,19 @@
                   </div>
                 </div>
               </div> 
+              
+              <%-- 현재 등급 --%>
+              <div class="form-group">
+                <label class="control-label col-sm-3">현재 등급 <span class="text-danger">*</span></label>
+                <div class="col-md-7 col-sm-9">
+                  <div class="input-group">
+                    <span class="input-group-addon"></span> 
+                    <label> 현재 당신의 등급은 <span style="color: blue">초급</span>입니다. </label>    
+                  </div>
+                </div>
+              </div> 
+              
+              
             </div>            
           </div><%-- 필수 입력정보 끝 --%>
           
@@ -157,8 +170,9 @@
 
 		 <div class="row">
            <%--1단 --%>
+           <div class="subInfo">
            <div class="col-md-6">
-          	<div class="form-group">
+          	<div class="form-group ">
 	          	<label class="control-label col-sm-3">
 	          		<img src="${pageContext.request.contextPath}/resources/img/profile_img/default.png" width="100px" id="previewImg"/><br>
 	                프로필 미리보기
@@ -168,7 +182,7 @@
                     <span class="input-group-addon" id="file_upload"></span> 
                     <input type="file" name="file" id="file" class="form-control upload" placeholder="프로필을 넣어주세요" 
                      onchange="LoadImg(this);" aria-describedby="file_upload">
-                    <button type="button" onclick="ResetImgvalue();">취소</button>
+                    <button type="button" onclick="ResetImgvalue();" id="cancelButton">취소</button>
                     </div>
                 </div>
 			</div>
@@ -182,21 +196,20 @@
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
                     <c:forEach var="item" items="${list}">
-        				<label> <input name="likeCrops" id="likeCrops${item.cropsVo.cropsNo}" type="checkbox" value="${item.cropsVo.cropsNo}"> ${item.cropsVo.cropsName} </label>
+        				<label > <input name="likeCrops" id="likeCrops${item.cropsVo.cropsNo}" type="checkbox" value="${item.cropsVo.cropsNo}"> ${item.cropsVo.cropsName} </label>
        				 </c:forEach> 
                   </div>
                 </div>
 			</div>
             </div>
-            
+            </div> <!-- subInfo -->
             </div><%--row --%>
             <%--제출 버튼 --%>
-            <div class="form-group">
-              <div class="col-xs-offset-3 col-xs-10">
+          
+        </div>	<!-- 판넬 폼 종료 -->
+              <div class="col-xs-12 registerBtn">
                 <input name="submit" type="submit" value="회원가입" class="btn btn-primary">
               </div>
-            </div>            
-        </div>	<!-- 판넬 폼 종료 -->
       </form><%-- form 영역 --%>
     </div><%-- 메인영역 --%>
   </div><%-- 전체 row --%>

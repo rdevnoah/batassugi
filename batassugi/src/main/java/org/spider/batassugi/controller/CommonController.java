@@ -9,6 +9,7 @@ import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CommonController {
@@ -39,10 +40,9 @@ public class CommonController {
    * @return
    */
   @RequestMapping("home/crops_detail")
-  public String getCropsDetail(Model model, String cropsNo) {
-    CropsInfoVo cropsInfoVo = commonService.getCropsDetail(cropsNo);
-    model.addAttribute("info", cropsInfoVo);
-    return "home/crops_detail.tiles";
+  @ResponseBody
+  public Object getCropsDetail(String cropsNo) {
+    return commonService.getCropsDetail(cropsNo);
   }
 
 }
