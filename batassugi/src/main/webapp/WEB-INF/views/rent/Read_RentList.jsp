@@ -20,9 +20,10 @@
 							<img src="${pageContext.request.contextPath}/resources/img/작물3.png">
 							<img src="${pageContext.request.contextPath}/resources/img/작물4.png"> --%>
 							<c:forEach items="${list.farmVo.cropsVo}" var="crops">
-								${crops.cropsNo} ${crops.cropsName}
+								${crops.cropsName}
 							</c:forEach>
 						</p>
+						<!-- 						
 						<div class="like">
 							<a style="cursor: pointer; color: #FF7473; text-decoration: none;">
 								<i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
@@ -31,15 +32,13 @@
 								100
 							</a>
 							<i class="fa fa-eye fa-lg"></i> <label>323</label>
-						</div>
+						</div> 
+						-->
 						<button class="btn btn-primary btn-block">대여하기</button>
 					</div> <%-- caption --%>
 				</div> <%-- thumbnail --%>
 			</div> <%-- col-xs-4 --%>
 			</c:forEach>
-			<div class="col-xs-11 text-right">
-				<button class="btn btn-info">농지 등록</button>
-			</div>
 		</div> <%-- col-xs-12 --%>
 		<c:set value="${rentListVo.pagingBean}" var="pb" />
 		<div class="text-center">
