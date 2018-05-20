@@ -77,7 +77,7 @@ public class MemberService implements MemberServiceIf {
 
     // 저장할 위치를 지정
     String fileSavePath =
-        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\profile_img\\";
+        "C:\\Users\\User\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\profile_img\\";
 
     // 이름에 현재 날짜를 붙이자
     // String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
@@ -168,6 +168,7 @@ public class MemberService implements MemberServiceIf {
     memberDao.updateMemberInfo(uvo);
     
     // - 기존 작물이 없고, 새로운 작물이 있으면 추가
+    if(uvo.getLikeCrops()!=null) {
       // - 기존 작물 지움
       memberDao.deleteLikeCrops(orgVo.getMemberVo().getId());
       // - 새로운 작물 등록
@@ -178,6 +179,7 @@ public class MemberService implements MemberServiceIf {
         map.put("crops", crops);
         memberDao.registerLikeCrop(map);
       }
+    }
       MemberInfoVo memberInfoVo=memberDao.login(uvo.getMemberVo());
       return memberInfoVo;
   }

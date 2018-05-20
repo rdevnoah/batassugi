@@ -5,14 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="farm">
     <!-- 농지 등록 -->
-    <insert id="FarmInsert" parameterType="farmVo">
+    <insert id="FarmInsert">
       <selectKey resultType="int" keyProperty="farmNo"
       order="BEFORE">
       select farm_SEQ.nextval FROM DUAL
       </selectKey>
       insert into
-      farm(farm_no,id,farm_size,farm_address,farm_startdate,farm_enddate)
-      values(#{farmNo},#{memberInfoVo.id},#{farmSize},#{farmAddress},#{farmStartdate},#{farmEnddate})
+      farm(farm_no,id,farm_size,farm_address,farm_startdate,farm_enddate,image)
+      values(#{farmNo},#{memberInfoVo.id},#{farmSize},#{farmAddress},#{farmStartdate},#{farmEnddate},#{image})
     </insert>
 
 <!-- 해당밭에 재배가능작물을 테이블에 넣는다. -->

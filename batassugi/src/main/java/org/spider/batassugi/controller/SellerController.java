@@ -76,6 +76,15 @@ public class SellerController {
    */
   @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "farm_register")
   public String farmRegister(FarmVo fvo, HttpServletRequest request) {
+    String path = "logo.png";
+    if (fvo.getFile() != null) {
+      try {
+        path = sellerFarmService.farmImg(fvo);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    fvo.setImage(path);
     HttpSession session = request.getSession();
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
     fvo.setMemberInfoVo(mvo);

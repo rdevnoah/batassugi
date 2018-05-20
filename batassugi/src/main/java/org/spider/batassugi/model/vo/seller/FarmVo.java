@@ -3,6 +3,7 @@ package org.spider.batassugi.model.vo.seller;
 import java.util.List;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 농지정보VO 입니다.
@@ -33,13 +34,46 @@ public class FarmVo {
   private String farmAddress;
   private String farmStartdate;
   private String farmEnddate;
+  private String image;
   private List<String> cropsNo;
   private List<CropsVo> cropsVo;
   private List<String> labels;
+  private MultipartFile file;
 
   public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate) {
     super();
   }
+
+  
+  
+
+ 
+
+
+
+
+  public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
+      String farmStartdate, String farmEnddate, String image, List<String> cropsNo,
+      List<CropsVo> cropsVo, List<String> labels, MultipartFile file) {
+    super();
+    this.farmNo = farmNo;
+    this.memberInfoVo = memberInfoVo;
+    this.farmSize = farmSize;
+    this.farmAddress = farmAddress;
+    this.farmStartdate = farmStartdate;
+    this.farmEnddate = farmEnddate;
+    this.image = image;
+    this.cropsNo = cropsNo;
+    this.cropsVo = cropsVo;
+    this.labels = labels;
+    this.file = file;
+  }
+
+
+
+
+
+
 
 
 
@@ -217,6 +251,56 @@ public class FarmVo {
   public void setLabels(List<String> labels) {
     this.labels = labels;
   }
+
+  
+  
+  public String getImage() {
+    return image;
+  }
+
+
+
+
+
+
+
+
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+
+
+
+
+
+
+
+
+  public MultipartFile getFile() {
+    return file;
+  }
+
+
+
+
+
+
+
+
+
+  public void setFile(MultipartFile file) {
+    this.file = file;
+  }
+
+
+
+
+
+
+
+
 
   @Override
   public String toString() {

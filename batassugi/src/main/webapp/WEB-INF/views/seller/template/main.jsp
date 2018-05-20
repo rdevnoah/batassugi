@@ -7,7 +7,7 @@
 			<c:forEach items="${farmList}" var="farmVo" varStatus="i">
 				<div class="col-xs-3">
 					<div class="thumbnail rent">
-						<img src="${pageContext.request.contextPath}/resources/img/대여신청_밭사진1.png" class="img-responsive">
+						<img src="${pageContext.request.contextPath}/resources/img/${farmVo.image}" width="100px" class="img-responsive">
 						<div class="caption">
 							<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${farmVo.farmEnddate}</span> 까지</div>
 							<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${farmVo.farmSize}평</span></div>
