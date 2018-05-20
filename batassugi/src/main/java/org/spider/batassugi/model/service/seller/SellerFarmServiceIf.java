@@ -1,5 +1,6 @@
 package org.spider.batassugi.model.service.seller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.spider.batassugi.model.vo.common.CropsVo;
@@ -46,6 +47,8 @@ public interface SellerFarmServiceIf {
   public ListVo findRecruitListByFarmNo(String farmNo, String nowPage);
 
   public Object findBuyerDetailByRentNo(String rentNo);
+  
+  public String farmImg(FarmVo fvo) throws IllegalStateException, IOException;
   
 }
 

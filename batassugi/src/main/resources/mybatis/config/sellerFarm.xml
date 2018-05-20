@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </resultMap>
 
   <select id="findSellerFarmList" parameterType="string" resultType="farmVo"><!-- farmVo에 밭정보 먼저 저장 -->
-    select farm_no as farmNo, farm_address as farmAddress, farm_size as farmSize, to_char(farm_Enddate, 'yyyy-mm-dd') as farmEnddate 
+    select farm_no as farmNo, farm_address as farmAddress, farm_size as farmSize, to_char(farm_Enddate, 'yyyy-mm-dd') as farmEnddate , image 
     from farm
     where id=#{id}
   </select>
