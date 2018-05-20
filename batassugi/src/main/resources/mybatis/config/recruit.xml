@@ -30,6 +30,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <update id="updateRentStatusReject" parameterType="string">
     update rent set rent_Status='거절' where rent_no=#{rentNo} 
   </update>
+  <resultMap type="recruitVo" id="recruitVoRM">
+    <result column="farmNo" property="farmVo.farmNo" />
+    <result column="farmAddress" property="farmVo.farmAddress" />
+    <result column="farmEnddate" property="farmVo.farmEnddate" />
+    <result column="id" property="farmVo.memberInfoVo.memberVo.id" />
+    <result column="name" property="farmVo.memberInfoVo.memberVo.name" />
+    <result column="nickname" property="farmVo.memberInfoVo.memberVo.nickname" />
+    <result column="tel" property="farmVo.memberInfoVo.tel" />
+    <result column="email" property="farmVo.memberInfoVo.email" />
+  </resultMap>
+  <select id="findRentDetailByRecruitNo" resultMap="recruitVoRM" parameterType="int">
+    SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, R.recruit_size AS recruitSize, 
+    ROUND(MONTHS_BETWEEN(F.farm_enddate, R.recruit_startdate)) AS maxRentMonth, 
+    R.price AS price, R.recruit_content AS recruitContent, R.recruit_status AS recruitStatus, 
+    R.farm_no AS FarmNo, F.farm_address AS farmAddress, to_char(F.farm_enddate,'yy.mm.dd') AS farmEnddate,
+    M.name, M.nickname, I.tel, I.email
+    FROM recruit R, farm F, spider_member M, member_info I 
+    WHERE r.farm_no = f.farm_no
+    AND f.id = m.id 
+    AND m.id = i.id 
+    AND ROUND(MONTHS_BETWEEN(f.farm_enddate, r.recruit_startdate)) > 0
+    AND r.recruit_no = #{recruitNo}
+  </select>
+  
+  <select id="getRentList" resultMap="recruitVoRM" parameterType="buyerPagingBean">
+    SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, recruit_no, recruit_kind, 
+      recruit_enddate, recruit_status, recruit_size, farm_no 
+      FROM recruit)R, farm F
+    WHERE R.farm_no = F.farm_no
+    AND rnum BETWEEN #{startRowNumber} AND #{endRowNumber}
+    ORDER BY rnum DESC
+  </select>
+  
+  <select id="totalRentListCount" resultType="int">
+    SELECT count(*)
+    FROM recruit
+  </select>
+  
+  <select id="findFarmAvailableCropsListByFarmNo" resultType="cropsVo" parameterType="int">
+    SELECT c.crops_no AS cropsNo, c.crops_name AS cropsName, c.crops_level AS cropsLevel
+    FROM farm f, recruit r, AVAILABLE_CROPS a, crops c
+    WHERE r.farm_no = f.farm_no 
+    AND f.farm_no = a.farm_no 
+    AND a.crops_no = c.crops_no
+    AND f.farm_no = #{farmNo}
+  </select>
 </mapper>
  <!--
  CREATE TABLE recruit
@@ -44,34 +95,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     recruit_status       VARCHAR2(50)    NOT NULL, 
     recruit_size         NUMBER          NOT NULL,  
   -->
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   

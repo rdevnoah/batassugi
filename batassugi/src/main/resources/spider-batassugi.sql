@@ -49,8 +49,8 @@ CREATE TABLE member_info
 alter table member_info modify(image varchar2(500));
 
 -- 멤버 회원 추가
-insert into spider_member values('admin','관리자','1234','관리자','관리자',1);
-insert into MEMBER_INFO values('admin','admin@kosta','경기도 판교',sysdate,'01012345678','여성',sysdate,'default.png')
+insert into spider_member values('123','판매자야','1234','나는판매자','판매자',1);
+insert into MEMBER_INFO values('1234','admin@kosta','경기도 판교',sysdate,'01012345678','여성',sysdate,'default.png')
 
 -- 회원 확인
 select * from SPIDER_MEMBER where id='Tottenham1';
@@ -178,7 +178,7 @@ CREATE TABLE accuse
     CONSTRAINT FK_accuse_accuse_id_spider_mem FOREIGN KEY (accuse_id) REFERENCES spider_member (id),
     CONSTRAINT FK_accuse_reported_id_spider_m FOREIGN KEY (reported_id) REFERENCES spider_member (id)   
 );
-
+select *from accuse;
 
 -- 크롭 시퀀스 생성
 CREATE SEQUENCE  accuse_SEQ nocache;
@@ -207,8 +207,13 @@ CREATE TABLE apply_seller
     CONSTRAINT APPLY_FAMMER_PK PRIMARY KEY (apply_no),
     CONSTRAINT FK_apply_fammer_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+<<<<<<< HEAD
 
 
+=======
+	alter table apply_seller add apply_date date not null
+	ALTER TABLE apply_seller MODIFY (farmer_document VARCHAR2(500));
+>>>>>>> refs/heads/develop_to_buyer
 -- 판매자 지원 신청번호 시퀀스
 CREATE SEQUENCE apply_fammer_SEQ nocache;
 
@@ -352,8 +357,8 @@ update  SPIDER_MEMBER set member_level='판매자' where id='Tottenham26';
 CREATE TABLE trade_post
 (
     trade_no            NUMBER          NOT NULL, 
-    trade_kind          VARCHAR2(50)    NOT NULL, 
     trade_hits          NUMBER          DEFAULT 0 NOT NULL, 
+    trade_kind          VARCHAR2(50)    NOT NULL, 
     trade_title         VARCHAR2(50)    NOT NULL, 
     trade_content       CLOB            NOT NULL, 
     trade_photo         VARCHAR2(50)    NULL, 
@@ -362,6 +367,11 @@ CREATE TABLE trade_post
     CONSTRAINT TRADE_POST_PK PRIMARY KEY (trade_no),
     CONSTRAINT FK_trade_post_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+-- 교환게시판 등록일 컬럼 추가
+alter table trade_post add  regdate date default sysdate;
+
+-- 교환게시판 사진경로 컬럼 크기 수정
+ALTER TABLE trade_post MODIFY (trade_photo VARCHAR2(500));
 
 -- 교환게시판 시퀀스
 CREATE SEQUENCE trade_post_SEQ nocache;
@@ -439,6 +449,7 @@ CREATE TABLE rent
     CONSTRAINT FK_rent_recruit_no_recruit_rec FOREIGN KEY (recruit_no) REFERENCES recruit (recruit_no),
     CONSTRAINT FK_rent_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+alter table rent add rent_startdate date default sysdate;
 
 --startdate 칼럼 추가
  alter table rent add rent_startdate date default sysdate;

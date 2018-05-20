@@ -1,7 +1,5 @@
 package org.spider.batassugi.service;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -9,8 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
-import org.spider.batassugi.model.vo.buyer.RentVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
+import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -72,5 +69,20 @@ public class SellerFarmServiceTest {
     
     System.out.println(harvest);
     
+//    List<FarmVo> list = sellerFarmDao.getSellerFarmList("aaaa");
+//    List<CropsVo> listCrops = null;
+////    for (int i=0 ; i<list.size() ; i++) {
+////      System.out.println(list.get(i));
+////    }
+//    for (int i=0 ; i<list.size() ; i++) {
+//      listCrops = sellerFarmDao.getAvailableCropsList(list.get(i).getFarmNo());
+//      list.get(i).setCropsVo(listCrops);
+//    }
+//    for (int i=0 ; i<list.size() ; i++) {
+//      System.out.println(list.get(i).getCropsVo());
+//      System.out.println("----");
+//    }
+    List<FarmVo> list = sellerFarmService.findSellerFarmList("aaaa");
+    System.out.println(list);
   }
 }

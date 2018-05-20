@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rent">
+  <insert id="registerRentByRentVo" parameterType="rentVo">
+    INSERT INTO rent(rent_no, crops_no, id, recruit_no, rent_size, rent_month) 
+    VALUES(rent_SEQ.nextval, #{cropsVo.cropsNo}, #{id}, #{recruitVo.recruitNo}, #{rentSize}, #{rentMonth})
+  </insert>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

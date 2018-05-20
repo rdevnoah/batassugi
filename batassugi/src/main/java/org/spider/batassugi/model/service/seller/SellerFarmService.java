@@ -148,4 +148,20 @@ public class SellerFarmService implements SellerFarmServiceIf {
   }
 
   
+/*=======
+public class SellerFarmService implements SellerFarmServiceIf {
+  
+  @Resource
+  private SellerFarmDaoIf sellerFarmDao;
+  
+  @Override
+  public List<FarmVo> getSellerFarmList(String id) {
+    List<FarmVo> farmList = sellerFarmDao.getSellerFarmList(id);
+    for (int i = 0; i < farmList.size(); i++) {
+      List<CropsVo> cropsList = sellerFarmDao.getAvailableCropsList(farmList.get(i).getFarmNo()); 
+      farmList.get(i).setCropsVo(cropsList);
+    }
+    return farmList;
+  }
+>>>>>>> refs/heads/develop_to_buyer*/
 }

@@ -17,6 +17,14 @@ a {
    color: black;
 }
 
+.rent {
+   margin-right: 50px; 
+   padding: 0px;
+}
+.rent>.caption {
+   color: black;
+}
+
 /* 이상욱 : 패럴랙스 사진 사이즈 조정 */
 .parallax-window {
     min-height: 600px;
@@ -33,6 +41,14 @@ a {
 }
 .rent>.caption {
    color: black;
+}
+
+.rent {
+	margin-right: 50px; 
+	padding: 0px;
+}
+.rent>.caption {
+	color: black;
 }
 
 /* 조선화 : 메인 로고 이미지 사이즈 */

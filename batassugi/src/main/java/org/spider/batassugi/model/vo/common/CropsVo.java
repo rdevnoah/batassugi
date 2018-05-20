@@ -5,12 +5,11 @@ public class CropsVo {
   private String cropsNo;
   private String cropsName;
   private String cropsLevel;
-  
-  
+
+
 
   public CropsVo() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
 
@@ -32,7 +31,6 @@ public class CropsVo {
   public String getCropsNo() {
     return cropsNo;
   }
-
 
   public void setCropsNo(String cropsNo) {
     this.cropsNo = cropsNo;
@@ -59,6 +57,5 @@ public class CropsVo {
     return "CropsVo [cropsNo=" + cropsNo + ", cropsName=" + cropsName + ", cropsLevel=" + cropsLevel
         + "]";
   }
-
 
 }

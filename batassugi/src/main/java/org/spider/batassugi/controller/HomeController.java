@@ -1,9 +1,10 @@
 package org.spider.batassugi.controller;
 
 import java.util.List;
-
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.service.admin.AccuseServiceIf;
@@ -83,7 +84,8 @@ public class HomeController {
    * @return
    */
   @RequestMapping("login")
-  public String login(HttpServletRequest request, Model model, MemberVo vo) {
+  public String login(HttpServletRequest request, Model model, MemberVo vo,
+      HttpServletResponse response) {
     try {
       HttpSession session = request.getSession();
       MemberInfoVo mvo = memberService.login(vo);
@@ -91,6 +93,15 @@ public class HomeController {
       memberService.findLikeCropsById(mvo);
       
       session.setAttribute("mvo", mvo);
+      Cookie[] cookies = request.getCookies();
+      for (int i = 0; i < cookies.length; i++) {
+        if (cookies[i].getName().equals("tradeHits")) {
+          break;
+        } else {
+          Cookie tradeHits = new Cookie("tradeHits", "!!");
+          response.addCookie(tradeHits);
+        }
+      }
       return "redirect:/";
     } catch (LoginException e) {
       model.addAttribute("message", e.getMessage());

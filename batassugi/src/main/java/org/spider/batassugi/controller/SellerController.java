@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SellerController {
 
-  
+
   @Resource
   private SellerFarmServiceIf sellerFarmService;
 
@@ -50,8 +50,8 @@ public class SellerController {
   private RecruitServiceIf recruitService;
 
   /**
-   * 판매자의 마이페이지로 이동하는 메소드입니다.
-   * tiles가 적용되어 있으며 tiles-config.xml 내부에 seller.tiles 설정이 이뤄져 있습니다.
+   * 판매자의 마이페이지로 이동하는 메소드입니다. tiles가 적용되어 있으며 tiles-config.xml 내부에 seller.tiles 설정이 이뤄져 있습니다.
+   * 
    * @author "PM KimYoungHo"
    * @param request HttpServletRequest 객체.
    * @param model Model 객체.
@@ -60,117 +60,104 @@ public class SellerController {
   @RequestMapping("seller_Home")
   public String sellerHome(HttpServletRequest request, Model model) {
     HttpSession session = request.getSession(false);
-    MemberInfoVo vo = (MemberInfoVo)session.getAttribute("mvo");
+    MemberInfoVo vo = (MemberInfoVo) session.getAttribute("mvo");
     model.addAttribute("farmList", sellerFarmService.findSellerFarmList(vo.getMemberVo().getId()));
-    
+
     return "seller.tiles";
   }
-  
+
   /**
    * 메소드 설명 : 밭등록.
+   * 
    * @author "GL_SangKyoung"
    * @param fvo
    * @param request
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "farm_register")
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "farm_register")
   public String farmRegister(FarmVo fvo, HttpServletRequest request) {
     HttpSession session = request.getSession();
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
     fvo.setMemberInfoVo(mvo);
     System.out.println(fvo);
     if (session.getAttribute("mvo") != null) {
-      //fvo.getMemberInfoVo().getMemberVo().setId(mvo.getId());
+      // fvo.getMemberInfoVo().getMemberVo().setId(mvo.getId());
       sellerFarmService.farmInsert(fvo);
       return "redirect:seller_Home";
     } else {
       return "farmRegister_error";
     }
   }
- 
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerFarmForm")
+
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "registerFarmForm")
   public String registerFarmForm(Model model) {
     List<CropsVo> list = sellerFarmService.getCropsData();
     String date = sellerFarmService.getNow_Date();
-    model.addAttribute("cropsList",list);
-    model.addAttribute("date",date);
+    model.addAttribute("cropsList", list);
+    model.addAttribute("date", date);
     return "seller/farmRegister.tiles";
   }
-  
-  
+
+
   /**
-   * 판매자의 마이페이지로 이동하는데 사용하는 Controller입니다. 
-   * 판매자 마이페이지로 이동할 경우 판매자의 현재 등록한 밭 정보들을 
-   * 가져와야 하기 때문에 getSellerFarmList(id)를 호출합니다.
-   * @author "PM KimYoungHo"
-   * @param request request를 저장하는 객체입니다..
-   * @param model farmList를 보내기 위한 객체입니다.
-   * @return
-   */
-  @RequestMapping("sellerInfoView")
-  public String sellerInfoView(HttpServletRequest request, Model model) {
-    HttpSession session = request.getSession(false);
-    MemberVo vo = (MemberVo)session.getAttribute("mvo");
-    model.addAttribute("farmList", sellerFarmService.findSellerFarmList(vo.getId()));
-    return "/infoTemplates/seller_info";
-  }
-  
-  /**
-   * 모집 등록하는 View 이동 메소드입니다. 기본적으로 필요한 데이터인 
-   * 대여가능 평수와 최대로 대여가능기간을 model에 map 타입으로 전송합니다.
+   * 모집 등록하는 View 이동 메소드입니다. 기본적으로 필요한 데이터인 대여가능 평수와 최대로 대여가능기간을 model에 map 타입으로 전송합니다.
+   * 
    * @author "PM KimYoungHo"
    * @param model Model 객체.
    * @param farmNo 농지 번호.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruitForm")
-  public String registerRecruitForm(Model model,String farmNo) {
-    Map<String,Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "registerRecruitForm")
+  public String registerRecruitForm(Model model, String farmNo) {
+    Map<String, Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
     model.addAttribute("recruitMap", map);
     return "seller/registerRecruit.tiles";
   }
-  
+
   /**
    * 농지의 세부정보에서 현재 농지에 대여나 모집을 신청한 회원을 확인하는 Controller.
+   * 
    * @author "PM KimYoungHo"
    * @param model Model 객체
    * @param farmNo 농지 번호.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "recruitList")
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "recruitList")
   public String recruitListView(Model model, String farmNo, String nowPage) {
     ListVo listVo = sellerFarmService.findRecruitListByFarmNo(farmNo, nowPage);
     model.addAttribute("pagingList", listVo);
     model.addAttribute("farmNo", farmNo);
     return "seller/recruit_List.tiles";
   }
-  
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruit")
+
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "registerRecruit")
   public String registerRecruit(RecruitVo vo, int farmNo) {
     vo.setFarmVo(new FarmVo(farmNo, null, 0, null, null, null));
     System.out.println(vo);
     recruitService.registerRecruit(vo);
     return "redirect:seller_Home";
   }
-  
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "updateRentStatusConfirm")
+
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET },
+      value = "updateRentStatusConfirm")
   public String updateRentStatusConform(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusConfirm(rentNo);
-    
-    return "redirect:recruitList?farmNo="+farmNo;
+
+    return "redirect:recruitList?farmNo=" + farmNo;
   }
-  
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "updateRentStatusReject")
+
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET },
+      value = "updateRentStatusReject")
   public String updateRentStatusReject(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusReject(rentNo);
-    
-    return "redirect:recruitList?farmNo="+farmNo;
+
+    return "redirect:recruitList?farmNo=" + farmNo;
   }
-  
+
   /**
-   * 판매자가 자신이 선택한 농지의 상세정보를 Modal로 확인하기 위해
-   * Ajax 방식으로 데이터를 전송합니다. 선택한 농지번호를 통해 상세정보를 조회 후
-   * 그 정보를 ResponseBody를 통해 전송합니다.
+   * 판매자가 자신이 선택한 농지의 상세정보를 Modal로 확인하기 위해 Ajax 방식으로 데이터를 전송합니다. 선택한 농지번호를 통해 상세정보를 조회 후 그 정보를
+   * ResponseBody를 통해 전송합니다.
+   * 
    * @author "PM KimYoungHo"
    * @param farmNo 농지 번호.
    * @return
@@ -180,11 +167,12 @@ public class SellerController {
   public Object findFarmDetail(String farmNo) {
     return sellerFarmService.findFarmDetail(farmNo);
   }
-  
+
   @ResponseBody
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "findBuyerDetailByRentNo")
+  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET },
+      value = "findBuyerDetailByRentNo")
   public Object findBuyerDetailByRentNo(String rentNo) {
     return sellerFarmService.findBuyerDetailByRentNo(rentNo);
   }
-  
+
 }

@@ -2,32 +2,26 @@
 	pageEncoding="UTF-8"%>
 <nav id="sidebar">
 	<div class="sidebar-header">
-		<h3>Spider : 밭아쓰기</h3>
-		<strong><img src="${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}" width="50px"></strong>
+		<h3>구매자 페이지</h3>
+		<strong>구매자</strong>
 	</div>
 
 	<ul class="list-unstyled components">
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
+			<a href="${pageContext.request.contextPath}/"> <i class="fa fa-home fa-lg"></i> 홈으로</a> 
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/buyer_myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
+			<a id="applySeller" class="applySeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청</a> 
+		</li>
+		<li>		
+			<a href="${pageContext.request.contextPath}/buyer_Home"> <i class="fa fa-fort-awesome fa-lg"></i>내밭리스트</a> 
 		</li>
 		
-		<li>
-		
-		<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"> <i class="glyphicon glyphicon-leaf"></i>
-				농지등록
-		</a>
-			<ul class="collapse list-unstyled" id="homeSubmenu">
-				<li><a href="#">Home 1</a></li>
-				<li><a href="#">Home 2</a></li>
-				<li><a href="#">Home 3</a></li>
-			</ul>
+		<li>		
+			<a href="${pageContext.request.contextPath}/buyer_myinfoView">&nbsp;<i class="fa fa-user fa-lg"></i>정보수정</a> 
 		</li>
-		
 		
 		
 		<!-- <li class="active">

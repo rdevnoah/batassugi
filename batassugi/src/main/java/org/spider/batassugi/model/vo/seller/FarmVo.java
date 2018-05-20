@@ -20,7 +20,8 @@ import org.spider.batassugi.model.vo.common.MemberInfoVo;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 14.  "GL_SangKyoung"    최초작성
+ * 2018. 5. 14. "GL_SangKyoung"  최초작성
+ * 2018. 5. 16  "SL SangUk Lee"  id를 제거하고 memberInfoVo 추가(has a)
  * 
  *      </pre>
  */
@@ -28,7 +29,6 @@ public class FarmVo {
 
   private int farmNo;
   private MemberInfoVo memberInfoVo;
-  private String id;
   private int farmSize;
   private String farmAddress;
   private String farmStartdate;
@@ -36,15 +36,16 @@ public class FarmVo {
   private List<String> cropsNo;
   private List<CropsVo> cropsVo;
   private List<String> labels;
-  
+
   public FarmVo(int farmSize, String farmAddress, String farmStartdate, String farmEnddate) {
     super();
   }
-  
-  
-  
+
+
+
   /**
    * 생성자 오버로딩.
+   * 
    * @param farmNo 농지번호.
    * @param memberInfoVo 멤버정보.
    * @param farmSize 농지크기.
@@ -65,13 +66,13 @@ public class FarmVo {
 
 
 
-
   /**
    * 농지정보 및 농작물 정보를 가져오는 생성자.
    * 
    * @author "GL_SangKyoung"
-   * @param farmNo 농지번호.
-   * @param memberInfoVo 회원 아이디
+   * @param farmNo 농지번호. <<<<<<< HEAD
+   * @param memberInfoVo 회원 아이디 =======
+   * @param memberInfoVo 회원정보가 담겨있는 객체. >>>>>>> refs/heads/develop_to_buyer
    * @param farmSize 농지사이즈.
    * @param farmAddress 농지주소.
    * @param farmStartdate 농지등록날짜.
@@ -79,7 +80,7 @@ public class FarmVo {
    * @param cropsNo 농작물 정보를 가져오는 cropsNo.
    */
   public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
-      String farmStartdate, String farmEnddate, List<String> cropsNo) {
+      String farmEnddate, List<String> cropsNo, String farmStartdate, List<CropsVo> cropsVo) {
     super();
     this.farmNo = farmNo;
     this.memberInfoVo = memberInfoVo;
@@ -93,6 +94,7 @@ public class FarmVo {
 
   /**
    * 기존 생성자.
+   * 
    * @param farmNo 농지번호.
    * @param id 아이디.
    * @param farmSize 농지크기.
@@ -104,7 +106,6 @@ public class FarmVo {
   public FarmVo(int farmNo, String id, int farmSize, String farmAddress, String farmStartdate,
       String farmEnddate, List<CropsVo> cropsVo) {
     this.farmNo = farmNo;
-    this.id = id;
     this.farmSize = farmSize;
     this.farmAddress = farmAddress;
     this.farmStartdate = farmStartdate;
@@ -114,6 +115,7 @@ public class FarmVo {
 
   /**
    * 생성자 오버로딩.
+   * 
    * @param farmSize 밭크기.
    * @param farmAddress 밭주소.
    * @param farmStartdate 밭등록일.
@@ -129,7 +131,7 @@ public class FarmVo {
     this.farmEnddate = farmEnddate;
     this.cropsNo = cropsNo;
   }
-  
+
   public List<CropsVo> getCropsVo() {
     return cropsVo;
   }
@@ -146,12 +148,12 @@ public class FarmVo {
     this.farmNo = farmNo;
   }
 
-  public String getId() {
-    return id;
+  public MemberInfoVo getMemberInfoVo() {
+    return memberInfoVo;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setMemberVo(MemberInfoVo memberInfoVo) {
+    this.memberInfoVo = memberInfoVo;
   }
 
   public int getFarmSize() {
@@ -179,16 +181,12 @@ public class FarmVo {
     this.farmEnddate = farmEnddate;
   }
 
-  
+
 
   public FarmVo() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
-  public MemberInfoVo getMemberInfoVo() {
-    return memberInfoVo;
-  }
 
   public void setMemberInfoVo(MemberInfoVo memberInfoVo) {
     this.memberInfoVo = memberInfoVo;
@@ -211,27 +209,20 @@ public class FarmVo {
     this.cropsNo = cropsNo;
   }
 
-  
+
   public List<String> getLabels() {
     return labels;
   }
-
-
 
   public void setLabels(List<String> labels) {
     this.labels = labels;
   }
 
-
-
   @Override
   public String toString() {
-    return "FarmVo [farmNo=" + farmNo + ", memberInfoVo=" + memberInfoVo + ", id=" + id
-        + ", farmSize=" + farmSize + ", farmAddress=" + farmAddress + ", farmStartdate="
-        + farmStartdate + ", farmEnddate=" + farmEnddate + ", cropsNo=" + cropsNo + ", cropsVo="
-        + cropsVo + "]";
+    return "FarmVo [farmNo=" + farmNo + ", memberInfoVo=" + memberInfoVo + ", farmSize=" + farmSize
+        + ", farmAddress=" + farmAddress + ", farmStartdate=" + farmStartdate + ", farmEnddate="
+        + farmEnddate + ", cropsNo=" + cropsNo + ", cropsVo=" + cropsVo + "]";
   }
-
-  
 
 }

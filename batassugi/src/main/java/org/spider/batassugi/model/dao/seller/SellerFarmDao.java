@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
-import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.springframework.stereotype.Repository;
 
@@ -33,7 +32,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class SellerFarmDao implements SellerFarmDaoIf {
-
+  
   @Resource
   private SqlSessionTemplate template;
 
@@ -102,4 +101,15 @@ public class SellerFarmDao implements SellerFarmDaoIf {
   
 
 
+  
+  @Override
+  public List<FarmVo> getSellerFarmList(String id) {
+    return template.selectList("getSellerFarmList", id);
+  }
+
+  @Override
+  public List<CropsVo> getAvailableCropsList(int farmNo) {
+    return template.selectList("getAvailableCropsList",farmNo);
+  }
+  
 }

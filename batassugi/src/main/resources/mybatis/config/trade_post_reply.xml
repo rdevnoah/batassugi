@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+
+   <resultMap type="TradeCommentVo" id="TradeCommentVoRm">
+      <result column="id" property="memberVo.id"/>
+      <result column="nickname" property="memberVo.nickname"/>
+   </resultMap>
+
+   <select id="findReplyListByTradeNo" resultMap="TradeCommentVoRm"  parameterType="int"> <!-- 댓글 리스트 출력 -->
+     select r.id as id, r.trade_no as tradeNo, to_char(r.reply_regdate,'yyyy.mm.dd hh24:mi') as replyRegdate,  r.reply_comment as replyComment, m.nickname as nickname
+     from TRADE_REPLY r, SPIDER_MEMBER m
+     where r.trade_no = #{tradeNo} and r.id=m.id
+   </select>
+   
+   <select id="findRegdateByReplyNo" parameterType="int" resultType="string"> <!-- 댓글 작성 날짜 출력 -->
+      select to_char(reply_regdate,'YYYY.MM.DD HH24:MI') as replyRegdate from trade_reply where reply_no=#{replyNo}
+   </select>
+   
+   <insert id="createReply" parameterType="tradeCommentVo"> <!-- 댓글 작성 -->
+      <selectKey keyProperty="replyNo" resultType="int" order="BEFORE">
+         select trade_reply_SEQ.nextval as replyNo from dual
+      </selectKey>
+       insert into trade_reply(reply_no, id, trade_no, reply_comment) values(#{replyNo}, #{memberVo.id}, #{tradeNo}, #{replyComment})
+   </insert>
+   
+   <delete id="deleteReplyByTradNo" parameterType="int"> <!-- 게시판 글 삭제시 댓글도 같이 삭제 -->
+      delete TRADE_REPLY where trade_no=#{value}
+   </delete>
+</mapper>
+

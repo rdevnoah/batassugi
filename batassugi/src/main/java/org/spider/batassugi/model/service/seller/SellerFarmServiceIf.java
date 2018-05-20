@@ -46,10 +46,6 @@ public interface SellerFarmServiceIf {
   public ListVo findRecruitListByFarmNo(String farmNo, String nowPage);
 
   public Object findBuyerDetailByRentNo(String rentNo);
-
-  
-
-  
   
 }
 
