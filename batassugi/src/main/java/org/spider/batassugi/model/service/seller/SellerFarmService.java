@@ -1,8 +1,11 @@
 package org.spider.batassugi.model.service.seller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.vo.common.CropsVo;
@@ -10,6 +13,7 @@ import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.spider.batassugi.model.vo.seller.ListVo;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 판매자의 농지를 등록 및 수정하는 서비스와 농지를 대여중인 구매자들을 관리하는 서비스입니다.
@@ -147,21 +151,17 @@ public class SellerFarmService implements SellerFarmServiceIf {
     return map;
   }
 
-  
-/*=======
-public class SellerFarmService implements SellerFarmServiceIf {
-  
-  @Resource
-  private SellerFarmDaoIf sellerFarmDao;
-  
   @Override
-  public List<FarmVo> getSellerFarmList(String id) {
-    List<FarmVo> farmList = sellerFarmDao.getSellerFarmList(id);
-    for (int i = 0; i < farmList.size(); i++) {
-      List<CropsVo> cropsList = sellerFarmDao.getAvailableCropsList(farmList.get(i).getFarmNo()); 
-      farmList.get(i).setCropsVo(cropsList);
-    }
-    return farmList;
+  public String farmImg(FarmVo fvo) throws IllegalStateException, IOException {
+    MultipartFile multifile = fvo.getFile();
+    String filename = multifile.getOriginalFilename();
+    String fileSavePath =
+        "C:\\Users\\Administrator\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\farm_photo\\";
+    UUID uu = UUID.randomUUID();
+    File f = new File(fileSavePath + uu + "_" + filename);
+    multifile.transferTo(f);
+    return f.getName();
   }
->>>>>>> refs/heads/develop_to_buyer*/
+
+  
 }
