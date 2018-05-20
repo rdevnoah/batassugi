@@ -15,12 +15,12 @@
 <div class="container">
    <%-- 가장 위쪽 헤더 --%>
 	<div class="row">
-	    <div class="col-xs-4 mainLogo">
+	    <div class="col-xs-2 mainLogo">
 			<a href="${pageContext.request.contextPath}/">
 				<img src=" ${pageContext.request.contextPath}/resources/img/logo.png" class="img-responsive mainLogo" />
 			</a>
 		</div><!--
-	    --><div class="col-xs-8 vcenter">
+	    --><div class="col-xs-10 vcenter">
    		<ul>
    			<li style="border-left:0px !important;"><a class="choice" href="${pageContext.request.contextPath}/">Home</a></li>
    			<li><a href="${pageContext.request.contextPath}/home/introduction_website">사이트소개</a></li>
@@ -45,10 +45,15 @@
 	             <c:if test="${sessionScope.mvo.memberVo.memberLevel == '초급'||sessionScope.mvo.memberVo.memberLevel == '중급'||sessionScope.mvo.memberVo.memberLevel == '고급'}">
 	            	<li><a href="${pageContext.request.contextPath}/buyer_Home">마이페이지</a></li>	            
 	            </c:if>
-				<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>    
 			</c:otherwise>
            	</c:choose>
-   		</ul> 
+   		</ul>
+   		   		    <div id="memberInfo">
+	<c:if test="${sessionScope.mvo!=null}">
+			<span id="memberInfoId">${sessionScope.mvo.memberVo.nickname}</span>님(${sessionScope.mvo.memberVo.memberLevel})
+			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+	</c:if>
+</div>
     </div> <%-- col-xs-8 vcenter --%>
    </div>  <%-- row --%>
 </div> <%-- container --%>

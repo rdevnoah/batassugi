@@ -1,17 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 메인영역 입니다 --%>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경1.jpg">
+			</div>
+		</div>
+	</div>
+</div> <%-- container --%>
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <form class="form-horizontal" action="${pageContext.request.contextPath}/crops_detail" method="post" name="crops_detail" id="crops_detail" enctype="multipart/form-data">
-        <%-- 판넬 헤드 : 농작물 사전 --%>
-        <div class="panel-heading">
-          <div class="panel-title text-left">
-            <h3>밭아쓰기에 오신 것을 환영합니다.</h3>
-          </div>
-        </div>
-		      </form><%-- form 영역 --%>
-    </div><%-- 메인영역 --%>
-  </div><%-- 전체 row --%>
-</div><%-- 전체 container --%>
+	<div class="row">
+		<div class="col-xs-12">
+			<a>게시판들어가기</a>
+			<c:forEach begin="1" end="10" var="i">
+				<h1><a>${i}</a></h1>
+			</c:forEach>
+		</div> <%-- col-xs-offset-2 col-xs-12 --%>
+	</div> <%-- row --%>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경2.jpg">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<c:forEach begin="1" end="10" var="i">
+				<h1>${i}</h1>
+			</c:forEach>
+		</div> <%-- col-xs-12 --%>
+	</div> <%-- row --%>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경3.jpg">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<c:forEach begin="1" end="10" var="i">
+				<h1>${i}</h1>
+			</c:forEach>
+		</div> <%-- col-xs-12 --%>l
+	</div> <%-- row --%>
+</div>
+
