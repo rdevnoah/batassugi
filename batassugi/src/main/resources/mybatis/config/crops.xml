@@ -21,8 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   <!-- 농작물 사전 헤더 메뉴 클릭시 농작물사전 아이콘 리스트를 가져옴 -->
   <select id="getIconList" resultMap="cropsRm">
-    select crops_no, crops_icon
-    from crops_info
+    select ci.crops_no, ci.crops_icon, c.crops_name from crops_info ci, CROPS c 
+    where c.crops_no=ci.crops_no
   </select>
 
   <!-- 농작물 사전에서 아이콘을 클릭시 농작물 정보를 가져옴 -->

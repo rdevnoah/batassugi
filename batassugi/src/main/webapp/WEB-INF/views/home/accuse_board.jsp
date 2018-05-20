@@ -81,6 +81,7 @@
             <div class="panel-title text-left">증빙자료 업로드</div>
           </div> 
 		 <div class="row">
+		 <div class="subInfo">
            <div class="col-md-6">
           	<div class="form-group">
           		<label class="control-label col-sm-3">
@@ -92,19 +93,19 @@
                     <span class="input-group-addon" id="file_upload"></span> 
                     <input type="file" name="file" id="file" class="form-control upload" placeholder="증빙자료를 첨부해주세요" required="required"
                      onchange="LoadImg(this);" aria-describedby="file_upload">
-                    <button type="button" onclick="ResetImgvalue();">취소</button>
+                    <button type="button" onclick="ResetImgvalue();" id="cancelButton">취소</button>
                     </div>
                 </div>
 			</div>
             </div>
+            </div>
             </div> <%--row --%>
             <%--제출 버튼 --%>
-            <div class="form-group">
-              <div class="col-xs-offset-3 col-xs-10">
-                <input name="submit" type="submit" value="신고하기" class="btn btn-primary">
-              </div>
-            </div>            
         </div>	<!-- 판넬 폼 종료 -->
+         <%--제출 버튼 --%>
+        	<div class="col-xs-12 registerBtn">
+                <input name="submit" type="submit" value="신고하기" class="btn btn-primary" style="background-color: red">
+              </div>
       </form><%-- form 영역 --%>
     </div><%-- 메인영역 --%>
   </div><%-- 전체 row --%>
