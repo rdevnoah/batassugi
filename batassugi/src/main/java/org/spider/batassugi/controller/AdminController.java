@@ -74,6 +74,7 @@ public class AdminController {
   public String updateMemberInfo(@ModelAttribute("memberInfoVo") MemberInfoVo uvo,
       HttpServletRequest request) {
     MemberInfoVo memberInfoVo = memberService.updateMemberInfo(uvo);
+    memberService.findLikeCropsById(memberInfoVo);
     HttpSession session = request.getSession();
     session.setAttribute("mvo", memberInfoVo);
     return "redirect:updateMember_success";

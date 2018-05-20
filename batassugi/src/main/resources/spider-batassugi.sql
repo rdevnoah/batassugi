@@ -207,13 +207,10 @@ CREATE TABLE apply_seller
     CONSTRAINT APPLY_FAMMER_PK PRIMARY KEY (apply_no),
     CONSTRAINT FK_apply_fammer_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
-<<<<<<< HEAD
 
-
-=======
 	alter table apply_seller add apply_date date not null
 	ALTER TABLE apply_seller MODIFY (farmer_document VARCHAR2(500));
->>>>>>> refs/heads/develop_to_buyer
+
 -- 판매자 지원 신청번호 시퀀스
 CREATE SEQUENCE apply_fammer_SEQ nocache;
 
