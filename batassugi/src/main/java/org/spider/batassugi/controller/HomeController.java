@@ -218,6 +218,44 @@ public class HomeController {
     return "home/accuse_success.tiles";
   }
   
+  /**
+   * 회원정보 수정폼으로 이동.
+   * 
+   * @author "PL_Seonhwa"
+   * @param model
+   * @return
+   */
+  @RequestMapping("{dirName}/myinfoView")
+  public String adminMyinfoView(@PathVariable String dirName,Model model) {
+    model.addAttribute("list", memberService.getAllCropsList());
+    if(dirName=="admin") {
+      return dirName + "/myinfoView.tiles";
+    }else if(dirName=="seller") {
+      return dirName + "/myinfoView.tiles";
+    }else {
+      return dirName + "/myinfoView.tiles";
+    }
+  }
+
+  /**
+   * 회원정보 update.
+   * 
+   * @author "PL_Seonhwa"
+   * @param uvo
+   * @param request
+   * @return
+   */
+  @RequestMapping("{dirName}/updateMemberInfo")
+  public String updateMemberInfo(@ModelAttribute("memberInfoVo") MemberInfoVo uvo,
+      HttpServletRequest request,@PathVariable String dirName ) {
+    MemberInfoVo memberInfoVo = memberService.updateMemberInfo(uvo);
+    memberService.findLikeCropsById(memberInfoVo);
+    HttpSession session = request.getSession();
+    session.setAttribute("mvo", memberInfoVo);
+    return "redirect:updateMember_success";
+  }
+  
+  
   @RequestMapping("home/accuse_board")
   public String getAllMemberList(Model model) {
    List<MemberInfoVo> list = accuseService.getAllMemberList();

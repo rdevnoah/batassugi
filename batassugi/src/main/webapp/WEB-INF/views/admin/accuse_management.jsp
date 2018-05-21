@@ -1,79 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
-table, th, td {
-	border: 1px solid black;
-}
-</style>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-       <form class="form-horizontal" action="${pageContext.request.contextPath}/adminAccuse" method="post"name="adminAccuse" 
-      id="adminAccuse" enctype="multipart/form-data" >
-        <div class="panel-heading">
-          <div class="panel-title text-left">
-            <h3>신고관리</h3>
-            <table>
-            <thead>
-            <tr>
-            	<th>#</th><th>신청일</th><th>신청자 ID</th><th>신고대상</th><th>분류</th><th>처리상태</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="list" items="${accuseList}">
-            <tr class="accuseListRow">
-            	<td>${list.accuseNo}</td>
-            	<td>${list.accuseDate}</td>
-            	<td>${list.accuseId}</td>
-            	<td>${list.reportedId}</td>
-            	<td>${list.accuseCategory}</td>
-            	<td>${list.accuseState}</td>
-            </tr>
-            </c:forEach>
-            </tbody>
-            </table>
-            <!-- 페이징 -->
-<ul>
-	<!-- < -->
+<div class="container-fluid">
+	<!-- 관리 전체영역 -->
+	<div class="manage_content">
+		<!-- 관리 타이틀 -->
+		<div class="manage_title">
+			<span id="manage_title_big">신고 처리 승인</span>
+			<span id="manage_title_small">회원이 신고한 내역을 처리하는 페이지입니다.</span> 
+		</div><!-- 관리 타이틀 -->
+		<!-- 관리 테이블 -->
+		<table class="table">
+			<thead class="manage_thead">
+				<tr>
+	            	<th>번호</th><th>신청일</th><th>신청자 ID</th><th>신고대상</th><th>분류</th><th>처리상태</th>
+	            </tr>
+			</thead>
+			<tbody class="manage_tbody">
+				<c:forEach var="list" items="${accuseList}">
+		            <tr class="accuseListRow">
+		            	<td>${list.accuseNo}</td>
+		            	<td>${list.accuseDate}</td>
+		            	<td>${list.accuseId}</td>
+		            	<td>${list.reportedId}</td>
+		            	<td>${list.accuseCategory}</td>
+		            	<td>
+		            		<c:if test="${list.accuseState=='미처리'}">
+		            			<span id="nostate">${list.accuseState}</span>
+		            		</c:if>
+		            		<c:if test="${list.accuseState=='신고승인'}">
+		            			<span id="acceptstate">${list.accuseState}</span>
+		            		</c:if>
+		            		<c:if test="${list.accuseState=='신고거절'}">
+		            			<span id="refusestate">${list.accuseState}</span>
+		            		</c:if>
+		            	</td>
+		            </tr>
+           		</c:forEach>
+			</tbody>
+		</table><!-- 관리 테이블 -->
+		<div class="manager_paging">
+	<nav aria-label="...">
+		<ul class="pagination justify-content-center">
+			<!-- Previous -->
+			<c:if test="${paging.previousPageGroup==false}">
+				<li class="page-item  disabled"><span class="page-link">Previous</span></li>
+			</c:if>
+			<c:if test="${paging.previousPageGroup}">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/applySellerView?nowPage=${paging.startPageOfPageGroup-1}">Previous</a></li>
+			</c:if>
+			
+			<!-- 숫자 부분 -->
+			<c:forEach var="page" begin="${paging.startPageOfPageGroup}" end="${paging.endPageOfPageGroup}">
+				<c:choose>
+					<c:when test="${page!=paging.nowPage}">	
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/applySellerView?nowPage=${page}">${page}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item active"><span class="page-link">${page}<span class="sr-only">(current)</span></span></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- next -->
+			<c:if test="${paging.nextPageGroup==false}">
+				<li class="page-item  disabled"><span class="page-link">Next</span></li>
+			</c:if>
+			<c:if test="${paging.nextPageGroup}">
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/applySellerView?nowPage=${paging.endPageOfPageGroup+1}">Next</a></li>
+			</c:if>
+		</ul>
+	</nav>
+	</div><!-- manage_paging -->
+		
+		
+	</div><!--관리 전체영역 -->
+</div><!-- container -->
 
-	<c:if test="${paging.previousPageGroup==true}">
-		<li><a
-			href="${pageContext.request.contextPath}/adminAccuse?nowPage=${paging.startPageOfPageGroup-1}">&lt;</a></li>
-	</c:if>
-	<!-- 1,2,3,4,5 -->
-	<c:forEach var="page" begin="${paging.startPageOfPageGroup}"
-		end="${paging.endPageOfPageGroup}">
-		<c:choose>
-			<c:when test="${page!=paging.nowPage}">
-				<li><a
-					href="${pageContext.request.contextPath}/adminAccuse?nowPage=${page}">${page}</a></li>
-			</c:when>
-			<c:otherwise>
-				<li>${page}</li>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
 
-	<!-- > -->
-	<c:if test="${paging.nextPageGroup==true}">
-		<li><a
-			href="${pageContext.request.contextPath}/adminAccuse?nowPage=${paging.endPageOfPageGroup+1}">&gt;</a></li>
-	</c:if>
-</ul>
-            
-            
-            
-          </div>
-        </div>
-      </form><%-- form 영역 --%>
-    </div><%-- 메인영역 --%>
-  </div><%-- 전체 row --%>
-</div><%-- 전체 container --%>
 
 <!-- 컨텐츠 모달 -->
 <div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog ">
 
 <!-- Modal content-->
 		<div class="modal-content">
@@ -82,35 +89,39 @@ table, th, td {
 				<h4 class="modal-title">신고정보</h4>
 			</div>
 			<div class="modal-body">
-				신고번호 : <span id="accuseNo"></span><br>
-				신고자 : <span id="accuseId"></span><br>
-				신고대상자 : <span id="reportedId"></span><br>
-				신고분류 : <span id="accuseCategory"></span><br>
-				신고사유 : <span id="accuseReason"></span><br>
-				신고일자 : <span id="accuseDate"></span><br>
-				신고처리상태 :<span id="accuseState_val"></span><br>
-				신고증거 : <span id="accuseProof"></span>
-				<div id="reason"></div>
-				<div id="resultDate"></div>
-				
-				<!-- 지원신청 폼 -->
-				<form name="accusePro" method="post" id="accusePro" action="${pageContext.request.contextPath}/accusePro">
-				<div id="accuseForm">
-				<input type="hidden" name="accuseNo" id="accuseNo_val" value="번호" >
-				<input type="hidden" name="accuseId" id="accuseId_val" value="신고자" >
-				<input type="hidden" name="reportedId" id="reportedId_val" value="신고대상자" >
-				<label><input type="radio" name="accuseState" value="신고승인" onClick="this.form.resultReason.disabled=true" checked >신고승인</label><br>
-				<label><input type="radio" id="radio" name="accuseState" value="신고거절" onClick="this.form.resultReason.disabled=false" >신고거절</label>
-				<br>
-				<textarea name="resultReason" disabled="disabled"></textarea>
+				<div class="row">
+						<div class="col-sm-4 accuseProofForm">
+							<span id="accuseProof"></span>
+							<div>신고증거</div>
+						</div>
+						<div class="col-sm-8 accuseInfo">
+							신고번호 : <span id="accuseNo" class="applyContent"></span><br>
+							신고자 : <span id="accuseId" class="applyContent"></span><br>
+							신고대상자 : <span id="reportedId" class="applyContent"></span><br>
+							신고분류 : <span id="accuseCategory" class="applyContent"></span><br>
+							신고사유 : <span id="accuseReason" class="applyContent"></span><br>
+							신고일자 : <span id="accuseDate" class="applyContent"></span><br>
+							신고처리상태 :<span id="accuseState_val" class="applyContent"></span><br>
+							<div id="reason" class="applyContent"></div>
+							<div id="resultDate" class="applyContent"></div>
+							<!-- 지원신청 폼 -->
+							<form name="accusePro" method="post" id="accusePro" action="${pageContext.request.contextPath}/accusePro">
+							<div id="accuseForm" class="applyContent">
+							<input type="hidden" name="accuseNo" id="accuseNo_val" value="번호" >
+							<input type="hidden" name="accuseId" id="accuseId_val" value="신고자" >
+							<input type="hidden" name="reportedId" id="reportedId_val" value="신고대상자" >
+							<label><input type="radio" id="radioBtn1" name="accuseState" value="신고승인" >신고승인</label><br>
+							<label><input type="radio" id="radioBtn2" name="accuseState" value="신고거절" >신고거절</label>
+							<br>
+							<textarea name="resultReason" class="reasonTx" id="reasonTx"></textarea>
+							</div>
+							</form>
+						</div>
 				</div>
-				<input type="submit" value="처리">
-				</form>
-				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal" id="accuseProBtn"> 제출</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 
@@ -121,6 +132,16 @@ table, th, td {
 
 <script>
 $(document).ready(function() {
+	// 라디오버튼 승인시 멘트 없애기
+	 $("#radioBtn1").click(function() {
+		$("#reasonTx").hide();
+	})
+
+	$("#radioBtn2").click(function() {
+		$("#reasonTx").show();
+	})
+	
+	
 	
 	// 판매자 신청 row 클릭시 모달 띄우기
 	var accuseNo ;
@@ -139,6 +160,10 @@ $(document).ready(function() {
 			url : "${pageContext.request.contextPath}/admin/detailaccuse",
 			data : "accuseNo=" + accuseNo,
 			success : function(data) {
+				$("#radioBtn2").prop('checked', true);
+	        	 $("#reasonTx").show();
+	        	 $("#reason").hide();
+	        	 $("#resultDate").hide();
 				if(data.accuseState=="미처리"){
 				 $("#accuseNo").html(data.accuseNo);
 				 $("#accuseId").html(data.accuseId);
@@ -167,6 +192,7 @@ $(document).ready(function() {
 					 $("#accuseProof").html("<img src=\"${pageContext.request.contextPath}/resources/img/accuse_img/"
 							 +data.accuseProof+"\" width=\"100px\" onclick=\"doImgPop('${pageContext.request.contextPath}/resources/img/accuse_img/"+data.accuseProof+"')\">");
 					 if(data.accuseState=="신고거절"){
+						 $("#reason").show();
 						 $("#reason").html("신고거절 사유 : "+data.resultReason)
 					 }
 					 $("#resultDate").html("처리 날짜 : "+data.accuseResultday )
@@ -178,10 +204,13 @@ $(document).ready(function() {
 			}//success      
 		});//ajax 
     })//모달
-    $('#myModal').on('hidden.bs.modal', function () {
-        $(this).removeData('bs.modal');
-  });
+	   // submint botton 누르면 제출
+	   $("#accuseProBtn").click(function() {
+		   $('#accusePro').submit();
+	   });	
 }); //ready
+
+
 
 
 //이미지 눌렀을 때 미리보기
