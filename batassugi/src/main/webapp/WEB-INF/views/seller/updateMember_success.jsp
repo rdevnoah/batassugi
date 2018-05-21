@@ -5,7 +5,7 @@
 		title : '밭아쓰기',
 		message : '회원정보 수정이 완료되었습니다',
 		onhidden : function() {
-			location.href=("${pageContext.request.contextPath}/seller/seller_home");
+			location.href=("${pageContext.request.contextPath}/seller_Home");
 		}
 	});
 </script>

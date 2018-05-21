@@ -9,7 +9,6 @@ import org.spider.batassugi.model.service.seller.RecruitServiceIf;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-import org.spider.batassugi.model.vo.common.MemberVo;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.spider.batassugi.model.vo.seller.ListVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
