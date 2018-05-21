@@ -20,7 +20,7 @@
 							<img src="${pageContext.request.contextPath}/resources/img/작물3.png">
 							<img src="${pageContext.request.contextPath}/resources/img/작물4.png"> --%>
 							<c:forEach items="${list.farmVo.cropsVo}" var="crops">
-								${crops.cropsName}
+									<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
 							</c:forEach>
 						</p>
 						<!-- 						

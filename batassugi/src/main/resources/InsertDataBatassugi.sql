@@ -4,16 +4,37 @@
  */
 
 -- 작물 정보
-INSERT INTO crops VALUES(crops_SEQ.nextval, '브로콜리', '하');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '땅콩', '하');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '옥수수', '중');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '부추', '하');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '깻잎', '중');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '케일', '중');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '호박', '상');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '대파', '상');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '쪽파', '하');
-INSERT INTO crops VALUES(crops_SEQ.nextval, '마늘', '중');
+INSERT INTO crops VALUES(crops_SEQ.nextval, '브로콜리', '하'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '땅콩', '하'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '옥수수', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '부추', '하'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '깻잎', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '케일', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '호박', '상'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '대파', '상'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '쪽파', '하'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '마늘', '중'); 
+
+INSERT INTO crops VALUES(crops_SEQ.nextval, '가지', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '감자', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '검은콩', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '고구마', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '고추', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '당근', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '대파', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '딸기', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '메론', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '무', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '방울토마토', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '배추', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '수박', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '시금치', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '양배추', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '양파', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '오이', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '참외', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '토마토', '중'); 
+INSERT INTO crops VALUES(crops_SEQ.nextval, '포도', '중'); 
 
 -- 작물사전 상세보기 테스트용 DB
 INSERT INTO crops_info VALUES(1, 'broccoli1.jpg','broccoli2.jpg','broccoli3.jpg','broccoli4.jpg','1월~3월','4월~6월',
@@ -395,52 +416,40 @@ INSERT INTO recruit(recruit_no, farm_no, recruit_kind, recruit_startdate, recrui
 VALUES(recruit_SEQ.nextval, 20, '대여', to_date('18.06.10','yy.mm.dd'), to_date('18.07.10','yy.mm.dd'), 1000, '고민하지말고 당장 ㄱㄱ해','모집중',30000);
 
 SELECT * FROM recruit;
+delete from available_crops
 
 -- 작물 정보 추가
 INSERT INTO available_crops(crops_no, farm_no) VALUES(1,1);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,2);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,3);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,4);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,5);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,6);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,7);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,8);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,9);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(2,2);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(3,3);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(4,4);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(5,5);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(6,6);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(7,7);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(8,8);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(9,9);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(10,10);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(11,11);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(12,12);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(13,13);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(14,14);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(15,15);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(16,16);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(17,17);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(18,18);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(19,19);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(20,20);
+
+INSERT INTO available_crops(crops_no, farm_no) VALUES(21,1);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(22,2);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(23,3);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(24,4);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(25,5);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(26,6);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(27,7);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(28,8);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(29,9);
 INSERT INTO available_crops(crops_no, farm_no) VALUES(1,10);
-
-INSERT INTO available_crops(crops_no, farm_no) VALUES(2,1);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(3,2);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(4,3);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(5,4);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(6,5);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(7,6);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(8,7);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(9,8);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(10,9);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(2,10);
-
-INSERT INTO available_crops(crops_no, farm_no) VALUES(3,1);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(4,2);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(5,3);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(6,4);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(7,5);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(8,6);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(9,7);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(10,8);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(2,9);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(3,10);
-
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,11);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,12);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,13);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,14);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,15);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,16);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,17);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,18);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,19);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(1,20);
-
 INSERT INTO available_crops(crops_no, farm_no) VALUES(2,11);
 INSERT INTO available_crops(crops_no, farm_no) VALUES(3,12);
 INSERT INTO available_crops(crops_no, farm_no) VALUES(4,13);
@@ -450,19 +459,28 @@ INSERT INTO available_crops(crops_no, farm_no) VALUES(7,16);
 INSERT INTO available_crops(crops_no, farm_no) VALUES(8,17);
 INSERT INTO available_crops(crops_no, farm_no) VALUES(9,18);
 INSERT INTO available_crops(crops_no, farm_no) VALUES(10,19);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(2,20);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(11,20);
 
-INSERT INTO available_crops(crops_no, farm_no) VALUES(3,11);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(4,12);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(5,13);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(6,14);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(7,15);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(8,16);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(9,17);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(10,18);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(2,19);
-INSERT INTO available_crops(crops_no, farm_no) VALUES(3,20);
-
+INSERT INTO available_crops(crops_no, farm_no) VALUES(10,1);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(11,2);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(12,3);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(13,4);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(14,5);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(15,6);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(16,7);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(17,8);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(18,9);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(19,10);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(20,11);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(21,12);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(22,13);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(23,14);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(24,15);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(25,16);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(26,17);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(27,18);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(28,19);
+INSERT INTO available_crops(crops_no, farm_no) VALUES(29,20);
 SELECT * FROM available_crops;
 
 

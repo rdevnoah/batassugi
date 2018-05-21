@@ -322,3 +322,21 @@ CREATE TABLE accuse
     CONSTRAINT FK_accuse_reported_id_spider_m FOREIGN KEY (reported_id) REFERENCES spider_member (id)   
 );
 drop table accuse
+
+
+
+    SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, recruit_no, recruit_kind, 
+      recruit_enddate, recruit_status, recruit_size, farm_no 
+      FROM recruit)R, farm F
+    WHERE R.farm_no = F.farm_no
+    AND rnum BETWEEN 5 AND 10
+    ORDER BY rnum DESC
+    
+    select * from farm
+    
+    select * from available_crops order by crops_no desc;
