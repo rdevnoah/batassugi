@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.vo.buyer;
 
 import org.spider.batassugi.model.vo.common.MemberVo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 구매자가 거래 게시판 작성한 거래글을 저장하는 클래스입니다.
@@ -19,24 +20,27 @@ import org.spider.batassugi.model.vo.common.MemberVo;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "Team Spider"    최초작성
+ * 2018. 5. 16.  "SM HyeonGil Kim"  MultipartFile file 추가
  *      </pre>
  */
 public class TradePostVo {
-  private Integer tradeNo;
+  private int tradeNo;
   private String tradeKind;
-  private Integer tradeHits;
+  private int tradeHits;
   private String tradeTitle;
   private String tradeContent;
   private String tradePhoto;
+  private String regdate;
   private MemberVo memberVo;
+  private  MultipartFile file;
 
   public TradePostVo() {
     super();
   }
-
   /**
    * 구매자가 거래글을 작성한 거래게시판VO입니다.
    * 
+   * @author "SM HyeonGil Kim"
    * @param tradeNo 거래게시판 번호.
    * @param tradeKind 거래 종류.
    * @param tradeHits 거래 조회수.
@@ -44,10 +48,11 @@ public class TradePostVo {
    * @param tradeContent 거래 게시판 내용.
    * @param tradePhoto 거래 게시판 내용 사진.
    * @param memberVo 거래 게시판 작성한 회원 정보.
+   * @param file 파일업로드.
    */
-
-  public TradePostVo(Integer tradeNo, String tradeKind, Integer tradeHits, String tradeTitle,
-      String tradeContent, String tradePhoto, MemberVo memberVo) {
+  
+  public TradePostVo(int tradeNo, String tradeKind, int tradeHits, String tradeTitle,
+      String tradeContent, String tradePhoto, MemberVo memberVo, MultipartFile file) {
     super();
     this.tradeNo = tradeNo;
     this.tradeKind = tradeKind;
@@ -56,6 +61,7 @@ public class TradePostVo {
     this.tradeContent = tradeContent;
     this.tradePhoto = tradePhoto;
     this.memberVo = memberVo;
+    this.file = file;
   }
 
   public Integer getTradeNo() {
@@ -114,12 +120,27 @@ public class TradePostVo {
     this.memberVo = memberVo;
   }
 
+  public String getRegdate() {
+    return regdate;
+  }
+
+  public void setRegdate(String regdate) {
+    this.regdate = regdate;
+  }
+  
+  public MultipartFile getFile() {
+    return file;
+  }
+  
+  public void setFile(MultipartFile file) {
+    this.file = file;
+  }
+  
   @Override
   public String toString() {
     return "TradePostVo [tradeNo=" + tradeNo + ", tradeKind=" + tradeKind + ", tradeHits="
         + tradeHits + ", tradeTitle=" + tradeTitle + ", tradeContent=" + tradeContent
-        + ", tradePhoto=" + tradePhoto + ", memberVo=" + memberVo + "]";
+        + ", tradePhoto=" + tradePhoto + ", regdate=" + regdate + ", memberVo=" + memberVo + "]";
   }
-
 
 }

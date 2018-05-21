@@ -32,6 +32,22 @@
  	</definition>
  	
  	
+
+ 	<!-- 판매자 메인 -->
+ 	<definition name="seller.tiles" template="/WEB-INF/views/seller/template/layout.jsp">
+ 		<put-attribute name="seller_title" value="spider_seller" />
+ 		<put-attribute name="seller_header" value="/WEB-INF/views/seller/template/header.jsp"/>
+ 		<put-attribute name="seller_left" value="/WEB-INF/views/seller/template/left.jsp"/>
+ 		<put-attribute name="seller_main" value="/WEB-INF/views/seller/template/main.jsp"/>
+ 	</definition>
+ 	
+ 	<definition name="seller/*.tiles"  extends="seller.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="seller_main"  value="/WEB-INF/views/seller/{1}.jsp"/>
+ 	</definition>
+ 	
+ 	
+
  	
 <!-- 공통메인 --> 	
  	<definition name="home.tiles" template="/WEB-INF/views/templates/layout.jsp">
@@ -51,6 +67,18 @@
  		<put-attribute name="title" value="{1}"/>
  		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
  	</definition> 
+ 	
+ 	<!-- <definition name="info.tiles" template="/WEB-INF/views/infoTemplates/layout_info.jsp">
+ 		<put-attribute name="title" value="spider-info"/>
+ 		<put-attribute name="header" value="/WEB-INF/views/infoTemplates/header_info.jsp"/>
+ 		<put-attribute name="left" value="/WEB-INF/views/infoTemplates/left_info.jsp"/>
+ 		<put-attribute name="main" value="/WEB-INF/views/infoTemplates/main_info.jsp"/>
+ 		<put-attribute name="footer" value="/WEB-INF/views/infoTemplates/footer_info.jsp"/>
+ 	</definition>
+ 	<definition name="*/*.tiles" extends="info.tiles">
+ 		<put-attribute name="title" value="{1}"/>
+ 		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp"/>
+ 	</definition> -->
  </tiles-definitions>
  
  

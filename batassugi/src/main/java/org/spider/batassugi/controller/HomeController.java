@@ -1,9 +1,10 @@
 package org.spider.batassugi.controller;
 
 import java.util.List;
-
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.service.admin.AccuseServiceIf;
@@ -83,7 +84,8 @@ public class HomeController {
    * @return
    */
   @RequestMapping("login")
-  public String login(HttpServletRequest request, Model model, MemberVo vo) {
+  public String login(HttpServletRequest request, Model model, MemberVo vo,
+      HttpServletResponse response) {
     try {
       HttpSession session = request.getSession();
       MemberInfoVo mvo = memberService.login(vo);
@@ -91,6 +93,15 @@ public class HomeController {
       memberService.findLikeCropsById(mvo);
       
       session.setAttribute("mvo", mvo);
+      Cookie[] cookies = request.getCookies();
+      for (int i = 0; i < cookies.length; i++) {
+        if (cookies[i].getName().equals("tradeHits")) {
+          break;
+        } else {
+          Cookie tradeHits = new Cookie("tradeHits", "!!");
+          response.addCookie(tradeHits);
+        }
+      }
       return "redirect:/";
     } catch (LoginException e) {
       model.addAttribute("message", e.getMessage());
@@ -206,6 +217,44 @@ public class HomeController {
     accuseService.registerAccuseInfo(accusePostVo);
     return "home/accuse_success.tiles";
   }
+  
+  /**
+   * 회원정보 수정폼으로 이동.
+   * 
+   * @author "PL_Seonhwa"
+   * @param model
+   * @return
+   */
+  @RequestMapping("{dirName}/myinfoView")
+  public String adminMyinfoView(@PathVariable String dirName,Model model) {
+    model.addAttribute("list", memberService.getAllCropsList());
+    if(dirName=="admin") {
+      return dirName + "/myinfoView.tiles";
+    }else if(dirName=="seller") {
+      return dirName + "/myinfoView.tiles";
+    }else {
+      return dirName + "/myinfoView.tiles";
+    }
+  }
+
+  /**
+   * 회원정보 update.
+   * 
+   * @author "PL_Seonhwa"
+   * @param uvo
+   * @param request
+   * @return
+   */
+  @RequestMapping("{dirName}/updateMemberInfo")
+  public String updateMemberInfo(@ModelAttribute("memberInfoVo") MemberInfoVo uvo,
+      HttpServletRequest request,@PathVariable String dirName ) {
+    MemberInfoVo memberInfoVo = memberService.updateMemberInfo(uvo);
+    memberService.findLikeCropsById(memberInfoVo);
+    HttpSession session = request.getSession();
+    session.setAttribute("mvo", memberInfoVo);
+    return "redirect:updateMember_success";
+  }
+  
   
   @RequestMapping("home/accuse_board")
   public String getAllMemberList(Model model) {

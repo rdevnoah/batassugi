@@ -4,9 +4,25 @@
 
 /* 이상욱 : 모든 앵커 커서모양을 포인터로 변경하고 앵커의 밑줄을 없애고 글씨 색상을 검정색으로 변경 */
 a {
-	cursor: pointer;
-	text-decoration: none;
-	color: black;
+   cursor: pointer;
+   text-decoration: none;
+   color: black;
+}
+
+.rent {
+   margin-right: 50px; 
+   padding: 0px;
+}
+.rent>.caption {
+   color: black;
+}
+
+.rent {
+   margin-right: 50px; 
+   padding: 0px;
+}
+.rent>.caption {
+   color: black;
 }
 
 /* 이상욱 : 패럴랙스 사진 사이즈 조정 */
@@ -16,15 +32,31 @@ a {
 
 /* navMenu에 선택된 메뉴 글씨색 검정색으로 변경*/
 .choice{
-	color: black !important;
+   color: black !important;
+}
+
+.rent {
+   margin-right: 50px; 
+   padding: 0px;
+}
+.rent>.caption {
+   color: black;
+}
+
+.rent {
+	margin-right: 50px; 
+	padding: 0px;
+}
+.rent>.caption {
+	color: black;
 }
 
 /* 조선화 : 메인 로고 이미지 사이즈 */
 
 .mainLogo {
-	display: inline-block;
-	vertical-align: middle;
-	float: none;
+   display: inline-block;
+   vertical-align: middle;
+   float: none;
 }
 .mainLogo img {
 	height: 150px;
@@ -48,7 +80,7 @@ a {
 
 /* 조선화 : 메뉴 ul */
 .navi ul{
-	margin: auto 0 !important;
+   margin: auto 0 !important;
 }
 
 .vcenter a {
@@ -57,22 +89,22 @@ a {
 }
 
 .vcenter ul{
-	float:right;
+   float:right;
 }
 .vcenter ul li{
-	list-style: none;
+   list-style: none;
 }
 
 .vcenter ul li { 
-	display:inline-block; /* 세로나열을 가로나열로 변경 */ 
-	border-left :1px solid lightgray; /* 각 메뉴의 왼쪽에 "|" 표시(분류 표시) */ 
-	padding:0 20px; /* 각 메뉴 간격 */ 
+   display:inline-block; /* 세로나열을 가로나열로 변경 */ 
+   border-left :1px solid lightgray; /* 각 메뉴의 왼쪽에 "|" 표시(분류 표시) */ 
+   padding:0 20px; /* 각 메뉴 간격 */ 
 }
 
 .vcenter {
-	display: inline-block;
-	vertical-align: middle;
-	float: none;
+   display: inline-block;
+   vertical-align: middle;
+   float: none;
 }
 
 /* 조선화 : 메인 하단 설정 */
@@ -172,6 +204,7 @@ a {
 .crops_info{
 	height: 400px;
 }
+
 
 #loginbox {
     margin-top: 5%; /* 헤더와 로그인box 사이의 간격 */

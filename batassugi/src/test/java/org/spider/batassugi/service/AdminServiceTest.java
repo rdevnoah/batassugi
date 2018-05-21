@@ -40,9 +40,9 @@ public class AdminServiceTest {
     
     
     //판매자 신청 업데이트
-    ApplySellerVo avo=new ApplySellerVo("24",new MemberVo("Tottenham23", null, null, null, null, null, null), null, null, "승인처리", null, null);
+    /*ApplySellerVo avo=new ApplySellerVo("24",new MemberVo("Tottenham23", null, null, null, null, null, null), null, null, "승인처리", null, null);
     avo.setApplyReason("승인처리되었습니다");
     //adminDao.updateMemberLevel(avo.getMemberVo().getId());
-    adminDao.updateApplySellerDate(avo);
+    adminDao.updateApplySellerDate(avo);*/
   }
 }

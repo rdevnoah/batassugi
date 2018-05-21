@@ -1,12 +1,9 @@
 package org.spider.batassugi.model.dao.common;
 
 import java.util.List;
-
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
-import org.spider.batassugi.model.vo.common.CropsVo;
-import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -43,6 +40,4 @@ public class CropsDao implements CropsDaoIf {
   public CropsInfoVo getCropsDetail(String cropsNo) {
     return template.selectOne("crops.getCropsDetail", cropsNo);
   }
-
-  
 }

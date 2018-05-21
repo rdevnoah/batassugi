@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sellerFarm">
+  <resultMap type="farmVo" id="farmRm">
+    <result column="farm_no" property="farmNo"/>
+    <result column="farm_address" property="farmAddress"/>
+  </resultMap>
+
+  <select id="findSellerFarmList" parameterType="string" resultType="farmVo"><!-- farmVo에 밭정보 먼저 저장 -->
+    select farm_no as farmNo, farm_address as farmAddress, farm_size as farmSize, to_char(farm_Enddate, 'yyyy-mm-dd') as farmEnddate , image 
+    from farm
+    where id=#{id}
+  </select>
+
+  <select id="findAvailableCropsList" parameterType="int" resultType="cropsVo"><!-- 이 후 farmVo에 있는 재배가능한 작물들인 cropsVo를 저장한다. -->
+    select c.crops_no as cropsNo, c.crops_name as cropsName 
+    from AVAILABLE_CROPS a, crops c, farm f
+    where f.farm_no=a.farm_no and a.crops_no=c.crops_no and f.farm_no=#{farmNo}
+  </select>
+  
+  <select id="findFarmDetail" parameterType="string" resultType="farmVo">
+    select farm_no as farmNo, farm_size as farmSize, farm_address as farmAddress, to_char(farm_enddate, 'yyyy-mm-dd') farmEnddate, id 
+    from farm
+    where farm_no=#{farmNo}
+  </select>
+  
+  <select id="findRentByFarmNo" parameterType="string" resultType="rentVo">
+    select m.nickname as id, r.rent_size as rentSize from spider_member m, rent r, recruit c
+    where r.id=m.id and c.recruit_no=r.recruit_no and c.farm_no=#{farmNo} and r.rent_status='승인'
+  </select>
+  
+  <select id="findLabels" parameterType="int" resultType="string">
+    select distinct recruit_status from recruit where farm_no=#{farmNo} union all select distinct r.rent_status
+    from rent r, recruit c, farm f
+    where r.recruit_no=c.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo}
+  </select>
+  
+  <select id="getTotalRentListByFarmNo" parameterType="string" resultType="int">
+    select count(*)
+    from rent r, farm f, recruit rc
+    where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo}
+  </select>
+  
+  <select id="findRentPagingList" parameterType="map" resultType="rentVo">
+    select r.rent_no as rentNo, r.recruit_no as recruitNo, r.rent_size as rentSize, r.id, r.rent_month as rentMonth, 
+    r.rent_status as rentStatus from (
+    select row_number() over(order by rent_no desc) as rnum, rent_no, id, recruit_no, rent_size, rent_month, rent_status from rent
+    )r, recruit rc, farm f where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo} and
+    rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+  </select>
+  
+  <select id="findBuyerDetailByRentNo" parameterType="string" resultType="map">
+    select m.nickname as NICKNAME, mi.tel as TEL, 
+    to_char(ADD_MONTHS(r.rent_startdate,r.rent_month),'yyyy-mm-dd') as RENTENDDATE, c.crops_name as CROPSNAME, 
+    round(((sysdate-r.rent_startdate)/(30*r.rent_month))*100) as harvestStatus 
+    from spider_member m, member_info mi, rent r, crops c
+    where m.id=mi.id and r.id=m.id and c.crops_no=r.crops_no and r.rent_no=#{rentNo}
+  </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

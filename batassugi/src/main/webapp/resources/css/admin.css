@@ -60,7 +60,7 @@ i, span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: linear-gradient(to bottom, #223a5e 0%, #3d3f43 100%);
     color: #fff;
     transition: all 0.3s;
 }
@@ -111,7 +111,7 @@ i, span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #1c2e4a;
 }
 
 #sidebar .sidebar-header strong {
@@ -121,7 +121,7 @@ i, span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #0e1725;
 }
 
 #sidebar ul li a {
@@ -130,7 +130,7 @@ i, span {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: #0e1725;
     background: #fff;
 }
 #sidebar ul li a i {
@@ -139,7 +139,7 @@ i, span {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #0e1725;
 }
 
 
@@ -232,7 +232,78 @@ a.article, a.article:hover {
     opacity: 1;
     margin: 5px auto;
 }
+/* 콘텐츠 개별 설정 */ 
+.manage_content{
+	background-color: white;
+	padding:10px;
+}
 
+.manage_title{
+	margin-bottom:20px;
+}
+
+#manage_title_big{
+	font-size: 22px;
+}
+#manage_title_small{
+	font-size: 12px;
+	color: #223a5e;
+}
+
+.manage_thead{
+	background-color: #142338;
+	color:white;
+}
+
+.manage_tbody tr:hover{
+	cursor:pointer;
+	background-color: rgb(27, 47, 75, 0.3);
+}
+
+.manager_paging{
+	text-align: center;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #1b2f4b;
+    border-color: #2f5283;
+}
+
+#nostate{
+	color: grey;
+}
+#acceptstate{
+	color: blue;
+	 font-weight: bold;
+}
+#refusestate{
+	color: red;
+	 font-weight: bold;
+}
+.modal-footer{
+	text-align: center;
+}
+.reasonTx{
+	 resize: none;
+	 width:80%;
+	
+}
+
+.farmdocumentForm{
+	text-align: center;
+	font-weight: bold;
+}
+
+.farmdocumentForm img{
+	width: 150px;
+}
+
+.applyContent, .reasonTx, .resultDate {
+	margin-top:5px;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

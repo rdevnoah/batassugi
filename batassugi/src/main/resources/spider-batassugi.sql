@@ -45,9 +45,12 @@ CREATE TABLE member_info
     CONSTRAINT FK_member_info_id_spidermember FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
+-- 이미지 타입 변경
+alter table member_info modify(image varchar2(500));
+
 -- 멤버 회원 추가
-insert into spider_member values('admin','관리자','1234','관리자','관리자',1);
-insert into MEMBER_INFO values('admin','admin@kosta','경기도 판교',sysdate,'01012345678','여성',sysdate,'default.png')
+insert into spider_member values('123','판매자야','1234','나는판매자','판매자',1);
+insert into MEMBER_INFO values('1234','admin@kosta','경기도 판교',sysdate,'01012345678','여성',sysdate,'default.png')
 
 -- 회원 확인
 select * from SPIDER_MEMBER where id='Tottenham1';
@@ -175,7 +178,7 @@ CREATE TABLE accuse
     CONSTRAINT FK_accuse_accuse_id_spider_mem FOREIGN KEY (accuse_id) REFERENCES spider_member (id),
     CONSTRAINT FK_accuse_reported_id_spider_m FOREIGN KEY (reported_id) REFERENCES spider_member (id)   
 );
-
+select *from accuse;
 
 -- 크롭 시퀀스 생성
 CREATE SEQUENCE  accuse_SEQ nocache;
@@ -205,6 +208,8 @@ CREATE TABLE apply_seller
     CONSTRAINT FK_apply_fammer_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
+	alter table apply_seller add apply_date date not null
+	ALTER TABLE apply_seller MODIFY (farmer_document VARCHAR2(500));
 
 -- 판매자 지원 신청번호 시퀀스
 CREATE SEQUENCE apply_fammer_SEQ nocache;
@@ -305,7 +310,7 @@ insert into spider_member values('Tottenham21','토비 알데르베이럴트','1
 insert into spider_member values('Tottenham22','크리스챤 에릭슨','1234','토튼햄22','초급',23);
 insert into spider_member values('Tottenham23','세르주 오리어','1234','토튼햄23','초급',24);
 insert into spider_member values('Tottenham24','빅토르 완야마','1234','토튼햄24','초급',25);
-insert into spider_member values('Tottenham25','페르난도 요렌테 토레스','1234','토튼햄25','초급',26);
+insert into spider_member values('Tottenham25','페르난도 토레스','1234','토튼햄25','초급',26);
 insert into spider_member values('Tottenham26','헤리 케인','1234','토튼햄26','초급',27);
 insert into spider_member values('Tottenham27','키어란 트리피어','1234','토튼햄27','초급',28);
 insert into spider_member values('Tottenham28','루카스 호드리게스','1234','토튼햄28','초급',29);
@@ -345,13 +350,12 @@ insert into MEMBER_INFO values('Tottenham28','Tottenham28@kosta.com','잉글랜�
 update  SPIDER_MEMBER set member_level='판매자' where id='Tottenham26';
 
 
-
 -- 교환 게시판 테이블
 CREATE TABLE trade_post
 (
     trade_no            NUMBER          NOT NULL, 
-    trade_kind          VARCHAR2(50)    NOT NULL, 
     trade_hits          NUMBER          DEFAULT 0 NOT NULL, 
+    trade_kind          VARCHAR2(50)    NOT NULL, 
     trade_title         VARCHAR2(50)    NOT NULL, 
     trade_content       CLOB            NOT NULL, 
     trade_photo         VARCHAR2(50)    NULL, 
@@ -360,6 +364,11 @@ CREATE TABLE trade_post
     CONSTRAINT TRADE_POST_PK PRIMARY KEY (trade_no),
     CONSTRAINT FK_trade_post_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+-- 교환게시판 등록일 컬럼 추가
+alter table trade_post add  regdate date default sysdate;
+
+-- 교환게시판 사진경로 컬럼 크기 수정
+ALTER TABLE trade_post MODIFY (trade_photo VARCHAR2(500));
 
 -- 교환게시판 시퀀스
 CREATE SEQUENCE trade_post_SEQ nocache;
@@ -431,12 +440,16 @@ CREATE TABLE rent
     id             VARCHAR2(50)    NOT NULL, 
     recruit_no     NUMBER          NOT NULL, 
     rent_size      NUMBER          NOT NULL, 
-    rent_month     NUMBER          NOT NULL, 
-    rent_status    VARCHAR2(50)    DEFAULT '미처리' NOT NULL, 
+    rent_month     NUMBER          NOT NULL,
+    rent_status    VARCHAR2(50)    DEFAULT '대기' NOT NULL, 
     CONSTRAINT RENT_PK PRIMARY KEY (rent_no),
     CONSTRAINT FK_rent_recruit_no_recruit_rec FOREIGN KEY (recruit_no) REFERENCES recruit (recruit_no),
     CONSTRAINT FK_rent_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
+alter table rent add rent_startdate date default sysdate;
+
+--startdate 칼럼 추가
+ alter table rent add rent_startdate date default sysdate;
 
 CREATE SEQUENCE rent_SEQ nocache;
 

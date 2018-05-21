@@ -1,14 +1,17 @@
 package org.spider.batassugi.model.vo.common;
 
 public class CropsVo {
+
   private String cropsNo;
   private String cropsName;
   private String cropsLevel;
 
+
+
   public CropsVo() {
     super();
-    // TODO Auto-generated constructor stub
   }
+
 
   /**
    * 메소드 설명 : 작물 기본 정보 VO.
@@ -23,6 +26,7 @@ public class CropsVo {
     this.cropsName = cropsName;
     this.cropsLevel = cropsLevel;
   }
+
 
   public String getCropsNo() {
     return cropsNo;
@@ -53,6 +57,5 @@ public class CropsVo {
     return "CropsVo [cropsNo=" + cropsNo + ", cropsName=" + cropsName + ", cropsLevel=" + cropsLevel
         + "]";
   }
-
 
 }

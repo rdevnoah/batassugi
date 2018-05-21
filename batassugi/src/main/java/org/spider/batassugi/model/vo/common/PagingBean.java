@@ -41,6 +41,11 @@ public class PagingBean {
     this.nowPage = nowPage;
     this.totalPostCount = totalPostCount;
   }
+  
+  public PagingBean(int totalPostCount) {
+    super();
+    this.totalPostCount = totalPostCount;
+  }
 
   public int getNowPage() {
     return nowPage;

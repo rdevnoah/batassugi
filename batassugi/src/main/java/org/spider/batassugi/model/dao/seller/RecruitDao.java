@@ -34,6 +34,28 @@ public class RecruitDao implements RecruitDaoIf {
   public void registerRecruit(RecruitVo recruitVo) {
     template.insert("recruit.registerRecruit",recruitVo);
   }
+
+  @Override
+  public String findRestFarmSizeByFarmNo(String farmNo) {
+    return template.selectOne("recruit.findRestFarmSizeByFarmNo", farmNo);
+  }
+
+  @Override
+  public String findMaxMonth(String farmNo) {
+    return template.selectOne("recruit.findMaxRecruitMonth",farmNo);
+  }
+
+  @Override
+  public void updateRentStatusConfirm(String rentNo) {
+    template.update("updateRentStatusConfirm", rentNo);
+    
+  }
+
+  @Override
+  public void updateRentStatusReject(String rentNo) {
+    template.update("updateRentStatusReject", rentNo);
+    
+  }
   
 }
 

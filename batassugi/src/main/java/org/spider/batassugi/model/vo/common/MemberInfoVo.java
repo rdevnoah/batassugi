@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
  * </pre>
  */
 public class MemberInfoVo {
+  private String id;
   private MemberVo memberVo;
   private String email;
   private String tel;
@@ -149,6 +150,15 @@ public class MemberInfoVo {
 
   public void setFile(MultipartFile file) {
     this.file = file;
+  }
+  
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   @Override

@@ -18,7 +18,7 @@ public class CommonAspect {
    * @return
    * @throws Throwable 허허.
    */
-/*  @Around("execution()")
+  /*  @Around("execution()")
   public Object report(ProceedingJoinPoint point) throws Throwable {
     Object retValue = null;
     retValue = point.proceed();
