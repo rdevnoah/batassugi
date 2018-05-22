@@ -4,12 +4,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="recruit">
+  <!--  모집을 등록하기 위한 쿼리문입니다. -->
   <insert id="registerRecruit" parameterType="recruitVo">
     insert into recruit 
     values(recruit_seq.nextval, #{farmVo.farmNo}, #{recruitKind}, 
     sysdate, #{recruitEnddate}, #{price}, #{recruitContent}, '모집중', #{recruitSize})
   </insert>
   
+  <!-- 모집 등록 시에 모집 가능한 농지 크기를 불러오기 위한 쿼리문입니다. -->
   <select id="findRestFarmSizeByFarmNo" parameterType="string" resultType="string">
     select (farm_size-(select coalesce(sum(r.rent_size),0) from rent r, recruit c, farm f 
     where c.recruit_no=r.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo}
@@ -18,19 +20,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     from farm
     where farm_no=#{farmNo}
   </select>
-  
+  <!-- 최대 대여 가능한 농지의 크기를 불러오기 위한 쿼리문입니다. -->
   <select id="findMaxRecruitMonth" parameterType="string" resultType="string">
     select ROUND(MONTHS_BETWEEN(farm_enddate,sysdate)) AS maxRentMonth from farm
     where farm_no=#{farmNo}
   </select>
-  
+  <!--  대여인의 대여신청을 수락하여 state를 update시켜주고, 대여 시작 날짜를 수락한 날짜로 바꿔줍니다. -->
   <update id="updateRentStatusConfirm" parameterType="string">
     update rent set rent_Status='승인', rent_startdate=sysdate where rent_no=#{rentNo} 
   </update>
   
+  <!--  대여인의 대여신청을 거절하여 state를 update시켜주는 쿼리문입니다. -->
   <update id="updateRentStatusReject" parameterType="string">
     update rent set rent_Status='거절' where rent_no=#{rentNo} 
   </update>
+  
+  
   <resultMap type="recruitVo" id="recruitVoRM">
     <result column="farmNo" property="farmVo.farmNo" />
     <result column="farmAddress" property="farmVo.farmAddress" />
@@ -41,6 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <result column="tel" property="farmVo.memberInfoVo.tel" />
     <result column="email" property="farmVo.memberInfoVo.email" />
   </resultMap>
+  
+  
   <select id="findRentDetailByRecruitNo" resultMap="recruitVoRM" parameterType="int">
     SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, R.recruit_size AS recruitSize, 
     ROUND(MONTHS_BETWEEN(F.farm_enddate, R.recruit_startdate)) AS maxRentMonth, 
@@ -74,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM recruit
   </select>
   
+  
   <select id="findFarmAvailableCropsListByFarmNo" resultType="cropsVo" parameterType="int">
     SELECT c.crops_no AS cropsNo, c.crops_name AS cropsName, c.crops_level AS cropsLevel
     FROM farm f, recruit r, AVAILABLE_CROPS a, crops c
@@ -83,20 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     AND f.farm_no = #{farmNo}
   </select>
 </mapper>
- <!--
- CREATE TABLE recruit
-(
-    recruit_no           NUMBER          NOT NULL, 
-    farm_no              NUMBER          NOT NULL, 
-    recruit_kind         VARCHAR2(50)    NOT NULL, 
-    recruit_startdate    DATE            NOT NULL, 
-    recruit_enddate      DATE            NOT NULL, 
-    price                NUMBER          NOT NULL, 
-    recruit_content      CLOB            NOT NULL, 
-    recruit_status       VARCHAR2(50)    NOT NULL, 
-    recruit_size         NUMBER          NOT NULL,  
-  -->
-
+ 
 
 
    

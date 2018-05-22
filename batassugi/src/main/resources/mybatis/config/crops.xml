@@ -50,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     values(crops_SEQ.nextval,#{cropsName},#{cropsLevel})
   </insert>
   
+  <!-- 농지 등록 시 작물사전에 등록되어 있는 작물 데이터들을 가져오기 위한 쿼리문입니다. -->
   <select id="getCropsData" resultType="cropsVo">
     select crops_no as cropsNo, 
     crops_name as cropsName, crops_level as

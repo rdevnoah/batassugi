@@ -47,8 +47,18 @@ public interface RecruitDaoIf {
    */
   String findMaxMonth(String farmNo);
 
+  /**
+   * 대여인의 대여신청을 수락하기 위해 rent정보를 update하는 메소드입니다.
+   * @author "PM KimYoungHo"
+   * @param rentNo update가 이뤄질 해당 대여번호입니다.
+   */
   void updateRentStatusConfirm(String rentNo);
-  
+
+  /**
+   * 대여인의 대여신청을 거절하기 위해 rent정보를 update하는 메소드입니다.
+   * @author "PM KimYoungHo"
+   * @param rentNo update가 이뤄질 해당 대여번호입니다.
+   */
   void updateRentStatusReject(String rentNo);
   
 
