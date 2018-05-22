@@ -46,7 +46,7 @@ function LoadImg(value) {
 		   alert("하나 이상의 작물을 선택하세요");
 		   return false;
 	   }else if (endDate < nowDate){
-		   alert("날짜를 다시 확인해주세요");
+		   alert("등록 만료 날짜를 다시 확인해주세요");
 		   return false;
 	   }else{
 		   return true;
@@ -63,7 +63,7 @@ function LoadImg(value) {
       <div class="row main">
          <div class="col-sm-offset-2 col-sm-8">
          <form action="${pageContext.request.contextPath}/farm_register" method="post"  enctype="multipart/form-data" onsubmit="return checkRegisterFarm()">
-            등록 평수<input type="text" name="farmSize" required="required"><br>
+            등록 평수<input type="number" name="farmSize" min="1" required="required"><br>
             농지 등록날짜<input type="text" name="farmStartdate" value="${requestScope.date }" required="required" readonly="readOnly"><br>
             농지 등록 만료 날짜<input type="date" id="endDate" name="farmEnddate" required="required" ><br>
             농지 주소 <input type="text" name="farmAddress" required="required" ><br>
