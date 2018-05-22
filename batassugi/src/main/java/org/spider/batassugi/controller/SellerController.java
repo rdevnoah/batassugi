@@ -52,8 +52,8 @@ public class SellerController {
    * 판매자의 마이페이지로 이동하는 메소드입니다. tiles가 적용되어 있으며 tiles-config.xml 내부에 seller.tiles 설정이 이뤄져 있습니다.
    * 
    * @author "PM KimYoungHo"
-   * @param request HttpServletRequest 객체.
-   * @param model Model 객체.
+   * @param request HttpServletRequest 객체입니다.
+   * @param model Model 객체입니다.
    * @return
    */
   @RequestMapping("seller_Home")
@@ -69,11 +69,11 @@ public class SellerController {
    * 메소드 설명 : 밭등록.
    * 
    * @author "GL_SangKyoung"
-   * @param fvo
-   * @param request
+   * @param fvo view에서 입력한 등록할 농지 정보를 저장하는 변수입니다.
+   * @param request HttpServletRequest 객체입니다.
    * @return
    */
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "farm_register")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "farm_register")
   public String farmRegister(FarmVo fvo, HttpServletRequest request) {
     String path = "logo.png";
     if (fvo.getFile() != null) {
@@ -97,7 +97,14 @@ public class SellerController {
     }
   }
 
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "registerFarmForm")
+  /**
+   * 농지 등록하는 View로 이동하는 메소드입니다. 필요한 데이터인 cropsList와 date를 request에 담아 함께 이동합니다.
+   * 
+   * @author "PM KimYoungHo"
+   * @param model Model 객체입니다.
+   * @return
+   */
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerFarmForm")
   public String registerFarmForm(Model model) {
     List<CropsVo> list = sellerFarmService.getCropsData();
     String date = sellerFarmService.getNow_Date();
@@ -111,11 +118,11 @@ public class SellerController {
    * 모집 등록하는 View 이동 메소드입니다. 기본적으로 필요한 데이터인 대여가능 평수와 최대로 대여가능기간을 model에 map 타입으로 전송합니다.
    * 
    * @author "PM KimYoungHo"
-   * @param model Model 객체.
-   * @param farmNo 농지 번호.
+   * @param model Model 객체입니다.
+   * @param farmNo 농지 번호입니다.
    * @return
    */
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "registerRecruitForm")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruitForm")
   public String registerRecruitForm(Model model, String farmNo) {
     Map<String, Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
     model.addAttribute("recruitMap", map);
@@ -123,14 +130,15 @@ public class SellerController {
   }
 
   /**
-   * 농지의 세부정보에서 현재 농지에 대여나 모집을 신청한 회원을 확인하는 Controller.
+   * 농지의 세부정보에서 현재 농지에 대여나 모집을 신청한 회원을 확인하는 메소드입니다.
    * 
    * @author "PM KimYoungHo"
-   * @param model Model 객체
-   * @param farmNo 농지 번호.
+   * @param model Model 객체입니다.
+   * @param farmNo 농지 번호입니다.
+   * @param nowPage 페이징 처리를 위한 현재 위치한 페이지 번호입니다.
    * @return
    */
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "recruitList")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "recruitList")
   public String recruitListView(Model model, String farmNo, String nowPage) {
     ListVo listVo = sellerFarmService.findRecruitListByFarmNo(farmNo, nowPage);
     model.addAttribute("pagingList", listVo);
@@ -138,7 +146,15 @@ public class SellerController {
     return "seller/recruit_List.tiles";
   }
 
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "registerRecruit")
+  /**
+   * 모집을 등록처리하고 seller_Home으로 이동하는 메소드입니다.
+   * 
+   * @author "PM KimYoungHo"
+   * @param vo 판매자가 입력한 모집 정보를 담고 있습니다.
+   * @param farmNo recruitVo 안의 farmVo의 farmNo를 세팅해주기 위해 입력받은 농지번호 값입니다.
+   * @return
+   */
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruit")
   public String registerRecruit(RecruitVo vo, int farmNo) {
     vo.setFarmVo(new FarmVo(farmNo, null, 0, null, null, null));
     System.out.println(vo);
@@ -146,7 +162,16 @@ public class SellerController {
     return "redirect:seller_Home";
   }
 
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET },
+  /**
+   * 구매자의 대여신청을 수락하여 처리하는 메소드입니다.
+   * 
+   * @author "PM KimYoungHo"
+   * @param model 모델 객체입니다.
+   * @param rentNo 수락 처리할 rentNo입니다.
+   * @param farmNo 수락 처리 후 다시 신청현황페이지로 이동하기 위해 필요한 farmNo를 입력받습니다.
+   * @return
+   */
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
       value = "updateRentStatusConfirm")
   public String updateRentStatusConform(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusConfirm(rentNo);
@@ -154,7 +179,16 @@ public class SellerController {
     return "redirect:recruitList?farmNo=" + farmNo;
   }
 
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET },
+  /**
+   * 구매자의 대여신청을 거절하여 처리하는 메소드입니다.
+   * 
+   * @author "PM KimYoungHo"
+   * @param model 모델 객체입니다.
+   * @param rentNo 거절 처리할 rentNo입니다.
+   * @param farmNo 거절 처리 후 다시 신청현황페이지로 이동하기 위해 필요한 farmNo를 입력받습니다.
+   * @return
+   */
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
       value = "updateRentStatusReject")
   public String updateRentStatusReject(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusReject(rentNo);
@@ -167,7 +201,7 @@ public class SellerController {
    * ResponseBody를 통해 전송합니다.
    * 
    * @author "PM KimYoungHo"
-   * @param farmNo 농지 번호.
+   * @param farmNo 농지 번호입니다.
    * @return
    */
   @ResponseBody
@@ -176,11 +210,17 @@ public class SellerController {
     return sellerFarmService.findFarmDetail(farmNo);
   }
 
+  /**
+   * 대여자의 상세정보를 Modal에 포함시키기 위한 메소드입니다.
+   * 
+   * @author "PM KimYoungHo"
+   * @param rentNo 대여인의 대여번호를 저장합니다.
+   * @return
+   */
   @ResponseBody
-  @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET },
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
       value = "findBuyerDetailByRentNo")
   public Object findBuyerDetailByRentNo(String rentNo) {
     return sellerFarmService.findBuyerDetailByRentNo(rentNo);
   }
-
 }

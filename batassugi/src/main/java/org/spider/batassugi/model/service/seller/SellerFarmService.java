@@ -38,6 +38,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class SellerFarmService implements SellerFarmServiceIf {
+
   @Resource
   private SellerFarmDaoIf sellerFarmDao;
   
@@ -46,7 +47,6 @@ public class SellerFarmService implements SellerFarmServiceIf {
 
   @Override
   public void farmInsert(FarmVo fvo) {
-    System.out.println("$$$"+fvo.getMemberInfoVo().getMemberVo().getId());
     fvo.getMemberInfoVo().setId(fvo.getMemberInfoVo().getMemberVo().getId());
     sellerFarmDao.farmInsert(fvo);
     Map<String, Integer> testmap = new HashMap<String, Integer>();
@@ -58,17 +58,11 @@ public class SellerFarmService implements SellerFarmServiceIf {
     }
   }
 
-  /**
-   * 판매자가 등록한 현재 농지의 리스트를 반환받는 비즈니스 로직입니다.
-   * @author "PM KimYoungHo"
-   * @param id 로그인한 사용자의 id.
-   * @return
-   */
   @Override
   public List<FarmVo> findSellerFarmList(String id) {
     List<FarmVo> farmList = sellerFarmDao.findSellerFarmList(id);
     for (int i = 0; i < farmList.size(); i++) {
-      List<CropsVo> cropsList = sellerFarmDao.findAvailableCropsList(farmList.get(i).getFarmNo()); 
+      List<CropsVo> cropsList = sellerFarmDao.findAvailableCropsList(farmList.get(i).getFarmNo());
       farmList.get(i).setCropsVo(cropsList);
       List<String> labels = sellerFarmDao.findLabels(farmList.get(i).getFarmNo());
       farmList.get(i).setLabels(labels);
@@ -77,15 +71,9 @@ public class SellerFarmService implements SellerFarmServiceIf {
     return farmList;
   }
 
-  /**
-   * 사용자가 등록한 농지의 상세정보를 반환받는 비즈니스 로직입니다.
-   * @author "PM KimYoungHo"
-   * @param farmNo 농지 번호.
-   * @return
-   */
   @Override
-  public Map<String,Object> findFarmDetail(String farmNo) {
-    Map<String,Object> map = new HashMap<String, Object>();
+  public Map<String, Object> findFarmDetail(String farmNo) {
+    Map<String, Object> map = new HashMap<String, Object>();
     FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
     vo.setLabels(sellerFarmDao.findLabels(Integer.parseInt(farmNo)));
     vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
@@ -95,24 +83,21 @@ public class SellerFarmService implements SellerFarmServiceIf {
     map.put("rentSize", sellerFarmDao.findRentSizeByFarmNo(farmNo));//대여중인 크기
     map.put("farmVo", vo);
     map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
-    
-    
-   // findRentRecruitFarmSize(String farmNo);
-    
+
     return map;
-    
+
   }
 
   @Override
   public List<CropsVo> getCropsData() {
-    List <CropsVo> list = sellerFarmDao.getCropsData();
+    List<CropsVo> list = sellerFarmDao.getCropsData();
     return list;
   }
 
   @Override
   public String getNow_Date() {
     return sellerFarmDao.getNow_Date();
-    
+
   }
 
   @Override
@@ -127,17 +112,17 @@ public class SellerFarmService implements SellerFarmServiceIf {
     Map<String, Object> map = new HashMap<String, Object>();
     map.put("farmNo", farmNo);
     map.put("pagingBean", listVo.getPb());
-   
+
     listVo.setRentList(sellerFarmDao.findRentPagingList(map));
-    
+
     return listVo;
-    
+
   }
 
   @Override
   public Object findBuyerDetailByRentNo(String rentNo) {
-    Map<String,String> map = sellerFarmDao.findBuyerDetailByRentNo(rentNo);
-    
+    Map<String, String> map = sellerFarmDao.findBuyerDetailByRentNo(rentNo);
+
     int harvest = Integer.parseInt(String.valueOf(map.get("HARVESTSTATUS")));
     map.remove("HARVESTSTATUS");
 
@@ -150,7 +135,7 @@ public class SellerFarmService implements SellerFarmServiceIf {
     } else {
       harvest = 4;
     }
-    
+
     String harv = String.valueOf(harvest);
     map.put("HARVESTSTATUS", harv);
 
@@ -161,13 +146,13 @@ public class SellerFarmService implements SellerFarmServiceIf {
   public String farmImg(FarmVo fvo) throws IllegalStateException, IOException {
     MultipartFile multifile = fvo.getFile();
     String filename = multifile.getOriginalFilename();
-    String fileSavePath =
-        "C:\\Users\\Administrator\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\farm_photo\\";
+    String fileSavePath = "C:\\Users\\Administrator\\git\\batassugi\\"
+        + "batassugi\\src\\main\\webapp\\resources\\img\\farm_photo\\";
     UUID uu = UUID.randomUUID();
     File f = new File(fileSavePath + uu + "_" + filename);
     multifile.transferTo(f);
     return f.getName();
   }
 
-  
+
 }

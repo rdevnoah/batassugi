@@ -98,10 +98,6 @@ public class SellerFarmDao implements SellerFarmDaoIf {
     return template.selectOne("sellerFarm.findBuyerDetailByRentNo", rentNo);
   }
 
-  
-
-
-  
   @Override
   public List<FarmVo> getSellerFarmList(String id) {
     return template.selectList("getSellerFarmList", id);

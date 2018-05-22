@@ -17,12 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 해당밭에 재배가능작물을 테이블에 넣는다. -->
     <insert id="avaliableCrops" parameterType="map">
-    insert into available_crops values(#{crops_no},#{farm_no})
+      insert into available_crops values(#{crops_no},#{farm_no})
     </insert>
     
+    <!-- 농지 등록 시 시작 날짜를 현재 날짜로 하기 위해 dao에 접근합니다. -->
     <select id="getNow_Date" resultType="String">
-   	select to_char(SYSDATE, 'YYYY.MM.DD') from dual
-   
+      select to_char(SYSDATE, 'YYYY.MM.DD') from dual
    </select>
     
 </mapper>
