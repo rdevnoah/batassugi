@@ -50,6 +50,8 @@ public interface RecruitDaoIf {
   void updateRentStatusConfirm(String rentNo);
   
   void updateRentStatusReject(String rentNo);
+
+  void updateRecruitSize(String rentNo);
   
 
 }

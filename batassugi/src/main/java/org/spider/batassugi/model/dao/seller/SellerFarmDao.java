@@ -111,5 +111,15 @@ public class SellerFarmDao implements SellerFarmDaoIf {
   public List<CropsVo> getAvailableCropsList(int farmNo) {
     return template.selectList("getAvailableCropsList",farmNo);
   }
+
+  @Override
+  public Object findRecruitSizeByFarmNo(String farmNo) {
+    return template.selectOne("sellerFarm.findRecruitSizeByFarmNo", farmNo);
+  }
+
+  @Override
+  public Object findRentSizeByFarmNo(String farmNo) {
+    return template.selectOne("sellerFarm.findRentSizeByFarmNo", farmNo);
+  }
   
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.annotation.Resource;
+import org.spider.batassugi.model.dao.seller.RecruitDaoIf;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
@@ -39,6 +40,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class SellerFarmService implements SellerFarmServiceIf {
   @Resource
   private SellerFarmDaoIf sellerFarmDao;
+  
+  @Resource
+  private RecruitDaoIf recruitDao;
 
   @Override
   public void farmInsert(FarmVo fvo) {
@@ -85,8 +89,10 @@ public class SellerFarmService implements SellerFarmServiceIf {
     FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
     vo.setLabels(sellerFarmDao.findLabels(Integer.parseInt(farmNo)));
     vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
-    System.out.println(farmNo);
     
+    map.put("canRecruitSize", recruitDao.findRestFarmSizeByFarmNo(farmNo));//모집 가능한 크기
+    map.put("recruitSize",sellerFarmDao.findRecruitSizeByFarmNo(farmNo));//모집중인 크기
+    map.put("rentSize", sellerFarmDao.findRentSizeByFarmNo(farmNo));//대여중인 크기
     map.put("farmVo", vo);
     map.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
     

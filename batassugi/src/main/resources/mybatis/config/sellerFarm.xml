@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select id="findFarmDetail" parameterType="string" resultType="farmVo">
-    select farm_no as farmNo, farm_size as farmSize, farm_address as farmAddress, to_char(farm_enddate, 'yyyy-mm-dd') farmEnddate, id 
+    select farm_no as farmNo, farm_size as farmSize, farm_address as farmAddress, to_char(farm_enddate, 'yyyy-mm-dd') farmEnddate, image 
     from farm
     where farm_no=#{farmNo}
   </select>
@@ -58,6 +58,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     round(((sysdate-r.rent_startdate)/(30*r.rent_month))*100) as harvestStatus 
     from spider_member m, member_info mi, rent r, crops c
     where m.id=mi.id and r.id=m.id and c.crops_no=r.crops_no and r.rent_no=#{rentNo}
+  </select>
+  
+  <select id="findRecruitSizeByFarmNo" parameterType="string" resultType="string">
+    select sum(recruit_size) as recruitSize from recruit where farm_no=#{farmNo}
+  </select>
+  
+  <select id="findRentSizeByFarmNo" parameterType="string" resultType="string">
+    select sum(r.rent_size) from rent r, recruit rc, farm f
+    where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=2 and r.rent_status='승인'
   </select>
 </mapper>
  

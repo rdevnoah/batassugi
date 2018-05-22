@@ -100,4 +100,8 @@ public interface SellerFarmDaoIf {
    */
   List<CropsVo> getAvailableCropsList(int farmNo);
 
+  public Object findRecruitSizeByFarmNo(String farmNo);
+
+  public Object findRentSizeByFarmNo(String farmNo);
+
 }
