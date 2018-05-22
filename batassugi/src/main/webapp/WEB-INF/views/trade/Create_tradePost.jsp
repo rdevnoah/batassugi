@@ -24,15 +24,13 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2"><img id= "img" >
+						<td colspan="2" width="250px"><img id= "img"  style="width: 250px ">
 						</td>
 						<td colspan="3" ><textarea cols="90" rows="8" name="tradeContent" required="required" id="tradeContent"  placeholder="본문내용을 입력하세요"></textarea></td>
 					<tr>
-					<tr>
-						<td class="text-left" colspan="5"><input type="file" name="file" id="tradephoto" ></td>
-					</tr>
 				</tbody>
 			</table>
+			<input type="file" name="file" id="tradephoto" width="250px" >
 			<div class="text-center">
 				<button class="btn btn-primary"  type="submit" >확인</button>
 				<button class="btn btn-primary" id="writeCancel">취소</button> 
@@ -47,7 +45,6 @@
 <%-- container-fluid --%>
 <script>
 var sel_file;
-
 $(document).ready(function() {	
 	$("#tradephoto").on("change", handleImgFileSelect);
 
@@ -89,6 +86,7 @@ function handleImgFileSelect(e) {
 				type : "danger",
 				message : "확장자는 이미지 확장자만 가능합니다!"
 			});
+			$("#tradephoto").val("");
 			return;
 		}
 		sel_file = f;

@@ -22,24 +22,19 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2"><img src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}"></td>
+						<td colspan="2" width="250px" height="250px"><img src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}" width="250px"></td>
 						<td colspan="3"><pre>${tvo.tradeContent}</pre></td>
 					<tr>
 				</tbody>
 			</table><%-- table table-hover --%>
-			<%-- 댓글 영역 --%>
-			<div>
-				<table class="table table-hover" id=listReply>
-				</table>
+			<%-- 댓글 영역 --%><%-- 목록 수정 삭제 버튼 --%>
+			<div id=listReply>
 			</div>
 			<div class ="text-center ">
 				<c:if test="${sessionScope.mvo.memberVo.nickname != null}">    
-				<textarea rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요" ></textarea>
-				<button class="btn btn-primary" type="button" id="btnReply">댓글 작성</button>
+				<textarea style="resize: none" rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요" ></textarea>
+				<button class="btn btn-primary" type="button" id="btnReply">댓글 작성</button><br>
 				</c:if>
-			</div>
-			<%-- 목록 수정 삭제 버튼 --%>
-			<div class="text-center">	
 				<button class="btn btn-primary" id="listBtn">목록</button>
 				<c:if test="${requestScope.tvo.memberVo.nickname == sessionScope.mvo.memberVo.nickname}">
 				<button class="btn btn-primary" id="updateBtn">수정</button>
@@ -116,13 +111,14 @@
   	 	        type: "get",
   	 	        url: "${pageContext.request.contextPath}/commentList?tradeNo=${requestScope.tvo.tradeNo}",
   	 	        success: function(result){
-  	 	      	  var output = "<tr>";
+  	 	      	  var output = "<table class=table table-hover><tr>";
   	 	            for(var i in result){
   	 	                output += "<td colspan='1'>"+result[i].memberVo.nickname;
   	 	                output += " ("+ result[i].replyRegdate +")</td>";
   	 	                output += "<td colspan='4'>"+ result[i].replyComment+"</td>";
 	 	                output += "<tr>";
   	 	            }
+  	 	            output +="</table>"
   	 	            $("#listReply").html(output);
   	 	        }
   	 	    });

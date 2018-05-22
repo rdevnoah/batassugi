@@ -68,20 +68,27 @@ public class TradeService implements TradeServiceIf {
 
   @Override
   public void updateTradePost(TradePostVo tvo) throws Exception, IOException {
-    MultipartFile multifile = tvo.getFile();
-    
-    String filename = multifile.getOriginalFilename();
-    String fileSavePath =
-        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
-        + "img\\trade_img\\";
-    
-    UUID uu = UUID.randomUUID();
-    
-    File f = new File(fileSavePath + uu + "_" + filename);
-    multifile.transferTo(f);
-    String path = f.getName();
-    
-    tvo.setTradePhoto(path);
+    TradePostVo torgVo = tradePostDao.findTradePostDetailByNo(tvo.getTradeNo());
+    if (tvo.getFile().getOriginalFilename().length() < 1) {
+      tvo.setTradePhoto(torgVo.getTradePhoto());
+    } else {
+      try {
+        MultipartFile multifile = tvo.getFile();
+        
+        String filename = multifile.getOriginalFilename();
+        String fileSavePath =
+            "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img"
+            + "\\trade_img\\";
+        
+        UUID uu = UUID.randomUUID();
+        File f = new File(fileSavePath + uu + "_" + filename);
+        multifile.transferTo(f);
+        String path = f.getName();
+        tvo.setTradePhoto(path);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
     
     tradePostDao.updateTradePost(tvo);
   }
@@ -93,8 +100,8 @@ public class TradeService implements TradeServiceIf {
     
     String filename = multifile.getOriginalFilename();
     String fileSavePath =
-        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
-        + "img\\trade_img\\";
+        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img"
+        + "\\trade_img\\";
     
     UUID uu = UUID.randomUUID();
     
