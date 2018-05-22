@@ -35,18 +35,22 @@ function LoadImg(value) {
     
     
 
-   function checkCropsbox(){
+   function checkRegisterFarm(){
+	   var endDate = new Date();
+	   endDate = $("#endDate").val();
+	   var nowDate = new Date().toLocaleDateString();
+
+
 	   
-
-
-
-	   
-	  if ($('input:checkbox[name=cropsNo]:checked').length==0){
+	   if ($('input:checkbox[name=cropsNo]:checked').length==0){
 		   alert("하나 이상의 작물을 선택하세요");
-			   return false;
+		   return false;
+	   }else if (endDate < nowDate){
+		   alert("날짜를 다시 확인해주세요");
+		   return false;
 	   }else{
 		   return true;
-	   }
+	   } 
 		    
    }
 	
@@ -58,10 +62,10 @@ function LoadImg(value) {
    <div class="container-fluid">
       <div class="row main">
          <div class="col-sm-offset-2 col-sm-8">
-         <form action="${pageContext.request.contextPath}/farm_register" method="post"  enctype="multipart/form-data" onsubmit="return checkCropsbox()">
+         <form action="${pageContext.request.contextPath}/farm_register" method="post"  enctype="multipart/form-data" onsubmit="return checkRegisterFarm()">
             등록 평수<input type="text" name="farmSize" required="required"><br>
             농지 등록날짜<input type="text" name="farmStartdate" value="${requestScope.date }" required="required" readonly="readOnly"><br>
-            농지 등록 만료 날짜<input type="date" name="farmEnddate" required="required" ><br>
+            농지 등록 만료 날짜<input type="date" id="endDate" name="farmEnddate" required="required" ><br>
             농지 주소 <input type="text" name="farmAddress" required="required" ><br>
              
             작물선택<br> 
