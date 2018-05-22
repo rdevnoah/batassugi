@@ -63,8 +63,14 @@ public class RentService implements RentServiceIf {
     }
     pb.setContentNumberPerPage(4);
     List<RecruitVo> list = rentDao.getRentList(pb); // 대여신청 게시글 목록을 list에 담음
+    List<RecruitVo> test2 = rentDao.getRentList(pb); // 대여신청 게시글 목록을 list에 담음
     List<RecruitVo> recruitlist = new ArrayList<>(); // arrayList 선언
     List<CropsVo> cropslist = null;
+    for (RecruitVo vo : test2) {
+      vo.getFarmVo()
+          .setCropsVo((rentDao.findFarmAvailableCropsListByFarmNo(vo.getFarmVo().getFarmNo())));
+      System.out.println(vo.getRecruitNo()+":"+vo.getFarmVo().getCropsVo());
+    }
     for (RecruitVo recruitVo : list) {
       cropslist = rentDao.findFarmAvailableCropsListByFarmNo(
           recruitVo.getFarmVo().getFarmNo()); // 재배가능 작물정보를 list에 담음.

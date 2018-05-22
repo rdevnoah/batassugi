@@ -20,7 +20,7 @@
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/buyer_myinfoView">&nbsp;<i class="fa fa-user fa-lg"></i>정보수정</a> 
+			<a href="${pageContext.request.contextPath}/buyer/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a>  
 		</li>
 		
 		

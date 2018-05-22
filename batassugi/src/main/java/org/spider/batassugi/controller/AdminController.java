@@ -62,35 +62,7 @@ public class AdminController {
     return "admin.tiles";
   }
 
-  /**
-   * 회원정보 update.
-   * 
-   * @author "PL_Seonhwa"
-   * @param uvo
-   * @param request
-   * @return
-   */
-  @RequestMapping("admin/updateMemberInfo")
-  public String updateMemberInfo(@ModelAttribute("memberInfoVo") MemberInfoVo uvo,
-      HttpServletRequest request) {
-    MemberInfoVo memberInfoVo = memberService.updateMemberInfo(uvo);
-    HttpSession session = request.getSession();
-    session.setAttribute("mvo", memberInfoVo);
-    return "redirect:updateMember_success";
-  }
 
-  /**
-   * 관리자회원정보 수정폼으로 이동.
-   * 
-   * @author "PL_Seonhwa"
-   * @param model
-   * @return
-   */
-  @RequestMapping("/admin/myinfoView")
-  public String adminMyinfoView(Model model) {
-    model.addAttribute("list", memberService.getAllCropsList());
-    return "admin/myinfoView.tiles";
-  }
 
   @RequestMapping("admin/applySellerView")
   public String applySellerView(Model model, String nowPage) {
