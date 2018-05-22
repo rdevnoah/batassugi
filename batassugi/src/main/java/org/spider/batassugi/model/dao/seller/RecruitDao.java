@@ -56,6 +56,12 @@ public class RecruitDao implements RecruitDaoIf {
     template.update("updateRentStatusReject", rentNo);
     
   }
+
+  @Override
+  public void updateRecruitSize(String rentNo) {
+    template.update("recruit.updateRecruitSize", rentNo);
+    
+  }
   
 }
 

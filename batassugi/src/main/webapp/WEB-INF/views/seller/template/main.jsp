@@ -56,8 +56,9 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-xs-5">
-						통계영역<br>
+					<div class="col-xs-6">
+						<div id="charts">
+						</div>
 						<table class="table table-hover text-center">
 							<thead>
 								<tr>
@@ -79,12 +80,33 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="col-xs-7">
-						평수 : <span id="farmSize"></span><br>
-						농지 주소 : <span id="farmAddress"></span><br>
-						농지주인 : <span id="farmOwner"></span><br>
-						등록만료일 : <span id="farmEnddate"></span><br>
-						재배가능작물 : <span id="crops"></span><br>
+					<div class="col-xs-6">
+						<div class="row">
+							<img src="" id="farmImage">
+						</div>
+						<div class="row">
+							<table class="table table-hover text-center">
+								<thead>
+									<tr>
+										<td colspan="2">농지 상세정보</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>평수 : </td><td><span id="farmSize"></span></td>
+									<tr>
+									<tr>
+										<td>농지 주소 : </td><td><span id="farmAddress"></span></td>
+									</tr>
+									<tr>
+										<td>등록만료일 : </td><td><span id="farmEnddate"></span></td>
+									</tr>
+									<tr>
+										<td>재배가능작물 : </td><td><span id="crops"></span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -97,8 +119,9 @@
 	</div>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/js/spider.js"></script>
 </body>
+<script src="${pageContext.request.contextPath}/resources/js/spider.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/highcharts/highcharts.js"></script>
 <script>
 $(document).ready(function() {
 	var $data;
@@ -119,9 +142,10 @@ $(document).ready(function() {
 					for (var i=0 ; i < data.farmVo.cropsVo.length ; i++){
 						crops+=data.farmVo.cropsVo[i].cropsName+' ';
 					}
+					alert($data.farmVo.image);
+					$("#farmImage").prop("src", data.farmVo.image);
 					$("#farmSize").html(data.farmVo.farmSize);
 					$("#farmAddress").html(data.farmVo.farmAddress);
-					$("#farmOwner").html(data.farmVo.id);
 					$("#farmEnddate").html(data.farmVo.farmEnddate);
 					$("#crops").html(crops);
 					var buyerTable='';
@@ -136,6 +160,64 @@ $(document).ready(function() {
 						buyerTable+="</tr>";
 					}
 					$("#buyerTable").append(buyerTable);
+					
+					
+					// Build the chart
+					
+					/* var farmData[];
+					
+					farmData.push({
+						
+						
+					}) */
+				    var $charts = new Highcharts.chart('charts', {
+				        chart: {
+				            plotBackgroundColor: null,
+				            plotBorderWidth: null,
+				            plotShadow: false,
+				            type: 'pie'
+				        },
+				        title: {
+				            text: '농지 사용 정보'
+				            		
+				        },
+				        subtitle: {
+				        	text:'총량:'+data.farmVo.farmSize
+				        },
+				        tooltip: {
+				            pointFormat: '{series.name}: <b>{point.y}평</b>'
+				        },
+				        plotOptions: {
+				            pie: {
+				                allowPointSelect: true,
+				                cursor: 'pointer',
+				                dataLabels: {
+				            		format: '{point.y}'
+				                    /* enabled: false */
+				                },
+				                showInLegend: true,
+				                size: 200
+				            }
+				        },
+				        series: [{
+				            name: '사용량',
+				            colorByPoint: true,
+				            data: [{
+				                name: '모집중',
+				                color: '#FE9A2E',
+				                y: parseInt($data.recruitSize)
+				            }, {
+				                name: '대여중',
+				                color: '#F5A9D0',
+				                y: parseInt($data.rentSize)
+				            }, {
+				                name: '모집가능',
+				                color: '#A9F5BC',
+				                y: parseInt($data.canRecruitSize)
+				            }]
+				        }]
+				    });
+				 
 				}	
 			}) 
 	 })	
@@ -157,6 +239,14 @@ $(document).ready(function() {
 			 'farmNo' : $data.farmVo.farmNo
 		 });
 	 });
+	 
+	
+	 
+	 
+	 
 });
 
 </script>
+
+
+

@@ -82,6 +82,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     AND a.crops_no = c.crops_no
     AND f.farm_no = #{farmNo}
   </select>
+  
+  
+  <!-- 승인이 거절 되었을 때, 신청한 량을 다시 모집량에 추가한다. -->
+  <update id="updateRecruitSize">
+    update recruit set recruit_size=recruit_size+(select rent_size from rent where rent_no=#{rentNo)
+    where recruit_no=(select recruit_no from rent where rent_no=#{rentNo})
+  </update>
 </mapper>
  <!--
  CREATE TABLE recruit

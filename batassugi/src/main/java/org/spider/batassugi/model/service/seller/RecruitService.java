@@ -75,6 +75,7 @@ public class RecruitService implements RecruitServiceIf {
   public void updateRentStatusReject(String[] rentNo) {
     for (int i = 0; i < rentNo.length; i++) {
       recruitDao.updateRentStatusReject(rentNo[i]);
+      recruitDao.updateRecruitSize(rentNo[i]);
     }
   }
 
