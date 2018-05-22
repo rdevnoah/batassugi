@@ -33,13 +33,32 @@ function LoadImg(value) {
       }
    }
     
+    
+
+   function checkCropsbox(){
+	   
+
+
+
+	   
+	  if ($('input:checkbox[name=cropsNo]:checked').length==0){
+		   alert("하나 이상의 작물을 선택하세요");
+			   return false;
+	   }else{
+		   return true;
+	   }
+		    
+   }
+	
+
+
 
 
 </script>
    <div class="container-fluid">
       <div class="row main">
          <div class="col-sm-offset-2 col-sm-8">
-         <form action="${pageContext.request.contextPath}/farm_register" method="post"  enctype="multipart/form-data">
+         <form action="${pageContext.request.contextPath}/farm_register" method="post"  enctype="multipart/form-data" onsubmit="return checkCropsbox()">
             등록 평수<input type="text" name="farmSize" required="required"><br>
             농지 등록날짜<input type="text" name="farmStartdate" value="${requestScope.date }" required="required" readonly="readOnly"><br>
             농지 등록 만료 날짜<input type="date" name="farmEnddate" required="required" ><br>
