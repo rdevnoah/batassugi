@@ -138,11 +138,19 @@ $(document).ready(function() {
 				async : false,
 				success : function(data) {
 					$data=data;
+					if ($data.recruitSize==null){
+						$data.recruitSize=0;
+					}if ($data.canRecruitSize==null){
+						$data.canRecruitSize=0;
+					}if ($data.rentSize==null){
+						$data.rentSize=0;
+					}
+					
 					var crops='';
 					for (var i=0 ; i < data.farmVo.cropsVo.length ; i++){
 						crops+=data.farmVo.cropsVo[i].cropsName+' ';
 					}
-					alert($data.farmVo.image);
+					
 					$("#farmImage").prop("src", data.farmVo.image);
 					$("#farmSize").html(data.farmVo.farmSize);
 					$("#farmAddress").html(data.farmVo.farmAddress);
