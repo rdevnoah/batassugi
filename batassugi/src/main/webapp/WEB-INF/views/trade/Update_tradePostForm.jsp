@@ -25,12 +25,12 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2" width="250px" height="250px"><img id="img" src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}" width="250px"></td>
-						<td colspan="3"><textarea cols="90" rows="8" name="tradeContent" required="required" id="tradeContent" >${tvo.tradeContent}</textarea></td>
+						<td colspan="2" width="210px" ><img id="img" src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}" width="210px"></td>
+						<td colspan="3"><textarea cols="90" rows="8"  style="resize: none;" name="tradeContent" required="required" id="tradeContent" >${tvo.tradeContent}</textarea></td>
 					<tr>
 				</tbody>
 			</table>
-			<input type="file" name="file" id="tradephoto" width="250px"  height="250px">
+			<input type="file" name="file" id="tradephoto" width="210px" >
 			<div class="text-center">
 				<button class="btn btn-primary" type="submit">확인</button>
 				<button class="btn btn-primary" id="updateCancel">취소</button> 

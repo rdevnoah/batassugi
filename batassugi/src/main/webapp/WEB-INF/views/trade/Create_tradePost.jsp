@@ -24,13 +24,13 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2" width="250px"><img id= "img"  style="width: 250px ">
+						<td colspan="2" width="200px"><img id= "img"  style="width: 200px ">
 						</td>
-						<td colspan="3" ><textarea cols="90" rows="8" name="tradeContent" required="required" id="tradeContent"  placeholder="본문내용을 입력하세요"></textarea></td>
+						<td colspan="3" ><textarea cols="90" rows="8"  style="resize: none;" name="tradeContent" required="required" id="tradeContent"  placeholder="본문내용을 입력하세요"></textarea></td>
 					<tr>
 				</tbody>
 			</table>
-			<input type="file" name="file" id="tradephoto" width="250px" >
+			<input type="file" name="file" id="tradephoto" width="210px" >
 			<div class="text-center">
 				<button class="btn btn-primary"  type="submit" >확인</button>
 				<button class="btn btn-primary" id="writeCancel">취소</button> 

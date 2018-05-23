@@ -4,9 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="container">
 	<div class="row main">
-		<div class="ccol-xs-12">
+		<div class="col-xs-12">
 			<h3></h3>
-			<table class="table table-hover text-center">
+			<table class="table table-hover">
 				<thead>
 					<tr class="info">
 						<th class="text-center" style="width: 10%">종류:
@@ -22,32 +22,43 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2" width="250px" height="250px"><img src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}" width="250px"></td>
+						<td colspan="2" width="210px" class="text-center" ><img src=" ${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}"  width="210px"></td>
 						<td colspan="3"><pre>${tvo.tradeContent}</pre></td>
 					<tr>
 				</tbody>
 			</table><%-- table table-hover --%>
 			<%-- 댓글 영역 --%><%-- 목록 수정 삭제 버튼 --%>
-			<div id=listReply>
+			<div class="col-xs-12"  id="listReply" style="width: 100%; word-break: break-all; word-wrap: break-word;">
 			</div>
-			<div class ="text-center ">
+			<div class ="form-inline col-xs-12">
 				<c:if test="${sessionScope.mvo.memberVo.nickname != null}">    
-				<textarea style="resize: none" rows="2" cols="100" id="replytext" placeholder="댓글을 작성해주세요" ></textarea>
-				<button class="btn btn-primary" type="button" id="btnReply">댓글 작성</button><br>
+				<div class="form-group col-xs-12">
+					<div class="col-xs-10">
+						<textarea class="form-control"  style="width:100%; resize: none; border: solid 1px; border-color: #5CAB7D" rows="3"  id="replytext" placeholder="댓글을 작성해주세요" ></textarea>
+					</div>
+					<div class="col-xs-2">
+						<br>&nbsp;&nbsp;
+						<button class="btn btn-primary"  type="button" id="btnReply">댓글 작성</button>
+					</div>
+				</div>
 				</c:if>
-				<button class="btn btn-primary" id="listBtn">목록</button>
-				<c:if test="${requestScope.tvo.memberVo.nickname == sessionScope.mvo.memberVo.nickname}">
-				<button class="btn btn-primary" id="updateBtn">수정</button>
-				<button class="btn btn-primary" id="deleteBtn">삭제</button> 
-				</c:if>
+				<div class="form-group col-xs-12 text-center">
+						<h6></h6>
+						<button class="btn btn-primary" id="listBtn">목록</button>
+					<c:if test="${requestScope.tvo.memberVo.nickname == sessionScope.mvo.memberVo.nickname}">
+						<button class="btn btn-primary" id="updateBtn">수정</button>
+						<button class="btn btn-primary" id="deleteBtn">삭제</button> 
+					</c:if>
+				</div>
+				<br><br><br>
 			</div>
-		</div>
-		<%-- col-sm-offset-2 col-sm-8 --%>
+		</div> <%-- col-sm-offset-2 col-sm-8 --%>
+	</div> <%-- row main --%>
+	<div class="row">
+		<div class="col-xs-12"><h1>&nbsp;</h1></div>
 	</div>
-	<%-- row main --%>
-</div>
-<%-- container-fluid --%>
-<script type="text/javascript">
+</div><%-- container-fluid --%>
+<script>
     $(document).ready(function(){
     	listReply2();
     	$("#listBtn").click(function() {
@@ -105,21 +116,18 @@
                     BootstrapDialog.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             });
-        });
+        });  	 	 
   	 	function listReply2(){
   	 	    $.ajax({
   	 	        type: "get",
   	 	        url: "${pageContext.request.contextPath}/commentList?tradeNo=${requestScope.tvo.tradeNo}",
   	 	        success: function(result){
-  	 	      	  var output = "<table class=table table-hover><tr>";
-  	 	            for(var i in result){
-  	 	                output += "<td colspan='1'>"+result[i].memberVo.nickname;
-  	 	                output += " ("+ result[i].replyRegdate +")</td>";
-  	 	                output += "<td colspan='4'>"+ result[i].replyComment+"</td>";
-	 	                output += "<tr>";
-  	 	            }
-  	 	            output +="</table>"
-  	 	            $("#listReply").html(output);
+  	 	            var $replyList = " ";
+  	 	            $.each(result, function(i, data) {
+  	 	            	$replyList += '<form class="form-inline"><div class="form-group"><label>'+data.memberVo.nickname+'('+data.replyRegdate+')'+'</label></div></form>';
+  	 	            	$replyList += '<form class="form-inline"><div class="form-group"><label>'+data.replyComment+'</label></div></form><hr>';
+  	 	            })
+  	 	            $("#listReply").html($replyList);
   	 	        }
   	 	    });
   	 	}
