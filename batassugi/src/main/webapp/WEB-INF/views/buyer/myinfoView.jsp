@@ -179,7 +179,7 @@
 									<div class="input-group">
 										<input type="file" name="file" id="file"
 											class="form-control upload" placeholder="프로필을 넣어주세요"
-											onchange="LoadImg(this);" aria-describedby="file_upload">
+											onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
 										<button type="button" onclick="ResetImgvalue();">취소</button>
 									</div>
 								</div>
@@ -340,16 +340,7 @@
     		   
     		   //submit		   
     		   $("#register").submit(function(){
-    		      if(checkResultId==""){
-    		         BootstrapDialog.alert({
-    		        	   type : 'danger',
-    		        	   title : '아이디 확인',
-    		        	   message : '아이디 중복체크를 다시 하세요',
-    		        	   size:"size-small"
-    		       	});    
-    		         return false;
-    		      }
-    		      else if (checkResultPassword=="") {
+    		     if (checkResultPassword=="") {
     		    	  BootstrapDialog.alert({
    		        	   type : 'danger',
    		        	   title : '비밀번호 확인',

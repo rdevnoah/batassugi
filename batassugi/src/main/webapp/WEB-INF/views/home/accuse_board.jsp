@@ -23,11 +23,11 @@
             <div class="col-md-6">
           <%-- 신고자 정보 --%>
               <div class="form-group">
-                <label class="control-label col-sm-3"> 신고자아이디 <span class="text-danger">*</span></label>
+                <label class="control-label col-sm-3"> 신고자 <span class="text-danger">*</span></label>
                 <div class="col-md-8 col-sm-9">
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
-                     <input type="text" class="form-control" name="accuseId" id="accuseId" value="${sessionScope.mvo.memberVo.id}" readonly="readonly">
+                     <input type="text" class="form-control" name="accuseId" id="accuseId" value="${sessionScope.mvo.memberVo.nickname}" readonly="readonly">
                   </div>
                 </div>
               </div>
@@ -38,9 +38,9 @@
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
                     <select name="reportedId" id="reportedId">
-        			<option value="">--닉네임--</option>
+        			<option value="닉네임" >--닉네임--</option>
     			     <c:forEach var="item" items="${list}">
-					   <option value="${item.memberVo.id}">${item.memberVo.nickname}</option>
+					   <option value="${item.memberVo.id}" >${item.memberVo.nickname}</option>
 					 </c:forEach> 
 					 </select>
                   </div>
@@ -53,7 +53,7 @@
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
                     <select name="accuseCategory" id="accuseCategory">
-         			  <option value="">--신고분류--</option>
+         			  <option value="신고분류">--신고분류--</option>
 		  			  <option value="허위정보기재">허위정보기재</option>
 		   			  <option value="욕설">욕설</option>
 		   			  <option value="노쇼">노쇼</option>
