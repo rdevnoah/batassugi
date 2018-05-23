@@ -39,14 +39,14 @@ public class RentService implements RentServiceIf {
 
   @Resource
   private RentDaoIf rentDao;
-  
+
   @Override
   @Transactional
   public int registerRentByRentVo(RentVo rentVo) {
     rentDao.registerRentByRentVo(rentVo);
     return rentDao.updateRecruitSizeByRecruitNo(rentVo);
   }
-  
+
   @Override
   public RecruitVo findRentDetailByRecruitNo(int recruitNo) {
     RecruitVo recruitVo = rentDao.findRentDetailByRecruitNo(recruitNo);
@@ -54,7 +54,7 @@ public class RentService implements RentServiceIf {
     recruitVo.getFarmVo().setCropsVo(rentDao.findFarmAvailableCropsListByFarmNo(farmNo));
     return recruitVo;
   }
-  
+
   @Override
   public RentListVo getRentList(String pageNum) {
     int totalRentListCount = rentDao.totalRentListCount(); // 대여신청 게시글의 총 개수를 얻어옴.
@@ -69,12 +69,10 @@ public class RentService implements RentServiceIf {
     List<RecruitVo> recruitlist = new ArrayList<>(); // arrayList 선언
     List<CropsVo> cropslist = null;
     for (RecruitVo recruitVo : list) {
-      cropslist = new ArrayList<>();
       int farmNo = recruitVo.getFarmVo().getFarmNo();
       cropslist = rentDao.findFarmAvailableCropsListByFarmNo(farmNo); // 재배가능 작물정보를 list에 담음.
-      
       recruitVo.getFarmVo().setCropsVo(cropslist); // 대여신청Vo객체에 작물정보list를 set
-      recruitlist.add(recruitVo); // arrayList에 대여신청Vo객체를 담음.
+      recruitlist.add(recruitVo);
     }
     return new RentListVo(pb, recruitlist);
   }

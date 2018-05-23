@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <select id="findFarmAvailableCropsListByFarmNo" resultType="cropsVo" parameterType="int">
-    SELECT c.crops_no AS cropsNo, c.crops_name AS cropsName, c.crops_level AS cropsLevel
+    SELECT distinct(c.crops_no) AS cropsNo, c.crops_name AS cropsName, c.crops_level AS cropsLevel
     FROM farm f, recruit r, AVAILABLE_CROPS a, crops c
     WHERE r.farm_no = f.farm_no 
     AND f.farm_no = a.farm_no 
