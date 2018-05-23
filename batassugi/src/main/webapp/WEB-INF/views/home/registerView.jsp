@@ -132,6 +132,9 @@
                     <span class="input-group-addon"></span> 
                     <input type="date" class="form-control" name="birthday" id="birthday" required="required">
                   </div>
+                  <div class="input-group">
+                    <span class="input-group-addon"></span> <small id="checkBirthdayView">  </small>
+                  </div>
                 </div>
               </div> 
 
@@ -181,7 +184,7 @@
                   <div class="input-group">
                     <span class="input-group-addon" id="file_upload"></span> 
                     <input type="file" name="file" id="file" class="form-control upload" placeholder="프로필을 넣어주세요" 
-                     onchange="LoadImg(this);" aria-describedby="file_upload">
+                     onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
                     <button type="button" onclick="ResetImgvalue();" id="cancelButton">취소</button>
                     </div>
                 </div>
@@ -261,7 +264,6 @@
 		});
     	
     	
-    	
     	   // 아이디 중복확인
     		$("#id").keyup(function(){
     	      var id=$(this).val().trim();
@@ -318,6 +320,7 @@
      		         checkResultPassword=password;
      		      }
      		   });//keyup
+     		   
     		   //닉네임 중복확인
     		   $("#nickname").keyup(function(){
     	      var nickname=$(this).val().trim();
@@ -344,7 +347,51 @@
     	      });//ajax
     	   });//keyup  
     		       		   
-    		   
+    	   $("#password").keyup(function(){
+ 		      var passwordCon = $("#cpassword").val();
+ 		      var password = $("#password").val();
+ 		      var checkResultPassword="";
+ 		      if(passwordCon!="" && password != passwordCon) {//비밀번호와 비밀번호 확인이 일치하지 않는 경우
+ 		         $("#checkPasswordView").html("패스워드와 일치하지 않습니다").css("color","#f35b56");
+ 		         checkResultPassword="";
+ 		      }else if (passwordCon=="") {
+ 		         $("#checkPasswordView").html("");
+ 		         checkResultPassword="";
+ 		      }else {//비밀번호와 비밀번호 확인이 일치하여 진행 가능한 경우
+ 		         $("#checkPasswordView").html("패스워드와 일치합니다").css("color","#1e878d");
+ 		         checkResultPassword=password;
+ 		      }
+ 		   });//keyup
+  		   
+ 		   // 오늘 날짜 이후는 선택되지 않도록 처리
+ 		   $("#birthday").change(function(){
+  		      var now = new Date();
+  		      var nowYear = now.getFullYear();
+  		      var nowMonth = now.getMonth()+1;
+	  		      if((nowMonth+"").length < 2){
+	  		    	nowMonth = "0"+nowMonth;
+			      }
+  		      var nowDate = now.getDate();
+	  		      if((nowDate+"").length < 2){
+	  		    	nowDate= "0"+nowDate;
+	  		      }
+  		      var today = nowYear+""+nowMonth+""+nowDate;
+  		      var birthday = $("#birthday").val();
+   		      var dateSplit = birthday.split("-");
+  		      var year = dateSplit[0];
+  		      var month = dateSplit[1];
+  		      var day = dateSplit[2];
+  		      var splitBirthday = year+""+month+""+day;
+  		      
+    		  if(parseInt(splitBirthday)>parseInt(today)) { //오늘 이후의 날짜를 선택했을 경우
+  		         $("#checkBirthdayView").html("오늘 이전의 날짜를 선택해주세요").css("color","#f35b56");
+  		         checkResultBirthday="";
+  		      }else { //오늘 이전의 날짜를 선택했을 경우
+  		         $("#checkBirthdayView").html("정상적인 생년월일입니다").css("color","#1e878d");
+  		       checkResultBirthday=birthday;
+  		      }
+  		   });//change
+ 		   
     		   //submit		   
     		   $("#register").submit(function(){
     		      if(checkResultId==""){
@@ -370,6 +417,15 @@
    		        	   type : 'danger',
    		        	   title : '닉네임 확인',
    		        	   message : '닉네임 중복체크를 다시 하세요',
+   		        	   size:"size-small"
+   		       	}); 
+     		         return false;
+    		      }
+    		      else if(checkResultBirthday==""){
+    		    	  BootstrapDialog.alert({
+   		        	   type : 'danger',
+   		        	   title : '생년월일 확인',
+   		        	   message : '생년월일 확인을 다시 하세요',
    		        	   size:"size-small"
    		       	}); 
      		         return false;

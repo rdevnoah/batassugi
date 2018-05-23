@@ -27,7 +27,7 @@
                 <div class="col-md-8 col-sm-9">
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
-                     <input type="text" class="form-control" name="accuseId" id="accuseId" value="${sessionScope.mvo.memberVo.id}" readonly="readonly">
+                     <input type="text" class="form-control" name="accuseId" id="accuseId" value="${sessionScope.mvo.memberVo.nickname}" readonly="readonly">
                   </div>
                 </div>
               </div>

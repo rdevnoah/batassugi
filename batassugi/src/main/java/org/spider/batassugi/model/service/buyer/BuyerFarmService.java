@@ -63,7 +63,7 @@ public class BuyerFarmService implements BuyerFarmServiceIf {
     // 파일이름을 변형해서 저장하기 위한 작업
     String filename = multifile.getOriginalFilename();// 원본의 이름을 가져옴
     String fileSavePath =
-        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
+        "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
         + "img\\farmer_doc\\"; // 저장할 위치를 지정
     UUID uu = UUID.randomUUID(); // 파일 이름에 난수 붙이기
     File f = new File(fileSavePath + uu + "_" + filename); // 새로운 이름으로 파일저장
