@@ -14,7 +14,8 @@ public class TradePostListVo {
    * ListVO.
    * 
    * @param pagingBean 페이징을 위한 페이징빈.
-   * @param postList 게시글 리스트.
+   * @param tradepostList 게시글 리스트.
+   * 
    */
   public TradePostListVo(BuyerPagingBean pagingBean, List<TradePostVo> tradepostList) {
     super();
