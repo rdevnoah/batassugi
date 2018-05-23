@@ -133,7 +133,7 @@ $(document).ready(function() {
 	 $("#myModalFarmDetail").on('show.bs.modal', function(e){
 			 $.ajax({
 				type : 'post',
-				url:'getDetailFarm',
+				url:'seller/getDetailFarm',
 				data : 'farmNo='+$farmNo,
 				async : false,
 				success : function(data) {
@@ -237,13 +237,13 @@ $(document).ready(function() {
      });
 	
 	 $("#recruitStatusBtn").on('click', function(){
-		 sendPost('recruitList', {
+		 sendPost('seller/recruitList', {
 			 'farmNo' : $data.farmVo.farmNo
 		 });
 	 });
 	 
 	 $("#recruitBtn").on('click', function(){
-		 sendPost('registerRecruitForm', {
+		 sendPost('seller/registerRecruitForm', {
 			 'farmNo' : $data.farmVo.farmNo
 		 });
 	 });

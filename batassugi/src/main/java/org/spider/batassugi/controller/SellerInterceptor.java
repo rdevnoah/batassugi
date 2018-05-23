@@ -12,6 +12,7 @@ package org.spider.batassugi.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
@@ -33,7 +34,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * 2018. 5. 12.  "Team Spider"    최초작성
  *      </pre>
  */
-public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
+public class SellerInterceptor extends HandlerInterceptorAdapter {
 
   /**
    * 메소드 설명 : 로그인 체크가 필요한 메소드는 로그인이 되어있는지 세션을 먼저 체크후 실행.
@@ -41,10 +42,16 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
     HttpSession session = request.getSession(false);
+    MemberInfoVo vo = (MemberInfoVo) session.getAttribute("mvo");
     if (session != null && session.getAttribute("mvo") != null) {
-      return true;
+        if(vo.getMemberVo().getmemberLevel().equals("판매자")){
+          return true;
+        }else {
+          response.sendRedirect("/batassugi");
+          return false;
+        }
     } else {
-      response.sendRedirect("/");
+      response.sendRedirect("/batassugi");
       return false;
     }
   }

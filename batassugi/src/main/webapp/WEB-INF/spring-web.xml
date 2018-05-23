@@ -45,14 +45,13 @@
 
 	<!-- Handler Interceptor-->
 	<mvc:interceptors>
-		<!-- 로그인체크용 interceptor -->
 		<mvc:interceptor>
-			<mvc:mapping path="" />
-			<mvc:exclude-mapping path="" />
-			<bean
-				class="org.spider.batassugi.controller.CheckLoginInterceptor" />
+			<mvc:mapping path="/seller/**" />
+			<bean class="org.spider.batassugi.controller.SellerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	
 	<!-- MultipartResolver : 파일 업로드용-->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
