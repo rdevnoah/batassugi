@@ -34,8 +34,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <update id="updateRentStatusReject" parameterType="string">
     update rent set rent_Status='거절' where rent_no=#{rentNo} 
   </update>
-  
-  
   <resultMap type="recruitVo" id="recruitVoRM">
     <result column="farmNo" property="farmVo.farmNo" />
     <result column="farmAddress" property="farmVo.farmAddress" />
@@ -46,8 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <result column="tel" property="farmVo.memberInfoVo.tel" />
     <result column="email" property="farmVo.memberInfoVo.email" />
   </resultMap>
-  
-  
   <select id="findRentDetailByRecruitNo" resultMap="recruitVoRM" parameterType="int">
     SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, R.recruit_size AS recruitSize, 
     ROUND(MONTHS_BETWEEN(F.farm_enddate, R.recruit_startdate)) AS maxRentMonth, 

@@ -31,8 +31,24 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
  *      </pre>
  */
 public interface RentDaoIf {
-  
+
+  /**
+   * 대여신청하기 위한 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param rentVo 대여신청정보를 담고있는 객체.
+   * @return int
+   */
   public int registerRentByRentVo(RentVo rentVo);
+  
+  /**
+   * 대여신청을 하고 농지대여 평수를 대여한만큼 업데이트하는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param rentVo 대여신청정보를 담고있는 객체.
+   */
+  public int updateRecruitSizeByRecruitNo(RentVo rentVo);
+
   
   /*
    * 구매자가 대여신청을 눌렀을때 대여신청 상세정보뷰를 출력해주는 메서드.

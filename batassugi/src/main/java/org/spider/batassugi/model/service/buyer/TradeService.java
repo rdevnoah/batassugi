@@ -69,7 +69,6 @@ public class TradeService implements TradeServiceIf {
   @Override
   public void updateTradePost(TradePostVo tvo) throws Exception, IOException {
     MultipartFile multifile = tvo.getFile();
-    
     String filename = multifile.getOriginalFilename();
     String fileSavePath =
         "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
@@ -93,8 +92,8 @@ public class TradeService implements TradeServiceIf {
     
     String filename = multifile.getOriginalFilename();
     String fileSavePath =
-        "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img"
-        + "\\trade_img\\";
+        "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
+        + "img\\trade_img\\";
     
     UUID uu = UUID.randomUUID();
     

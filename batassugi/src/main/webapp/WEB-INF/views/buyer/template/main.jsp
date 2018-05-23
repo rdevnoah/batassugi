@@ -39,19 +39,3 @@
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
-<script>
-var result = '${success}', // 성공메세지 redirect FlashAttribute 객체
-	applyVo = { // ${applySellerVo} 판매자 신청 Vo객체
-	'farmerDocument' : '${pageContext.request.contextPath}/resources/img/farmer_doc/${applySellerVo.farmerDocument}',
-	'applyDate' : '${applySellerVo.applyDate}',
-	'applyState' : '${applySellerVo.applyState}',
-	'applyReason' : '${applySellerVo.applyReason}'
-}
-
-if(result !== '') { // redirect FlashAttribute 객체가 있으면
-	BootstrapDialog.alert(result) // 성공메세지 모달출력
-}
-$(document).ready(function() {
-	applyInfo(applyVo) // buyer.js에서 사용될 ${applySellerVo} 판매자신청 Vo객체를 매개변수로 전달.
-})
-</script>
