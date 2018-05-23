@@ -95,7 +95,7 @@ public class BuyerController {
     ApplySellerVo applySellerVo = buyerService.findApplySellerById(id); // 판매자신청 정보를 조회해서 vo에 담음
     
     model.addAttribute("rentList", rentList); // 뷰로 보내줄 모델 객체.
-    model.addAttribute("applySellerVo",applySellerVo); // 뷰로 보내줄 모델 객체.
+    session.setAttribute("applySellerVo", applySellerVo); // 뷰로 보내줄 세션 객체
     if (request.getServletPath().equals("/buyer_myinfoView")) {
       return "buyer/myinfoView.tiles";
     }
