@@ -29,7 +29,7 @@
    <div class="container-fluid">
       <div class="row main">
          <div class="col-sm-offset-2 col-sm-8">
-			<form action="${pageContext.request.contextPath}/farm_register" method="post" >
+			<form action="${pageContext.request.contextPath}/seller/farm_register" method="post" >
 				밭평수<input type="text" name="farmSize"><br>
 				밭등록날짜<input type="date" name="farmStartdate"><br>
 				밭마감날짜<input type="date" name="farmEnddate"><br>

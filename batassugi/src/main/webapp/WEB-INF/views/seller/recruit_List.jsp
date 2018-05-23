@@ -43,18 +43,18 @@
 			</table>
 			<div class="text-center">
 				<c:if test="${pagingList.pb.previousPageGroup==true}">
-					<a href="recruitList?nowPage=${pagingList.pb.startPageOfPageGroup-1}&farmNo=${farmNo}">이전</a>
+					<a href="seller/recruitList?nowPage=${pagingList.pb.startPageOfPageGroup-1}&farmNo=${farmNo}">이전</a>
 				</c:if>
 				<c:forEach var="i" begin="${pagingList.pb.startPageOfPageGroup}" end="${pagingList.pb.endPageOfPageGroup}">
 				<c:choose>
 					<c:when test="${i==pagingList.pb.nowPage}">${i}</c:when>
 					<c:otherwise>
-						<a href="recruitList?nowPage=${i}&farmNo=${farmNo}">${i}</a>
+						<a href="seller/recruitList?nowPage=${i}&farmNo=${farmNo}">${i}</a>
 					</c:otherwise>
 				</c:choose>
 				</c:forEach>
 				<c:if test="${pagingList.pb.nextPageGroup==true}">
-				<a href="recruitList?nowPage=${pagingList.pb.endPageOfPageGroup+1}&farmNo=${farmNo}">다음</a>
+				<a href="seller/recruitList?nowPage=${pagingList.pb.endPageOfPageGroup+1}&farmNo=${farmNo}">다음</a>
 				</c:if>
 			</div> <%-- 페이지 번호 div --%>
             <div>
@@ -104,7 +104,7 @@ $(document).ready(function() {
      		$.each($("input[name=userCheck]:checked"), function() {
      			checked.push($(this).val());
      		})
-     		sendPost('updateRentStatusConfirm', {
+     		sendPost('seller/updateRentStatusConfirm', {
      			'rentNo' : checked,
      			'farmNo' : ${farmNo}
      		})
@@ -115,7 +115,7 @@ $(document).ready(function() {
      		$.each($("input[name=userCheck]:checked"), function() {
      			checked.push($(this).val());
      		})
-     		sendPost('updateRentStatusReject', {
+     		sendPost('seller/updateRentStatusReject', {
      			'rentNo' : checked,
      			'farmNo' : ${farmNo}
      		})
@@ -132,7 +132,7 @@ $(document).ready(function() {
      	$("#myModalBuyerDetail").on('show.bs.modal', function(){
      		$.ajax({
 				type : 'post',
-				url:'findBuyerDetailByRentNo',
+				url:'seller/findBuyerDetailByRentNo',
 				data : 'rentNo='+$rentNo,
 				async : false,
 				success : function(data) {

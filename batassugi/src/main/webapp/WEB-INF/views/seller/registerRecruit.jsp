@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <form class="form-inline" method="post" action="registerRecruit">
+        <form class="form-inline" method="post" action="seller/registerRecruit">
           <input type="hidden" name="farmNo" value="${recruitMap.farmVo.farmVo.farmNo}">
           <div class="panel panel-info animated fadeIn">
             <div class="panel-heading">
