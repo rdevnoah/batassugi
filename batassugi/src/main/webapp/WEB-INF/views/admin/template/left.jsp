@@ -13,7 +13,7 @@
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/admin_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>관리자메인</a> 
+			<a href="${pageContext.request.contextPath}/admin/admin_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>관리자메인</a> 
 		</li>
 		<li>		
 			<a href="${pageContext.request.contextPath}/admin/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
@@ -24,7 +24,21 @@
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/adminAccuse"> <i class="glyphicon glyphicon-bullhorn"></i>신고관리</a> 
+			<a href="${pageContext.request.contextPath}/admin/adminAccuse"> <i class="glyphicon glyphicon-bullhorn"></i>신고관리</a> 
+		</li>
+		
+		<li>
+		<!-- 쪽지함 -->
+		<li>
+		<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+				<i class="glyphicon glyphicon-envelope"></i> 쪽지함
+		</a>
+			<ul class="collapse list-unstyled" id="pageSubmenu">
+				<li><a href="${pageContext.request.contextPath}/admin/sendMessage">쪽지보내기</a></li>
+				<li><a href="#">내개쓴편지함</a></li>
+				<li><a href="#">받은쪽지함</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/sendBox">보낸쪽지함</a></li>
+			</ul>
 		</li>
 		
 

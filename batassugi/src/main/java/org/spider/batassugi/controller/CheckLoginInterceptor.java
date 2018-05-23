@@ -12,6 +12,8 @@ package org.spider.batassugi.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
+import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
@@ -31,6 +33,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
+ * 
  *      </pre>
  */
 public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
@@ -41,10 +44,11 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
     HttpSession session = request.getSession(false);
-    if (session != null && session.getAttribute("mvo") != null) {
+    MemberInfoVo mvo=(MemberInfoVo)session.getAttribute("mvo");
+    if (session != null && mvo.getMemberVo().getmemberLevel().equals("관리자")) {
       return true;
     } else {
-      response.sendRedirect("/");
+      response.sendRedirect(request.getContextPath()+"/home/nosession");
       return false;
     }
   }

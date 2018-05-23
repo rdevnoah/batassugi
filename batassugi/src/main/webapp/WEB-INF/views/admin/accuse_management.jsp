@@ -105,7 +105,7 @@
 							<div id="reason" class="applyContent"></div>
 							<div id="resultDate" class="applyContent"></div>
 							<!-- 지원신청 폼 -->
-							<form name="accusePro" method="post" id="accusePro" action="${pageContext.request.contextPath}/accusePro">
+							<form name="accusePro" method="post" id="accusePro" action="${pageContext.request.contextPath}/admin/accusePro">
 							<div id="accuseForm" class="applyContent">
 							<input type="hidden" name="accuseNo" id="accuseNo_val" value="번호" >
 							<input type="hidden" name="accuseId" id="accuseId_val" value="신고자" >

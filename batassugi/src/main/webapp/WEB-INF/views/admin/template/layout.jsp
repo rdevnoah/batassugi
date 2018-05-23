@@ -55,7 +55,6 @@
 	</div>
 
 	
-
          <!-- Bootstrap Js CDN -->
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -65,6 +64,9 @@
                      $('#sidebar').toggleClass('active');
                      $(this).toggleClass('active');
                  });
+                 
+                 
+                 
              });
          </script>
 

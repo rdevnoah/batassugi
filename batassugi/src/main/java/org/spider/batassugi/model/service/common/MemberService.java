@@ -190,4 +190,9 @@ public class MemberService implements MemberServiceIf {
     return list;
   }
 
+  @Override
+  public List<MemberVo> findNicknameByWord(Map<String, String> map) {
+    return memberDao.findNicknameByWord(map);
+  }
+
 }

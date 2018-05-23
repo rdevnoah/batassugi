@@ -129,4 +129,9 @@ public class MemberDao implements MemberDaoIf {
     return template.selectOne("member.findStateNumberById", reportedId);
   }
 
+  @Override
+  public List<MemberVo> findNicknameByWord(Map<String, String> map) {
+    return template.selectList("member.findNicknameByWord", map);
+  }
+
 }

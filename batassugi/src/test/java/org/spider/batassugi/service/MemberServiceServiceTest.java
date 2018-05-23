@@ -1,5 +1,7 @@
 package org.spider.batassugi.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +35,10 @@ public class MemberServiceServiceTest {
     } catch (LoginException e) {
       e.printStackTrace();
     }*/
+    Map<String, String> map=new HashMap<String, String>();
+    map.put("id", "admin");
+    map.put("nickname", "관리");
+    System.out.println(memberDao.findNicknameByWord(map));
     
     }
 

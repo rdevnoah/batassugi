@@ -1,17 +1,12 @@
 package org.spider.batassugi.model.service.common;
 
-import java.io.File;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.spider.batassugi.model.dao.common.CropsDaoIf;
+import org.spider.batassugi.model.dao.common.MessageDaoIf;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
-import org.spider.batassugi.model.vo.common.CropsVo;
+import org.spider.batassugi.model.vo.common.MessageVo;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 공통영역에서 사용하는 서비스입니다.
@@ -37,6 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class CommonService implements CommonServiceIf {
   @Resource
   private CropsDaoIf cropsDao;
+  @Resource
+  private MessageDaoIf messageDao;
+  
   
   @Override
   public List<CropsInfoVo> getCropsIconList() {
@@ -48,6 +46,26 @@ public class CommonService implements CommonServiceIf {
   public CropsInfoVo getCropsDetail(String cropsNo) {
     CropsInfoVo cropsInfoVo = cropsDao.getCropsDetail(cropsNo);
     return cropsInfoVo;
+  }
+
+  @Override
+  public void registerMessage(MessageVo mgVo) {
+    messageDao.registerMessage(mgVo);
+  }
+
+  @Override
+  public List<MessageVo> findmyMassageListById(String id) {
+    return messageDao.findmyMassageListById(id);
+  }
+
+  @Override
+  public MessageVo finddetailsendBoxByNo(String messageNo) {
+    return messageDao.finddetailsendBoxByNo(messageNo);
+  }
+
+  @Override
+  public void deleteMessageProByNo(String messageNo) {
+    messageDao.deleteMessageProByNo(messageNo);
   }
   
 }

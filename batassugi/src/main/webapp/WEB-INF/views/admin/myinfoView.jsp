@@ -368,6 +368,6 @@
      		         return false;
     		      }
     		   });//submit
-	})//ready
+	}) //ready
      
 </script>

@@ -180,5 +180,13 @@ public interface MemberDaoIf {
   public String findStateNumberById(String reportedId);
 
 
+  /**
+   * 입력한 글자가 포함된 회원 닉네임검색.
+   * 
+   * @author "PL_Seonhwa"
+   * @param term
+   * @return
+   */
+  public List<MemberVo> findNicknameByWord(Map<String, String> map);
 
 }

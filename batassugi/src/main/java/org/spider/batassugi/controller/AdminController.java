@@ -57,7 +57,7 @@ public class AdminController {
    * @author "PL_Seonhwa"
    * @return
    */
-  @RequestMapping("admin_Home")
+  @RequestMapping("admin/admin_Home")
   public String adminHome() {
     return "admin.tiles";
   }
@@ -84,7 +84,7 @@ public class AdminController {
    * @param model
    * @return
    */
-  @RequestMapping("adminAccuse")
+  @RequestMapping("admin/adminAccuse")
   public String getAllAccuseList(Model model, String nowPage) {
     
     if (nowPage == null) {
@@ -104,7 +104,7 @@ public class AdminController {
    * @param applyNo
    * @return
    */
-  @RequestMapping("detailapply")
+  @RequestMapping("admin/detailapply")
   @ResponseBody
   public Object detailApply(String applyNo) {
     return adminService.findDetailApplyByNO(applyNo);
@@ -117,10 +117,10 @@ public class AdminController {
    * @param avo
    * @return
    */
-  @RequestMapping("applySellerPro")
+  @RequestMapping("admin/applySellerPro")
   public Object applySellerPro(ApplySellerVo avo) {
     adminService.updateMemberLevel(avo);
-    return "redirect:admin/applySellerPro_success";
+    return "redirect:applySellerPro_success";
   }
 
   /**
@@ -143,10 +143,10 @@ public class AdminController {
    * @param accusePostVo
    * @return
    */
-  @RequestMapping("accusePro")
+  @RequestMapping("admin/accusePro")
   public String accusePro(AccusePostVo accusePostVo) {
     accuseService.accusePro(accusePostVo);
-    return "redirect:admin/accusePro_success";
+    return "redirect:accusePro_success";
   }
   
   /**

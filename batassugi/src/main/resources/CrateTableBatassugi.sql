@@ -222,3 +222,30 @@ CREATE TABLE rent
 
 -- 농지 대여 신청 테이블
 CREATE SEQUENCE rent_SEQ nocache;
+
+
+-- 쪽지게시판
+CREATE TABLE message
+(
+    message_no          INT              NOT NULL, 
+    receiver_id         VARCHAR2(50)     NOT NULL, 
+    message_title       VARCHAR2(100)    NOT NULL, 
+    message_contents    CLOB             NOT NULL, 
+    sender_date         VARCHAR2(50)     DEFAULT 'sysdate' NOT NULL, 
+    read_date           VARCHAR2(50)     NULL, 
+    sender_delete       VARCHAR2(50)     NULL, 
+    receiver_delete     VARCHAR2(50)     NULL, 
+    sender_id           VARCHAR2(50)     NOT NULL, 
+    CONSTRAINT MESSAGE_PK PRIMARY KEY (message_no),
+    CONSTRAINT FK_message_receiver_id_member_ FOREIGN KEY (receiver_id) REFERENCES spider_member (id),
+    CONSTRAINT FK_message_sender_id_member_id FOREIGN KEY (sender_id)REFERENCES spider_member (id)
+);
+
+CREATE SEQUENCE message_SEQ;
+
+select * from message where receiver_id='admin'
+
+select message_no as messageNo,receiver_id as receiverId, message_title as messageTitle,message_contents as messageContents,
+		sender_date as senderDate, read_date as readDate 
+		from message 
+		where sender_id='admin' and receiver_id !='admin' and receiver_delete is null

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="message">
+	<!-- 메세지 등록  -->
+	<insert id="registerMessage">
+		INSERT INTO message (message_no,receiver_id,message_title,message_contents,sender_date,sender_id)
+		VALUES (message_SEQ.nextval,#{receiverId},#{messageTitle},#{messageContents},sysdate,#{senderId})
+	</insert>
+	<!-- 보낸 메세지 가져오기 -->
+	<select id="findmyMassageListById" resultType="messageVo">
+		select mg.message_no as messageNo, mg.message_title as messageTitle,
+		mg.sender_date as senderDate, mg.read_date as readDate, s.nickname as receiverNickname
+		from message mg, spider_member s
+		where mg.receiver_id=s.id and sender_id=#{value} and receiver_id !=#{value} and receiver_delete is null
+	</select>
+	<!-- 보낸메세지 상세내역 -->
+	<select id="finddetailsendBoxByNo" resultType="messageVo">
+		select mg.message_no as messageNo,mg.receiver_id as receiverId, mg.message_title as messageTitle,mg.message_contents as messageContents,
+		mg.sender_date as senderDate, mg.read_date as readDate, s.nickname as receiverNickname
+		from message mg, spider_member s
+		where mg.receiver_id=s.id and  mg.message_no=#{value}
+	</select>
+	
+	<!-- 보낸메세지 삭제 : 자신의 삭제 날짜를 업데이트 -->
+	
+	<update id="deleteMessageProByNo">
+		update message set receiver_delete=sysdate where message_no=#{value}
+	</update>
+</mapper>
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

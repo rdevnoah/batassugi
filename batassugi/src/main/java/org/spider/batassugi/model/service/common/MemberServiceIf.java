@@ -3,6 +3,7 @@ package org.spider.batassugi.model.service.common;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
@@ -107,7 +108,7 @@ public interface MemberServiceIf {
    */
   public MemberInfoVo updateMemberInfo(MemberInfoVo uvo);
 
-  
+
   /**
    * 회원기호 작물 입력을 위하여 DB에서 작물 리스트를 가져오는 메소드.
    * 
@@ -116,5 +117,14 @@ public interface MemberServiceIf {
    */
   public List<CropsInfoVo> getAllCropsList();
 
- 
+  /**
+   * 입력된 글자가 포함된 회원 닉네임 검색
+   * 
+   * @author "PL_Seonhwa"
+   * @param term
+   * @return
+   */
+  public List<MemberVo> findNicknameByWord(Map<String, String> map);
+
+
 }

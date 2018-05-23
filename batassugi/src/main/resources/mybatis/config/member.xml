@@ -139,4 +139,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="findStateNumberById" resultType="String">
   	select state_number from spider_member where id=#{value}
   </select>
+  
+  <!-- 입력한 글자가 포함된 닉네임 가져오기 -->
+  <select id="findNicknameByWord" resultType="memberVo">
+  	select id,nickname from spider_member where nickname Like '%' ||  #{nickname} || '%' and id != #{id}
+  </select>
 </mapper>
