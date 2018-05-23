@@ -78,7 +78,4 @@ public class RentService implements RentServiceIf {
     }
     return new RentListVo(pb, recruitlist);
   }
-
-
-  
 }
