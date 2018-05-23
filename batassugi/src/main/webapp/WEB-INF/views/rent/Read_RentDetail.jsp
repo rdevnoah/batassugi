@@ -16,7 +16,7 @@
 						<%-- 평수 --%>
 						<div class="form-group col-xs-offset-1 col-xs-3">
 							<label>평수 : </label>
-							<input name="rentSize" type="number" class="form-control" min="1000" max="${recruitVo.recruitSize}" required style="width: 30%;"><label class="text-danger">/ ${recruitVo.recruitSize}</label>
+							<input name="rentSize" type="number" class="form-control" min="10" max="${recruitVo.recruitSize}" required style="width: 30%;"><label class="text-danger">/ ${recruitVo.recruitSize}</label>
 						</div> <%-- form-group col-xs-offset-1 col-xs-3 --%>
 						
 						<%-- 재배가능작물 --%>

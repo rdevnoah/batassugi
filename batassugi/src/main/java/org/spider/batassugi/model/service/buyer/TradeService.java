@@ -69,7 +69,6 @@ public class TradeService implements TradeServiceIf {
   @Override
   public void updateTradePost(TradePostVo tvo) throws Exception, IOException {
     MultipartFile multifile = tvo.getFile();
-    
     String filename = multifile.getOriginalFilename();
     String fileSavePath =
         "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"

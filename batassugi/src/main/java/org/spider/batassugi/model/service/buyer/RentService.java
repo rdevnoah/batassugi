@@ -10,6 +10,7 @@ import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 구매자가 판매자가 올린 농지를 대여할 수 있는 서비스입니다.
@@ -40,8 +41,10 @@ public class RentService implements RentServiceIf {
   private RentDaoIf rentDao;
   
   @Override
+  @Transactional
   public int registerRentByRentVo(RentVo rentVo) {
-    return rentDao.registerRentByRentVo(rentVo);
+    rentDao.registerRentByRentVo(rentVo);
+    return rentDao.updateRecruitSizeByRecruitNo(rentVo);
   }
   
   @Override
@@ -63,21 +66,19 @@ public class RentService implements RentServiceIf {
     }
     pb.setContentNumberPerPage(4);
     List<RecruitVo> list = rentDao.getRentList(pb); // 대여신청 게시글 목록을 list에 담음
-    List<RecruitVo> test2 = rentDao.getRentList(pb); // 대여신청 게시글 목록을 list에 담음
     List<RecruitVo> recruitlist = new ArrayList<>(); // arrayList 선언
     List<CropsVo> cropslist = null;
-    for (RecruitVo vo : test2) {
-      vo.getFarmVo()
-          .setCropsVo((rentDao.findFarmAvailableCropsListByFarmNo(vo.getFarmVo().getFarmNo())));
-      System.out.println(vo.getRecruitNo()+":"+vo.getFarmVo().getCropsVo());
-    }
     for (RecruitVo recruitVo : list) {
-      cropslist = rentDao.findFarmAvailableCropsListByFarmNo(
-          recruitVo.getFarmVo().getFarmNo()); // 재배가능 작물정보를 list에 담음.
+      cropslist = new ArrayList<>();
+      int farmNo = recruitVo.getFarmVo().getFarmNo();
+      cropslist = rentDao.findFarmAvailableCropsListByFarmNo(farmNo); // 재배가능 작물정보를 list에 담음.
+      
       recruitVo.getFarmVo().setCropsVo(cropslist); // 대여신청Vo객체에 작물정보list를 set
       recruitlist.add(recruitVo); // arrayList에 대여신청Vo객체를 담음.
     }
     return new RentListVo(pb, recruitlist);
   }
+
+
   
 }

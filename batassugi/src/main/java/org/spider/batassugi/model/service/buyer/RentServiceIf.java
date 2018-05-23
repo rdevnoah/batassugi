@@ -6,15 +6,16 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
 
 /**
  * 반드시 마침표를 찍습니다.
+ * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.model.service.buyer
  * @filename : RentServiceIf.java
  * @author : "SL SangUk Lee"
  * @since : 2018. 5. 17.
  * @version : 1.0
- * @see 
+ * @see
  * 
- * <pre>
+ *      <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
@@ -23,10 +24,10 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
  * 2018. 5. 17.  "SL SangUk Lee" registerRentByRentVo 메서드 추가
  * 2018. 5. 17.  "SL SangUk Lee" findRentDetailByRecruitNo 메서드 추가
  * 2018. 5. 17.  "SL SangUk Lee" getRentList 메서드 추가
- * </pre>
+ *      </pre>
  */
 public interface RentServiceIf {
-  
+
   /**
    * 대여신청하기 위한 메서드.
    * 
@@ -52,5 +53,6 @@ public interface RentServiceIf {
    * @return List
    */
   public RentListVo getRentList(String pageNum);
-  
+
+
 }

@@ -156,7 +156,7 @@ public class SellerFarmService implements SellerFarmServiceIf {
     MultipartFile multifile = fvo.getFile();
     String filename = multifile.getOriginalFilename();
     String fileSavePath =
-        "C:\\Users\\Administrator\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\farm_photo\\";
+        "C:\\Users\\charm\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\farm_photo\\";
     UUID uu = UUID.randomUUID();
     File f = new File(fileSavePath + uu + "_" + filename);
     multifile.transferTo(f);

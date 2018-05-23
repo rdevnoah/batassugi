@@ -340,3 +340,16 @@ drop table accuse
     select * from farm
     
     select * from available_crops order by crops_no desc;
+    
+    
+    
+    select * from rent where rent_no = 14
+    
+    select * from recruit where recruit_no = 14
+    
+    
+    UPDATE recruit SET recruit_size = recruit_size-5000
+    WHERE recruit_no = 14
+    
+    
+    

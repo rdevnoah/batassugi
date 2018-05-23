@@ -74,11 +74,6 @@ public class BuyerController {
   @Resource
   private BuyerFarmServiceIf buyerService;
 
-  @RequestMapping("buyer_myinfoView")
-  public String myinfoView() {
-    return "buyer/myinfoView.tiles";
-  }
-  
   /**
    * 구매자가 대여한 농지정보 조회 메서드.
    * 
@@ -87,7 +82,7 @@ public class BuyerController {
    * @param request 세션의 아이디값을 가져오기 위함.
    * @return mapping url
    */
-  @RequestMapping(value = "buyer_Home", method = RequestMethod.GET)
+  @RequestMapping(value = {"buyer_Home","buyer_myinfoView"}, method = RequestMethod.GET)
   public String buyerHome(Model model, HttpServletRequest request) {
     HttpSession session = request.getSession(false);
     if (session == null) {
@@ -101,6 +96,9 @@ public class BuyerController {
     
     model.addAttribute("rentList", rentList); // 뷰로 보내줄 모델 객체.
     model.addAttribute("applySellerVo",applySellerVo); // 뷰로 보내줄 모델 객체.
+    if (request.getServletPath().equals("/buyer_myinfoView")) {
+      return "buyer/myinfoView.tiles";
+    }
     return "buyer.tiles";
   }
 
