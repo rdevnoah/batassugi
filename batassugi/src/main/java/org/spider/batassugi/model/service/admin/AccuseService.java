@@ -64,7 +64,7 @@ public class AccuseService implements AccuseServiceIf {
 
     // 저장할 위치를 지정
     String fileSavePath =
-        "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\accuse_img\\";
+        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\accuse_img\\";
     // 이름에 현재 날짜를 붙이자
     // String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
     // 파일 이름에 난수 붙이기

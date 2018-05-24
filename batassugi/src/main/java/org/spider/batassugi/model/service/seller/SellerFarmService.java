@@ -146,8 +146,7 @@ public class SellerFarmService implements SellerFarmServiceIf {
   public String farmImg(FarmVo fvo) throws IllegalStateException, IOException {
     MultipartFile multifile = fvo.getFile();
     String filename = multifile.getOriginalFilename();
-    String fileSavePath = "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\"
-        + "img\\farm_photo\\";
+    String fileSavePath = "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\farm_photo\\";
     UUID uu = UUID.randomUUID();
     File f = new File(fileSavePath + uu + "_" + filename);
     multifile.transferTo(f);
