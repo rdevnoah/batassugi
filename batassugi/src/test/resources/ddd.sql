@@ -367,7 +367,7 @@ drop table accuse
     M.name AS name, RT.rent_no AS rentNo, RT. rent_size AS rentSize, 
     RT.rent_month AS rentMonth, RT.rent_status AS rentStatus, 
     to_char(RT.rent_startdate,'yy.mm.dd') AS rentStartdate,
-    round(((sysdate-to_date('2018-08-05','yyyy-mm-dd'))/(30*RT.rent_month))*100) as harvestStatus 
+    round(((sysdate-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus 
     FROM rent RT, recruit R, spider_member M, member_info I, farm F, crops C
     WHERE RT.recruit_no = R.recruit_no
     AND C.crops_no = RT.crops_no
@@ -376,5 +376,7 @@ drop table accuse
     AND RT.id = M.id 
     AND RT.id = 'test12'
     ORDER BY RT.rent_startdate DESC
+    
+    update rent set rent_startdate = to_date('2018-04-23','yyyy-mm-dd') where rent_status = '승인'
     
     
