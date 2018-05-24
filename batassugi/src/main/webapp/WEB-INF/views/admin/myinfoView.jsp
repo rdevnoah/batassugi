@@ -4,10 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-horizontal"
-				action="${pageContext.request.contextPath}/admin/updateMemberInfo"
-				method="post" name="updateMemberInfo" id="register"
-				enctype="multipart/form-data">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/updateMemberInfo" method="post" name="updateMemberInfo" id="register" enctype="multipart/form-data">
 				<%-- 판넬 헤드 : 회원가입 --%>
 				<div class="panel-heading">
 					<div class="panel-title text-left">
@@ -26,9 +23,10 @@
 						<%-- 1단 --%>
 						<div class="col-md-6">
 							<%-- 아이디 --%>
-							<div class="form-group">
-								<label class="control-label col-sm-3">아이디 <span
-									class="text-danger">*</span></label>
+							<div class="form-group formFirst">
+								<label class="control-label col-sm-3">아이디
+									<span class="text-danger">*</span>
+								</label>
 								<div class="col-md-8 col-sm-9">
 									<div class="input-group">
 										<input type="text" class="form-control" name="memberVo.id"
@@ -99,7 +97,7 @@
 						<%-- 2단 --%>
 						<div class="col-md-6">
 							<%-- 회원 이메일 --%>
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3"> 이메일 <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
@@ -170,17 +168,15 @@
 					<div class="row">
 						<%--1단 --%>
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3"> <img
 									src="${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}"
 									width="100px" id="previewImg" /><br> 프로필 미리보기
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<div class="input-group">
-										<input type="file" name="file" id="file"
-											class="form-control upload" placeholder="프로필을 넣어주세요"
-											onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
-										<button type="button" onclick="ResetImgvalue();">취소</button>
+									<div class="input-group formFirst">
+										<input type="file" name="file" id="file" class="form-control upload" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
+										<button type="button" class="formFirst" onclick="ResetImgvalue();">취소</button>
 									</div>
 								</div>
 							</div>
@@ -188,7 +184,7 @@
 						<%-- 2단 --%>
 						<%-- 기호작물 --%>
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
