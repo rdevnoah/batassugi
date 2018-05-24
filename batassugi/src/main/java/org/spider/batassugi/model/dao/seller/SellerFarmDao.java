@@ -48,7 +48,6 @@ public class SellerFarmDao implements SellerFarmDaoIf {
 
   @Override
   public List<FarmVo> findSellerFarmList(String id) {
-    System.out.println(id);
     return template.selectList("sellerFarm.findSellerFarmList", id);
   }
 

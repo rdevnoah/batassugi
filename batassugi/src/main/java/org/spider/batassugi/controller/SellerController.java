@@ -56,7 +56,7 @@ public class SellerController {
    * @param model Model 객체입니다.
    * @return
    */
-  @RequestMapping("seller_Home")
+  @RequestMapping("seller/seller_Home")
   public String sellerHome(HttpServletRequest request, Model model) {
     HttpSession session = request.getSession(false);
     MemberInfoVo vo = (MemberInfoVo) session.getAttribute("mvo");
@@ -73,7 +73,7 @@ public class SellerController {
    * @param request HttpServletRequest 객체입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "farm_register")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/farm_register")
   public String farmRegister(FarmVo fvo, HttpServletRequest request) {
     String path = "logo.png";
     if (fvo.getFile() != null) {
@@ -104,7 +104,7 @@ public class SellerController {
    * @param model Model 객체입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerFarmForm")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/registerFarmForm")
   public String registerFarmForm(Model model) {
     List<CropsVo> list = sellerFarmService.getCropsData();
     String date = sellerFarmService.getNow_Date();
@@ -122,10 +122,11 @@ public class SellerController {
    * @param farmNo 농지 번호입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruitForm")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/registerRecruitForm")
   public String registerRecruitForm(Model model, String farmNo) {
     Map<String, Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
     model.addAttribute("recruitMap", map);
+    System.out.println("test");
     return "seller/registerRecruit.tiles";
   }
 
@@ -138,11 +139,13 @@ public class SellerController {
    * @param nowPage 페이징 처리를 위한 현재 위치한 페이지 번호입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "recruitList")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/recruitList")
   public String recruitListView(Model model, String farmNo, String nowPage) {
+    System.out.println("초입부분");
     ListVo listVo = sellerFarmService.findRecruitListByFarmNo(farmNo, nowPage);
     model.addAttribute("pagingList", listVo);
     model.addAttribute("farmNo", farmNo);
+    System.out.println("recruitList넘어왓습니다.");
     return "seller/recruit_List.tiles";
   }
 
@@ -154,11 +157,12 @@ public class SellerController {
    * @param farmNo recruitVo 안의 farmVo의 farmNo를 세팅해주기 위해 입력받은 농지번호 값입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "registerRecruit")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/registerRecruit")
   public String registerRecruit(RecruitVo vo, int farmNo) {
     vo.setFarmVo(new FarmVo(farmNo, null, 0, null, null, null));
     System.out.println(vo);
     recruitService.registerRecruit(vo);
+    System.out.println("registerRequi들어옴요");
     return "redirect:seller_Home";
   }
 
@@ -172,10 +176,10 @@ public class SellerController {
    * @return
    */
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
-      value = "updateRentStatusConfirm")
+      value = "seller/updateRentStatusConfirm")
   public String updateRentStatusConform(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusConfirm(rentNo);
-
+System.out.println("업데이트렌트부분들어왔음");
     return "redirect:recruitList?farmNo=" + farmNo;
   }
 
@@ -189,10 +193,10 @@ public class SellerController {
    * @return
    */
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
-      value = "updateRentStatusReject")
+      value = "seller/updateRentStatusReject")
   public String updateRentStatusReject(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusReject(rentNo);
-
+System.out.println("updateRentStatus들어옴");
     return "redirect:recruitList?farmNo=" + farmNo;
   }
 
@@ -205,8 +209,9 @@ public class SellerController {
    * @return
    */
   @ResponseBody
-  @RequestMapping(method = RequestMethod.POST, value = "getDetailFarm")
+  @RequestMapping(method = RequestMethod.POST, value = "seller/getDetailFarm")
   public Object findFarmDetail(String farmNo) {
+    System.out.println("test디테일넘어옴");
     return sellerFarmService.findFarmDetail(farmNo);
   }
 
@@ -219,7 +224,7 @@ public class SellerController {
    */
   @ResponseBody
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
-      value = "findBuyerDetailByRentNo")
+      value = "seller/findBuyerDetailByRentNo")
   public Object findBuyerDetailByRentNo(String rentNo) {
     return sellerFarmService.findBuyerDetailByRentNo(rentNo);
   }
