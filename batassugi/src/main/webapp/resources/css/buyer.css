@@ -306,3 +306,7 @@ a.article, a.article:hover {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 }
+.harvest {
+	display: !important inline-block;
+	border: solid 0px;
+}
