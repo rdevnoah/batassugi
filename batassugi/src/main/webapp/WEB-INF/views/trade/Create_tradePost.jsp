@@ -5,7 +5,7 @@
 	<div class="row main">
 		<div class="ccol-xs-12">
 			<h3></h3>
-			<form action="${pageContext.request.contextPath}/createBoard" method="post" enctype="multipart/form-data" id="writeSuccess">
+			<form action="${pageContext.request.contextPath}/common/createBoard" method="post" enctype="multipart/form-data" id="writeSuccess">
 			<table class="table table-hover text-center">
 				<thead>
 					<tr class="info">

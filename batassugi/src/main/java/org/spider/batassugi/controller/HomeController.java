@@ -201,7 +201,7 @@ public class HomeController {
   }
   
 
-  @RequestMapping("accuse")
+  @RequestMapping("common/accuse")
   public String registerAccuseInfo(AccusePostVo accusePostVo) {
     String path = "default.png";
     // - 업로드할 파일이 있다면 파일업로드
@@ -215,7 +215,7 @@ public class HomeController {
     // - 이미지 처리 결과 경로를 vo에 넣음
     accusePostVo.setAccuseProof(path);
     accuseService.registerAccuseInfo(accusePostVo);
-    return "home/accuse_success.tiles";
+    return "redirect:/home/accuse_success.tiles";
   }
   
   /**
@@ -256,7 +256,7 @@ public class HomeController {
   }
   
   
-  @RequestMapping("home/accuse_board")
+  @RequestMapping("common/accuse_board")
   public String getAllMemberList(Model model) {
    List<MemberInfoVo> list = accuseService.getAllMemberList();
    model.addAttribute("list", list);

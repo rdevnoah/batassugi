@@ -31,10 +31,10 @@
 	            <li><a href="${pageContext.request.contextPath}/home/loginView">로그인</a></li> 
            	</c:when>
 			<c:otherwise>
-	            <li><a href="${pageContext.request.contextPath}/tradePost">거래게시판</a></li>
-	            <li><a href="${pageContext.request.contextPath}/getRentList">대여신청</a></li>
+	            <li><a href="${pageContext.request.contextPath}/common/tradePost">거래게시판</a></li>
+	            <li><a href="${pageContext.request.contextPath}/common/getRentList">대여신청</a></li>
 
-	            <li><a href="${pageContext.request.contextPath}/home/accuse_board">신고게시판</a></li>
+	            <li><a href="${pageContext.request.contextPath}/common/accuse_board">신고게시판</a></li>
 	            <c:if test="${sessionScope.mvo.memberVo.memberLevel == '관리자'}">
 	            	<li><a href="${pageContext.request.contextPath}/admin_Home">관리페이지</a></li>	            
 	            </c:if>

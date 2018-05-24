@@ -47,10 +47,9 @@
 	<mvc:interceptors>
 		<!-- 로그인체크용 interceptor -->
 		<mvc:interceptor>
-			<mvc:mapping path="" />
+			<mvc:mapping path="/common/**" />
 			<mvc:exclude-mapping path="" />
-			<bean
-				class="org.spider.batassugi.controller.CheckLoginInterceptor" />
+			<bean class="org.spider.batassugi.controller.CheckLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- MultipartResolver : 파일 업로드용-->
