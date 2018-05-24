@@ -15,7 +15,7 @@
     <div class="carousel-inner">
 
       <div class="item active">
-        <img src="${pageContext.request.contextPath}/resources/img/배경1.jpg" alt="Los Angeles">
+        <img src="${pageContext.request.contextPath}/resources/img/배경1.png" alt="Los Angeles">
         <div class="carousel-caption">
           <h3>강원도 강릉</h3>
           <p>정갈한 밭을 바라보며 수확할 열매를 떠올려보세요</p>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="item">
-        <img src="${pageContext.request.contextPath}/resources/img/배경2.jpg" alt="Chicago" >
+        <img src="${pageContext.request.contextPath}/resources/img/배경2.png" alt="Chicago" >
         <div class="carousel-caption">
           <h3>경상남도 남해</h3>
           <p>소와 함께 쟁기질로 받을 일구어 보세요</p>
@@ -31,7 +31,7 @@
       </div>
     
       <div class="item">
-        <img src="${pageContext.request.contextPath}/resources/img/배경3.jpg" alt="New York" >
+        <img src="${pageContext.request.contextPath}/resources/img/배경3.png" alt="New York" >
         <div class="carousel-caption">
           <h3>경기도 이천</h3>
           <p>저녁 노을과 함께 벼가 익어가는 거리를 걸어보세요</p>

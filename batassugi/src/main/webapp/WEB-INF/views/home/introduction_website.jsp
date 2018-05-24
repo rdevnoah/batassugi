@@ -4,7 +4,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경1.jpg">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경1.png">
 			</div>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경2.jpg">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경2.png">
 			</div>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경3.jpg">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="${pageContext.request.contextPath}/resources/img/배경3.png">
 			</div>
 		</div>
 	</div>
