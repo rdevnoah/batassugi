@@ -33,11 +33,38 @@ public class RentVo {
   private int rentMonth;
   private String rentStatus;
   private String rentStartdate;
+  private int harvestStatus;
 
   public RentVo() {
     super();
   }
 
+  /**
+   * 구매자가 대여한 농지VO입니다.
+   * 
+   * @param rentNo 대여번호.
+   * @param cropsVo 대여작물.
+   * @param recruitVo 모집정보.
+   * @param id 대여회원아이디.
+   * @param rentSize 대여 농지 사이즈.
+   * @param rentMonth 대여 개월.
+   * @param rentStatus 대여 상태.
+   * @param harvestStatus 수확상태.
+   */
+  public RentVo(int rentNo, CropsVo cropsVo, RecruitVo recruitVo, String id, int rentSize,
+      int rentMonth, String rentStatus, String rentStartdate, int harvestStatus) {
+    super();
+    this.rentNo = rentNo;
+    this.cropsVo = cropsVo;
+    this.recruitVo = recruitVo;
+    this.id = id;
+    this.rentSize = rentSize;
+    this.rentMonth = rentMonth;
+    this.rentStatus = rentStatus;
+    this.rentStartdate = rentStartdate;
+    this.harvestStatus = harvestStatus;
+  }
+  
   /**
    * 구매자가 대여한 농지VO입니다.
    * 
@@ -61,6 +88,7 @@ public class RentVo {
     this.rentStatus = rentStatus;
     this.rentStartdate = rentStartdate;
   }
+
 
   /**
    * 구매자가 대여한 농지VO입니다.
@@ -145,6 +173,14 @@ public class RentVo {
 
   public void setRentStartdate(String rentStartdate) {
     this.rentStartdate = rentStartdate;
+  }
+
+  public int getHarvestStatus() {
+    return harvestStatus;
+  }
+
+  public void setHarvestStatus(int harvestStatus) {
+    this.harvestStatus = harvestStatus;
   }
 
   @Override
