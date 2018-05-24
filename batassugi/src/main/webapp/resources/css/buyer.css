@@ -61,7 +61,7 @@ i, span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #5CAB7D;
+    background: linear-gradient(to bottom, #79c753 0%, #83a970 100%);
     color: #fff;
     transition: all 0.3s;
 }
@@ -112,7 +112,7 @@ i, span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #54a075;
+    background: #6ac13e;
 }
 
 #sidebar .sidebar-header strong {
