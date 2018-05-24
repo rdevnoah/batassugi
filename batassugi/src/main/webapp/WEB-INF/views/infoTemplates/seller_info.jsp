@@ -68,7 +68,7 @@
 			var $data;
 			 $.ajax({
 				type : 'post',
-				url:'seller/getDetailFarm',
+				url:'getDetailFarm',
 				data : 'farmNo='+$farmNo,
 				async : false,
 				success : function(data) {
