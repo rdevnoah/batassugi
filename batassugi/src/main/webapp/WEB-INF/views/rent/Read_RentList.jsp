@@ -7,7 +7,7 @@
 			<c:forEach items="${rentListVo.recruitList}" var="list" >
 			<div class="col-xs-3">
 				<div class="thumbnail rent">
-					<img src="${pageContext.request.contextPath}/resources/img/대여신청_밭사진1.png" class="img-responsive">
+					<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${list.farmVo.image}" class="img-responsive" >
 					<div class="caption content">
 						<div class="hidden"><span>${list.recruitNo}</span></div>
 						<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${list.recruitEnddate}</span> 까지</div>
@@ -88,7 +88,6 @@ $(document).ready(function() {
 	$rentPaginationA.on('click',function() {
 		rentList.paging($(this), '${pb.startPageOfPageGroup-1}', '${pb.endPageOfPageGroup+1}', 'getRentList');
 	});
-	
 	// 대여신청하기 버튼 이벤트 상세정보페이지로 이동
 	$rent.on('click', function() {
 		var $recruitNo = $(this).parents('.content').find('span:nth(0)').text(), // 대여신청번호.
