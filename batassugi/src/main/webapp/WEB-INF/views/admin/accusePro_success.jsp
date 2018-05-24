@@ -5,7 +5,7 @@
 		title : '밭아쓰기 신고 승인 처리',
 		message : '신고 승인 처리가 완료되었습니다.',
 		onhidden : function() {
-			location.href=("${pageContext.request.contextPath}/adminAccuse");
+			location.href=("${pageContext.request.contextPath}/admin/adminAccuse");
 		}
 	});
 </script>

@@ -82,12 +82,9 @@ public class BuyerController {
    * @param request 세션의 아이디값을 가져오기 위함.
    * @return mapping url
    */
-  @RequestMapping(value = {"buyer_Home","buyer_myinfoView"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"buyer/buyer_Home","buyer/buyer_myinfoView"}, method = RequestMethod.GET)
   public String buyerHome(Model model, HttpServletRequest request) {
     HttpSession session = request.getSession(false);
-    if (session == null) {
-      return "redirect:/";
-    }
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo"); // 세션에 있는 회원Vo객체를 얻어옴
     String id = mvo.getMemberVo().getId(); // vo객체 안에 있는 id값을 얻어옴
     
@@ -110,12 +107,12 @@ public class BuyerController {
    * @param rttr 신청취소 완료시 성공메세지를 출력해주기 위함.
    * @return maaping Url
    */
-  @RequestMapping(value = "deleteRentByRentNo", method = RequestMethod.POST)
+  @RequestMapping(value = "buyer/deleteRentByRentNo", method = RequestMethod.POST)
   public String deleteRentByRentNo(String rentNo, RedirectAttributes rttr) {
     buyerService.deleteRentByRentNo(Integer.parseInt(rentNo)); // 농지대여신청을 취소. 대여신청 정보를 삭제.
     
     rttr.addFlashAttribute("success", "신청취소되었습니다."); // 뷰에 성공메세지 출력을 위해 보내줄 객체 
-    return "redirect:buyer_Home";
+    return "redirect:/buyer/buyer_Home";
   }
 
   /**
@@ -126,13 +123,10 @@ public class BuyerController {
    * @param rttr 신청 후 성공 메세지를 출력해주기 위함.
    * @return
    */
-  @RequestMapping(value = "registerApplySeller", method = RequestMethod.POST)
+  @RequestMapping(value = "buyer/registerApplySeller", method = RequestMethod.POST)
   public String rgisterApplySeller(@ModelAttribute ApplySellerVo applySellerVo,
       HttpServletRequest request, RedirectAttributes rttr) {
     HttpSession session = request.getSession(false);
-    if (session == null) {
-      return "redirect:buyer_Home";
-    }
     String path = "";
     try {
       path = buyerService.farmerDocument(applySellerVo); // 파일경로를 얻어옴.
@@ -146,7 +140,7 @@ public class BuyerController {
     buyerService.registerApplySeller(applySellerVo); // 판매자신청 정보를 insert
     
     rttr.addFlashAttribute("success", "판매자신청이 완료되었습니다."); // 뷰에 성공메세지를 출력하기위해 보내줄 객체
-    return "redirect:buyer_Home";
+    return "redirect:/buyer/buyer_Home";
   }
 
 
