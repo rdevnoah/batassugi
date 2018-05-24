@@ -44,7 +44,7 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
     if (session != null && session.getAttribute("mvo") != null) {
       return true;
     } else {
-      response.sendRedirect("/");
+      response.sendRedirect(request.getContextPath()+"/home/nosession");
       return false;
     }
   }

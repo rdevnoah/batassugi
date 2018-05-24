@@ -5,7 +5,7 @@ var $a = $('a'),
 	$applyingSeller = $('.components').children('li:nth-child(2)');
 	
 	// 모달에 넣을 판매자신청 하는 form
-var $applyForm = '<form action="registerApplySeller" id="ApplySellerForm" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return false;">';	
+var $applyForm = '<form action="buyer/registerApplySeller" id="ApplySellerForm" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return false;">';	
 	$applyForm += '<div class="form-group">';
 	$applyForm += '<label class="control-label col-xs-4">농지문서</label>';
 	$applyForm += '<div class="col-xs-5">';
@@ -151,7 +151,7 @@ $rentCancel.on('click',function() {
 		type : 'danger',
 		message : "신청취소 하시겠습니까?",
 		onhidden: function() {
-			flag == 'true' ? sendPost('deleteRentByRentNo', {'rentNo':$rentNo}) : '';
+			flag == 'true' ? sendPost('buyer/deleteRentByRentNo', {'rentNo':$rentNo}) : '';
 			// flag가 true이면 post전송.
 		},
 		callback: function(result) {

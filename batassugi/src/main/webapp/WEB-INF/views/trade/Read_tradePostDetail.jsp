@@ -62,7 +62,7 @@
     $(document).ready(function(){
     	listReply2();
     	$("#listBtn").click(function() {
-    		location.href="${pageContext.request.contextPath}/tradePost";
+    		location.href="${pageContext.request.contextPath}/common/tradePost";
     	});
     	function modalConfrim(msg, path, params) {
     		var flag = false;
@@ -82,10 +82,10 @@
 		} // modalConfrim 
 		
     	$("#updateBtn").click(function(){  
-    		modalConfrim("게시물을 수정하시겠습니까?", "${pageContext.request.contextPath}/updateBoardForm" , {"tradeNo": "${requestScope.tvo.tradeNo}"});	
+    		modalConfrim("게시물을 수정하시겠습니까?", "${pageContext.request.contextPath}/common/updateBoardForm" , {"tradeNo": "${requestScope.tvo.tradeNo}"});	
     	}); 	
     	$("#deleteBtn").click(function(){ 
-    		modalConfrim("게시물을 삭제하시겠습니까?","${pageContext.request.contextPath}/deleteBoard" , {"tradeNo": "${requestScope.tvo.tradeNo}"});
+    		modalConfrim("게시물을 삭제하시겠습니까?","${pageContext.request.contextPath}/common/deleteBoard" , {"tradeNo": "${requestScope.tvo.tradeNo}"});
   	 	 }); // $("#deleteBtn").click(function()	
     	
   	 	$("#btnReply").click(function(){
