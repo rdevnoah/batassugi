@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <form class="form-horizontal" action="${pageContext.request.contextPath}/accuse" method="post" name="accuse" id="accuse" enctype="multipart/form-data">
+      <form class="form-horizontal" action="${pageContext.request.contextPath}/common/accuse" method="post" name="accuse" id="accuse" enctype="multipart/form-data">
         <%-- 판넬 헤드 : 신고게시판 --%>
         <div class="panel-heading">
           <div class="panel-title text-left">

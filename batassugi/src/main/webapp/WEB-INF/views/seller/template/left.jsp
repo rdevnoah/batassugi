@@ -11,6 +11,9 @@
 			<a href="${pageContext.request.contextPath}/"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
 		</li>
 		<li>		
+			<a href="${pageContext.request.contextPath}/seller/seller_home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>관리자메인</a> 
+		</li>
+		<li>		
 			<a href="${pageContext.request.contextPath}/seller_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>판매자 메인</a> 
 		</li>
 		<li>		

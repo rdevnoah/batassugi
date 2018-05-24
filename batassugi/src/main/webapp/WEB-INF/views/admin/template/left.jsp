@@ -13,7 +13,7 @@
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/admin_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>관리자메인</a> 
+			<a href="${pageContext.request.contextPath}/admin/admin_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>관리자메인</a> 
 		</li>
 		<li>		
 			<a href="${pageContext.request.contextPath}/admin/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 
@@ -24,7 +24,7 @@
 		</li>
 		
 		<li>		
-			<a href="${pageContext.request.contextPath}/adminAccuse"> <i class="glyphicon glyphicon-bullhorn"></i>신고관리</a> 
+			<a href="${pageContext.request.contextPath}/admin/adminAccuse"> <i class="glyphicon glyphicon-bullhorn"></i>신고관리</a> 
 		</li>
 		
 

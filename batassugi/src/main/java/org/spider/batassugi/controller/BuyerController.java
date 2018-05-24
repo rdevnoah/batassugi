@@ -82,12 +82,9 @@ public class BuyerController {
    * @param request 세션의 아이디값을 가져오기 위함.
    * @return mapping url
    */
-  @RequestMapping(value = {"buyer_Home","buyer_myinfoView"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"buyer/buyer_Home","buyer/buyer_myinfoView"}, method = RequestMethod.GET)
   public String buyerHome(Model model, HttpServletRequest request) {
     HttpSession session = request.getSession(false);
-    if (session == null) {
-      return "redirect:/";
-    }
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo"); // 세션에 있는 회원Vo객체를 얻어옴
     String id = mvo.getMemberVo().getId(); // vo객체 안에 있는 id값을 얻어옴
     
@@ -110,12 +107,12 @@ public class BuyerController {
    * @param rttr 신청취소 완료시 성공메세지를 출력해주기 위함.
    * @return maaping Url
    */
-  @RequestMapping(value = "deleteRentByRentNo", method = RequestMethod.POST)
+  @RequestMapping(value = "buyer/deleteRentByRentNo", method = RequestMethod.POST)
   public String deleteRentByRentNo(String rentNo, RedirectAttributes rttr) {
     buyerService.deleteRentByRentNo(Integer.parseInt(rentNo)); // 농지대여신청을 취소. 대여신청 정보를 삭제.
     
     rttr.addFlashAttribute("success", "신청취소되었습니다."); // 뷰에 성공메세지 출력을 위해 보내줄 객체 
-    return "redirect:buyer_Home";
+    return "redirect:/buyer/buyer_Home";
   }
 
   /**
@@ -126,13 +123,10 @@ public class BuyerController {
    * @param rttr 신청 후 성공 메세지를 출력해주기 위함.
    * @return
    */
-  @RequestMapping(value = "registerApplySeller", method = RequestMethod.POST)
+  @RequestMapping(value = "buyer/registerApplySeller", method = RequestMethod.POST)
   public String rgisterApplySeller(@ModelAttribute ApplySellerVo applySellerVo,
       HttpServletRequest request, RedirectAttributes rttr) {
     HttpSession session = request.getSession(false);
-    if (session == null) {
-      return "redirect:buyer_Home";
-    }
     String path = "";
     try {
       path = buyerService.farmerDocument(applySellerVo); // 파일경로를 얻어옴.
@@ -146,7 +140,7 @@ public class BuyerController {
     buyerService.registerApplySeller(applySellerVo); // 판매자신청 정보를 insert
     
     rttr.addFlashAttribute("success", "판매자신청이 완료되었습니다."); // 뷰에 성공메세지를 출력하기위해 보내줄 객체
-    return "redirect:buyer_Home";
+    return "redirect:/buyer/buyer_Home";
   }
 
 
@@ -157,12 +151,8 @@ public class BuyerController {
    * @author "SL SangUk Lee"
    * @return Mapping Url
    */
-  @RequestMapping(value = "getRentList", method = { RequestMethod.POST, RequestMethod.GET })
+  @RequestMapping(value = "common/getRentList", method = { RequestMethod.POST, RequestMethod.GET })
   public String getRentList(HttpServletRequest request, Model model, String pageNum) {
-    HttpSession session = request.getSession(false);
-    if (session == null) {
-      return "redirect:/";
-    }
     model.addAttribute("rentListVo", rentService.getRentList(pageNum)); // 뷰에 보내줄 대여신청 목록 리스트 
     return "rent/Read_RentList.tiles";
   }
@@ -175,14 +165,9 @@ public class BuyerController {
    * @param recruitNo 대여신청번호.
    * @return Mapping Url
    */
-  @RequestMapping(value = "findRentDetailByRecruitNo",
+  @RequestMapping(value = "common/findRentDetailByRecruitNo",
       method = { RequestMethod.POST, RequestMethod.GET })
-  public String findRentDetailByRecruitNo(Model model, String recruitNo,
-      HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
-    if (session == null) {
-      return "redirect:/";
-    }
+  public String findRentDetailByRecruitNo(Model model, String recruitNo) {
     // 대여신청 번호로 대여신청 상세정보를 vo객체에 담음
     RecruitVo recruitVo = rentService.findRentDetailByRecruitNo(Integer.parseInt(recruitNo)); 
     model.addAttribute("recruitVo", recruitVo); // 뷰에 보내줄 대여신청Vo 객체
@@ -198,14 +183,11 @@ public class BuyerController {
    * @param request 세션에 저장된 로그인정보를 가져오기 위함.
    * @return mapping Url
    */
-  @RequestMapping(value = "registerRentByRentVo", method = RequestMethod.POST)
+  @RequestMapping(value = "common/registerRentByRentVo", method = RequestMethod.POST)
   public String registerRentByRentVo(RentVo rentVo, RedirectAttributes rttr,
       HttpServletRequest request) {
     HttpSession session = request.getSession(false);
     RentVo rvo = rentVo; // 뷰에서 대여신청 정보를 얻어와서 대여신청Vo객체에 담음
-    if (session == null || rvo == null) {
-      return "redirect:/";
-    }
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo"); // 세션에 있는 회원Vo객체를 얻어옴
     rvo.setId(mvo.getMemberVo().getId()); // 대여신청Vo객체에 회원Vo객체를 set
     
@@ -223,7 +205,7 @@ public class BuyerController {
    * @param pageNum 페이징번호.
    * @return trade/Read_tradePost.tiles
    */
-  @RequestMapping(value = "tradePost", method = { RequestMethod.GET, RequestMethod.POST })
+  @RequestMapping(value = "common/tradePost", method = { RequestMethod.GET, RequestMethod.POST })
   public String getTradePostList(Model model, String pageNum) {
     TradePostListVo lvo = tradeService.findTradePostList(pageNum);
     model.addAttribute("tradePostListVo", lvo);
@@ -240,14 +222,10 @@ public class BuyerController {
    * @param response 데이터 전송.
    * @return
    */
-  @RequestMapping(value = "findTradePostListByNo",
+  @RequestMapping(value = "common/findTradePostListByNo",
       method = { RequestMethod.GET, RequestMethod.POST })
   public String findTradePostDetailByNo(Model model, String tradeNo, HttpServletRequest request,
       HttpServletResponse response) {
-    HttpSession session = request.getSession(false);
-    if (session == null || session.getAttribute("mvo") == null) {
-      return "redirect:/";
-    }
     Cookie[] cookies = request.getCookies();
     for (int i = 0; i < cookies.length; i++) {
       if (cookies[i].getName().equals("tradeHits")) {
@@ -273,7 +251,7 @@ public class BuyerController {
    * @param tradeNo 게시글 번호.
    * @return trade/Read_tradePost.tiles
    */
-  @RequestMapping("/deleteBoard")
+  @RequestMapping("common/deleteBoard")
   public String deleteTradePostByNo(Model model, String tradeNo) {
     tradeService.deleteTradePostByNo(Integer.parseInt(tradeNo));
     TradePostListVo lvo = tradeService.findTradePostList("1");
@@ -289,7 +267,7 @@ public class BuyerController {
    * @param tvo 현재 거래 게시판 정보 전달 객체.
    * @return trade/Update_tradePostForm.tiles
    */
-  @RequestMapping("/updateBoardForm")
+  @RequestMapping("common/updateBoardForm")
   public String updateTradePostForm(Model model, TradePostVo tvo) {
     noHitdetailViewCheck(tvo, model);
     return "trade/Update_tradePostForm.tiles";
@@ -303,7 +281,7 @@ public class BuyerController {
    * @param tvo 수정한 거래 게시판 객체.
    * @return trade/Read_tradePostDetail.tiles
    */
-  @RequestMapping(method = RequestMethod.POST, value = "/updateBoard")
+  @RequestMapping(method = RequestMethod.POST, value = "common/updateBoard")
   public String updateTradePost(Model model, @ModelAttribute TradePostVo tvo) {
     try {
       tradeService.updateTradePost(tvo);
@@ -321,7 +299,7 @@ public class BuyerController {
    * @author "SM HyeonGil Kim"
    * @return trade/Create_tradePost.tiles
    */
-  @RequestMapping("/createTradePostForm")
+  @RequestMapping("common/createTradePostForm")
   public String createTradePostForm() {
     return "trade/Create_tradePost.tiles";
   }
@@ -332,7 +310,7 @@ public class BuyerController {
    * @author "SM HyeonGil Kim"
    * @return redirect:tradePost
    */
-  @RequestMapping(method = RequestMethod.POST, value = "/createBoard")
+  @RequestMapping(method = RequestMethod.POST, value = "common/createBoard")
   public String createTradePost(HttpServletRequest request, Model model,
       @ModelAttribute TradePostVo tvo) {
 
@@ -361,7 +339,7 @@ public class BuyerController {
    * @param model 뷰에 전달할 객체.
    * @return trade/Read_tradePostDetail.tiles
    */
-  @RequestMapping("/hit")
+  @RequestMapping("common/hit")
   public String hitdetailViewCheck(TradePostVo tvo, Model model) {
     tradeService.updateHitsTradePost(tvo);
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
@@ -376,7 +354,7 @@ public class BuyerController {
    * @param model 뷰에 전달할 객체.
    * @return trade/Read_tradePostDetail.tiles
    */
-  @RequestMapping("/nohit")
+  @RequestMapping("common/nohit")
   public String noHitdetailViewCheck(TradePostVo tvo, Model model) {
     model.addAttribute("tvo", tradeService.findTradePostDetailByNo(tvo.getTradeNo()));
     return "trade/Read_tradePostDetail.tiles";

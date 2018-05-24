@@ -106,7 +106,7 @@
 						<div id="reason" class="applyContent"></div>
 						<div id="resultDate" class="applyContent"></div> 
 						<!-- 지원신청 폼 -->
-						<form name="applySellerPro" method="post" class="applyContent" id="applySeller" action="${pageContext.request.contextPath}/applySellerPro">
+						<form name="applySellerPro" method="post" class="applyContent" id="applySeller" action="${pageContext.request.contextPath}/admin/applySellerPro">
 							<div id="applyForm" >
 								<input type="hidden" name="applyNo" id="applyNo_val" value="번호">
 								<input type="hidden" name="memberVo.id" id="applyId_val" value="아이디"> 
