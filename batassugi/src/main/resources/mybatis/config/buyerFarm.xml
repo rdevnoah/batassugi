@@ -20,8 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     M.name AS name, RT.rent_no AS rentNo, RT. rent_size AS rentSize, 
     RT.rent_month AS rentMonth, RT.rent_status AS rentStatus, 
     to_char(RT.rent_startdate,'yy.mm.dd') AS rentStartdate,
-    <!-- round(((sysdate-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus  -->
-    round(((to_date('2018-06-24')-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus 
+    round(((sysdate-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus 
+    <!-- round(((to_date('2018-06-24')-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus --> 
     FROM rent RT, recruit R, spider_member M, member_info I, farm F, crops C
     WHERE RT.recruit_no = R.recruit_no
     AND C.crops_no = RT.crops_no
