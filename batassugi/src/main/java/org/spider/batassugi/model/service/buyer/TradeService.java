@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.buyer.TradePostCommentDaoIf;
 import org.spider.batassugi.model.dao.buyer.TradePostDaoIf;
+import org.spider.batassugi.model.dao.common.PathInfo;
 import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
@@ -36,7 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
  *      </pre>
  */
 @Service
-public class TradeService implements TradeServiceIf {
+public class TradeService implements TradeServiceIf, PathInfo {
 
   @Resource
   private TradePostDaoIf tradePostDao;
@@ -70,8 +71,7 @@ public class TradeService implements TradeServiceIf {
   public void updateTradePost(TradePostVo tvo) throws Exception, IOException {
     MultipartFile multifile = tvo.getFile();
     String filename = multifile.getOriginalFilename();
-    String fileSavePath =
-        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\trade_img\\";
+    String fileSavePath = Image_PATH + "\\trade_img\\";
     
     UUID uu = UUID.randomUUID();
     
@@ -90,8 +90,7 @@ public class TradeService implements TradeServiceIf {
     MultipartFile multifile = tvo.getFile();
     
     String filename = multifile.getOriginalFilename();
-    String fileSavePath =
-        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\trade_img\\";
+    String fileSavePath = Image_PATH + "\\trade_img\\";
     
     UUID uu = UUID.randomUUID();
     

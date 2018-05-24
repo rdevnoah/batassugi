@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
+import org.spider.batassugi.model.dao.common.PathInfo;
 import org.spider.batassugi.model.exception.LoginException;
-import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberStateVo;
@@ -44,7 +44,7 @@ import org.springframework.web.multipart.MultipartFile;
  *      </pre>
  */
 @Service
-public class MemberService implements MemberServiceIf {
+public class MemberService implements MemberServiceIf, PathInfo {
 
   @Resource
   private MemberDaoIf memberDao;
@@ -76,8 +76,7 @@ public class MemberService implements MemberServiceIf {
     String filename = multifile.getOriginalFilename();
 
     // 저장할 위치를 지정
-    String fileSavePath =
-        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\profile_img\\";
+    String fileSavePath = Image_PATH + "\\profile_img\\";
 
     // 이름에 현재 날짜를 붙이자
     // String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
@@ -147,12 +146,12 @@ public class MemberService implements MemberServiceIf {
     MemberInfoVo orgVo = memberDao.findMemberInfoById(uvo.getMemberVo().getId());
 
     // 2. 패스워드 없으면 기존 password를 uvo에 넣어줌
-    if (uvo.getMemberVo().getPassword().length()<1) {
+    if (uvo.getMemberVo().getPassword().length() < 1) {
       uvo.getMemberVo().setPassword(orgVo.getMemberVo().getPassword());
     }
 
     // 3. 사진 정보가 없으면 Img에 기존 경로 넣어주고, 있으면 등록 후 새 경로를 넣어준다.
-    if (uvo.getFile().getOriginalFilename().length()<1) {
+    if (uvo.getFile().getOriginalFilename().length() < 1) {
       uvo.setImage(orgVo.getImage());
     } else {
       try {
@@ -168,7 +167,7 @@ public class MemberService implements MemberServiceIf {
     memberDao.updateMemberInfo(uvo);
     
     // - 기존 작물이 없고, 새로운 작물이 있으면 추가
-    if(uvo.getLikeCrops()!=null) {
+    if (uvo.getLikeCrops() != null) {
       // - 기존 작물 지움
       memberDao.deleteLikeCrops(orgVo.getMemberVo().getId());
       // - 새로운 작물 등록
@@ -180,8 +179,8 @@ public class MemberService implements MemberServiceIf {
         memberDao.registerLikeCrop(map);
       }
     }
-      MemberInfoVo memberInfoVo=memberDao.login(uvo.getMemberVo());
-      return memberInfoVo;
+    MemberInfoVo memberInfoVo = memberDao.login(uvo.getMemberVo());
+    return memberInfoVo;
   }
 
   @Override

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.buyer.BuyerFarmDaoIf;
+import org.spider.batassugi.model.dao.common.PathInfo;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
  *      </pre>
  */
 @Service
-public class BuyerFarmService implements BuyerFarmServiceIf {
+public class BuyerFarmService implements BuyerFarmServiceIf, PathInfo {
   
   @Resource
   private BuyerFarmDaoIf buyerFarmDao;
@@ -63,7 +64,7 @@ public class BuyerFarmService implements BuyerFarmServiceIf {
     // 파일이름을 변형해서 저장하기 위한 작업
     String filename = multifile.getOriginalFilename();// 원본의 이름을 가져옴
     String fileSavePath =
-        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\farmer_doc\\"; // 저장할 위치를 지정
+        Image_PATH + "\\farmer_doc\\"; // 저장할 위치를 지정
     UUID uu = UUID.randomUUID(); // 파일 이름에 난수 붙이기
     File f = new File(fileSavePath + uu + "_" + filename); // 새로운 이름으로 파일저장
     System.out.println(f.getCanonicalPath());

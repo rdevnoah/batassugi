@@ -65,7 +65,7 @@ public class AdminService implements AdminServiceIf {
       adminDao.updateMemberLevel(avo.getMemberVo().getId());
     }
     // 승인 거절시 아무 거절 사유를 적지 않은 경우
-    if(avo.getApplyState().equals("승인처리")&&avo.getApplyReason().equals("")){
+    if (avo.getApplyState().equals("승인처리") && avo.getApplyReason().equals("")) {
       avo.setApplyReason("승인거절 처리되었습니다");
     }
     adminDao.updateApplySellerDate(avo);

@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import org.spider.batassugi.model.dao.admin.AccusePostDaoIf;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
+import org.spider.batassugi.model.dao.common.PathInfo;
 import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
  *      </pre>
  */
 @Service
-public class AccuseService implements AccuseServiceIf {
+public class AccuseService implements AccuseServiceIf, PathInfo {
   @Resource
   private AccusePostDaoIf accusePostDao;
 
@@ -63,8 +64,7 @@ public class AccuseService implements AccuseServiceIf {
     String filename = multifile.getOriginalFilename();
 
     // 저장할 위치를 지정
-    String fileSavePath =
-        "C:\\Users\\HyunGil\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img\\accuse_img\\";
+    String fileSavePath = Image_PATH + "\\accuse_img\\";
     // 이름에 현재 날짜를 붙이자
     // String now = new SimpleDateFormat("yyyyMMddHmsS").format(new Date());
     // 파일 이름에 난수 붙이기
