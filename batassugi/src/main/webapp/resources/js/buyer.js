@@ -8,8 +8,10 @@ var $a = $('a'),
 var $applyForm = '<form action="buyer/registerApplySeller" id="ApplySellerForm" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return false;">';	
 	$applyForm += '<div class="form-group">';
 	$applyForm += '<label class="control-label col-xs-4">농지문서</label>';
-	$applyForm += '<div class="col-xs-5">';
-	$applyForm += '<input type="file" name="file" class="form-control" placeholder="농지문서추가" required></div></div>';
+	$applyForm += '<div class="col-xs-8"><div class="filebox">';
+	$applyForm += '<input class="upload-name" value="파일선택" disabled="disabled">';
+	$applyForm += '<label class="btn btn-primary" for="file">업로드</label>';
+	$applyForm += '<input type="file" name="file" id="file" class="form-control upload upload-hidden" accept=".gif, .jpg, .png"></div></div></div>';
 	$applyForm += '<div class="form-group">';
 	$applyForm += '<label class="control-label col-xs-4">신청사유</label>';
 	$applyForm += '<div class="col-xs-5">';
@@ -38,6 +40,11 @@ function applyInfo(applyVo) { // ${applyVo}의 EL 값을 매개변수로 받아�
 			}); //var $applyModal = new BootstrapDialog({})
 			
 			$applyModal.realize(); // modal.open()메서드를 사용하면 자동으로 호출되지만, 모달이 호출되기전에 조작을 하기위해서 사용.
+			$applyModal.getModalBody().find('.filebox .upload-hidden').on('change', function() { // input type 파일명 넣어주는 event
+                  var $filename;
+                  $(this).val() != '' ? $filename = $(this)[0].files[0].name : $filename = '파일선택';
+                  $(this).siblings('.upload-name').val($filename); 
+             });
 			var $ApplySellerForm = $applyModal.getModalBody().find('#ApplySellerForm'); // 모달안에 있는 form을 담음.
 			$ApplySellerForm.on('submit', function() { // 모달 안에 있는 신청하기 버튼을 눌렀을시
 				$applyModal.close(); // 모달을 닫음.
@@ -215,5 +222,3 @@ $harvestLevel.on('click', function() {
 	var harvestChange = setInterval(harvestChangeFn, 1000); // setInterval을 1초마다 실행
 	$harvestModal.open(); // 모달을 호출
 })
-
-
