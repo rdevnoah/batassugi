@@ -24,8 +24,8 @@
 	<img src="${pageContext.request.contextPath}/resources/img/농작물사전_메인.jpg" width="100%">
 </div>
 <!-- 사전 영역 -->
-<!-- <div class="container dictionary">
-  <select name="cropsCategory" id="cropsCategory">
+ <div class="container dictionary">
+<!--  <select name="cropsCategory" id="cropsCategory">
     <option value="전체보기">난이도선택</option>
     <option value="상">난이도 상</option>
     <option value="중">난이도 중</option>
@@ -81,7 +81,6 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>	
 			<div>
-			margin-bottom: 50px;
 			</div>	
 		</div><%-- 모달 바디 --%>
 	</div><%-- 모달 다이얼로그 --%>
