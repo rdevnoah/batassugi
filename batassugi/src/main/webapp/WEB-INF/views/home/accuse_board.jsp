@@ -92,7 +92,7 @@
                   <div class="input-group">
                     <span class="input-group-addon" id="file_upload"></span> 
                     <input type="file" name="file" id="file" class="form-control upload" placeholder="증빙자료를 첨부해주세요" required="required"
-                     onchange="LoadImg(this);" aria-describedby="file_upload">
+                     onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
                     <button type="button" onclick="ResetImgvalue();" id="cancelButton">취소</button>
                     </div>
                 </div>
