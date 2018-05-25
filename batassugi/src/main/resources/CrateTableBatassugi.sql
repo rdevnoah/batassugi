@@ -175,6 +175,7 @@ CREATE TABLE farm
     CONSTRAINT FK_farm_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
+
 -- 농지 테이블 시퀀스
 CREATE SEQUENCE farm_SEQ nocache;
 
