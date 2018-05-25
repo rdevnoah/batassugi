@@ -109,7 +109,6 @@ public class BuyerController {
    */
   @RequestMapping(value = "buyer/deleteRentByRentNo", method = RequestMethod.POST)
   public String deleteRentByRentNo(RentVo rentVo, RedirectAttributes rttr) {
-    System.out.println(rentVo.getRecruitVo().getRecruitNo());
     buyerService.deleteRentByRentNo(rentVo);
     // 농지대여신청을 취소. 대여신청 정보를 삭제.
     

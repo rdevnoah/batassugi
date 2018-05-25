@@ -259,7 +259,7 @@
 			if(cnt > 3){
 				
 				$(this).prop("checked" , false);
-				alert("선택은 3개까지 가능합니다.");
+				BootstrapDialog.alert("선택은 3개까지 가능합니다.");
 			}
 		});
     	

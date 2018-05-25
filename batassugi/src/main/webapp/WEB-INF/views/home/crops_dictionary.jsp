@@ -93,7 +93,6 @@ $(document).ready(function() {
 	$(".dictionary_content").click(function() {
 		// cropsNo 가져오기 
 		cropsNo=$(this).attr('id'); 
-		//alert(cropsNo);
 		$("#myModal").modal();
 	});//작물 선택
 	
@@ -103,7 +102,6 @@ $(document).ready(function() {
 			url : "${pageContext.request.contextPath}/home/crops_detail",
 			data : "cropsNo="+cropsNo,
 			success : function(data) {
-				//alert(data.cropsVo.cropsNo);
 				$(".modal-title").html(data.cropsVo.cropsName);
 				$("#cropsProfileImg").html("<img src=\"${pageContext.request.contextPath}/resources/img/crops_img/"+data.cropsProfileimg+"\" width=\"98%\" height=\"300px\">");
 				$("#cropsImage1").html("<img src=\"${pageContext.request.contextPath}/resources/img/crops_img/"

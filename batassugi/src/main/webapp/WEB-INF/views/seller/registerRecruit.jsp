@@ -63,7 +63,7 @@
   		enddate=$("#recruitEnddate").val();
   		var nowDate=new Date().toLocaleDateString();
   		if (enddate < nowDate){
-  			alert("모집 종료날짜를 바르게 입력해주세요.");
+  			BootstrapDialog.alert("모집 종료날짜를 바르게 입력해주세요.");
   			return false;
   		}else{
   			return true;

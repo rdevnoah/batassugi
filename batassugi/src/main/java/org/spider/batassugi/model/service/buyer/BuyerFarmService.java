@@ -68,7 +68,6 @@ public class BuyerFarmService implements BuyerFarmServiceIf, PathInfo {
         Image_PATH + "\\farmer_doc\\"; // 저장할 위치를 지정
     UUID uu = UUID.randomUUID(); // 파일 이름에 난수 붙이기
     File f = new File(fileSavePath + uu + "_" + filename); // 새로운 이름으로 파일저장
-    System.out.println(f.getCanonicalPath());
     multifile.transferTo(f); // 저장된 경로에 파일 생성
     return f.getName();
   }

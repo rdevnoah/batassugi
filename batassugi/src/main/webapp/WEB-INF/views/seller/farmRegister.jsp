@@ -5,9 +5,9 @@
 	$(document).ready(function() {
 		   $("#farmRegister").click(function() {
 			   if ($('#farmSize').val()==''){
-				   alert('등록할 농지의 크기를 입력하세요');
+				   BootstrapDialog.alert('등록할 농지의 크기를 입력하세요');
 			   }else if ($('#farmAddress').val()==''){
-				   alert('주소를 입력하세요');
+				   BootstrapDialog.alert('주소를 입력하세요');
 			   }else{
 				   $('#farm_register').submit();
 			   }
@@ -47,10 +47,10 @@
 	   endDate = $("#endDate").val();
 	   var nowDate = nowdateCal();
 	   if ($('input:checkbox[name=cropsNo]:checked').length==0){
-		   alert("하나 이상의 작물을 선택하세요");
+		   BootstrapDialog.alert("하나 이상의 작물을 선택하세요");
 		   return false;
 	   }else if (endDate < nowDate){
-		   alert("등록 만료 날짜를 다시 확인해주세요");
+		   BootstrapDialog.alert("등록 만료 날짜를 다시 확인해주세요");
 		   return false;
 	   }else{
 		   return true;

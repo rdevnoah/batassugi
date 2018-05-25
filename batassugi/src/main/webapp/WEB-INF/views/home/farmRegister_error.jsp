@@ -25,7 +25,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
 <title>"GL_SangKyoung"</title>
 <script type="text/javascript">
-	alert("로그인후 다시등록해주세요");
+	BootstrapDialog.alert("로그인후 다시등록해주세요");
 	location.href="/"
 </script>
 </head>
