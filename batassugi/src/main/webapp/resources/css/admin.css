@@ -305,8 +305,9 @@ a.article, a.article:hover {
 	width: 150px;
 }
 
-.applyContent, .reasonTx, .resultDate {
+#applyContent, .reasonTx, .resultDate {
 	margin-top:5px;
+	
 }
 /* ---------------------------------------------------
     MEDIAQUERIES

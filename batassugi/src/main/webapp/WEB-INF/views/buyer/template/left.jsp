@@ -12,9 +12,6 @@
 			<a href="${pageContext.request.contextPath}/"> <i class="fa fa-home fa-lg"></i> 홈으로</a> 
 		</li>
 		<li>		
-			<a href="${pageContext.request.contextPath}/buyer/buyer_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>관리자메인</a> 
-		</li>
-		<li>		
 			<a id="applySeller" class="applySeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청</a> 
 		</li>
 		<li>		

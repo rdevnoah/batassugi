@@ -102,7 +102,7 @@ CREATE TABLE accuse
     CONSTRAINT FK_accuse_reported_id_spider_m FOREIGN KEY (reported_id) REFERENCES spider_member (id)   
 );
 
-AAA modify(bbb varchar2(5));
+
 
 
 -- 크롭 시퀀스 생성
