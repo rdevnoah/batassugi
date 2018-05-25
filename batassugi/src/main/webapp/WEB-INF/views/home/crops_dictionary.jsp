@@ -79,7 +79,10 @@
 			</div>	
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>		
+			</div>	
+			<div>
+			margin-bottom: 50px;
+			</div>	
 		</div><%-- 모달 바디 --%>
 	</div><%-- 모달 다이얼로그 --%>
 </div><%-- 컨텐츠 모달 --%>
@@ -115,7 +118,6 @@ $(document).ready(function() {
 				$("#cropsSeason").html(data.cropsSeason);
 				$("#cropsLevel").html(data.cropsVo.cropsLevel);
 				$("#cropsMethod").html(data.cropsMethod);
-				/*
 				
 				$("#applyNo").html(data.applyNo);
 				 $("#applyId").html(data.memberVo.id);
@@ -130,7 +132,6 @@ $(document).ready(function() {
 				 $("#applyForm").show();
 				 $("#applySellerProBtn").show();
 				 
-				*/
 			}//success      
 		});//ajax  
 
