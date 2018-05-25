@@ -73,7 +73,7 @@ $(document).ready(function() {
 	});
 	
 	$("#writeCancel").click(function() {
-		location.href = "${pageContext.request.contextPath}/tradePost";
+		location.href = "${pageContext.request.contextPath}/common/tradePost";
 	});
 });
 function handleImgFileSelect(e) {
