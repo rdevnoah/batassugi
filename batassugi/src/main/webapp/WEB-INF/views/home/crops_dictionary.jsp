@@ -23,13 +23,18 @@
 <div class="container-fluid">
 	<img src="${pageContext.request.contextPath}/resources/img/농작물사전_메인.jpg" width="100%">
 </div>
-
 <!-- 사전 영역 -->
-<div class="container dictionary">
+<!-- <div class="container dictionary">
+  <select name="cropsCategory" id="cropsCategory">
+    <option value="전체보기">난이도선택</option>
+    <option value="상">난이도 상</option>
+    <option value="중">난이도 중</option>
+    <option value="하">난이도 하</option>
+  </select>	 -->
 	<%--사전영역 row --%>
 	<div class="row">
 		<%--사전영역 개별 아이템--%>
-		<c:forEach var="item" items="${icon}">			
+		<c:forEach var="item" items="${icon}">		
 			<div class="col-sm-3 dictionary_content" id="${item.cropsVo.cropsNo}">
 			  	<div class="dictionary_content_heading">
 			  		<span class="dictionary_icon"><img src="${pageContext.request.contextPath}/resources/img/crops_img/${item.cropsIcon}" height="76px;"></span><br>
@@ -108,7 +113,7 @@ $(document).ready(function() {
 				$("#cropsName").html(data.cropsVo.cropsName);
 				$("#seedSeason").html(data.seedSeason);
 				$("#cropsSeason").html(data.cropsSeason);
-				$("#cropsLevel").html(data.cropsLevel);
+				$("#cropsLevel").html(data.cropsVo.cropsLevel);
 				$("#cropsMethod").html(data.cropsMethod);
 				/*
 				

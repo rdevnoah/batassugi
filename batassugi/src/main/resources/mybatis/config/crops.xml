@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   <!-- 농작물 사전 헤더 메뉴 클릭시 농작물사전 아이콘 리스트를 가져옴 -->
   <select id="getIconList" resultMap="cropsRm">
-    select ci.crops_no, ci.crops_icon, c.crops_name from crops_info ci, CROPS c 
+    select ci.crops_no, ci.crops_icon, c.crops_name, c.crops_level from crops_info ci, CROPS c 
     where c.crops_no=ci.crops_no
   </select>
 
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     c.crops_name, c.crops_level, ci.crops_profileImg,
     ci.crops_img1,
     ci.crops_img2, ci.crops_img3, ci.seed_season,
-    ci.crops_season,
+    ci.crops_season, c.crops_level,
     ci.crops_method, ci.crops_food
     from CROPS_INFO ci, CROPS c where
     c.crops_no=#{cropsNo} and
