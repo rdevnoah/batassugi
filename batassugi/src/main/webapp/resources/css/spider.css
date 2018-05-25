@@ -3,6 +3,18 @@
 
 
 /* 이상욱 : 모든 앵커 커서모양을 포인터로 변경하고 앵커의 밑줄을 없애고 글씨 색상을 검정색으로 변경 */
+.cropsList {
+	padding-left: 5px;
+	padding-top: 10px;
+	height: 74px;
+}
+.cropsList>img {
+	padding-right: 5px;
+}
+.mainImg {
+	padding-left: 0px; 
+	padding-right: 0px;
+}
 a {
    cursor: pointer;
    text-decoration: none;
