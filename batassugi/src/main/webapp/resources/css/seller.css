@@ -9,6 +9,11 @@ body {
     background: #fafafa;
 }
 
+
+.sellerFarmImage{
+	text-align: center;
+}
+
 p {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 1.1em;

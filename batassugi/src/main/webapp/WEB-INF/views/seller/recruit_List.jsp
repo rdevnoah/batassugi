@@ -77,7 +77,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="col-xs-5">
+					<div class="col-xs-5" id="buyerImage">
 						사진영역	
 					</div>
 					<div class="col-xs-7">
@@ -132,7 +132,7 @@ $(document).ready(function() {
      	$("#myModalBuyerDetail").on('show.bs.modal', function(){
      		$.ajax({
 				type : 'post',
-				url:'seller/findBuyerDetailByRentNo',
+				url:'findBuyerDetailByRentNo',
 				data : 'rentNo='+$rentNo,
 				async : false,
 				success : function(data) {
@@ -141,6 +141,8 @@ $(document).ready(function() {
 					$("#buyerTel").html(data.TEL);
 					$("#buyerHarvestStatus").html(data.HARVESTSTATUS);
 					$("#buyerCrops").html(data.CROPSNAME);
+					$("#buyerImage").html("<img src='${pageContext.request.contextPath}/resources/img/profile_img/"+data.IMAGE+"' style='height: 230px;'>");
+					
 				}	
 			})
      	});
