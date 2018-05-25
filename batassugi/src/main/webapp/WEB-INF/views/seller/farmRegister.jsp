@@ -16,7 +16,7 @@
               }
               reader.readAsDataURL(value.files[0]);
          }
-         $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/logo.png");
+         $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png");
          if ($('#previewImg').attr('class')=="animated fadeIn") {
            $('#previewImg').removeClass("animated fadeIn")
       } else {
@@ -28,7 +28,7 @@
       // 프로필 이미지 리셋
        $("#file").val("");
       // 미리보기 이미지 리셋
-      $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/logo.png");
+      $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png");
        if ($('#previewImg').attr('class')=="animated fadeIn") {
           $('#previewImg').removeClass("animated fadeIn")
       } else {
@@ -78,6 +78,7 @@
 		
 		<%-- contents부분 --%>
 	<div class="farm_contents">
+			<form action="${pageContext.request.contextPath}/seller/farm_register" id="farm_register" method="post"  enctype="multipart/form-data" onsubmit="return checkRegisterFarm()">
 		<div class="row main">
 			<div class="col-md-3 input_img">
 				<div class="img_Preview">프로필 미리보기</div>
@@ -93,7 +94,6 @@
 			</div>
 		
 		<div class="col-md-9">
-		<form action="${pageContext.request.contextPath}/farm_register" id="farm_register" method="post"  enctype="multipart/form-data" onsubmit="return checkRegisterFarm()">
             <span class="applyContent">농지 등록평수 <input type="number" name="farmSize" min="1" required="required"></span><br>
             <span class="applyContent">농지 등록날짜 <input type="text" name="farmStartdate" value="${requestScope.date }" required="required" readonly="readOnly"></span><br>
             <span class="applyContent">농지 만료날짜 <input type="date" id="endDate" name="farmEnddate" required="required" ></span><br>

@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="findRestFarmSizeByFarmNo" parameterType="string" resultType="string">
     select (farm_size-(select coalesce(sum(r.rent_size),0) from rent r, recruit c, farm f 
     where c.recruit_no=r.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo}
-    and r.rent_status='승인' and r.rent_status='대기')-(
+    and (r.rent_status='승인' or r.rent_status='대기'))-(
     select coalesce(sum(recruit_size),0) from recruit where farm_no=#{farmNo}))
     from farm
     where farm_no=#{farmNo}

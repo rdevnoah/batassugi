@@ -132,7 +132,7 @@ $(document).ready(function() {
      	$("#myModalBuyerDetail").on('show.bs.modal', function(){
      		$.ajax({
 				type : 'post',
-				url:'findBuyerDetailByRentNo',
+				url:'seller/findBuyerDetailByRentNo',
 				data : 'rentNo='+$rentNo,
 				async : false,
 				success : function(data) {
