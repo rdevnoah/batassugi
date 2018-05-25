@@ -288,6 +288,9 @@ a {
 .sidenav a:hover {
     color: #f1f1f1;
 }
+nav{
+	display: block !important;
+}
 
 .sidenav .closebtn {
     position: absolute;
@@ -312,6 +315,7 @@ a {
     color: white;
     text-align: center;
     background-color: #323741;
+    margin-top: 20px;
 }
 
 /* 조선화 carousel */

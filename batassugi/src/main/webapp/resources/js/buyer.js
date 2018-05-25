@@ -158,7 +158,7 @@ $rentCancel.on('click',function() {
 		type : 'danger',
 		message : "신청취소 하시겠습니까?",
 		onhidden: function() {
-			flag == 'true' ? sendPost('buyer/deleteRentByRentNo', {'rentNo':$rentNo}) : '';
+			flag == 'true' ? sendPost('deleteRentByRentNo', {'rentNo':$rentNo}) : '';
 			// flag가 true이면 post전송.
 		},
 		callback: function(result) {

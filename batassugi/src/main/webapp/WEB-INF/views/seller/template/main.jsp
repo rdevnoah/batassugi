@@ -151,7 +151,7 @@ $(document).ready(function() {
 						crops+=data.farmVo.cropsVo[i].cropsName+' ';
 					}
 					
-					$("#farmImage").html("<img src='${pageContext.request.contextPath}/resources/img/farm_photo/"+data.farmVo.image+"' width='100px'>");
+					$("#farmImage").html("<img src='${pageContext.request.contextPath}/resources/img/farm_photo/"+data.farmVo.image+"' style='height:170px;''>");
 					$("#farmSize").html(data.farmVo.farmSize);
 					$("#farmAddress").html(data.farmVo.farmAddress);
 					$("#farmEnddate").html(data.farmVo.farmEnddate);
@@ -201,7 +201,9 @@ $(document).ready(function() {
 				                allowPointSelect: true,
 				                cursor: 'pointer',
 				                dataLabels: {
-				            		format: '{point.y}'
+				            		format: '{point.y}',
+				            		distance: -20
+				            		
 				                    /* enabled: false */
 				                },
 				                showInLegend: true,

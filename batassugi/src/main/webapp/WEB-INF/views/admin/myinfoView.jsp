@@ -328,37 +328,36 @@
     	   });//keyup  
     		       		   
     		   
-    		   //submit		   
-    		   $("#register").submit(function(){
-    		      if (checkResultPassword=="") {
-    		    	  BootstrapDialog.alert({
-   		        	   type : 'danger',
-   		        	   title : '비밀번호 확인',
-   		        	   message : '비밀번호 확인을 다시 하세요',
-   		        		size:"size-small"
-   		       	}); 
+   		   //submit		   
+   		   $("#register").submit(function(){
+   		      if (checkResultPassword=="") {
+   		    	  BootstrapDialog.alert({
+  		        	   type : 'danger',
+  		        	   title : '비밀번호 확인',
+  		        	   message : '비밀번호 확인을 다시 하세요',
+  		        		size:"size-small"
+  		       	}); 
+   		         return false;
+   		      }
+   		      else if(checkResultnickname==""){
+   		    	  BootstrapDialog.alert({
+  		        	   type : 'danger',
+  		        	   title : '닉네임 확인',
+  		        	   message : '닉네임 중복체크를 다시 하세요',
+  		        	   size:"size-small"
+  		       	}); 
     		         return false;
-    		      }
-    		      else if(checkResultnickname==""){
-    		    	  BootstrapDialog.alert({
-   		        	   type : 'danger',
-   		        	   title : '닉네임 확인',
-   		        	   message : '닉네임 중복체크를 다시 하세요',
-   		        	   size:"size-small"
-   		       	}); 
-     		         return false;
-    		      }
-    		   });//submit
-    		   var fileTarget = $('.filebox .upload-hidden'); 
-    		   fileTarget.on('change', function(){ // 값이 변경되면 
-    			   if(window.FileReader){ // modern browser 
-    				   var filename = $(this)[0].files[0].name; 
-    			   } else { // old IE 
-    				   var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
-   				   } // 추출한 파일명 삽입 
-   				   $(this).siblings('.upload-name').val(filename); 
-    			});
-
+   		      }
+   		   });//submit
+   		   var fileTarget = $('.filebox .upload-hidden'); 
+   		   fileTarget.on('change', function(){ // 값이 변경되면 
+   			   if(window.FileReader){ // modern browser 
+   				   var filename = $(this)[0].files[0].name; 
+   			   } else { // old IE 
+   				   var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+  				   } // 추출한 파일명 삽입 
+  				   $(this).siblings('.upload-name').val(filename); 
+   			});
 	})//ready
      
 </script>
