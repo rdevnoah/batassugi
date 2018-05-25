@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 신청현황에서 상세보기를 눌렀을 때 상세정보를 얻어오는 쿼리문입니다. -->
   <select id="findBuyerDetailByRentNo" parameterType="string" resultType="map">
-    select m.nickname as NICKNAME, mi.tel as TEL, 
+    select m.nickname as NICKNAME, mi.tel as TEL, mi.image as IMAGE, 
     to_char(ADD_MONTHS(r.rent_startdate,r.rent_month),'yyyy-mm-dd') as RENTENDDATE, c.crops_name as CROPSNAME, 
     round(((sysdate-r.rent_startdate)/(30*r.rent_month))*100) as harvestStatus 
     from spider_member m, member_info mi, rent r, crops c

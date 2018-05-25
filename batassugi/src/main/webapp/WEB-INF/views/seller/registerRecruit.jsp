@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <form class="form-inline" method="post" action="${pageContext.request.contextPath}/seller/registerRecruit">
+        <form class="form-inline" method="post" action="${pageContext.request.contextPath}/seller/registerRecruit" onsubmit="return recruitCheck()">
           <input type="hidden" name="farmNo" value="${recruitMap.farmVo.farmVo.farmNo}">
           <div class="panel panel-info animated fadeIn">
             <div class="panel-heading">
@@ -18,7 +18,7 @@
               <%--재배가능농작물 --%>
               <div class="form-group col-xs-4">
                 <label>모집종료일 : </label>
-                <input type="date" name="recruitEnddate">
+                <input type="date" id="recruitEnddate" required name="recruitEnddate">
               </div> <%-- form-group col-xs-4 --%>
               <%-- 대여기간 --%>
               <div class="form-group col-xs-4">
@@ -38,12 +38,12 @@
               <%-- 평당 월 가격 --%>
               <div class="form-group col-xs-4">
                 <label>평당 월 가격 : </label>
-                  <input class="form-control" type="number" min="0" name="price" style="width: 45%;" placeholder="가격을 입력하세요">
+                  <input class="form-control" type="number" min="0" name="price" required="required" style="width: 45%;" placeholder="가격을 입력하세요">
               </div> <%-- form-group col-xs-4 --%>
               <%-- 상세내용 --%>
               <div class="form-group col-xs-offset-1 col-xs-10"><br>
                 <h5>상세내용</h5>
-                <textarea name="recruitContent" style="width : 100%; border: solid 1px; height: 100px; overflow-y: scroll;"></textarea>
+                <textarea name="recruitContent" required="required" style="width : 100%; border: solid 1px; height: 100px; overflow-y: scroll;"></textarea>
               </div>
             </div> <%-- form-group col-xs-offset-1 col-xs-10 --%>
           </div> <%-- panel-body --%>
@@ -56,3 +56,18 @@
       </div> <%-- panel panel-info animated fadeIn --%>
     </div> <%-- col-xs-12 --%>
   </div> <%-- row --%> 
+  
+  <script>
+  	function recruitCheck(){
+  		var enddate=new Date();
+  		enddate=$("#recruitEnddate").val();
+  		var nowDate=new Date().toLocaleDateString();
+  		if (enddate < nowDate){
+  			alert("모집 종료날짜를 바르게 입력해주세요.");
+  			return false;
+  		}else{
+  			return true;
+  		}
+
+  	}
+  </script>

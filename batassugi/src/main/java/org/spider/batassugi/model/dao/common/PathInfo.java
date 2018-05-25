@@ -4,3 +4,4 @@ public interface PathInfo {
   String Image_PATH =
       "C:\\Users\\kosta\\git\\batassugi\\batassugi\\src\\main\\webapp\\resources\\img";
 }
+
