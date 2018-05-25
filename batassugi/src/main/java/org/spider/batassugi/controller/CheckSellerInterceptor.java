@@ -47,11 +47,11 @@ public class CheckSellerInterceptor extends HandlerInterceptorAdapter {
         if(vo.getMemberVo().getmemberLevel().equals("판매자")){
           return true;
         }else {
-          response.sendRedirect("/batassugi");
+          response.sendRedirect(request.getContextPath()+"/home/nosession");
           return false;
         }
     } else {
-      response.sendRedirect("/batassugi");
+      response.sendRedirect(request.getContextPath()+"/home/nosession");
       return false;
     }
   }
