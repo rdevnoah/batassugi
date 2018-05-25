@@ -11,6 +11,9 @@ insert into member_state(state_number,state_set) values(1,'활동');
 insert into member_state(state_number,state_set) values(2,'중단');
 insert into member_state(state_number,state_set) values(3,'탈퇴'); 
 
+
+select * from crops
+
 -- 멤버 상태 시퀀스 생성
 CREATE SEQUENCE member_state_SEQ nocache;
 
@@ -286,7 +289,9 @@ select * from member_state
 
 select * from membeR_info
 
+select * from spider_member
 
+update spider_member set member_level='관리자' where id='admin'
 -- 시퀀스 전체 삭제 쿼리문입니다.
 drop sequence rent_SEQ;
 drop sequence recruit_SEQ;
