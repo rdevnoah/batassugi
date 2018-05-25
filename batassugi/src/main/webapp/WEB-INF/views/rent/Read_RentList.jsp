@@ -7,18 +7,15 @@
 			<c:forEach items="${rentListVo.recruitList}" var="list" >
 			<div class="col-xs-3">
 				<div class="thumbnail rent">
-					<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${list.farmVo.image}" class="img-responsive" >
+					<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${list.farmVo.image}" style="height: 230px;">
 					<div class="caption content">
 						<div class="hidden"><span>${list.recruitNo}</span></div>
-						<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${list.recruitEnddate}</span> 까지</div>
+						<div><i class="fa fa-user fa-2x"></i>&nbsp;<span>${list.farmVo.memberInfoVo.memberVo.nickname}</span></div>
+						<div class="text-danger"><i class="fa fa-calendar-check-o fa-lg"></i> <span>${list.recruitEnddate}</span> 까지</div>
 						<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${list.recruitSize}</span>평</div>
 						<!-- <div><i class="fa fa-comment-o fa-lg"></i> <span>서현에 위치한 농장을 대여 해드립니다</span></div> -->
 						<div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${list.farmVo.farmAddress}</span></div>
-						<p>
-							<%-- <img src="${pageContext.request.contextPath}/resources/img/작물1.png">
-							<img src="${pageContext.request.contextPath}/resources/img/작물2.png">
-							<img src="${pageContext.request.contextPath}/resources/img/작물3.png">
-							<img src="${pageContext.request.contextPath}/resources/img/작물4.png"> --%>
+						<p class="cropsList">
 							<c:forEach items="${list.farmVo.cropsVo}" var="crops">
 								<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
 							</c:forEach>

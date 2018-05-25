@@ -7,14 +7,14 @@
 			<c:forEach items="${farmList}" var="farmVo" varStatus="i">
 				<div class="col-xs-3">
 					<div class="thumbnail rent">
-						<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${farmVo.image}" width="100px" class="img-responsive">
+						<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${farmVo.image}" style="height: 230px;">
 						<div class="caption">
 							<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${farmVo.farmEnddate}</span> 까지</div>
 							<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${farmVo.farmSize}평</span></div>
 							<div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${farmVo.farmAddress}</span></div>
 								<p>
 								<c:forEach items="${farmVo.cropsVo}" var="crops">
-									${crops.cropsName}
+									<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
 								</c:forEach>
 								</p>
 							<div>
@@ -81,8 +81,8 @@
 						</table>
 					</div>
 					<div class="col-xs-6">
-						<div class="row">
-							<img src="" id="farmImage">
+						<div class="row text-center" id="farmImage">
+							
 						</div>
 						<div class="row">
 							<table class="table table-hover text-center">
@@ -151,11 +151,12 @@ $(document).ready(function() {
 						crops+=data.farmVo.cropsVo[i].cropsName+' ';
 					}
 					
-					$("#farmImage").prop("src", data.farmVo.image);
+					$("#farmImage").html("<img src='${pageContext.request.contextPath}/resources/img/farm_photo/"+data.farmVo.image+"' width='100px'>");
 					$("#farmSize").html(data.farmVo.farmSize);
 					$("#farmAddress").html(data.farmVo.farmAddress);
 					$("#farmEnddate").html(data.farmVo.farmEnddate);
 					$("#crops").html(crops);
+					/* $("#crops").html(crops); */
 					var buyerTable='';
 					for (var i=0 ; i< data.rentList.length ; i++){
 						buyerTable+="<tr>";
