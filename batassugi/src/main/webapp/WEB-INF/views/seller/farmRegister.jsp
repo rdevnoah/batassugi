@@ -4,7 +4,13 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		   $("#farmRegister").click(function() {
-			   $('#farm_register').submit();
+			   if ($('#farmSize').val()==''){
+				   alert('등록할 농지의 크기를 입력하세요');
+			   }else if ($('#farmAddress').val()==''){
+				   alert('주소를 입력하세요');
+			   }else{
+				   $('#farm_register').submit();
+			   }
 		   });	
 	})
 
@@ -94,10 +100,10 @@
 			</div>
 		
 		<div class="col-md-9">
-            <span class="applyContent">농지 등록평수 <input type="number" name="farmSize" min="1" required="required"></span><br>
+            <span class="applyContent">농지 등록평수 <input type="number" name="farmSize" id='farmSize' min="1" required="required"></span><br>
             <span class="applyContent">농지 등록날짜 <input type="text" name="farmStartdate" value="${requestScope.date }" required="required" readonly="readOnly"></span><br>
             <span class="applyContent">농지 만료날짜 <input type="date" id="endDate" name="farmEnddate" required="required" ></span><br>
-            <span class="applyContent">농지 등록주소 <input type="text" name="farmAddress" required="required" ></span><br>
+            <span class="applyContent">농지 등록주소 <input type="text" name="farmAddress" id='farmAddress' required="required" ></span><br>
              
             가능 작물선택 
             

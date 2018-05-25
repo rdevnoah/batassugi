@@ -17,6 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE recruit_no = #{recruitVo.recruitNo}
   </update>
   
+  <update id="updateRecruitSizeResetByRecruitNo">
+    UPDATE recruit SET recruit_size = recruit_size+#{rentSize}
+    WHERE recruit_no = #{recruitNo}
+  </update>
+  
+  
   <resultMap type="recruitVo" id="recruitVoRM">
     <result column="farmNo" property="farmVo.farmNo" />
     <result column="image" property="farmVo.image" />

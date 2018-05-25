@@ -46,7 +46,7 @@ public interface BuyerFarmServiceIf {
    * @author "SL SangUk Lee"
    * @param rentNo 대여신청번호.
    */
-  public void deleteRentByRentNo(int rentNo);
+  public void deleteRentByRentNo(RentVo rentVo);
   
   /**
    * 구매자에서 판매자신청하는 메서드.

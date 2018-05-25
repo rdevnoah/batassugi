@@ -108,8 +108,10 @@ public class BuyerController {
    * @return maaping Url
    */
   @RequestMapping(value = "buyer/deleteRentByRentNo", method = RequestMethod.POST)
-  public String deleteRentByRentNo(String rentNo, RedirectAttributes rttr) {
-    buyerService.deleteRentByRentNo(Integer.parseInt(rentNo)); // 농지대여신청을 취소. 대여신청 정보를 삭제.
+  public String deleteRentByRentNo(RentVo rentVo, RedirectAttributes rttr) {
+    System.out.println(rentVo.getRecruitVo().getRecruitNo());
+    buyerService.deleteRentByRentNo(rentVo);
+    // 농지대여신청을 취소. 대여신청 정보를 삭제.
     
     rttr.addFlashAttribute("success", "신청취소되었습니다."); // 뷰에 성공메세지 출력을 위해 보내줄 객체 
     return "redirect:/buyer/buyer_Home";
