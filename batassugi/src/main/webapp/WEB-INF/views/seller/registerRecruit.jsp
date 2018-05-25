@@ -59,9 +59,10 @@
   
   <script>
   	function recruitCheck(){
-  		var enddate=new Date();
-  		enddate=$("#recruitEnddate").val();
-  		var nowDate=new Date().toLocaleDateString();
+  	  var enddate = new Date();
+	   enddate = $("#recruitEnddate").val();
+	   var nowDate = nowdateCal();
+  		
   		if (enddate < nowDate){
   			BootstrapDialog.alert("모집 종료날짜를 바르게 입력해주세요.");
   			return false;
@@ -70,4 +71,18 @@
   		}
 
   	}
+    function nowdateCal() {
+ 	   var date = new Date();
+ 	    var year = date.getFullYear(); //년도
+ 	    var month = date.getMonth()+1; //월
+ 	    var day = date.getDate(); //일
+ 	    if ((month+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해
+ 	    	month = "0" + month;
+ 	    }
+ 	    if ((day+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해
+ 	        day = "0" + day;
+ 	    }
+ 	    var getToday = year+"-"+month+"-"+day; // 오늘 날짜 (2017-02-07)
+ 	    return getToday;
+ 	}
   </script>
