@@ -69,18 +69,22 @@ public class TradeService implements TradeServiceIf, PathInfo {
 
   @Override
   public void updateTradePost(TradePostVo tvo) throws Exception, IOException {
-    MultipartFile multifile = tvo.getFile();
-    String filename = multifile.getOriginalFilename();
-    String fileSavePath = Image_PATH + "\\trade_img\\";
-    
-    UUID uu = UUID.randomUUID();
-    
-    File f = new File(fileSavePath + uu + "_" + filename);
-    multifile.transferTo(f);
-    String path = f.getName();
-    
-    tvo.setTradePhoto(path);
-    
+    TradePostVo torgVo = tradePostDao.findTradePostDetailByNo(tvo.getTradeNo());
+    if (tvo.getFile().getOriginalFilename().length() < 1) {
+      tvo.setTradePhoto(torgVo.getTradePhoto());
+    } else {
+      MultipartFile multifile = tvo.getFile();
+      String filename = multifile.getOriginalFilename();
+      String fileSavePath = Image_PATH + "\\trade_img\\";
+
+      UUID uu = UUID.randomUUID();
+
+      File f = new File(fileSavePath + uu + "_" + filename);
+      multifile.transferTo(f);
+      String path = f.getName();
+
+      tvo.setTradePhoto(path);
+    }
     tradePostDao.updateTradePost(tvo);
   }
 
