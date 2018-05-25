@@ -48,8 +48,9 @@ public class BuyerFarmService implements BuyerFarmServiceIf, PathInfo {
   }
 
   @Override
-  public void deleteRentByRentNo(int rentNo) {
-    buyerFarmDao.deleteRentByRentNo(rentNo);
+  public void deleteRentByRentNo(RentVo rentVo) {
+    buyerFarmDao.updateRecruitSizeResetByRecruitNo(rentVo);
+    buyerFarmDao.deleteRentByRentNo(rentVo);
   }
 
   @Override
