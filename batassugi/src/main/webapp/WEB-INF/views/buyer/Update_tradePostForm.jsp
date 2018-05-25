@@ -50,7 +50,7 @@
     	$("#tradephoto").on("change", handleImgFileSelect);
     	
     	$("#updateCancel").click(function() {
-    		location.href="${pageContext.request.contextPath}/tradePost";
+    		location.href="${pageContext.request.contextPath}/common/tradePost";
     	});
     	$("#updateSuccess").click(function(){ 
     		if ($("#tradeTitle").val() == "") {

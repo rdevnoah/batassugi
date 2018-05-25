@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<div class="container">
+<div class="container boatd_contents">
 	<div class="row">
 		<div class="col-xs-12">
 			<c:forEach items="${rentListVo.recruitList}" var="list" >
 			<div class="col-xs-3">
 				<div class="thumbnail rent">
-					<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${list.farmVo.image}" style="height: 230px;">
+					<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${list.farmVo.image}" style="height: 150px;">
 					<div class="caption content">
 						<div class="hidden"><span>${list.recruitNo}</span></div>
 						<div><i class="fa fa-user fa-2x"></i>&nbsp;<span>${list.farmVo.memberInfoVo.memberVo.nickname}</span></div>
@@ -46,7 +46,7 @@
 		</div> <%-- col-xs-12 --%>
 		<c:set value="${rentListVo.pagingBean}" var="pb" />
 		<div class="text-center">
-			<nav>
+			<div >
 				<ul class="pagination rentPagination">
 					<c:if test="${pb.previousPageGroup}">
 					<li>
@@ -73,7 +73,7 @@
 					</li> <%-- nextPage --%>
 				</c:if>
 				</ul> <%-- pagination rentPagination --%>
-			</nav> <%-- nav --%>
+			</div> <%-- nav --%>
 		</div> <%-- text-center --%>
 	</div> <%-- row --%>
 </div> <%-- container --%>
