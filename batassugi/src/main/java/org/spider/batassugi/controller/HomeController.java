@@ -257,8 +257,10 @@ public class HomeController {
   
   
   @RequestMapping("common/accuse_board")
-  public String getAllMemberList(Model model) {
-   List<MemberInfoVo> list = accuseService.getAllMemberList();
+  public String getAllMemberList(Model model, HttpServletRequest request) {
+   MemberInfoVo mvo = (MemberInfoVo)request.getSession(false).getAttribute("mvo");
+ 
+   List<MemberInfoVo> list = accuseService.getAllMemberList(mvo.getMemberVo().getId());
    model.addAttribute("list", list);
   return "home/accuse_board.tiles";
  }

@@ -38,9 +38,9 @@
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
                     <select name="reportedId" id="reportedId">
-        			<option value="닉네임" >--닉네임--</option>
+        			<option value="" >--닉네임--</option>
     			     <c:forEach var="item" items="${list}">
-					   <option value="${item.memberVo.id}" >${item.memberVo.nickname}</option>
+						   <option value="${item.memberVo.id}" >${item.memberVo.nickname}</option>
 					 </c:forEach> 
 					 </select>
                   </div>
@@ -53,7 +53,7 @@
                   <div class="input-group">
                     <span class="input-group-addon"></span> 
                     <select name="accuseCategory" id="accuseCategory">
-         			  <option value="신고분류">--신고분류--</option>
+         			  <option value="">--신고분류--</option>
 		  			  <option value="허위정보기재">허위정보기재</option>
 		   			  <option value="욕설">욕설</option>
 		   			  <option value="노쇼">노쇼</option>
@@ -139,4 +139,27 @@
  			$('#previewImg').addClass("animated fadeIn")
  		}
  	}
+     
+     $(document).ready(function() {
+     		   $("#accuse").submit(function(){
+     		      if($("#reportedId").val()==""){
+     		         BootstrapDialog.alert({
+     		        	   type : 'danger',
+     		        	   title : '신고대상 확인',
+     		        	   message : '신고대상을 선택하세요',
+     		        	   size:"size-small"
+     		       	});    
+     		         return false;
+     		      }
+     		      else if($("#accuseCategory").val()==""){
+     		    	  BootstrapDialog.alert({
+    		        	   type : 'danger',
+    		        	   title : '신고카테고리 확인',
+    		        	   message : '신고카테고리를 선택하세요',
+    		        	   size:"size-small"
+    		       	}); 
+      		         return false;
+     		      }
+     		   });//submit
+ 	})//ready
 </script>

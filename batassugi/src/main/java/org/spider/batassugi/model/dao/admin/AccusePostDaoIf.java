@@ -6,7 +6,7 @@ import org.spider.batassugi.model.vo.common.MemberInfoVo;
 
 public interface AccusePostDaoIf {
 
-  public List<MemberInfoVo> getAllMemberList();
+  public List<MemberInfoVo> getAllMemberList(String id);
 
   public void registerAccuseInfo(AccusePostVo accusePostVo);
 

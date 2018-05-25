@@ -11,7 +11,9 @@ insert into member_state(state_number,state_set) values(1,'활동');
 insert into member_state(state_number,state_set) values(2,'중단');
 insert into member_state(state_number,state_set) values(3,'탈퇴'); 
 
-
+select mi.id, m.nickname
+	from MEMBER_INFO mi, SPIDER_MEMBER m
+	where m.id=mi.id and m.id!='admin' and m.id!='test1'
 select * from crops
 
 -- 멤버 상태 시퀀스 생성

@@ -74,10 +74,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
 
   <!-- 신고게시판에서 모든 멤버 아이디 불러오기 -->
-  <select id="getAllMemberList" resultMap="detailMemberRM">
+  <select id="getAllMemberList" parameterType="string" resultMap="detailMemberRM">
 	select mi.id, m.nickname
 	from MEMBER_INFO mi, SPIDER_MEMBER m
-	where m.id=mi.id
+	where m.id=mi.id and m.id!='admin' and m.id!=#{id}
   </select>
   
    <resultMap type="memberInfoVo" id="detailMember" >

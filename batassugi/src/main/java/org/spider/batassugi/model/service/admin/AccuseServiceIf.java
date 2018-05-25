@@ -6,7 +6,7 @@ import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 
 public interface AccuseServiceIf {
-  public List<MemberInfoVo> getAllMemberList();
+  public List<MemberInfoVo> getAllMemberList(String id);
 
   public void registerAccuseInfo(AccusePostVo accusePostVo);
 
@@ -30,4 +30,6 @@ public interface AccuseServiceIf {
    * @param accusePostVo
    */
   public void accusePro(AccusePostVo accusePostVo);
+
+
 }
