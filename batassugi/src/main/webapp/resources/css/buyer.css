@@ -61,7 +61,7 @@ i, span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #5CAB7D;
+    background: linear-gradient(to bottom, #79c753 0%, #83a970 100%);
     color: #fff;
     transition: all 0.3s;
 }
@@ -112,7 +112,7 @@ i, span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #54a075;
+    background: #6ac13e;
 }
 
 #sidebar .sidebar-header strong {
@@ -305,4 +305,36 @@ a.article, a.article:hover {
     #sidebarCollapse.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
+}
+.harvest {
+	display: !important inline-block;
+	border: solid 0px;
+}
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox .upload-name {
+	width: 40%;
+	display: inline-block;
+	padding: .5em .75em; /* label의 패딩값과 일치 */
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
 }

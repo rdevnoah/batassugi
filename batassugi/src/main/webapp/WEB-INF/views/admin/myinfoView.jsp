@@ -4,10 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-horizontal"
-				action="${pageContext.request.contextPath}/admin/updateMemberInfo"
-				method="post" name="updateMemberInfo" id="register"
-				enctype="multipart/form-data">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/updateMemberInfo" method="post" name="updateMemberInfo" id="register" enctype="multipart/form-data">
 				<%-- 판넬 헤드 : 회원가입 --%>
 				<div class="panel-heading">
 					<div class="panel-title text-left">
@@ -26,9 +23,10 @@
 						<%-- 1단 --%>
 						<div class="col-md-6">
 							<%-- 아이디 --%>
-							<div class="form-group">
-								<label class="control-label col-sm-3">아이디 <span
-									class="text-danger">*</span></label>
+							<div class="form-group formFirst">
+								<label class="control-label col-sm-3">아이디
+									<span class="text-danger">*</span>
+								</label>
 								<div class="col-md-8 col-sm-9">
 									<div class="input-group">
 										<input type="text" class="form-control" name="memberVo.id"
@@ -99,7 +97,7 @@
 						<%-- 2단 --%>
 						<div class="col-md-6">
 							<%-- 회원 이메일 --%>
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3"> 이메일 <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
@@ -170,17 +168,19 @@
 					<div class="row">
 						<%--1단 --%>
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3"> <img
 									src="${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}"
 									width="100px" id="previewImg" /><br> 프로필 미리보기
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<div class="input-group">
-										<input type="file" name="file" id="file"
-											class="form-control upload" placeholder="프로필을 넣어주세요"
-											onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
-										<button type="button" onclick="ResetImgvalue();">취소</button>
+									<div class="input-group formFirst">
+										<div class="filebox">
+											<input class="upload-name" value="파일선택" disabled="disabled">
+											<label class="btn btn-primary" for="file">업로드</label>
+											<input type="file" name="file" id="file" class="form-control upload upload-hidden" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
+											<button type="button" class="btn btn-danger" onclick="ResetImgvalue();">취소</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -188,7 +188,7 @@
 						<%-- 2단 --%>
 						<%-- 기호작물 --%>
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
@@ -210,8 +210,7 @@
 					<%--제출 버튼 --%>
 					<div class="form-group">
 						<div class="col-xs-offset-3 col-xs-10">
-							<input name="submit" type="submit" value="회원정보수정"
-								class="btn btn-primary">
+							<input name="submit" type="submit" value="회원정보수정" class="btn btn-primary">
 						</div>
 					</div>
 				</div>
@@ -236,25 +235,16 @@
                }
                reader.readAsDataURL(value.files[0]);
           }
-          $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png");
-          if ($('#previewImg').attr('class')=="animated fadeIn") {
-     		 $('#previewImg').removeClass("animated fadeIn")
- 		} else {
- 			$('#previewImg').addClass("animated fadeIn")
- 		}
+          $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png").toggleClass('animated fadeIn');
      }
      
      
      function ResetImgvalue() {
     	// 프로필 이미지 리셋
 	 	$("#file").val("");
+    	$('.upload-name').val('파일선택')
     	// 미리보기 이미지 리셋
-    	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}");
-    	 if ($('#previewImg').attr('class')=="animated fadeIn") {
-    		 $('#previewImg').removeClass("animated fadeIn")
-		} else {
-			$('#previewImg').addClass("animated fadeIn")
-		}
+    	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}").toggleClass('animated fadeIn');
 	}
      
     $(document).ready(function() {
@@ -359,6 +349,16 @@
      		         return false;
     		      }
     		   });//submit
+    		   var fileTarget = $('.filebox .upload-hidden'); 
+    		   fileTarget.on('change', function(){ // 값이 변경되면 
+    			   if(window.FileReader){ // modern browser 
+    				   var filename = $(this)[0].files[0].name; 
+    			   } else { // old IE 
+    				   var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+   				   } // 추출한 파일명 삽입 
+   				   $(this).siblings('.upload-name').val(filename); 
+    			});
+
 	})//ready
      
 </script>

@@ -47,14 +47,14 @@
 				<li class="page-item  disabled"><span class="page-link">Previous</span></li>
 			</c:if>
 			<c:if test="${paging.previousPageGroup}">
-				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/applySellerView?nowPage=${paging.startPageOfPageGroup-1}">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/adminAccuse?nowPage=${paging.startPageOfPageGroup-1}">Previous</a></li>
 			</c:if>
 			
 			<!-- 숫자 부분 -->
 			<c:forEach var="page" begin="${paging.startPageOfPageGroup}" end="${paging.endPageOfPageGroup}">
 				<c:choose>
 					<c:when test="${page!=paging.nowPage}">	
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/applySellerView?nowPage=${page}">${page}</a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/adminAccuse?nowPage=${page}">${page}</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="page-item active"><span class="page-link">${page}<span class="sr-only">(current)</span></span></li>
@@ -66,7 +66,7 @@
 				<li class="page-item  disabled"><span class="page-link">Next</span></li>
 			</c:if>
 			<c:if test="${paging.nextPageGroup}">
-				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/applySellerView?nowPage=${paging.endPageOfPageGroup+1}">Next</a></li>
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/adminAccuse?nowPage=${paging.endPageOfPageGroup+1}">Next</a></li>
 			</c:if>
 		</ul>
 	</nav>
@@ -105,7 +105,7 @@
 							<div id="reason" class="applyContent"></div>
 							<div id="resultDate" class="applyContent"></div>
 							<!-- 지원신청 폼 -->
-							<form name="accusePro" method="post" id="accusePro" action="${pageContext.request.contextPath}/accusePro">
+							<form name="accusePro" method="post" id="accusePro" action="${pageContext.request.contextPath}/admin/accusePro">
 							<div id="accuseForm" class="applyContent">
 							<input type="hidden" name="accuseNo" id="accuseNo_val" value="번호" >
 							<input type="hidden" name="accuseId" id="accuseId_val" value="신고자" >

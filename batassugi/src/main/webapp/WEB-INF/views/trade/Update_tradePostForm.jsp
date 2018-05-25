@@ -5,7 +5,7 @@
 	<div class="row main">
 		<div class="ccol-xs-12">
 			<h3></h3>
-			<form action="${pageContext.request.contextPath}/updateBoard?tradeNo=${tvo.tradeNo}&regdate=${tvo.regdate}&memberVo.nickname=${tvo.memberVo.nickname }&tradeHits=${tvo.tradeHits}" 
+			<form action="${pageContext.request.contextPath}/common/updateBoard?tradeNo=${tvo.tradeNo}&regdate=${tvo.regdate}&memberVo.nickname=${tvo.memberVo.nickname }&tradeHits=${tvo.tradeHits}" 
 			method="post" enctype="multipart/form-data" id="updateSuccess">
 			<table class="table table-hover text-center">
 				<thead>
@@ -25,14 +25,12 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2"><img id="img" src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}"></td>
-						<td colspan="3"><textarea cols="90" rows="8" name="tradeContent" required="required" id="tradeContent" >${tvo.tradeContent}</textarea></td>
+						<td colspan="2" width="210px" ><img id="img" src="${pageContext.request.contextPath}/resources/img/trade_img/${tvo.tradePhoto}" width="210px"></td>
+						<td colspan="3"><textarea cols="90" rows="8"  style="resize: none;" name="tradeContent" required="required" id="tradeContent" >${tvo.tradeContent}</textarea></td>
 					<tr>
-					<tr>
-						<td class="text-left" colspan="5"><input type="file" name="file" id="tradephoto" ></td>
-					</tr>
 				</tbody>
 			</table>
+			<input type="file" name="file" id="tradephoto" width="210px" >
 			<div class="text-center">
 				<button class="btn btn-primary" type="submit">확인</button>
 				<button class="btn btn-primary" id="updateCancel">취소</button> 
@@ -50,7 +48,7 @@
     	$("#tradephoto").on("change", handleImgFileSelect);
     	
     	$("#updateCancel").click(function() {
-    		location.href="${pageContext.request.contextPath}/tradePost";
+    		location.href="${pageContext.request.contextPath}/common/tradePost";
     	});
     	$("#updateSuccess").click(function(){ 
     		if ($("#tradeTitle").val() == "") {
@@ -79,6 +77,7 @@ function handleImgFileSelect(e) {
 				type : "danger",
 				message : "확장자는 이미지 확장자만 가능합니다!"
 			});
+			$("#tradephoto").val("");
 			return;
 		}
 		sel_file = f;

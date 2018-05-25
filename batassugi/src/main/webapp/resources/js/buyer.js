@@ -1,14 +1,17 @@
 var $a = $('a'),
-	$rentListA = $('.rentList a'),
+	$harvestLevel = $('.harvestLevel'),
+	$rentCancel = $('.rentCancel'),
 	$applySeller = $('#applySeller'),
 	$applyingSeller = $('.components').children('li:nth-child(2)');
 	
 	// 모달에 넣을 판매자신청 하는 form
-var $applyForm = '<form action="registerApplySeller" id="ApplySellerForm" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return false;">';	
+var $applyForm = '<form action="buyer/registerApplySeller" id="ApplySellerForm" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return false;">';	
 	$applyForm += '<div class="form-group">';
 	$applyForm += '<label class="control-label col-xs-4">농지문서</label>';
-	$applyForm += '<div class="col-xs-5">';
-	$applyForm += '<input type="file" name="file" class="form-control" placeholder="농지문서추가" required></div></div>';
+	$applyForm += '<div class="col-xs-8"><div class="filebox">';
+	$applyForm += '<input class="upload-name" value="파일선택" disabled="disabled">';
+	$applyForm += '<label class="btn btn-primary" for="file">업로드</label>';
+	$applyForm += '<input type="file" name="file" id="file" class="form-control upload upload-hidden" accept=".gif, .jpg, .png"></div></div></div>';
 	$applyForm += '<div class="form-group">';
 	$applyForm += '<label class="control-label col-xs-4">신청사유</label>';
 	$applyForm += '<div class="col-xs-5">';
@@ -23,6 +26,7 @@ $('#sidebarCollapse').on('click', function() {
 	$(this).toggleClass('active');
 }); // $('#sidebarCollapse').on('click', function(){})
 
+
 // 판매자신청 모달
 function applyInfo(applyVo) { // ${applyVo}의 EL 값을 매개변수로 받아옴.
 	if(applyVo.applyState === '') { // ${applySellerVo.applyState} 값이 없으면. 즉 판매자신청을 안했을경우
@@ -36,6 +40,11 @@ function applyInfo(applyVo) { // ${applyVo}의 EL 값을 매개변수로 받아�
 			}); //var $applyModal = new BootstrapDialog({})
 			
 			$applyModal.realize(); // modal.open()메서드를 사용하면 자동으로 호출되지만, 모달이 호출되기전에 조작을 하기위해서 사용.
+			$applyModal.getModalBody().find('.filebox .upload-hidden').on('change', function() { // input type 파일명 넣어주는 event
+                  var $filename;
+                  $(this).val() != '' ? $filename = $(this)[0].files[0].name : $filename = '파일선택';
+                  $(this).siblings('.upload-name').val($filename); 
+             });
 			var $ApplySellerForm = $applyModal.getModalBody().find('#ApplySellerForm'); // 모달안에 있는 form을 담음.
 			$ApplySellerForm.on('submit', function() { // 모달 안에 있는 신청하기 버튼을 눌렀을시
 				$applyModal.close(); // 모달을 닫음.
@@ -142,14 +151,14 @@ var rentList = {
 } // rentList
 
 // 대여신청 취소하기 이벤트
-$rentListA.click(function() {
+$rentCancel.on('click',function() {
 	var flag = '';
 	var $rentNo = $(this).parents().children('td:nth(0)').text()
 	BootstrapDialog.confirm({
 		type : 'danger',
 		message : "신청취소 하시겠습니까?",
 		onhidden: function() {
-			flag == 'true' ? sendPost('deleteRentByRentNo', {'rentNo':$rentNo}) : '';
+			flag == 'true' ? sendPost('buyer/deleteRentByRentNo', {'rentNo':$rentNo}) : '';
 			// flag가 true이면 post전송.
 		},
 		callback: function(result) {
@@ -158,3 +167,58 @@ $rentListA.click(function() {
 		} // callback;
 	}); // BootstrapDialog.confirm({})
 }); // $rentListA.click(function(){})
+
+$harvestLevel.on('click', function() {
+	var $harvestStatus = parseInt($(this).children('span:nth(0)').text()),
+		$statusImg = '<div class="text-center">';
+		$statusImg += '<img src="/batassugi/resources/img/harvestStatus_img/6.png" class="img-thumbnail harvest">';
+		$statusImg += '<div class="progress">';
+		$statusImg += '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width: 0%">';
+		$statusImg += '</div></div></div>';
+	var harvestNum = 0; // 수확상태의 백분율 값을 5단계로 바꾸기 위해 선언
+	// 수확상태 모달 선언
+	var $harvestModal = new BootstrapDialog({
+		type : 'success',
+		title : '<i class="fa fa-leaf"></i> 수확상태',
+		message : $statusImg,
+		closable : true
+	});
+	
+	// 수확상태의 백분율값을 해당하는 조건에 1~5로 바꿈
+    if ($harvestStatus > 5 && $harvestStatus < 21) {
+    	harvestNum = 1;
+      } else if ($harvestStatus > 20 && $harvestStatus < 41) {
+    	  harvestNum = 2;
+      } else if ($harvestStatus > 40 && $harvestStatus < 61) {
+    	  harvestNum = 3;
+      } else if ($harvestStatus > 60 && $harvestStatus < 81) {
+    	  harvestNum = 4;
+      } else if ($harvestStatus > 80) {
+    	  harvestNum = 5;
+      } else {
+    	  harvestNum = 0;
+      }
+	$harvestModal.realize(); // modal.open()메서드를 사용하면 자동으로 호출되지만, 모달이 호출되기전에 조작을 하기위해서 사용.
+	var $harvestImg = $harvestModal.getModalBody().find('.harvest'); // 모달안에 있는 img 태그
+	var $progressBar = $harvestModal.getModalBody().find('.progress'); // 모달안에 있는 진행바 태그
+	var i = 0 ; // setInterval을 이용해 여러사진을 보여주기 위해 선언
+	var progress = Math.round($harvestStatus/(harvestNum+1)); // 진행바를 수확상태에 맞게 보여주기 위해 수확상태의 백분율을 수확단계만큼 나눔. 
+	
+	// setInterval을 멈춰주는 function
+	function harvestChangeFn() {
+		if (i == harvestNum) { // i 값이 수확상태의 상태 값과 같다면
+			clearInterval(harvestChange); // clearInterval setInterval을 멈춤
+		}
+		// 애니메이션을 추가하고 사진을  0단계부터 해당하는 수확상태의 맥스값까지 바꿈.
+		$harvestImg.toggleClass('animated fadeIn').attr('src','/batassugi/resources/img/harvestStatus_img/'+(i)+'.png');
+		// 진행바를 수확상태에 따라서 0%부터 해당하는 수확상태의 맥스값까지 바꿈
+		$progressBar.children().css('width',progress+'%').html(function() {
+			progress > 100 ? progress = 100 : progress
+					return progress+'%'	
+				})
+		i++; // 사진을 0단계부터 해당하는 수확상태의 맥스값까지 바꾸기 위해 사진을 바꾸고 1씩 올린다.
+		progress+=Math.round($harvestStatus/(harvestNum+1)); // 진행바를 수확상태에 맞게 보여주기 위해 수확상태의 백분율을 수확단계만큼 나눈만큼 더해준다.
+	}
+	var harvestChange = setInterval(harvestChangeFn, 1000); // setInterval을 1초마다 실행
+	$harvestModal.open(); // 모달을 호출
+})

@@ -19,7 +19,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${rentList}" var="list">
+					<c:forEach items="${rentList}" var="list" varStatus="i">
 						<tr class="rentList">
 							<td class="hidden">${list.rentNo}</td>
 							<td>${list.recruitVo.recruitKind}</td>
@@ -28,9 +28,27 @@
 							<td>${list.rentSize}</td>
 							<td>${list.rentMonth}개월</td>
 							<td>${list.cropsVo.cropsName}</td>
-							<td><a>여기는작물진행상태다</a></td>
+							<td>
+								<a class="harvestLevel text-success">
+									<c:if test="${list.rentStatus != '대기'}">
+										<span class="hidden">${list.harvestStatus}</span>
+										<span>수확상태 확인</span>
+									</c:if>
+								</a>
+							</td>
 							<td>${list.rentStartdate}</td>
-							<td><a>${list.rentStatus}<c:if test="${list.rentStatus == '미처리'}"> <span class="text-danger">(취소하기)</span></c:if></a></td>
+							<td>
+							<c:choose>
+								<c:when test="${list.rentStatus == '대기'}"> 
+									<a class="rentCancel">${list.rentStatus}
+										<span class="text-danger">(취소하기)</span>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<span>${list.rentStatus}</span>
+								</c:otherwise>
+							</c:choose>
+							</td>
 						</tr>
 					</c:forEach>
 					</tbody>
@@ -39,19 +57,3 @@
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
-<script>
-var result = '${success}', // 성공메세지 redirect FlashAttribute 객체
-	applyVo = { // ${applySellerVo} 판매자 신청 Vo객체
-	'farmerDocument' : '${pageContext.request.contextPath}/resources/img/farmer_doc/${applySellerVo.farmerDocument}',
-	'applyDate' : '${applySellerVo.applyDate}',
-	'applyState' : '${applySellerVo.applyState}',
-	'applyReason' : '${applySellerVo.applyReason}'
-}
-
-if(result !== '') { // redirect FlashAttribute 객체가 있으면
-	BootstrapDialog.alert(result) // 성공메세지 모달출력
-}
-$(document).ready(function() {
-	applyInfo(applyVo) // buyer.js에서 사용될 ${applySellerVo} 판매자신청 Vo객체를 매개변수로 전달.
-})
-</script>

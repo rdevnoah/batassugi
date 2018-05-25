@@ -89,7 +89,7 @@ function handleImgFileSelect(e) {
 				type : "danger",
 				message : "확장자는 이미지 확장자만 가능합니다!"
 			});
-			return;
+			return false;
 		}
 		sel_file = f;
 		

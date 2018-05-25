@@ -3,6 +3,7 @@
 <nav id="sidebar">
 	<div class="sidebar-header">
 		<h3>Spider : 밭아쓰기</h3>
+		<strong>판매자</strong>
 		<%-- <strong><img src="${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}" width="50px"></strong> --%>
 	</div>
 
@@ -11,7 +12,7 @@
 			<a href="${pageContext.request.contextPath}/"> <i class="glyphicon glyphicon-home"></i>홈으로</a> 
 		</li>
 		<li>		
-			<a href="${pageContext.request.contextPath}/seller_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>판매자 메인</a> 
+			<a href="${pageContext.request.contextPath}/seller/seller_Home"> <i class="glyphicon glyphicon glyphicon-pushpin"></i>판매자 메인</a>
 		</li>
 		<li>		
 			<a href="${pageContext.request.contextPath}/seller/myinfoView"> <i class="glyphicon glyphicon-user"></i>정보수정</a> 

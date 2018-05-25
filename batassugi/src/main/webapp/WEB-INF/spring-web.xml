@@ -45,14 +45,43 @@
 
 	<!-- Handler Interceptor-->
 	<mvc:interceptors>
-		<!-- 로그인체크용 interceptor -->
+				<!--  공통메뉴 interceptor -->
 		<mvc:interceptor>
-			<mvc:mapping path="" />
+			<mvc:mapping path="/common/**" />
 			<mvc:exclude-mapping path="" />
-			<bean
-				class="org.spider.batassugi.controller.CheckLoginInterceptor" />
+			<bean class="org.spider.batassugi.controller.CheckLoginInterceptor" />
 		</mvc:interceptor>
+		
+		
+				<!--  판매자 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/seller/**" />
+			<mvc:exclude-mapping path="" />
+			<bean class="org.spider.batassugi.controller.CheckSellerInterceptor" />
+		</mvc:interceptor>
+		
+				<!-- 구매자 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/buyer/**" />
+			<mvc:exclude-mapping path="" />
+			<bean class="org.spider.batassugi.controller.CheckBuyerInterceptor" />
+		</mvc:interceptor>
+		
+				<!-- 관리자 interceptor -->
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<mvc:exclude-mapping path="" />
+			<bean class="org.spider.batassugi.controller.CheckAdminInterceptor" />
+		</mvc:interceptor>
+		
+		
+		
+		
+		
+		
 	</mvc:interceptors>
+	
+	
 	<!-- MultipartResolver : 파일 업로드용-->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

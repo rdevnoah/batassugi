@@ -83,10 +83,10 @@
 				buttons : [{
 	                label: '대여모집',
 	                action : function() {
-	                	sendPost('registerRecruitForm', {
+	                	sendPost('seller/registerRecruitForm', {
 	                		'farmNo' : $data.farmVo.farmNo
 	                	})
-						//location.href="registerRecruitForm";
+						//location.href="seller/registerRecruitForm";
 					}
 	            },{
 	            	label:'주말농장모집',

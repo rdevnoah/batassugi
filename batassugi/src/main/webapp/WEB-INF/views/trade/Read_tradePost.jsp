@@ -84,7 +84,7 @@ $(document).ready(function() {
 		postEvent.findPostDetail($(this));
 	});
 	$("#wirteTradePost").click(function() {
-		location.href = "${pageContext.request.contextPath}/createTradePostForm";
+		location.href = "${pageContext.request.contextPath}/common/createTradePostForm";
 	});
 });
 </script>

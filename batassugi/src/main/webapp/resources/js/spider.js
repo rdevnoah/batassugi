@@ -123,19 +123,18 @@ var rentList = {
  * @returns
  */
 $rentForm.on('submit', function() {
-	var flag = false;
+	var flag;
 	BootstrapDialog.confirm({
 		message : '농지 대여를 신청을 하시겠습니까?',
 		onhidden : function() {
-			// flag가 true면 return true; true가 아니면 return false으로 바꾸고 form submit 전송
-			$rentForm.attr('onsubmit', [ flag == 'true' ? 'return true;' : 'return false;' ]).submit(); 
+			// flag가 true면 onsubmit속성을 return true;으로 바꾸고 submit(); 
+			flag == 'true' ? $rentForm.attr('onsubmit','return true;').submit() : '';
 		},
 		callback : function(result) {
-			flag = [ result == true ? true : false ]; // 확인버튼 클릭시 true를 반환,
-														// 취소버튼 클릭시 false를 반환해서
-														// flag에 담음.
+			flag = [ result == true ? 'true' : '' ]; // 확인버튼 클릭시 true를 반환, 취소버튼 클릭시 false를 반환해서 flag에 담음.
 		}
 	});
+});
 
 	$vcenterLi.on('mouseenter', function() {
 		$(this).addClass('animated pulse');
@@ -170,4 +169,3 @@ $rentForm.on('submit', function() {
 		$f.submit();
 	} // sendPost(path, params)
 
-})

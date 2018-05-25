@@ -45,23 +45,29 @@ public class RentDao implements RentDaoIf {
   }
   
   @Override
+  public int updateRecruitSizeByRecruitNo(RentVo rentVo) {
+    return template.update("rent.updateRecruitSizeByRecruitNo", rentVo);
+  }
+  
+  @Override
   public RecruitVo findRentDetailByRecruitNo(int recruitNo) {
-    return template.selectOne("recruit.findRentDetailByRecruitNo", recruitNo);
+    return template.selectOne("rent.findRentDetailByRecruitNo", recruitNo);
   }
 
   @Override
   public List<CropsVo> findFarmAvailableCropsListByFarmNo(int farmNo) {
-    return template.selectList("recruit.findFarmAvailableCropsListByFarmNo", farmNo);
+    return template.selectList("rent.findFarmAvailableCropsListByFarmNo", farmNo);
   }
 
   @Override
   public List<RecruitVo> getRentList(BuyerPagingBean pb) {
-    return template.selectList("recruit.getRentList",pb);
+    return template.selectList("rent.getRentList",pb);
   }
 
   @Override
   public int totalRentListCount() {
-    return template.selectOne("recruit.totalRentListCount");
+    return template.selectOne("rent.totalRentListCount");
   }
+
   
 }
