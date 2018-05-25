@@ -4,11 +4,10 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		   $("#farmRegister").click(function() {
-			   if ($('#farmAddress').val()==''){
-				   alert('주소를 입력하세요');
-			   }
-			   else if ($('#farmSize').val()==''){
+			   if ($('#farmSize').val()==''){
 				   alert('등록할 농지의 크기를 입력하세요');
+			   }else if ($('#farmAddress').val()==''){
+				   alert('주소를 입력하세요');
 			   }else{
 				   $('#farm_register').submit();
 			   }
