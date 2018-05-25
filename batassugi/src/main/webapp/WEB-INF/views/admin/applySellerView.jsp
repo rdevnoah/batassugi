@@ -172,7 +172,7 @@
                  $("#applyregidate").html(data.applyDate);
                  $("#applymemberLevel").html(data.memberVo.memberLevel);
                  $("#applyState_value").html(data.applyState);
-                 $("#farmdoc").html("<img src=\"${pageContext.request.contextPath}/resources/img/farmDoc_img/"+ data.farmerDocument+"\" onclick=\"doImgPop('${pageContext.request.contextPath}/resources/img/farmDoc_img/"+ data.farmerDocument+ "')\">");
+                 $("#farmdoc").html("<img src=\"${pageContext.request.contextPath}/resources/img/farmer_doc/"+ data.farmerDocument+"\" onclick=\"doImgPop('${pageContext.request.contextPath}/resources/img/farmer_doc/"+ data.farmerDocument+ "')\">");
                  $("#applyNo_val").val(data.applyNo);
                  $("#applyId_val").val(data.memberVo.id);
                  $("#applyForm").show();
@@ -184,7 +184,7 @@
                  $("#applyregidate").html(data.applyDate);
                  $("#applymemberLevel").html(data.memberVo.memberLevel);
                  $("#applyState_value").html(data.applyState);
-                 $("#farmdoc").html("<img src=\"${pageContext.request.contextPath}/resources/img/farmDoc_img/"+ data.farmerDocument+ "\" onclick=\"doImgPop('${pageContext.request.contextPath}/resources/img/farmDoc_img/"+ data.farmerDocument+ "')\">");
+                 $("#farmdoc").html("<img src=\"${pageContext.request.contextPath}/resources/img/farmer_doc/"+ data.farmerDocument+ "\" onclick=\"doImgPop('${pageContext.request.contextPath}/resources/img/farmer_doc/"+ data.farmerDocument+ "')\">");
                  if (data.applyState == "승인거절") {
                 	 $("#reason").show();
                 	 $("#reason").html("승인거절 사유 : "+ data.applyReason);
