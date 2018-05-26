@@ -143,5 +143,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+PathInfo.java
+
 
 # End of https://www.gitignore.io/api/osx,java,windows,eclipse,java-web,code-java
