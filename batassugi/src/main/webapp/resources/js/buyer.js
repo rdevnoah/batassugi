@@ -154,11 +154,13 @@ var rentList = {
 $rentCancel.on('click',function() {
 	var flag = '';
 	var $rentNo = $(this).parents().children('td:nth(0)').text()
+	var $recruitNo = $(this).parents().children('td:nth(1)').text()
+	var $rentSize = $(this).parents().children('td:nth(5)').text()
 	BootstrapDialog.confirm({
 		type : 'danger',
 		message : "신청취소 하시겠습니까?",
 		onhidden: function() {
-			flag == 'true' ? sendPost('buyer/deleteRentByRentNo', {'rentNo':$rentNo}) : '';
+			flag == 'true' ? sendPost('deleteRentByRentNo', {'rentNo':$rentNo,'rentSize':$rentSize,'recruitVo.recruitNo':$recruitNo}) : '';
 			// flag가 true이면 post전송.
 		},
 		callback: function(result) {

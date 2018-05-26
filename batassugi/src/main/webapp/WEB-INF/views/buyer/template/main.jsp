@@ -22,6 +22,7 @@
 					<c:forEach items="${rentList}" var="list" varStatus="i">
 						<tr class="rentList">
 							<td class="hidden">${list.rentNo}</td>
+							<td class="hidden">${list.recruitVo.recruitNo}</td>
 							<td>${list.recruitVo.recruitKind}</td>
 							<td>${list.recruitVo.farmVo.memberInfoVo.memberVo.name}</td>
 							<td>${list.recruitVo.farmVo.farmAddress}</td>

@@ -52,7 +52,6 @@ public class SellerFarmService implements SellerFarmServiceIf, PathInfo {
     sellerFarmDao.farmInsert(fvo);
     Map<String, Integer> testmap = new HashMap<String, Integer>();
     testmap.put("farm_no", fvo.getFarmNo());
-    System.out.println(fvo.getMemberInfoVo().getMemberVo().getId());
     for (int i = 0; i <= fvo.getCropsNo().size() - 1; i++) {
       testmap.put("crops_no", Integer.parseInt(fvo.getCropsNo().get(i)));
       sellerFarmDao.avaliableCrops(testmap);// 밭등록시 선택한 작물에 번호를 가지고 작물등록dao
@@ -67,7 +66,6 @@ public class SellerFarmService implements SellerFarmServiceIf, PathInfo {
       farmList.get(i).setCropsVo(cropsList);
       List<String> labels = sellerFarmDao.findLabels(farmList.get(i).getFarmNo());
       farmList.get(i).setLabels(labels);
-      System.out.println(labels);
     }
     return farmList;
   }

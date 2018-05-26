@@ -24,8 +24,8 @@
 	<img src="${pageContext.request.contextPath}/resources/img/농작물사전_메인.jpg" width="100%">
 </div>
 <!-- 사전 영역 -->
-<!-- <div class="container dictionary">
-  <select name="cropsCategory" id="cropsCategory">
+ <div class="container dictionary">
+<!--  <select name="cropsCategory" id="cropsCategory">
     <option value="전체보기">난이도선택</option>
     <option value="상">난이도 상</option>
     <option value="중">난이도 중</option>
@@ -79,7 +79,9 @@
 			</div>	
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>		
+			</div>	
+			<div>
+			</div>	
 		</div><%-- 모달 바디 --%>
 	</div><%-- 모달 다이얼로그 --%>
 </div><%-- 컨텐츠 모달 --%>
@@ -91,7 +93,6 @@ $(document).ready(function() {
 	$(".dictionary_content").click(function() {
 		// cropsNo 가져오기 
 		cropsNo=$(this).attr('id'); 
-		//alert(cropsNo);
 		$("#myModal").modal();
 	});//작물 선택
 	
@@ -101,7 +102,6 @@ $(document).ready(function() {
 			url : "${pageContext.request.contextPath}/home/crops_detail",
 			data : "cropsNo="+cropsNo,
 			success : function(data) {
-				//alert(data.cropsVo.cropsNo);
 				$(".modal-title").html(data.cropsVo.cropsName);
 				$("#cropsProfileImg").html("<img src=\"${pageContext.request.contextPath}/resources/img/crops_img/"+data.cropsProfileimg+"\" width=\"98%\" height=\"300px\">");
 				$("#cropsImage1").html("<img src=\"${pageContext.request.contextPath}/resources/img/crops_img/"
@@ -115,7 +115,6 @@ $(document).ready(function() {
 				$("#cropsSeason").html(data.cropsSeason);
 				$("#cropsLevel").html(data.cropsVo.cropsLevel);
 				$("#cropsMethod").html(data.cropsMethod);
-				/*
 				
 				$("#applyNo").html(data.applyNo);
 				 $("#applyId").html(data.memberVo.id);
@@ -130,7 +129,6 @@ $(document).ready(function() {
 				 $("#applyForm").show();
 				 $("#applySellerProBtn").show();
 				 
-				*/
 			}//success      
 		});//ajax  
 

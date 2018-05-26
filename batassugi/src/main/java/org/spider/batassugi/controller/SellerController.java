@@ -87,7 +87,6 @@ public class SellerController {
     HttpSession session = request.getSession();
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
     fvo.setMemberInfoVo(mvo);
-    System.out.println(fvo);
     if (session.getAttribute("mvo") != null) {
       // fvo.getMemberInfoVo().getMemberVo().setId(mvo.getId());
       sellerFarmService.farmInsert(fvo);
@@ -126,7 +125,6 @@ public class SellerController {
   public String registerRecruitForm(Model model, String farmNo) {
     Map<String, Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
     model.addAttribute("recruitMap", map);
-    System.out.println("test");
     return "seller/registerRecruit.tiles";
   }
 
@@ -141,11 +139,9 @@ public class SellerController {
    */
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/recruitList")
   public String recruitListView(Model model, String farmNo, String nowPage) {
-    System.out.println("초입부분");
     ListVo listVo = sellerFarmService.findRecruitListByFarmNo(farmNo, nowPage);
     model.addAttribute("pagingList", listVo);
     model.addAttribute("farmNo", farmNo);
-    System.out.println("recruitList넘어왓습니다.");
     return "seller/recruit_List.tiles";
   }
 
@@ -160,9 +156,7 @@ public class SellerController {
   @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/registerRecruit")
   public String registerRecruit(RecruitVo vo, int farmNo) {
     vo.setFarmVo(new FarmVo(farmNo, null, 0, null, null, null));
-    System.out.println(vo);
     recruitService.registerRecruit(vo);
-    System.out.println("registerRequi들어옴요");
     return "redirect:seller_Home";
   }
 
@@ -179,7 +173,6 @@ public class SellerController {
       value = "seller/updateRentStatusConfirm")
   public String updateRentStatusConform(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusConfirm(rentNo);
-System.out.println("업데이트렌트부분들어왔음");
     return "redirect:recruitList?farmNo=" + farmNo;
   }
 
@@ -196,7 +189,6 @@ System.out.println("업데이트렌트부분들어왔음");
       value = "seller/updateRentStatusReject")
   public String updateRentStatusReject(Model model, String[] rentNo, String farmNo) {
     recruitService.updateRentStatusReject(rentNo);
-System.out.println("updateRentStatus들어옴");
     return "redirect:recruitList?farmNo=" + farmNo;
   }
 
@@ -211,7 +203,6 @@ System.out.println("updateRentStatus들어옴");
   @ResponseBody
   @RequestMapping(method = RequestMethod.POST, value = "seller/getDetailFarm")
   public Object findFarmDetail(String farmNo) {
-    System.out.println("test디테일넘어옴");
     return sellerFarmService.findFarmDetail(farmNo);
   }
 

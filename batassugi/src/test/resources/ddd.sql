@@ -379,4 +379,17 @@ drop table accuse
     
     update rent set rent_startdate = to_date('2018-04-23','yyyy-mm-dd') where rent_status = '승인'
     
+    SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress, F.image as image, M.nickname
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, recruit_no, recruit_kind, 
+      recruit_enddate, recruit_status, recruit_size, farm_no 
+      FROM recruit)R, farm F, spider_member M
+    WHERE R.farm_no = F.farm_no
+    AND F.id = M.id
+    AND rnum BETWEEN 1 AND 5
+    ORDER BY R.recruit_no DESC
+    
     

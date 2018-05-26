@@ -44,8 +44,8 @@ public class AccuseService implements AccuseServiceIf, PathInfo {
   private MemberDaoIf memberDao;
 
   @Override
-  public List<MemberInfoVo> getAllMemberList() {
-    List<MemberInfoVo> list = accusePostDao.getAllMemberList();
+  public List<MemberInfoVo> getAllMemberList(String id) {
+    List<MemberInfoVo> list = accusePostDao.getAllMemberList(id);
     return list;
   }
 

@@ -9,6 +9,10 @@ body {
     background: #fafafa;
 }
 
+.formFirst {
+	margin-top: 15px !important;
+}
+
 p {
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 1.1em;
@@ -311,6 +315,7 @@ a.article, a.article:hover {
 	border: solid 0px;
 }
 
+
 .filebox input[type="file"] {
 	position: absolute;
 	width: 1px;
@@ -323,7 +328,6 @@ a.article, a.article:hover {
 }
 
 .filebox .upload-name {
-	width: 40%;
 	display: inline-block;
 	padding: .5em .75em; /* label의 패딩값과 일치 */
 	font-size: inherit;

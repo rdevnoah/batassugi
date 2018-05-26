@@ -62,8 +62,6 @@
 	$(document).ready(function() {
 		var $detailFarm = $('.detailFarm');
 		$detailFarm.on('click', function() {
-			//alert($(this).val());
-			//alert($('.hidden').children("span:nth(0)").text());
 			var $farmNo=$(this).val();
 			var $data;
 			 $.ajax({
@@ -72,7 +70,6 @@
 				data : 'farmNo='+$farmNo,
 				async : false,
 				success : function(data) {
-					//alert(data.farmVo.farmEnddate);
 					$data=data;		
 				}	
 			})
@@ -120,10 +117,7 @@
 			appendString+="</div><hr>";
 			
 			$myModalBody.append(appendString);
-			//alert($myModalBody.html());
 			$detailModal.open();
-			//alert(($data).farmVo.farmAddress);
-			// 
 		})
 	})
 </script>

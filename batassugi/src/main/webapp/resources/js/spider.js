@@ -11,6 +11,8 @@ var $closeSide = $('#closeSide'),
 	$rentForm = $('#rentForm'), 
 	$rent = $('.rent button'), 
 	$rentPaginationA = $('.rentPagination a');
+	$cropsList = $('.cropsList');
+	
 
 // 헤더 애니메이션 이벤트 추가
 $vcenterLi.on('mouseenter', function() {

@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <result column="cropsNo" property="cropsVo.cropsNo"/>
     <result column="cropsName" property="cropsVo.cropsName"/>
     <result column="cropsLevel" property="cropsVo.cropsLevel"/>
+    <result column="recruitNo" property="recruitVo.recruitNo"  />
     <result column="recruitKind" property="recruitVo.recruitKind"  />
     <result column="recruitSize" property="recruitVo.recruitSize"/>
     <result column="name" property="recruitVo.farmVo.memberInfoVo.memberVo.name"/>
@@ -16,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="findRentFarmInfoById" resultMap="rentVoRM" parameterType="string">
     SELECT C.crops_no AS cropsNo, C.crops_name AS cropsName, 
     C.crops_level AS cropsLevel, R.recruit_kind AS recruitKind, 
-    R.recruit_size AS recruitSize, F.farm_address AS farmAddress, 
+    R.recruit_no AS recruitNo, R.recruit_size AS recruitSize, F.farm_address AS farmAddress, 
     M.name AS name, RT.rent_no AS rentNo, RT. rent_size AS rentSize, 
     RT.rent_month AS rentMonth, RT.rent_status AS rentStatus, 
     to_char(RT.rent_startdate,'yy.mm.dd') AS rentStartdate,
@@ -31,9 +32,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     AND RT.id = #{id}
     ORDER BY RT.rent_startdate DESC
   </select>
-  <delete id="deleteRentByRentNo" parameterType="int">
+  <delete id="deleteRentByRentNo" parameterType="rentVo">
     DELETE rent 
-    WHERE rent_no = #{rentNo}
+    WHERE rent_no = #{rentVo.rentNo}
   </delete>
   <insert id="registerApplySeller" parameterType="applySellerVo">
     <selectKey resultType="string" keyProperty="applyNo" order="BEFORE">

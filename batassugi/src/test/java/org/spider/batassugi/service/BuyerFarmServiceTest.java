@@ -6,7 +6,9 @@ import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.buyer.BuyerFarmDaoIf;
 import org.spider.batassugi.model.service.buyer.BuyerFarmServiceIf;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
+import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
+import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -30,7 +32,14 @@ public class BuyerFarmServiceTest {
         new MemberVo("ukyi", null, null, null, null, null, null), "사진이다 ", 
         null, null, null, "판매자신청함!", null));
     */
-    System.out.println(buyerFarmDao.findApplySellerById("test1"));
+    //System.out.println(buyerFarmDao.findApplySellerById("test1"));
+    RentVo vo = new RentVo();
+    RecruitVo vo2 = new RecruitVo();
+    vo2.setRecruitNo(58);
+    vo.setRentNo(35);
+    vo.setRecruitVo(vo2);
+    vo.setRentSize(1234);
+    buyerFarmDao.updateRecruitSizeResetByRecruitNo(vo);
   }
   
 }

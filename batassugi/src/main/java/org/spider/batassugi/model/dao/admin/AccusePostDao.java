@@ -33,8 +33,8 @@ public class AccusePostDao implements AccusePostDaoIf {
   private SqlSessionTemplate template;
 
   @Override
-  public List<MemberInfoVo> getAllMemberList() {
-    return template.selectList("member.getAllMemberList");
+  public List<MemberInfoVo> getAllMemberList(String id) {
+    return template.selectList("member.getAllMemberList", id);
   }
 
   @Override

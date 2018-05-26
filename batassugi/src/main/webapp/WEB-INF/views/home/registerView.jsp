@@ -259,7 +259,7 @@
 			if(cnt > 3){
 				
 				$(this).prop("checked" , false);
-				alert("선택은 3개까지 가능합니다.");
+				BootstrapDialog.alert("선택은 3개까지 가능합니다.");
 			}
 		});
     	
@@ -384,10 +384,10 @@
   		      var splitBirthday = year+""+month+""+day;
   		      
     		  if(parseInt(splitBirthday)>parseInt(today)) { //오늘 이후의 날짜를 선택했을 경우
-  		         $("#checkBirthdayView").html("오늘 이전의 날짜를 선택해주세요").css("color","#f35b56");
+  		         $("#checkBirthdayView").html("오늘 이후의 날짜는 선택할 수 없습니다").css("color","#f35b56");
   		         checkResultBirthday="";
   		      }else { //오늘 이전의 날짜를 선택했을 경우
-  		         $("#checkBirthdayView").html("정상적인 생년월일입니다").css("color","#1e878d");
+  		         $("#checkBirthdayView").html("생년월일 확인이 완료되었습니다").css("color","#1e878d");
   		       checkResultBirthday=birthday;
   		      }
   		   });//change

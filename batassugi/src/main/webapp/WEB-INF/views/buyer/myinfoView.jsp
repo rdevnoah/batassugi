@@ -26,7 +26,7 @@
 						<%-- 1단 --%>
 						<div class="col-md-6">
 							<%-- 아이디 --%>
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3">아이디 <span
 									class="text-danger">*</span></label>
 								<div class="col-md-8 col-sm-9">
@@ -99,7 +99,7 @@
 						<%-- 2단 --%>
 						<div class="col-md-6">
 							<%-- 회원 이메일 --%>
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3"> 이메일 <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
@@ -170,13 +170,13 @@
 					<div class="row">
 						<%--1단 --%>
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3"> <img
 									src="${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}"
 									width="100px" id="previewImg" /><br> 프로필 미리보기
 								</label>
 								<div class="col-md-8 col-sm-8">
-									<div class="input-group">
+									<div class="input-group formFirst">
 										<input type="file" name="file" id="file"
 											class="form-control upload" placeholder="프로필을 넣어주세요"
 											onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
@@ -188,7 +188,7 @@
 						<%-- 2단 --%>
 						<%-- 기호작물 --%>
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group formFirst">
 								<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
@@ -271,7 +271,7 @@
 			if(cnt > 3){
 				
 				$(this).prop("checked" , false);
-				alert("선택은 3개까지 가능합니다.");
+				BootstrapDialog.alert("선택은 3개까지 가능합니다.");
 			}
 		});
     	

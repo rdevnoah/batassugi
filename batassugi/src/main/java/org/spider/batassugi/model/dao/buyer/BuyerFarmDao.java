@@ -1,6 +1,8 @@
 package org.spider.batassugi.model.dao.buyer;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
@@ -42,8 +44,8 @@ public class BuyerFarmDao implements BuyerFarmDaoIf {
   }
 
   @Override
-  public void deleteRentByRentNo(int rentNo) {
-    template.delete("buyerFarm.deleteRentByRentNo", rentNo);
+  public void deleteRentByRentNo(RentVo rentVo) {
+    template.delete("buyerFarm.deleteRentByRentNo", rentVo.getRentNo());
   }
 
   @Override
@@ -54,6 +56,14 @@ public class BuyerFarmDao implements BuyerFarmDaoIf {
   @Override
   public ApplySellerVo findApplySellerById(String id) {
     return template.selectOne("buyerFarm.findApplySellerById", id);
+  }
+
+  @Override
+  public void updateRecruitSizeResetByRecruitNo(RentVo rentVo) {
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("recruitNo", rentVo.getRecruitVo().getRecruitNo());
+    map.put("rentSize", rentVo.getRentSize());
+    template.update("rent.updateRecruitSizeResetByRecruitNo",map);
   }
 
 }

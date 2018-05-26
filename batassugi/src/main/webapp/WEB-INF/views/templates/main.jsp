@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<div class="container-fluid">
+<div class="container-fluid mainImg">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -54,9 +54,10 @@
 <!-- 사이트 소개 or 로그인시 추천 농장 -->
 <div class="container main">
   <h3>안녕하세요 밭아쓰기 입니다!</h3>
+  <c:if test="${sessionScope.mvo == null}">
   <p id="site_move">밭아쓰기는 회원가입 후 사용가능합니다. <a href="${pageContext.request.contextPath}/registerView"> 회원가입</a>을 클릭해주세요. 
   자세한 사이트 소개는 <a href="${pageContext.request.contextPath}/home/introduction_website">사이트 소개</a>를 클릭해주세요.</p>
-	
+  </c:if>
 	<!-- 사이트 간략 소개 -->
 	<div class="container main_intro">
 		<div class="row">
