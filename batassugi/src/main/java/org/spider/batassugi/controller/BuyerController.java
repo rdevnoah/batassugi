@@ -103,7 +103,7 @@ public class BuyerController {
    * 구매자가 신청한 농지대여를 취소하는 메서드.
    * 
    * @author "SL SangUk Lee"
-   * @param rentNo 대여신청번호.
+   * @param rentVo 대여신청정보.
    * @param rttr 신청취소 완료시 성공메세지를 출력해주기 위함.
    * @return maaping Url
    */

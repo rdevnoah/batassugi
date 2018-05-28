@@ -10,6 +10,7 @@ import org.spider.batassugi.model.dao.common.PathInfo;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -47,15 +48,21 @@ public class BuyerFarmService implements BuyerFarmServiceIf, PathInfo {
     return buyerFarmDao.findRentFarmInfoById(id);
   }
 
+  @Transactional
   @Override
   public void deleteRentByRentNo(RentVo rentVo) {
     buyerFarmDao.updateRecruitSizeResetByRecruitNo(rentVo);
     buyerFarmDao.deleteRentByRentNo(rentVo);
   }
 
+  @Transactional
   @Override
   public void registerApplySeller(ApplySellerVo applySellerVo) {
-    buyerFarmDao.registerApplySeller(applySellerVo);
+    if (findApplySellerById(applySellerVo.getMemberVo().getId()) != null) {
+      buyerFarmDao.updateApplySeller(applySellerVo);
+    } else {
+      buyerFarmDao.registerApplySeller(applySellerVo);
+    }
   }
   
   @Override
@@ -71,7 +78,7 @@ public class BuyerFarmService implements BuyerFarmServiceIf, PathInfo {
     multifile.transferTo(f); // 저장된 경로에 파일 생성
     return f.getName();
   }
-
+  
   @Override
   public ApplySellerVo findApplySellerById(String id) {
     return buyerFarmDao.findApplySellerById(id);

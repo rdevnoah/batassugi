@@ -8,7 +8,7 @@
 					<thead>
 						<tr class="success">
 							<th class="text-center">종류</th>
-							<th class="text-center">이름</th>
+							<th class="text-center">농지 주인</th>
 							<th class="text-center">농지 주소</th>
 							<th class="text-center">평수</th>
 							<th class="text-center">대여기간</th>
@@ -23,8 +23,12 @@
 						<tr class="rentList">
 							<td class="hidden">${list.rentNo}</td>
 							<td class="hidden">${list.recruitVo.recruitNo}</td>
+							<td class="hidden">${list.recruitVo.farmVo.memberInfoVo.tel}</td>
+							<td class="hidden">${list.recruitVo.farmVo.memberInfoVo.email}</td>
+							<td class="hidden">${list.recruitVo.farmVo.memberInfoVo.image}</td>
+							<td class="hidden">${list.recruitVo.farmVo.memberInfoVo.memberVo.name}</td>
 							<td>${list.recruitVo.recruitKind}</td>
-							<td>${list.recruitVo.farmVo.memberInfoVo.memberVo.name}</td>
+							<td><a class="text-info sellerInfo">${list.recruitVo.farmVo.memberInfoVo.memberVo.nickname}</a></td>
 							<td>${list.recruitVo.farmVo.farmAddress}</td>
 							<td>${list.rentSize}</td>
 							<td>${list.rentMonth}개월</td>

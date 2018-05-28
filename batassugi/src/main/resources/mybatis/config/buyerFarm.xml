@@ -11,17 +11,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <result column="recruitNo" property="recruitVo.recruitNo"  />
     <result column="recruitKind" property="recruitVo.recruitKind"  />
     <result column="recruitSize" property="recruitVo.recruitSize"/>
-    <result column="name" property="recruitVo.farmVo.memberInfoVo.memberVo.name"/>
     <result column="farmAddress" property="recruitVo.farmVo.farmAddress"/>
+    <result column="tel" property="recruitVo.farmVo.memberInfoVo.tel"/>
+    <result column="image" property="recruitVo.farmVo.memberInfoVo.image"/>
+    <result column="email" property="recruitVo.farmVo.memberInfoVo.email"/>
+    <result column="name" property="recruitVo.farmVo.memberInfoVo.memberVo.name"/>
+    <result column="nickname" property="recruitVo.farmVo.memberInfoVo.memberVo.nickname"/>
   </resultMap>
   <select id="findRentFarmInfoById" resultMap="rentVoRM" parameterType="string">
     SELECT C.crops_no AS cropsNo, C.crops_name AS cropsName, 
     C.crops_level AS cropsLevel, R.recruit_kind AS recruitKind, 
     R.recruit_no AS recruitNo, R.recruit_size AS recruitSize, F.farm_address AS farmAddress, 
-    M.name AS name, RT.rent_no AS rentNo, RT. rent_size AS rentSize, 
+    M.nickname, M.name, I.email, I.tel, I.image,
+    RT.rent_no AS rentNo, RT. rent_size AS rentSize, 
     RT.rent_month AS rentMonth, RT.rent_status AS rentStatus, 
     to_char(RT.rent_startdate,'yy.mm.dd') AS rentStartdate,
-    round(((sysdate-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus 
+    round(((sysdate-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus
     <!-- round(((to_date('2018-06-24')-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus --> 
     FROM rent RT, recruit R, spider_member M, member_info I, farm F, crops C
     WHERE RT.recruit_no = R.recruit_no
@@ -44,6 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     INSERT INTO apply_seller(apply_no, id, farmer_document, apply_date, apply_reason)
     VALUES (#{applyNo}, #{memberVo.id}, #{farmerDocument}, sysdate, #{applyReason})
   </insert>
+  <update id="updateApplySeler" parameterType="applySellerVo">
+    UPDATE apply_seller 
+    SET farmer_document = #{farmerDocument}, apply_state = '미처리', apply_date = sysdate, apply_reason = #{applyReason}
+    WHERE id = #{memberVo.id}
+  </update>
   <select id="findApplySellerById" resultType="applySellerVo" parameterType="string">
     SELECT farmer_document AS farmerDocument, apply_state AS applyState, 
     apply_reason AS applyReason, to_char(apply_date,'yy.mm.dd') AS applyDate

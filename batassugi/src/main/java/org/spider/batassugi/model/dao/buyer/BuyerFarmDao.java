@@ -66,4 +66,9 @@ public class BuyerFarmDao implements BuyerFarmDaoIf {
     template.update("rent.updateRecruitSizeResetByRecruitNo",map);
   }
 
+  @Override
+  public void updateApplySeller(ApplySellerVo applySellerVo) {
+    template.update("buyerFarm.updateApplySeler", applySellerVo);
+  }
+
 }

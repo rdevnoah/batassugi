@@ -43,7 +43,7 @@ public interface BuyerFarmDaoIf {
    * 구매자가 신청한 농지대여를 취소하는 메서드.
    * 
    * @author "SL SangUk Lee"
-   * @param rentNo 대여신청번호.
+   * @param rentVo 대여신청번호.
    */
   public void deleteRentByRentNo(RentVo rentVo);
 
@@ -63,6 +63,20 @@ public interface BuyerFarmDaoIf {
    * @return ApplySellerVo
    */
   public ApplySellerVo findApplySellerById(String id);
-  
+
+  /**
+   * 대여신청하고 취소했을시 대여한만큼 평수 초기화해주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param rentVo 대여신청정보.
+   */
   public void updateRecruitSizeResetByRecruitNo(RentVo rentVo);
+
+  /**
+   * 판매자신청한 이력이 있을때 상태를 업데이트주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param applySellerVo 판매자신청 정보.
+   */
+  public void updateApplySeller(ApplySellerVo applySellerVo);
 }

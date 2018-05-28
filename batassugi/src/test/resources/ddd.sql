@@ -392,4 +392,4 @@ drop table accuse
     AND rnum BETWEEN 1 AND 5
     ORDER BY R.recruit_no DESC
     
-    
+    select * from apply_seller
