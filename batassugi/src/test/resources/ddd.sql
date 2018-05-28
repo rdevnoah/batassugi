@@ -393,3 +393,19 @@ drop table accuse
     ORDER BY R.recruit_no DESC
     
     select * from apply_seller
+    
+    
+    
+   UPDATE rent
+    SET rent_status = '대여만료'
+    WHERE rent_no = 31
+    
+    
+    select * from rent where id = 'test12'
+    
+    select * from spider_member where id = 'test12'
+    
+    UPDATE spider_member
+    SET member_level = '초급'
+    WHERE id = 'test12'
+    

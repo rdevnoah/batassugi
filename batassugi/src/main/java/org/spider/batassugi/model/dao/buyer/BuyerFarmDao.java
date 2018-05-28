@@ -71,4 +71,14 @@ public class BuyerFarmDao implements BuyerFarmDaoIf {
     template.update("buyerFarm.updateApplySeler", applySellerVo);
   }
 
+  @Override
+  public void updateRentStatus(int rentNo) {
+    template.update("buyerFarm.updateRentStatus",rentNo);
+  }
+
+  @Override
+  public void updateMemberLevel(Map<String, String> map) {
+    template.update("buyerFarm.updateMemberLevel",map);
+  }
+
 }

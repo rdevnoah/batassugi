@@ -49,6 +49,9 @@
 										<span class="text-danger">(취소하기)</span>
 									</a>
 								</c:when>
+								<c:when test="${list.rentStatus == '대여만료'}">
+									<span class="text-danger">${list.rentStatus}</span>
+								</c:when>
 								<c:otherwise>
 									<span>${list.rentStatus}</span>
 								</c:otherwise>
