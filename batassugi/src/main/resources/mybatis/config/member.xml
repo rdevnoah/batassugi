@@ -6,46 +6,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="member">
 <!-- 회원등록 -->
 
-	<!-- 멤버 상태 등록 -->
-<insert id="registerMemberState" parameterType="memberStateVo">
-	<selectKey resultType="string" keyProperty="stateNumber" order="BEFORE">
+  <!-- 멤버 상태 등록 -->
+  <insert id="registerMemberState" parameterType="memberStateVo">
+    <selectKey resultType="string" keyProperty="stateNumber" order="BEFORE">
         select member_state_SEQ.nextval FROM DUAL        
     </selectKey>    
-	insert into member_state(state_number,state_set,stopdate) values(#{stateNumber},#{stateSet},sysdate)
-</insert>
+  insert into member_state(state_number,state_set,stopdate) values(#{stateNumber},#{stateSet},sysdate)
+  </insert>
 
-	<!-- 멤버 기본정보 등록 -->
-<insert id="registerBasic">
-  insert into spider_member
-  (id,name,password,nickname,state_number)values(#{memberVo.id},#{memberVo.name},#{memberVo.password},#{memberVo.nickname},#{memberVo.state})
-</insert>
+  <!-- 멤버 기본정보 등록 -->
+  <insert id="registerBasic">
+    insert into spider_member
+    (id,name,password,nickname,state_number)values(#{memberVo.id},#{memberVo.name},#{memberVo.password},#{memberVo.nickname},#{memberVo.state})
+  </insert>
 
-	<!-- 멤버 추가정보 등록 -->
-<insert id="registerExtend">
-  insert into member_info(id,email,address,birthday,tel,gender,image) values(#{memberVo.id},#{email},#{address},#{birthday},#{tel},#{gender},#{image})
-</insert>
+  <!-- 멤버 추가정보 등록 -->
+  <insert id="registerExtend">
+    insert into member_info(id,email,address,birthday,tel,gender,image) values(#{memberVo.id},#{email},#{address},#{birthday},#{tel},#{gender},#{image})
+  </insert>
 
-	<!-- 멤버 기호 작물 등록 -->
-<insert id="registerLikeCrop">
-	insert into member_like_crops values(#{id},#{crops})
-</insert>
+  <!-- 멤버 기호 작물 등록 -->
+  <insert id="registerLikeCrop">
+    insert into member_like_crops values(#{id},#{crops})
+  </insert>
 
-	<!-- 로그인시 회원정보 불러오기위한 용도 -->
+  <!-- 로그인시 회원정보 불러오기위한 용도 -->
   <resultMap type="memberInfoVo" id="detailMemberRM" >
-  	<result property="memberVo.id" column="id" />
-  	<result property="memberVo.password" column="password" />
-  	<result property="memberVo.name" column="name" />
-  	<result property="memberVo.nickname" column="nickname" />
-  	<result property="memberVo.memberLevel" column="member_level" />
-  	<result property="memberVo.state" column="state_number" />
-  	<result property="memberVo.stopdate" column="stopdate" />
+    <result property="memberVo.id" column="id" />
+    <result property="memberVo.password" column="password" />
+    <result property="memberVo.name" column="name" />
+    <result property="memberVo.nickname" column="nickname" />
+    <result property="memberVo.memberLevel" column="member_level" />
+    <result property="memberVo.state" column="state_number" />
+    <result property="memberVo.stopdate" column="stopdate" />
   </resultMap>
   <select id="login" resultMap="detailMemberRM">
-  	select s.id,s.name,s.nickname,s.member_level, s.state_number, ms.stopdate ,m.email, m.tel, m.address, m.birthday, m.gender, m.regdate, m.image
-  	from spider_member s, member_info m, member_state ms
-  	where s.id=#{id} and s.password =#{password} 
-  	and s.id=m.id
-  	and ms.state_number=s.state_number
+    select s.id,s.name,s.nickname,s.member_level, s.state_number, ms.stopdate ,m.email, m.tel, m.address, m.birthday, m.gender, m.regdate, m.image
+    from spider_member s, member_info m, member_state ms
+    where s.id=#{id} and s.password =#{password} 
+    and s.id=m.id
+    and ms.state_number=s.state_number
   </select>
   <!-- 멤버 아이디찾기 - 로그인 익셉션처리를 위해 필요함 -->
   <select id="findMemberById" resultType="memberVo">
@@ -55,12 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 회원기호 작물 존재 여부 확인 count -->
   <select id="countCropsCountById" resultType="int">
-  	select count(id) from  member_like_crops where id=#{memberVo.id}
+    select count(id) from  member_like_crops where id=#{memberVo.id}
   </select>
   
   <!-- 회원 기호 작물 리스트로 가져오기 -->
   <select id="findLikeCropsById" resultType="String">
-	select crops_no from  member_like_crops where id=#{memberVo.id}
+    select crops_no from  member_like_crops where id=#{memberVo.id}
   </select>
   
   <!-- 멤버 아이디 중복확인 -->
@@ -75,19 +75,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   <!-- 신고게시판에서 모든 멤버 아이디 불러오기 -->
   <select id="getAllMemberList" parameterType="string" resultMap="detailMemberRM">
-	select mi.id, m.nickname
-	from MEMBER_INFO mi, SPIDER_MEMBER m
-	where m.id=mi.id and m.id!='admin' and m.id!=#{id}
+    select mi.id, m.nickname
+    from MEMBER_INFO mi, SPIDER_MEMBER m
+    where m.id=mi.id and m.id!='admin' and m.id!=#{id}
   </select>
   
    <resultMap type="memberInfoVo" id="detailMember" >
-  	<result property="memberVo.id" column="id" />
-  	<result property="memberVo.password" column="password" />
-  	<result property="memberVo.name" column="name" />
-  	<result property="memberVo.nickname" column="nickname" />
-  	<result property="memberVo.memberLevel" column="member_level" />
-  	<result property="memberVo.state" column="state_number" />
-  	<result property="memberVo.stopdate" column="stopdate" />
+    <result property="memberVo.id" column="id" />
+    <result property="memberVo.password" column="password" />
+    <result property="memberVo.name" column="name" />
+    <result property="memberVo.nickname" column="nickname" />
+    <result property="memberVo.memberLevel" column="member_level" />
+    <result property="memberVo.state" column="state_number" />
+    <result property="memberVo.stopdate" column="stopdate" />
   </resultMap>
   
   <!-- 신고신청하기 -->
@@ -106,37 +106,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 멤버 전체 정보 반환(패스워드까지) -->
    <select id="findMemberInfoById" resultMap="detailMember">
-  	select s.id,s.password,s.name,s.nickname,s.member_level, s.state_number, ms.stopdate ,m.email, m.tel, m.address, m.birthday, m.gender, m.regdate, m.image
-  	from spider_member s, member_info m, member_state ms 
-  	where s.id=#{value}
-  	and s.id=m.id
-  	and ms.state_number=s.state_number
+    select s.id,s.password,s.name,s.nickname,s.member_level, s.state_number, ms.stopdate ,m.email, m.tel, m.address, m.birthday, m.gender, m.regdate, m.image
+    from spider_member s, member_info m, member_state ms 
+    where s.id=#{value}
+    and s.id=m.id
+     and ms.state_number=s.state_number
   </select>
   <!-- 멤버 작물 리스트 삭제 -->
   <delete id="deleteLikeCrops">
-  	DELETE FROM member_like_crops WHERE id=#{value}
+   DELETE FROM member_like_crops WHERE id=#{value}
   </delete>
   <!-- 멤버 부가정보 업데이트 -->
   <update id="updateMemberInfo">
-  	update member_info 
-  	set email=#{email}, address=#{address}, tel=#{tel}, image=#{image}    
-  	where id=#{memberVo.id}
+  update member_info 
+    set email=#{email}, address=#{address}, tel=#{tel}, image=#{image}    
+    where id=#{memberVo.id}
   </update>
   <!-- 멤버 정보 업데이트 -->
   <update id="updateMember">
-  	update spider_member 
-  	set password=#{password}, nickname=#{nickname} 
-  	where id=#{id}
+    update spider_member 
+    set password=#{password}, nickname=#{nickname} 
+    where id=#{id}
   </update>
   <!-- 멤버 상태 업데이트 -->
   <update id="updateMemberState">
-  	update member_state
-  	set state_set=#{state}, stopdate=sysdate
-  	where state_number=#{stateNumber}
+    update member_state
+    set state_set=#{state}, stopdate=sysdate
+    where state_number=#{stateNumber}
   </update>
   
   <!-- 멤버 상태 번호 가져오기 -->
-  <select id="findStateNumberById" resultType="String">
-  	select state_number from spider_member where id=#{value}
+  <select id="findStateNumberById" resultType="string">
+    select state_number from spider_member where id=#{value}
   </select>
 </mapper>

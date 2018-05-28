@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.dao.buyer;
 
 import java.util.List;
+import java.util.Map;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 
@@ -79,4 +80,20 @@ public interface BuyerFarmDaoIf {
    * @param applySellerVo 판매자신청 정보.
    */
   public void updateApplySeller(ApplySellerVo applySellerVo);
+
+  /**
+   * 수확상태가 100이 넘으면 대여만료처리 해주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param rentNo 대여신청번호.
+   */
+  public void updateRentStatus(int rentNo);
+
+  /**
+   * 회원 등급 올려주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param map 회원아이디, 회원등급명.
+   */
+  public void updateMemberLevel(Map<String, String> map);
 }
