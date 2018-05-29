@@ -129,4 +129,19 @@ public class MemberDao implements MemberDaoIf {
     return template.selectOne("member.findStateNumberById", reportedId);
   }
 
+@Override
+public void updateMemberStateNumberPlus(String reportedId) {
+	template.update("member.updateMemberStateNumberPlus",reportedId);
+}
+
+  @Override
+  public void updateMemberStateNumberMinus(String reportedId) {
+	template.update("member.updateMemberStateNumberMinus",reportedId);
+  }
+  
+  @Override
+  public void updateMemberStateNumber2Plus(String reportedId) {
+  	template.update("member.updateMemberStateNumber2Plus",reportedId);
+  }
+
 }
