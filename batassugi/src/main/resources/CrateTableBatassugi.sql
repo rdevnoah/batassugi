@@ -47,6 +47,8 @@ CREATE TABLE member_info
     CONSTRAINT FK_member_info_id_spidermember FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
+ALTER TABLE member_info ADD 
+
 -- 작물 테이블 생성
 CREATE TABLE crops
 (

@@ -37,6 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     AND RT.id = #{id}
     ORDER BY RT.rent_startdate DESC
   </select>
+  <update id="updateRentStatus" parameterType="int">
+    UPDATE rent
+    SET rent_status = '대여만료'
+    WHERE rent_no = #{rentNo}
+  </update>
   <delete id="deleteRentByRentNo" parameterType="rentVo">
     DELETE rent 
     WHERE rent_no = #{rentVo.rentNo}
@@ -60,6 +65,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM apply_seller
     WHERE id = #{id}
   </select>
+  <update id="updateMemberLevel">
+    UPDATE spider_member
+    SET member_level = #{level}
+    WHERE id = #{id}
+  </update>
 </mapper>
  
  

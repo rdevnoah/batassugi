@@ -402,4 +402,18 @@ drop table accuse
 select id, password, state_number from spider_member
     where id='test11'
     
+
+   UPDATE rent
+    SET rent_status = '대여만료'
+    WHERE rent_no = 31
+    
+    
+    select * from rent where id = 'test12'
+    
+    select * from spider_member where id = 'test12'
+    
+    UPDATE spider_member
+    SET member_level = '초급'
+    WHERE id = 'test12'
+>>>>>>> refs/heads/develop
     
