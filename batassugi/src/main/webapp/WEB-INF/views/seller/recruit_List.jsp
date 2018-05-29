@@ -27,7 +27,7 @@
 							<td>${rent.rentMonth}</td>
 							<td><button class="detailBuyerBtn" value="${rent.rentNo}">보기</button></td>
 							<td>
-								<c:if test="${rent.rentStatus=='승인'}">
+								<c:if test="${rent.rentStatus=='대여중'}">
 									<h5><span class="label label-success">승인</span></h5>
 								</c:if>
 								<c:if test="${rent.rentStatus=='거절'}">
@@ -90,6 +90,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
+				<button type="button" id="scheduleBtn" class="btn btn-success">농사일정관리</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
@@ -149,6 +150,12 @@ $(document).ready(function() {
      	
      	$("myModalBuyerDetail").on('hidden.bs.modal',function(){
      		
+     	})
+     	
+     	$("#scheduleBtn").on('click', function(){
+     		sendPost('${pageContext.request.contextPath}/seller/findScheduleByRentNo', {
+     			'rentNo' : $rentNo
+     		})
      	})
      	
 })

@@ -293,6 +293,11 @@ select * from membeR_info
 
 select * from spider_member
 
+select * from rent;
+
+update rent set rent_status='대여중' where id='test2';
+
+
 update spider_member set member_level='관리자' where id='admin'
 -- 시퀀스 전체 삭제 쿼리문입니다.
 drop sequence rent_SEQ;

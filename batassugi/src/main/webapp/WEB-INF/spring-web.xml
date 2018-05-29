@@ -73,12 +73,6 @@
 			<mvc:exclude-mapping path="" />
 			<bean class="org.spider.batassugi.controller.CheckAdminInterceptor" />
 		</mvc:interceptor>
-		
-		
-		
-		
-		
-		
 	</mvc:interceptors>
 	
 	

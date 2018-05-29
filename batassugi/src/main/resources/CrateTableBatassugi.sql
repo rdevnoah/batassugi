@@ -226,3 +226,21 @@ CREATE TABLE rent
 
 -- 농지 대여 신청 테이블
 CREATE SEQUENCE rent_SEQ nocache;
+
+
+
+-- 일정 테이블
+CREATE TABLE rent_schedule(
+	schedule_no				NUMBER			NOT NULL,
+	rent_no					NUMBER			NOT NULL,
+	schedule_startdate		DATE			NOT NULL,
+	schedule_enddate		DATE			NOT NULL,
+	schedule_title			VARCHAR2(100)	NOT NULL,
+	schedule_content		CLOB			NOT NULL,
+	auth					NUMBER			NOT NULL,
+	CONSTRAINT rent_schedule_pk PRIMARY KEY (schedule_no, rent_no),
+	CONSTRAINT FK_rent_schedule_no FOREIGN KEY (rent_no) REFERENCES rent (rent_no)
+);
+
+-- 일정 테이블 일정 번호 시퀀스
+CREATE SEQUENCE rent_schedule_seq nocache;

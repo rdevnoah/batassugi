@@ -16,6 +16,7 @@
 							<th class="text-center">농작물 진행상태</th>
 							<th class="text-center">신청일</th>
 							<th class="text-center">처리상태</th>
+							<th class="text-center">일정관리</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -50,6 +51,11 @@
 								</c:otherwise>
 							</c:choose>
 							</td>
+							<td>
+								<c:if test="${list.rentStatus=='대여중'}">
+									<button id="scheduleBtn" value="${list.rentNo}" class="scheduleBtn btn btn-success">농사일정관리</button>
+								</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 					</tbody>
@@ -58,3 +64,14 @@
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
+	
+	<script>
+		$(document).ready(function(){
+			$(".scheduleBtn").on('click', function(e){
+				alert($(this).val());
+				sendPost('${pageContext.request.contextPath}/buyer/findBuyerScheduleByRentNo', {
+					'rentNo' : $(this).val()
+				})		
+			})
+		})
+	</script>
