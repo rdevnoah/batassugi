@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <nav id="sidebar">
 	<div class="sidebar-header">
 		<h3>구매자 페이지</h3>
@@ -11,8 +13,19 @@
 		<li>		
 			<a href="${pageContext.request.contextPath}/"> <i class="fa fa-home fa-lg"></i> 홈으로</a> 
 		</li>
-		<li>		
-			<a id="applySeller" class="applySeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청</a> 
+		<li>
+			<c:choose>
+				<c:when test="${applySellerVo.applyState == '미처리'}">
+					<a id="applyingSeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청 정보보기</a>
+				</c:when>
+				<c:when test="${applySellerVo.applyState == '승인거절'}">
+					<a id="applySeller" class="applySeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청</a>
+					<a id="applyingSeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청 정보보기</a>
+				</c:when>
+				<c:otherwise>
+					<a id="applySeller" class="applySeller"> <i class="fa fa-user-plus fa-lg"></i>판매자신청</a>
+				</c:otherwise>
+			</c:choose>
 		</li>
 		<li>		
 			<a href="${pageContext.request.contextPath}/buyer/buyer_Home"> <i class="fa fa-fort-awesome fa-lg"></i>내밭리스트</a> 

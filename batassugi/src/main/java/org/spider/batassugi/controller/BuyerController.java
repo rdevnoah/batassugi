@@ -82,15 +82,21 @@ public class BuyerController {
    * @param request 세션의 아이디값을 가져오기 위함.
    * @return mapping url
    */
-  @RequestMapping(value = {"buyer/buyer_Home","buyer/buyer_myinfoView"}, method = RequestMethod.GET)
-  public String buyerHome(Model model, HttpServletRequest request) {
+  @RequestMapping(value = { "buyer/buyer_Home", "buyer/buyer_myinfoView" },
+      method = RequestMethod.GET)
+  public String buyerHome(Model model, HttpServletRequest request, RedirectAttributes rttr) {
     HttpSession session = request.getSession(false);
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo"); // 세션에 있는 회원Vo객체를 얻어옴
-    String id = mvo.getMemberVo().getId(); // vo객체 안에 있는 id값을 얻어옴
-    
-    List<RentVo> rentList = buyerService.findRentFarmInfoById(id); // 현재 농지대여중인 목록을 조회해서 list에 담음
-    ApplySellerVo applySellerVo = buyerService.findApplySellerById(id); // 판매자신청 정보를 조회해서 vo에 담음
-    
+    List<RentVo> rentList = buyerService.findRentFarmInfoById(mvo); // 현재 농지대여중인 목록을 조회해서 list에 담음
+    String levelUp = buyerService.updateMemberLevel(mvo); // 등급이 변경되면 등급이름을 반환
+    if (!levelUp.equals("")) { // 등급이름이 반환된 값이 있으면
+      mvo.getMemberVo().setmemberLevel(levelUp); // 등급값 변경
+      session.setAttribute("mvo", mvo); // 세션에 다시 set
+      rttr.addFlashAttribute("success", levelUp + "으로 등급이 변경되었습니다. 축하합니다!"); // 등업축하메세지.
+      return "redirect:buyer_Home";
+    }
+    // 판매자신청 정보를 조회해서 vo에 담음
+    ApplySellerVo applySellerVo = buyerService.findApplySellerById(mvo.getMemberVo().getId());
     model.addAttribute("rentList", rentList); // 뷰로 보내줄 모델 객체.
     session.setAttribute("applySellerVo", applySellerVo); // 뷰로 보내줄 세션 객체
     if (request.getServletPath().equals("/buyer_myinfoView")) {
@@ -103,7 +109,7 @@ public class BuyerController {
    * 구매자가 신청한 농지대여를 취소하는 메서드.
    * 
    * @author "SL SangUk Lee"
-   * @param rentNo 대여신청번호.
+   * @param rentVo 대여신청정보.
    * @param rttr 신청취소 완료시 성공메세지를 출력해주기 위함.
    * @return maaping Url
    */

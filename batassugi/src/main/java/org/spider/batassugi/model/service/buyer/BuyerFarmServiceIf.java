@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
 
 
 /**
@@ -35,16 +36,16 @@ public interface BuyerFarmServiceIf {
    * 구매자가 대여한 농지정보 조회 메서드.
    * 
    * @author "SL SangUk Lee"
-   * @param id 구매자의 아이디.
+   * @param mvo 구매자정보.
    * @return RentVo
    */
-  public List<RentVo> findRentFarmInfoById(String id);
+  public List<RentVo> findRentFarmInfoById(MemberInfoVo mvo);
   
   /**
    * 구매자가 신청한 농지대여를 취소하는 메서드.
    * 
    * @author "SL SangUk Lee"
-   * @param rentNo 대여신청번호.
+   * @param rentVo 대여신청번호.
    */
   public void deleteRentByRentNo(RentVo rentVo);
   
@@ -74,4 +75,12 @@ public interface BuyerFarmServiceIf {
    * @return ApplySellerVo
    */
   public ApplySellerVo findApplySellerById(String id);
+
+  /**
+   * 여기에 설명을 쓰시오.
+   * @author "SL SangUk Lee"
+   * @param mvo 회원정보 객체.
+   * @return
+   */
+  public String updateMemberLevel(MemberInfoVo mvo);
 }

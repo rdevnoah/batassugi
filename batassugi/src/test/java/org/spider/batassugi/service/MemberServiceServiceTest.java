@@ -33,7 +33,6 @@ public class MemberServiceServiceTest {
     } catch (LoginException e) {
       e.printStackTrace();
     }*/
-    
     }
 
     // 멤버 로그인 테스튼

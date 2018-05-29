@@ -315,7 +315,10 @@ a.article, a.article:hover {
 	border: solid 0px;
 }
 
-
+.imgA {
+	display: !important inline-block;
+	border: solid 0px;
+}
 .filebox input[type="file"] {
 	position: absolute;
 	width: 1px;

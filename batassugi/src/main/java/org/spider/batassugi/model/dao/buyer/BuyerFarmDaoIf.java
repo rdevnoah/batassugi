@@ -1,6 +1,7 @@
 package org.spider.batassugi.model.dao.buyer;
 
 import java.util.List;
+import java.util.Map;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 
@@ -43,7 +44,7 @@ public interface BuyerFarmDaoIf {
    * 구매자가 신청한 농지대여를 취소하는 메서드.
    * 
    * @author "SL SangUk Lee"
-   * @param rentNo 대여신청번호.
+   * @param rentVo 대여신청번호.
    */
   public void deleteRentByRentNo(RentVo rentVo);
 
@@ -63,6 +64,36 @@ public interface BuyerFarmDaoIf {
    * @return ApplySellerVo
    */
   public ApplySellerVo findApplySellerById(String id);
-  
+
+  /**
+   * 대여신청하고 취소했을시 대여한만큼 평수 초기화해주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param rentVo 대여신청정보.
+   */
   public void updateRecruitSizeResetByRecruitNo(RentVo rentVo);
+
+  /**
+   * 판매자신청한 이력이 있을때 상태를 업데이트주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param applySellerVo 판매자신청 정보.
+   */
+  public void updateApplySeller(ApplySellerVo applySellerVo);
+
+  /**
+   * 수확상태가 100이 넘으면 대여만료처리 해주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param rentNo 대여신청번호.
+   */
+  public void updateRentStatus(int rentNo);
+
+  /**
+   * 회원 등급 올려주는 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param map 회원아이디, 회원등급명.
+   */
+  public void updateMemberLevel(Map<String, String> map);
 }

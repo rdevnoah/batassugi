@@ -50,19 +50,15 @@
     	</div>
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/buyer.js"></script>
+	<script>
+		//대여신청 성공시 RedirectAttribute 객체를 받아서 메세지 출력
+		'${success}' !== '' ? BootstrapDialog.alert('${success}') : ''; // RedirectAttribute 객체가 있다면 모달로 메세지 출력
+		elApplyVo({
+			applyDate : '${applySellerVo.applyDate}',
+			applyState : '${applySellerVo.applyState}',
+			applyReason : '${applySellerVo.applyReason}',
+			farmerDocument : '${applySellerVo.farmerDocument}'
+		})
+	</script>
 </body>
-<script>
-//대여신청 성공시 RedirectAttribute 객체를 받아서 메세지 출력
-'${success}' !== '' ? BootstrapDialog.alert('${success}') : ''; // RedirectAttribute 객체가 있다면 모달로 메세지 출력 
-var applyVo = { // ${applySellerVo} 판매자 신청 Vo객체
-		'farmerDocument' : '${pageContext.request.contextPath}/resources/img/farmer_doc/${applySellerVo.farmerDocument}',
-		'applyDate' : '${applySellerVo.applyDate}',
-		'applyState' : '${applySellerVo.applyState}',
-		'applyReason' : '${applySellerVo.applyReason}'
-	}
-
-$(document).ready(function() {
-	applyInfo(applyVo) // buyer.js에서 사용될 ${applySellerVo} 판매자신청 Vo객체를 매개변수로 전달.
-})
-</script>
 </html>
