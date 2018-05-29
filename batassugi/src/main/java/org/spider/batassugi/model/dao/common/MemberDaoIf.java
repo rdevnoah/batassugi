@@ -179,6 +179,11 @@ public interface MemberDaoIf {
    */
   public String findStateNumberById(String reportedId);
 
+  public void updateMemberStateNumberPlus(String reportedId);
+
+  public void updateMemberStateNumberMinus(String reportedId);
+  
+  public void updateMemberStateNumber2Plus(String reportedId);
 
 
 }

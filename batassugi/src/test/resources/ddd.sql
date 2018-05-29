@@ -1,6 +1,6 @@
 select id, password from spider_member where id='admin'
 
-<<<<<<< HEAD
+
 select * from member_info
 select * from MEMBER_STATE
 
@@ -394,8 +394,15 @@ drop table accuse
     
     select * from apply_seller
     
+    select * from spider_member
+    select * from member_state
+    select * from accuse
     
+    select count(accuse_no) from accuse where reported_id='test11' and accuse_state='신고승인'
+select id, password, state_number from spider_member
+    where id='test11'
     
+
    UPDATE rent
     SET rent_status = '대여만료'
     WHERE rent_no = 31
@@ -408,4 +415,5 @@ drop table accuse
     UPDATE spider_member
     SET member_level = '초급'
     WHERE id = 'test12'
+>>>>>>> refs/heads/develop
     

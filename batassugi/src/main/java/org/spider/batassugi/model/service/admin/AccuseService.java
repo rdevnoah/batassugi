@@ -122,17 +122,32 @@ public class AccuseService implements AccuseServiceIf, PathInfo {
       map.put("stateNumber", stateNumber);
       map.put("state", "정지");
       memberDao.updateMemberState(map);
+      memberDao.updateMemberStateNumberPlus(accusePostVo.getReportedId());
     }
+    // - 신고 4회 - 신고를 기록만함
+    else if (accuseCount == 3) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("stateNumber", stateNumber);
+        map.put("state", "활동");
+        memberDao.updateMemberState(map);
+        memberDao.updateMemberStateNumberMinus(accusePostVo.getReportedId());
+      }
     // - 신고 5회 - 회원 탈퇴 처리
     else if (accuseCount == 4) {
       Map<String, String> map = new HashMap<String, String>();
       map.put("stateNumber", stateNumber);
       map.put("state", "탈퇴");
       memberDao.updateMemberState(map);
+      memberDao.updateMemberStateNumber2Plus(accusePostVo.getReportedId());
     }
-
+    // - 신고 5회이상 - 회원 탈퇴 처리
+    else if (accuseCount > 4) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("stateNumber", stateNumber);
+        map.put("state", "탈퇴");
+        memberDao.updateMemberState(map);
+      }
     // 3. 신고 내역 처리
     accusePostDao.updateAccuseStateInfo(accusePostVo);
   }
-
 }

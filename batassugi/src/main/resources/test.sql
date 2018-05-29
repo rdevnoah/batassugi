@@ -304,3 +304,4 @@ drop sequence apply_fammer_SEQ;
 drop sequence accuse_SEQ ;
 drop sequence crops_SEQ;
 drop sequence member_state_SEQ;
+select * from MEMBER_STATE

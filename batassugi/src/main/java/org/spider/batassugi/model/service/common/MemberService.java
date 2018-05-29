@@ -57,6 +57,10 @@ public class MemberService implements MemberServiceIf, PathInfo {
       throw new LoginException("아이디가 존재하지 않습니다.");
     } else if (!password.equals(memberVo.getPassword())) {
       throw new LoginException("비밀번호가 다릅니다.");
+    } else if (Integer.parseInt(memberVo.getState())==2) {
+        throw new LoginException("3개월동안 활동이 중지된 회원입니다. 관리자에게 문의하세요.");
+    } else if (Integer.parseInt(memberVo.getState())==3) {
+      throw new LoginException("강제 탈퇴된 회원입니다.");
     }
     return memberDao.login(vo);
   }
