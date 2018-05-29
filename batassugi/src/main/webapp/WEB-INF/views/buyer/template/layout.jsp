@@ -26,8 +26,16 @@
 <!-- Our Custom CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/buyer.css" rel="stylesheet">
 
+<!-- fullCalendar CSS -->
+<link href='${pageContext.request.contextPath}/resources/css/fullcalendar/fullcalendar.min.css' rel='stylesheet' />
+<link href='${pageContext.request.contextPath}/resources/css/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+
+<%-- fullCalendar JS --%>
+<script src='${pageContext.request.contextPath}/resources/js/fullcalendar/moment.min.js'></script>
 <%-- Jquery v3.3.1 --%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
+<%-- fullCalendar JS --%>
+<script src='${pageContext.request.contextPath}/resources/js/fullcalendar/fullcalendar.min.js'></script>
 <%-- Bootstrap v3.3.7 --%>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 <%-- Bootstrap-dialog --%>

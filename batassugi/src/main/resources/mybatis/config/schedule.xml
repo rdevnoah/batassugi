@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="schedule">
+
+  <insert id="createSellerSchedule" parameterType="scheduleVo">
+    insert into rent_schedule
+      values(rent_schedule_seq.nextval, #{rentNo}, #{scheduleStartdate}, #{scheduleEnddate},
+      #{scheduleTitle}, #{scheduleContent}, #{auth})
+  </insert>
+
+  <select id="findScheduleByRentNo" parameterType="string" resultType="scheduleVo">
+  	select schedule_no as scheduleNo, rent_no as rentNo, to_char(schedule_startdate,'YYYY-MM-DD') as scheduleStartdate,
+  	to_char(schedule_enddate,'YYYY-MM-DD') as scheduleEnddate, schedule_title as scheduleTitle,
+  	schedule_content as scheduleContent, auth from rent_schedule where rent_no=#{value}
+  </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

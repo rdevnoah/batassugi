@@ -19,13 +19,10 @@
 		</li>
 		<li>
 		<a href="registerFarmForm"> <i class="glyphicon glyphicon-leaf"></i>농지등록</a>
-			<ul class="collapse list-unstyled" id="homeSubmenu">
-				<li><a href="#">Home 1</a></li>
-				<li><a href="#">Home 2</a></li>
-				<li><a href="#">Home 3</a></li>
-			</ul>
 		</li>
-		
+		<li>
+			<a href="${pageContext.request.contextPath}/seller/sellerSchedule">일정보기</a>
+		</li>
 		
 		
 		<!-- <li class="active">

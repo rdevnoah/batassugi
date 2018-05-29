@@ -1,13 +1,14 @@
 package org.spider.batassugi.service;
 
-import java.util.List;
-import java.util.Map;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.spider.batassugi.model.dao.common.ScheduleDaoIf;
 import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
+import org.spider.batassugi.model.service.common.ScheduleServiceIf;
 import org.spider.batassugi.model.service.seller.SellerFarmServiceIf;
-import org.spider.batassugi.model.vo.seller.FarmVo;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,6 +21,14 @@ public class SellerFarmServiceTest {
   
   @Resource
   private SellerFarmServiceIf sellerFarmService;
+  
+  @Resource
+  private ScheduleDaoIf scheduleDao;
+  
+  @Resource
+  private ScheduleServiceIf scheduleService;
+  
+  @Scheduled(cron = "0 0/5 15 * * ?")
   @Test
   public void SellerFarmServiceTest() {
 //    List<FarmVo> list = sellerFarmDao.findSellerFarmList("aaaa");
@@ -50,24 +59,24 @@ public class SellerFarmServiceTest {
 //    map.put("pagingBean", new PagingBean(sellerFarmDao.getTotalRentListByFarmNo("1")));
 //    List<RentVo> list = sellerFarmDao.findRentPagingList(map);
 //    System.out.println(list);
-    
-    Map<String, String> map = sellerFarmDao.findBuyerDetailByRentNo("4");
-    int harvest = Integer.parseInt(String.valueOf(map.get("HARVESTSTATUS")));
-    map.remove("HARVESTSTATUS");
-
-    if (harvest <25) {
-      harvest=1;
-    }else if (harvest < 50) {
-      harvest=2;
-    }else if (harvest < 75) {
-      harvest=3;
-    }else
-      harvest=4;
-    
-    String harv = String.valueOf(harvest);
-    map.put("HARVESTSTATUS", harv);
-    
-    System.out.println(harvest);
+//    
+//    Map<String, String> map = sellerFarmDao.findBuyerDetailByRentNo("4");
+//    int harvest = Integer.parseInt(String.valueOf(map.get("HARVESTSTATUS")));
+//    map.remove("HARVESTSTATUS");
+//
+//    if (harvest <25) {
+//      harvest=1;
+//    }else if (harvest < 50) {
+//      harvest=2;
+//    }else if (harvest < 75) {
+//      harvest=3;
+//    }else
+//      harvest=4;
+//    
+//    String harv = String.valueOf(harvest);
+//    map.put("HARVESTSTATUS", harv);
+//    
+//    System.out.println(harvest);
     
 //    List<FarmVo> list = sellerFarmDao.getSellerFarmList("aaaa");
 //    List<CropsVo> listCrops = null;
@@ -82,7 +91,10 @@ public class SellerFarmServiceTest {
 //      System.out.println(list.get(i).getCropsVo());
 //      System.out.println("----");
 //    }
-    List<FarmVo> list = sellerFarmService.findSellerFarmList("aaaa");
-    System.out.println(list);
+//    List<FarmVo> list = sellerFarmService.findSellerFarmList("aaaa");
+//    System.out.println(list);
+//    scheduleDao.createSellerSchedule(new ScheduleVo(null, "14", "2018-04-22", "2018-04-23", "제목", "내용입니다.", "1"));
+//    System.out.println("asdfasdf");
+    System.out.println("test");
   }
 }

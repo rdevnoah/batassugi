@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
@@ -12,11 +13,13 @@
 							<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${farmVo.farmEnddate}</span> 까지</div>
 							<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${farmVo.farmSize}평</span></div>
 							<div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${farmVo.farmAddress}</span></div>
-								<p>
+								
 								<c:forEach items="${farmVo.cropsVo}" var="crops">
 									<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
+								
 								</c:forEach>
-								</p>
+								
+								
 							<div>
 								<h4>
 								<c:if test="${farmVo.labels.size()==0 }">
@@ -24,7 +27,7 @@
 								</c:if>
 								<c:forEach items="${farmVo.labels}" var="label">
 									<c:choose>
-									<c:when test="${label=='승인'}">
+									<c:when test="${label=='대여중'}">
 										<span class="label label-success">대여중</span>
 									</c:when>
 									<c:when test="${label=='모집중'}">
@@ -82,6 +85,7 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="row text-center" id="farmImage">
+							
 							
 						</div>
 						<div class="row">

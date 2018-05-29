@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="findRestFarmSizeByFarmNo" parameterType="string" resultType="string">
     select (farm_size-(select coalesce(sum(r.rent_size),0) from rent r, recruit c, farm f 
     where c.recruit_no=r.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo}
-    and (r.rent_status='승인' or r.rent_status='대기'))-(
+    and (r.rent_status='대여중' or r.rent_status='대기'))-(
     select coalesce(sum(recruit_size),0) from recruit where farm_no=#{farmNo}))
     from farm
     where farm_no=#{farmNo}
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   <!--  대여인의 대여신청을 수락하여 state를 update시켜주고, 대여 시작 날짜를 수락한 날짜로 바꿔줍니다. -->
   <update id="updateRentStatusConfirm" parameterType="string">
-    update rent set rent_Status='승인', rent_startdate=sysdate where rent_no=#{rentNo} 
+    update rent set rent_Status='대여중', rent_startdate=sysdate where rent_no=#{rentNo} 
   </update>
   
   <!--  대여인의 대여신청을 거절하여 state를 update시켜주는 쿼리문입니다. -->
