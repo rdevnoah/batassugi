@@ -405,7 +405,87 @@ drop table accuse
     
     select * from spider_member where id = 'test12'
     
+    select crops_name from crops
+    
     UPDATE spider_member
     SET member_level = '초급'
     WHERE id = 'test12'
+
     
+   SELECT DISTINCT(R.recruit_no) AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress, F.image as image, M.nickname
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, R.recruit_no, R.recruit_kind, 
+      R.recruit_enddate, R.recruit_status, R.recruit_size, R.farm_no
+      FROM recruit R, farm F, available_crops A, crops C 
+      WHERE R.farm_no = F.farm_no 
+      AND F.farm_no = A.farm_no 
+      AND A.crops_no = C.crops_no 
+      AND F.farm_address = '서울')R, farm F, spider_member M, available_crops A, crops C
+    WHERE R.farm_no = F.farm_no
+    AND F.id = M.id
+    AND F.farm_no = A.farm_no
+    AND A.crops_no = C.crops_no
+    AND rnum BETWEEN 1 AND 10
+    
+    
+    SELECT count(*) 
+    FROM recruit R, farm F
+    WHERE F.farm_address = '서울'
+    AND R.farm_no = F.farm_no
+
+    
+    SELECT count(*) 
+    FROM recruit R, farm F, available_crops A, crops C
+    WHERE C.crops_name = '양배추'
+    AND R.farm_no = F.farm_no
+    AND F.farm_no = A.farm_no
+    AND A.crops_no = C.crops_no
+
+    
+    SELECT DISTINCT(R.recruit_no) AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress, F.image as image, M.nickname
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, R.recruit_no, R.recruit_kind, 
+      R.recruit_enddate, R.recruit_status, R.recruit_size, R.farm_no
+      FROM recruit R, farm F
+      WHERE R.farm_no = F.farm_no 
+      AND F.farm_address LIKE '%' || '여기는' || '%' 
+      )R, farm F, spider_member M, available_crops A, crops C
+    WHERE R.farm_no = F.farm_no
+    AND F.id = M.id
+    AND F.farm_no = A.farm_no
+    AND A.crops_no = C.crops_no
+    AND rnum BETWEEN 1 AND 5
+    ORDER BY R.recruit_no DESC
+    
+    
+     SELECT DISTINCT(R.recruit_no) AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress, F.image as image, M.nickname
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, R.recruit_no, R.recruit_kind, 
+      R.recruit_enddate, R.recruit_status, R.recruit_size, R.farm_no
+      FROM recruit R, farm F, available_crops A, crops C 
+      WHERE R.farm_no = F.farm_no 
+      AND F.farm_no = A.farm_no 
+      AND A.crops_no = C.crops_no
+      <choose>
+        <when test="category.equals('crops')">
+          AND C.crops_name = #{keyword}
+        </when>
+        <when test="category.equals('address')">
+          AND REPLACE(F.farm_address, ' ', '') like '%' || #{keyword} || '%'
+        </when>
+      </choose>)R, farm F, spider_member M, available_crops A, crops C
+    WHERE R.farm_no = F.farm_no
+    AND F.id = M.id
+    AND F.farm_no = A.farm_no
+    AND A.crops_no = C.crops_no
+    AND rnum BETWEEN #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber}
+    ORDER BY R.recruit_no DESC

@@ -13,6 +13,7 @@ import org.spider.batassugi.model.service.buyer.TradeServiceIf;
 import org.spider.batassugi.model.service.seller.RecruitServiceIf;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.buyer.SearchRentListVo;
 import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
@@ -58,7 +59,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class BuyerController {
 
-  
+
   @Resource
   private TradeServiceIf tradeService;
 
@@ -117,8 +118,8 @@ public class BuyerController {
   public String deleteRentByRentNo(RentVo rentVo, RedirectAttributes rttr) {
     buyerService.deleteRentByRentNo(rentVo);
     // 농지대여신청을 취소. 대여신청 정보를 삭제.
-    
-    rttr.addFlashAttribute("success", "신청취소되었습니다."); // 뷰에 성공메세지 출력을 위해 보내줄 객체 
+
+    rttr.addFlashAttribute("success", "신청취소되었습니다."); // 뷰에 성공메세지 출력을 위해 보내줄 객체
     return "redirect:/buyer/buyer_Home";
   }
 
@@ -142,10 +143,10 @@ public class BuyerController {
     }
     applySellerVo.setFarmerDocument(path); // vo객체에 파일경로를 set
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo"); // 세션에 있는 회원Vo객체를 얻어옴
-    applySellerVo.setMemberVo(mvo.getMemberVo()); //판매자신청Vo 객체에회원Vo객체 set
-    
+    applySellerVo.setMemberVo(mvo.getMemberVo()); // 판매자신청Vo 객체에회원Vo객체 set
+
     buyerService.registerApplySeller(applySellerVo); // 판매자신청 정보를 insert
-    
+
     rttr.addFlashAttribute("success", "판매자신청이 완료되었습니다."); // 뷰에 성공메세지를 출력하기위해 보내줄 객체
     return "redirect:/buyer/buyer_Home";
   }
@@ -153,15 +154,45 @@ public class BuyerController {
 
 
   /**
-   * 대여신청 게시판뷰 출력 메서드.
+   * 대여신청 게시판 검색 & 게시판뷰 메서드.
    * 
    * @author "SL SangUk Lee"
+   * @param model 뷰에 보내줄 데이터.
+   * @param pageNum 페이징 번호.
+   * @param searchVo 검색정보.
    * @return Mapping Url
    */
-  @RequestMapping(value = "common/getRentList", method = { RequestMethod.POST, RequestMethod.GET })
-  public String getRentList(HttpServletRequest request, Model model, String pageNum) {
-    model.addAttribute("rentListVo", rentService.getRentList(pageNum)); // 뷰에 보내줄 대여신청 목록 리스트 
+  @RequestMapping(value = { "common/getRentList", "common/findRentListByKeyword" },
+      method = { RequestMethod.POST, RequestMethod.GET })
+  public String getRentList(HttpServletRequest request, Model model, String pageNum,
+      SearchRentListVo searchVo, RedirectAttributes rttr) {
+    if (request.getServletPath().equals("/common/getRentList")) {
+      model.addAttribute("rentListVo", rentService.getRentList(pageNum)); // 뷰에 보내줄 대여신청 목록 리스트
+    } else {
+      if (rentService.findRentListByKeyword(pageNum, searchVo).getRecruitList().isEmpty()) {
+        rttr.addFlashAttribute("fail", "검색결과가 없습니다");
+        return "redirect:/common/getRentList";
+      }
+      model.addAttribute("searchVo", searchVo);
+      model.addAttribute("rentListVo", rentService.findRentListByKeyword(pageNum, searchVo));
+    }
     return "rent/Read_RentList.tiles";
+  }
+
+  /**
+   * 대여신청 게시판에서 검색시 자동완성 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @return List
+   */
+  @ResponseBody
+  @RequestMapping(value = { "getCropsList", "getFarmAddressList" }, method = RequestMethod.POST)
+  public List<String> getSearchList(HttpServletRequest request) {
+    if (request.getServletPath().equals("/getCropsList")) {
+      return rentService.getCropsList();
+    } else {
+      return rentService.getFarmAddressList();
+    }
   }
 
   /**
@@ -176,7 +207,7 @@ public class BuyerController {
       method = { RequestMethod.POST, RequestMethod.GET })
   public String findRentDetailByRecruitNo(Model model, String recruitNo) {
     // 대여신청 번호로 대여신청 상세정보를 vo객체에 담음
-    RecruitVo recruitVo = rentService.findRentDetailByRecruitNo(Integer.parseInt(recruitNo)); 
+    RecruitVo recruitVo = rentService.findRentDetailByRecruitNo(Integer.parseInt(recruitNo));
     model.addAttribute("recruitVo", recruitVo); // 뷰에 보내줄 대여신청Vo 객체
     return "rent/Read_RentDetail.tiles";
   }
@@ -197,9 +228,9 @@ public class BuyerController {
     RentVo rvo = rentVo; // 뷰에서 대여신청 정보를 얻어와서 대여신청Vo객체에 담음
     MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo"); // 세션에 있는 회원Vo객체를 얻어옴
     rvo.setId(mvo.getMemberVo().getId()); // 대여신청Vo객체에 회원Vo객체를 set
-    
-    rentService.registerRentByRentVo(rentVo); //대여신청Vo객체를 insert
-    
+
+    rentService.registerRentByRentVo(rentVo); // 대여신청Vo객체를 insert
+
     rttr.addFlashAttribute("success", "대여신청이 완료되었습니다."); // 뷰에 성공메세지를 출력하기위해 보내줄 객체
     return "redirect:getRentList";
   }

@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY R.recruit_no DESC
   </select>
   
-  <select id="totalRentListCount" resultType="int">
+  <select id="getTotalRentListCount" resultType="int">
     SELECT count(*)
     FROM recruit
   </select>
@@ -75,6 +75,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     AND f.farm_no = a.farm_no 
     AND a.crops_no = c.crops_no
     AND f.farm_no = #{farmNo}
+  </select>
+  
+  <select id="getCropsList" resultType="string">
+    SELECT DISTINCT(crops_name) AS cropsName 
+    FROM crops
+  </select>
+  
+  <select id="getFarmAddressList" resultType="string">
+    SELECT DISTINCT(farm_address) AS farmAddress 
+    FROM farm
+  </select>
+  
+  <select id="findTotalRentListCountByKeyword" resultType="int" parameterType="searchRentListVo">
+    SELECT count(*)
+    <choose>
+      <when test="category.equals('address')">
+        FROM recruit R, farm F
+        WHERE REPLACE(F.farm_address, ' ', '') LIKE '%' || #{keyword} || '%'
+        AND R.farm_no = F.farm_no
+      </when>
+      <when test="category.equals('crops')">
+        FROM recruit R, farm F, available_crops A, crops C
+        WHERE C.crops_name = #{keyword}
+        AND R.farm_no = F.farm_no
+        AND F.farm_no = A.farm_no
+        AND A.crops_no = C.crops_no
+      </when>
+      <otherwise>
+        FROM recruit R
+      </otherwise>
+    </choose>
+  </select>
+  
+  <select id="findRentListByKeyword" resultMap="recruitVoRM" parameterType="searchRentListVo">
+   SELECT DISTINCT(R.recruit_no) AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress, F.image as image, M.nickname
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, R.recruit_no, R.recruit_kind, 
+      R.recruit_enddate, R.recruit_status, R.recruit_size, R.farm_no
+      <choose>
+        <when test="category.equals('crops')">
+          FROM recruit R, farm F, available_crops A, crops C 
+          WHERE R.farm_no = F.farm_no 
+          AND F.farm_no = A.farm_no 
+          AND A.crops_no = C.crops_no
+          AND C.crops_name = #{keyword}
+        </when>
+        <when test="category.equals('address')">
+          FROM recruit R, farm F
+          WHERE R.farm_no = F.farm_no 
+          AND REPLACE(F.farm_address, ' ', '') LIKE '%' || #{keyword} || '%'
+        </when>
+      </choose>)R, farm F, spider_member M, available_crops A, crops C
+    WHERE R.farm_no = F.farm_no
+    AND F.id = M.id
+    AND F.farm_no = A.farm_no
+    AND A.crops_no = C.crops_no
+    AND rnum BETWEEN #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber}
+    ORDER BY R.recruit_no DESC
   </select>
 </mapper>
  
