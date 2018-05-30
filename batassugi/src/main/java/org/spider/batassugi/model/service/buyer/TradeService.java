@@ -9,6 +9,7 @@ import org.spider.batassugi.model.dao.buyer.TradePostDaoIf;
 import org.spider.batassugi.model.dao.common.PathInfo;
 import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
+import org.spider.batassugi.model.vo.buyer.TradePostSearchVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
  *                                                getTotalTradePostCount, findTradePostDetailByNo추가
  * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 추가
  * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost, createTradePost 추가
+ * 2018. 5. 28. "SM HyeonGil Kim" findtradePostBySearch 추가
  *      </pre>
  */
 @Service
@@ -110,5 +112,21 @@ public class TradeService implements TradeServiceIf, PathInfo {
   @Override
   public void updateHitsTradePost(TradePostVo tvo) {
     tradePostDao.updateHitsTradePost(tvo);
+  }
+
+  @Override
+  public TradePostSearchVo findtradePostBySearch(String pageNum, TradePostSearchVo tps) {
+    int totalPostCount = tradePostDao.getTotalTradeSearchCount(tps);
+    BuyerPagingBean pb = null;
+    if (pageNum == null) {
+      pb = new BuyerPagingBean(totalPostCount);
+      tps.setPagingBean(pb);
+      tps.setTradepostList(tradePostDao.findtradePostBySearch(tps));
+    } else {
+      pb = new BuyerPagingBean(Integer.parseInt(pageNum), totalPostCount);
+      tps.setPagingBean(pb);
+      tps.setTradepostList(tradePostDao.findtradePostBySearch(tps));
+    }
+    return tps;
   }
 }

@@ -16,6 +16,7 @@ import org.spider.batassugi.model.vo.buyer.RentVo;
 import org.spider.batassugi.model.vo.buyer.SearchRentListVo;
 import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
+import org.spider.batassugi.model.vo.buyer.TradePostSearchVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
@@ -54,6 +55,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * 2018. 5. 16.  "SM HyeonGil Kim"  거래게시판 글 쓰기, 수정 완료
  * 2018. 5. 17.  "SM HyeonGil Kim"  거래게시판 글 조회수 처리 완료
  * 2018. 5. 18.  "SM HyeonGil Kim"  거래게시판 댓글 리스트, 댓글 작성 완료
+ * 2018. 5. 29.  "SM HyeonGil Kim"  거래게시판 검색 기능 완료
+ * 2018. 5. 30.  "SM HyeonGil Kim"  거래게시판 댓글 삭제, 댓글 갯수 출력 기능 완료
  *      </pre>
  */
 @Controller
@@ -236,17 +239,31 @@ public class BuyerController {
   }
 
   /**
-   * 거래 게시판 목록 출력 메서드.
+   * 거래 게시판 목록 출력 및 검색결과 출력 메서드.
    * 
-   * @author "SL SangUk Lee"
+   * @author "SM HyeonGil Kim"
    * @param model 뷰에 전달할 객체.
    * @param pageNum 페이징번호.
+   * @param request 경로 확인.
+   * @param tps 검색결과.
    * @return trade/Read_tradePost.tiles
    */
-  @RequestMapping(value = "common/tradePost", method = { RequestMethod.GET, RequestMethod.POST })
-  public String getTradePostList(Model model, String pageNum) {
-    TradePostListVo lvo = tradeService.findTradePostList(pageNum);
-    model.addAttribute("tradePostListVo", lvo);
+  @RequestMapping(value = {"common/tradePost", "common/findtradePostBySearch"},
+      method = {RequestMethod.GET, RequestMethod.POST})
+  public String getTradePostList(Model model, String pageNum, HttpServletRequest request,
+      TradePostSearchVo tps, RedirectAttributes rttr) {
+    if (request.getServletPath().equals("/common/tradePost")) {
+      TradePostListVo lvo = tradeService.findTradePostList(pageNum);
+      model.addAttribute("tradePostListVo", lvo);
+    } else {
+      TradePostSearchVo lvo = tradeService.findtradePostBySearch(pageNum, tps);
+      if (lvo.getTradepostList().isEmpty()) {
+        rttr.addFlashAttribute("fail", "검색결과가 없습니다!");
+        return "redirect:/common/tradePost";
+      }
+      model.addAttribute("tps", tps);
+      model.addAttribute("tradePostListVo", lvo);
+    }
     return "trade/Read_tradePost.tiles";
   }
 
@@ -421,7 +438,7 @@ public class BuyerController {
    */
   @RequestMapping("/createReply")
   @ResponseBody
-  public TradeCommentVo createReply(TradeCommentVo tcvo, HttpServletRequest request) {
+  public TradeCommentVo createReply(TradeCommentVo tcvo, HttpServletRequest request, Model model) {
     HttpSession session = request.getSession(false);
     if (session != null) {
       MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
@@ -431,5 +448,22 @@ public class BuyerController {
     }
     tradeCommentService.createReply(tcvo);
     return tcvo;
+  }
+  
+  /**
+  * 작성자가 댓글 삭제가능한 메서드.
+   * 
+   * @author "SM HyeonGil Kim"
+   * @param replyNo 댓글 번호.
+   * @param tradeNo 게시글 번호.
+   * @param model 뷰에 전달할 객체.
+   * @return trade/Read_tradePostDetail.tiles
+   */
+  @RequestMapping("common/deleteReply")
+  public String deleteReplyByReplyNo(String replyNo, String tradeNo, Model model) {
+    tradeCommentService.deleteReplyByReplyNo(Integer.parseInt(replyNo));
+    TradePostVo tvo = tradeService.findTradePostDetailByNo(Integer.parseInt(tradeNo));
+    model.addAttribute("tvo", tvo);
+    return "trade/Read_tradePostDetail.tiles";
   }
 }

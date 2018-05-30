@@ -2,26 +2,27 @@ package org.spider.batassugi.model.service.buyer;
 
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
+
 /**
- * 댓글 서비스.
- * .
+ * 댓글 서비스. .
+ * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.model.service.buyer
  * @filename : TradeCommentServiceIf.java
  * @author : "SM HyeonGil Kim"
  * @since : 2018. 5. 18.
  * @version : 1.0
- * @see 
+ * @see
  * 
- * <pre>
+ *      <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 18.  "SM HyeonGil Kim"    findReplyListByTradeNo(int tradeNo), 
  *                                                    createReply(TradeCommentVo tcvo) 추가
- *                                          
- * </pre>
+ * 2018. 5. 30.  "SM HyeonGil Kim"   deleteReplyByReplyNo(int replyNo) 추가
+ *      </pre>
  */
 
 public interface TradeCommentServiceIf {
@@ -42,5 +43,13 @@ public interface TradeCommentServiceIf {
    * @return 
    */
   public TradeCommentVo createReply(TradeCommentVo tcvo);
+  
+  /**
+   * 댓글 작성자가 댓글 삭제.
+   * 
+   * @author "SM HyeonGil Kim"
+   * @param replyNo 댓글 번호.
+   */
+  public void deleteReplyByReplyNo(int replyNo);
   
 }

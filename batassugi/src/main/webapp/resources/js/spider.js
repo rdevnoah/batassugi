@@ -6,15 +6,16 @@ var $closeSide = $('#closeSide'),
 	$vcenterLi = $('.vcenter li'), 
 	$vcenterA = $('.vcenter a'), 
 	$paginationA = $('.pagination a'), 
+	$paginationB = $('.pagination1 a'), 
 	$postListA = $('.postList a'), 
 	$like = $('.like a'), 
 	$rentForm = $('#rentForm'), 
 	$rent = $('.rent .rentBtn'), 
-	$rentPaginationA = $('.rentPagination a');
+	$rentPaginationA = $('.rentPagination a'),
 	$cropsList = $('.cropsList'),
 	$searchCategory = $('#searchCategory'),
 	$searchForm = $('#searchForm'),
-	$fail = $('body').find('#fail').text();
+	$fail = $('body').find('#fail').text(),
 	$success = $('body').find('#success').text();
 	
 	
@@ -68,37 +69,28 @@ function sendPost(path, params) {
 	$f.submit();
 } // sendPost(path, params)
 
-// 페이징, 디테일 펑션
-var postEvent = {
-	sendPost : function(params) {
-		sendPost(params.path, params.parms)
-	}, // sendPost
-	paging : function($this, previous, end) {
-		if ($this.is('#previousPage')) {
-			param = previous;
-		} else if ($this.is('#nextPage')) {
-			param = end;
-		} else {
-			param = $this.text();
-		}
-		return postEvent.sendPost({
-			path : 'tradePost',
-			parms : {
-				'pageNum' : param
-			}
-		})
-	}, // paging
+// 페이징, 디테일 펑션, 검색 페이징
+var tradeList = {
+		   paging : function(target, previous, end, path, keyword, searchType) {
+		      var param;
+		      if (target.is('#previousPage')) {
+		         param = previous;
+		      } else if (target.is('#nextPage')) {
+		         param = end;
+		      } else {
+		         param = target.text();
+		      }
+		      sendPost(path, {
+		         'pageNum' : param,
+		         'keyword' : keyword,
+		         'searchType' : searchType
+		      })
+		   }, // paging
+		   detail : function(target, path, params) {
+		      sendPost(path, params)
+		   } // detail
+		} // rentList
 
-	findPostDetail : function($this) {
-		param = $this.parents().children('td:first').text();
-		return postEvent.sendPost({
-			path : 'findTradePostListByNo',
-			parms : {
-				'tradeNo' : param
-			}
-		})
-	} // findPostDetail
-} // postEvent
 
 /**
  * 대여신청 상세정보 뷰 출력 event
