@@ -29,7 +29,11 @@
 							<c:if test="${list.tradeKind == '구매'}">
 								<td><span class="label label-danger">${list.tradeKind}</span></td>
 							</c:if>
-							<td><a>${list.tradeTitle}</a></td>
+							<td><a>${list.tradeTitle}</a>&nbsp;&nbsp;&nbsp;
+							<c:if test="${list.replyCnt > 0}">
+								[${list.replyCnt}]
+							</c:if>
+							</td>
 							<td>${list.memberVo.nickname}</td>
 							<td>${list.tradeHits}</td>
 							<td>${list.regdate}</td>
