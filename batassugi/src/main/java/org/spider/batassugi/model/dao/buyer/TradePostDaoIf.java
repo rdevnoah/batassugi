@@ -2,6 +2,7 @@ package org.spider.batassugi.model.dao.buyer;
 
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
+import org.spider.batassugi.model.vo.buyer.TradePostSearchVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 
 /**
@@ -25,7 +26,8 @@ import org.spider.batassugi.model.vo.buyer.TradePostVo;
  * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 추가
  * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost, createTradePost 추가
  * 2018. 5. 17. "SM HyeonGil Kim" updateHitsTradePost 추가
- * 
+ * 2018. 5. 28. "SM HyeonGil Kim" findtradePostBySearch 추가
+ * 2018. 5. 28. "SM HyeonGil Kim" getTotalTradeSearchCount 추가
  *      </pre>
  */
 public interface TradePostDaoIf {
@@ -43,4 +45,9 @@ public interface TradePostDaoIf {
   public void createTradePost(TradePostVo tvo);
   
   public void updateHitsTradePost(TradePostVo tvo);
+  
+  public List<TradePostVo> findtradePostBySearch(TradePostSearchVo tps);
+  
+  public int getTotalTradeSearchCount(TradePostSearchVo tps);
+  
 }

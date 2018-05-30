@@ -41,7 +41,7 @@
 				<button class="btn btn-primary" id="wirteTradePost">글쓰기</button>
 			</div>
 			<c:set value="${tradePostListVo.pagingBean}" var="pb" />
-			<div class="text-center">
+			<div class="text-center" >
 				<nav>
 					<ul class="pagination">
 						<c:if test="${pb.previousPageGroup}">
@@ -71,17 +71,49 @@
 					</ul>
 				</nav>
 			</div>
+			<div class="text-center">
+				<form class="form-inline" action="findtradePostBySearch" method="post" id="searchForm" onsubmit="return false;">
+				<div class="form-group">
+					<select class="form-control" name="searchType" required="required" id="searchType">
+						<option value="tradeTitle">제목</option>
+						<option value="tradeContent">내용</option>
+						<option value="nickname">작성자</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="검색"  name="keyword"  required="required" id="keyword">
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			 	</form>
+			</div>
 		</div> <%-- col-sm-offset-2 col-sm-8 --%>
 	</div> <%-- row main --%>
 </div> <%-- container-fluid --%>
 <script src="${pageContext.request.contextPath}/resources/js/spider.js"></script>
 <script>
 $(document).ready(function() {	
+	'${fail}' !== '' && BootstrapDialog.alert('${fail}').setType('danger');
+	 $('#searchForm').on('submit',function(){
+	      var $searchType = $(this).children('.form-group:nth(0)').children('#searchType').val();
+	      var $keyword = $(this).children('.form-group:nth(1)').children('#keyword').val().replace(/\s/g, '');
+	      sendPost('findtradePostBySearch', {'keyword':$keyword,'searchType':$searchType})
+	 });
+	 
 	$paginationA.on('click',function() {
-		postEvent.paging($(this), '${pb.startPageOfPageGroup-1}', '${pb.endPageOfPageGroup+1}')
+		if(${empty tps}) {
+			tradeList.paging($(this), '${pb.startPageOfPageGroup-1}', '${pb.endPageOfPageGroup+1}',"tradePost");
+		} else {
+			tradeList.paging($(this), '${pb.startPageOfPageGroup-1}', '${pb.endPageOfPageGroup+1}', "findtradePostBySearch", "${tps.keyword}", "${tps.searchType}" );
+		}
+			
 	});
 	$postListA.on('click', function() {
-		postEvent.findPostDetail($(this));
+		var tradeNo = $(this).parents().children('td:nth(0)').text();
+		tradeList.detail($(this),"findTradePostListByNo",{"tradeNo": tradeNo});
 	});
 	$("#wirteTradePost").click(function() {
 		location.href = "${pageContext.request.contextPath}/common/createTradePostForm";

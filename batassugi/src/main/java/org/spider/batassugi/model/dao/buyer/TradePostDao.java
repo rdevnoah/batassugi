@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
+import org.spider.batassugi.model.vo.buyer.TradePostSearchVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +29,8 @@ import org.springframework.stereotype.Repository;
  * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 메서드 추가
  * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost, createTradePost 추가
  * 2018. 5. 17. "SM HyeonGil Kim" updateHitsTradePost 추가
- *
+ * 2018. 5. 28. "SM HyeonGil Kim" findtradePostBySearch 추가
+ * 2018. 5. 28. "SM HyeonGil Kim" getTotalTradeSearchCount 추가
  *      </pre>
  */
 @Repository
@@ -70,6 +72,16 @@ public class TradePostDao implements TradePostDaoIf {
   @Override
   public void updateHitsTradePost(TradePostVo tvo) {
     template.update("trade.updateHitsTradePost", tvo);
+  }
+
+  @Override
+  public List<TradePostVo> findtradePostBySearch(TradePostSearchVo tps) {
+    return template.selectList("trade.findtradePostBySearch", tps);
+  }
+
+  @Override
+  public int getTotalTradeSearchCount(TradePostSearchVo tps) {
+    return template.selectOne("trade.findtradePostBySearchCount", tps);
   }
   
 }

@@ -2,6 +2,7 @@ package org.spider.batassugi.model.dao.buyer;
 
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
+
 /**
  * 댓글.
  * 
@@ -11,9 +12,9 @@ import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
  * @author : "SM HyeonGil Kim"
  * @since : 2018. 5. 18.
  * @version : 1.0
- * @see 
+ * @see
  * 
- * <pre>
+ *      <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
@@ -22,8 +23,8 @@ import org.spider.batassugi.model.vo.buyer.TradeCommentVo;
  *                                                    createReply(TradeCommentVo tcvo) 추가
  *                                                    findRegdateByReplyNo(int replyNo) 추가
  * 2018. 5. 19.  "SM HyeonGil Kim"    deleteReplyByTradNo(int tradeNo) 추가
- *                                             
- * </pre>
+ * 2018. 5. 30.  "SM HyeonGil Kim"   deleteReplyByReplyNo(int replyNo) 추가
+ *      </pre>
  */
 
 public interface TradePostCommentDaoIf {
@@ -60,4 +61,12 @@ public interface TradePostCommentDaoIf {
    * @param tradeNo 게시글 번호.
    */
   public void deleteReplyByTradNo(int tradeNo);
+  
+  /**
+   * 댓글 작성자가 댓글 삭제.
+   * 
+   * @author "SM HyeonGil Kim"
+   * @param replyNo 댓글 번호.
+   */
+  public void deleteReplyByReplyNo(int replyNo);
 }

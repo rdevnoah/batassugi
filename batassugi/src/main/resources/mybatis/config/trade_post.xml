@@ -56,4 +56,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateHitsTradePost" parameterType="tradePostVo"> <!-- 거래 게시판 조회수 증가 -->
        update trade_post set trade_hits = trade_hits+1 where trade_no = #{tradeNo}
      </update>
+     
+     <select id="findtradePostBySearch" resultMap="tradePostVoRM" parameterType="buyerPagingBean"> <!-- 거래 게시판 검색 페이징 처리 -->
+        select t.trade_no as tradeNo, t.trade_kind as tradeKind, t.trade_hits
+        as tradeHits, t.trade_title as tradeTitle, t.trade_content as tradeContent,
+        t.trade_photo as tradePhoto, m.nickname as nickname, to_char(t.regdate,'yy.mm.dd')
+        as regdate from (
+        select row_number() over(order by trade_no desc) as rnum, trade_no,
+        trade_kind, trade_hits,
+        trade_title, trade_content,
+        trade_photo, p.id, regdate, s.nickname
+        from trade_post p , spider_member s
+        <where>
+        <if test="searchType != null">
+           <if test="searchType == 'tradeTitle'">
+              p.id = s.id and replace(trade_title, ' ', '') like '%' || #{keyword} || '%'
+           </if>
+           <if test="searchType == 'tradeContent'">
+              p.id = s.id and replace(trade_content, ' ', '')  like '%' || #{keyword} || '%'
+           </if>
+            <if test="searchType == 'nickname'">
+               p.id = s.id and replace(nickname, ' ', '') like '%' || #{keyword} || '%'
+            </if>
+        </if>
+        </where>
+        )
+        t, spider_member m
+        where t.id = m.id
+        and rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+        order by tradeNo desc 
+     </select>
+   
+     <select id="findtradePostBySearchCount" resultType="int" parameterType="tradePostSearchVo"> <!-- 거래 게시판 검색 결과 갯수 -->
+        select count(*) from  trade_post t, spider_member m
+        <where>
+           <if test="keyword != '' and searchType == 'tradeTitle'">
+             m.id = t.id and replace(t.trade_title, ' ', '') like '%' || #{keyword} || '%'
+           </if>
+           <if test="keyword != '' and searchType == 'tradeContent'">
+             m.id = t.id and replace(t.trade_content, ' ', '') like '%' || #{keyword} || '%'
+           </if>
+           <if test="keyword != '' and searchType == 'nickname'">
+            m.id = t.id and replace(nickname, ' ', '') like '%' || #{keyword} || '%'
+           </if>
+        </where>
+     </select>
 </mapper>

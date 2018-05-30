@@ -2,6 +2,7 @@ package org.spider.batassugi.model.service.buyer;
 
 import java.io.IOException;
 import org.spider.batassugi.model.vo.buyer.TradePostListVo;
+import org.spider.batassugi.model.vo.buyer.TradePostSearchVo;
 import org.spider.batassugi.model.vo.buyer.TradePostVo;
 
 /**
@@ -25,7 +26,7 @@ import org.spider.batassugi.model.vo.buyer.TradePostVo;
  *                                            getTotalTradePostCount, findTradePostDetailByNo추가
  * 2018. 5. 15. "SM HyeonGil Kim" deleteTradePostByNo 추가
  * 2018. 5. 16. "SM HyeonGil Kim" updateTradePost, createTradePost 추가
- * 
+ * 2018. 5. 28. "SM HyeonGil Kim" findtradePostBySearch 추가 
  *      </pre>
  */
 public interface TradeServiceIf {
@@ -82,4 +83,15 @@ public interface TradeServiceIf {
    * @param tvo 거래 게시판 번호와 조회수를 위한 생성자.
    */
   public void updateHitsTradePost(TradePostVo tvo);
+  
+  /**
+   * 거래 게시판 검색 후 페이징 처리.
+   * 
+   * @author "SM HyeonGil Kim"
+   * @param pageNum 페이징 번호.
+   * @param tps 검색한 결과.
+   * @return
+   */
+
+  public TradePostSearchVo findtradePostBySearch(String pageNum, TradePostSearchVo tps);
 }
