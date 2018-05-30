@@ -7,17 +7,17 @@ CREATE TABLE member_state
 (
     state_number    NUMBER           NOT NULL, 
     state_set       VARCHAR2(50)     NOT NULL, 
-    stopdate        VARCHAR2(100)    NULL, 
     CONSTRAINT MEMBER_STATE_PK PRIMARY KEY (state_number)
 );
+
 
 -- 멤버 상태 시퀀스 생성
 CREATE SEQUENCE member_state_SEQ nocache;
 
 -- 멤버 상태 정보 추가 : 탈퇴 로그인 안되게
-insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'활동');
-insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'정지',sysdate);
-insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'탈퇴',sysdate);
+insert into member_state(state_number,state_set) values(member_state_SEQ.nextval,'활동');
+insert into member_state(state_number,state_set) values(member_state_SEQ.nextval,'정지');
+insert into member_state(state_number,state_set) values(member_state_SEQ.nextval,'탈퇴');
 
 -- 멤버 테이블 생성
 CREATE TABLE spider_member
@@ -27,7 +27,8 @@ CREATE TABLE spider_member
     password        VARCHAR2(30)    NOT NULL, 
     nickname        VARCHAR2(30)    NOT NULL, 
     member_level    VARCHAR2(20)    DEFAULT '초급' NOT NULL, 
-    state_number    NUMBER          DEFAULT '1' NOT NULL, 
+    state_number    NUMBER          DEFAULT '1' NOT NULL,
+    stopdate		VARCHAR2(100)	NULL,
     CONSTRAINT SPIDER_MEMBER_PK PRIMARY KEY (id),
     CONSTRAINT FK_spider_member_state_number_ FOREIGN KEY (state_number) REFERENCES member_state (state_number)
 );
@@ -47,7 +48,7 @@ CREATE TABLE member_info
     CONSTRAINT FK_member_info_id_spidermember FOREIGN KEY (id) REFERENCES spider_member (id)
 );
 
-ALTER TABLE member_info ADD 
+ 
 
 -- 작물 테이블 생성
 CREATE TABLE crops

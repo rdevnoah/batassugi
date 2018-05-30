@@ -11,6 +11,13 @@ insert into member_state(state_number,state_set) values(1,'활동');
 insert into member_state(state_number,state_set) values(2,'중단');
 insert into member_state(state_number,state_set) values(3,'탈퇴'); 
 
+select * from spider_member
+
+select * from accuse
+
+select * from recruit
+
+
 select mi.id, m.nickname
 	from MEMBER_INFO mi, SPIDER_MEMBER m
 	where m.id=mi.id and m.id!='admin' and m.id!='test1'
@@ -296,7 +303,7 @@ select * from spider_member
 select * from rent;
 
 update rent set rent_status='대여중' where id='test2';
-
+select * from member_state
 
 update spider_member set member_level='관리자' where id='admin'
 -- 시퀀스 전체 삭제 쿼리문입니다.
@@ -310,3 +317,12 @@ drop sequence accuse_SEQ ;
 drop sequence crops_SEQ;
 drop sequence member_state_SEQ;
 select * from MEMBER_STATE
+
+select * from rent
+
+
+select f.farm_address, rc.recruit_startdate, rc.recruit_enddate 
+from spider_member m, farm f, recruit rc
+where m.id=f.id and f.farm_no=rc.farm_no
+and m.id='test3'
+

@@ -31,7 +31,6 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
  * 2018. 5. 28.  "PM KimYoungHo"    최초작성
  * </pre>
  */
-@EnableScheduling
 @Controller
 public class ScheduleController {
   
@@ -96,13 +95,6 @@ public class ScheduleController {
       value = "buyer/createSchedule")
   public String buyerCreateSchedule(ScheduleVo svo) {
     scheduleService.createBuyerSchedule(svo);
-    testCron();
     return "redirect:findBuyerScheduleByRentNo?rentNo="+svo.getRentNo();
   }
-  
-  @Scheduled(cron="* * 15 * * ?")
-  public void testCron() {
-    System.out.println("gogo");
-  }
-  
 }

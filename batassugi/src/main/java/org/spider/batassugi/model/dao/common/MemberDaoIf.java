@@ -1,5 +1,6 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
@@ -161,14 +162,6 @@ public interface MemberDaoIf {
   public List<CropsInfoVo> getAllCropsList();
 
 
-  /**
-   * 회원 상태를 변경해주는 메소드.
-   * 
-   * @author "PL_Seonhwa"
-   * @param map 변경할 회원 상태+회원아이디
-   */
-  public void updateMemberState(Map<String, String> map);
-
 
   /**
    * 회원 아이디로 회원 상태번호 가져오기.
@@ -184,6 +177,18 @@ public interface MemberDaoIf {
   public void updateMemberStateNumberMinus(String reportedId);
   
   public void updateMemberStateNumber2Plus(String reportedId);
+
+
+  public List<MemberInfoVo> getAllMemberInfo();
+
+
+  public String getSysdate();
+
+
+  public void updateMemberStateRelease(String id);
+
+
+  public void updateMemberStopDate(String id);
 
 
 }

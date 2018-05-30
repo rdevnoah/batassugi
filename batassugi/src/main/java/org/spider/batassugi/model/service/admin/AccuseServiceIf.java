@@ -31,5 +31,7 @@ public interface AccuseServiceIf {
    */
   public void accusePro(AccusePostVo accusePostVo);
 
+  void updateAccuseRelease();
+
 
 }

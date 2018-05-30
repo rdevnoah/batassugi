@@ -20,9 +20,7 @@
 		<li>
 		<a href="registerFarmForm"> <i class="glyphicon glyphicon-leaf"></i>농지등록</a>
 		</li>
-		<li>
-			<a href="${pageContext.request.contextPath}/seller/sellerSchedule">일정보기</a>
-		</li>
+		
 		
 		
 		<!-- <li class="active">

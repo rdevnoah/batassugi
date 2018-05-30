@@ -219,4 +219,5 @@ public class SellerController {
   public Object findBuyerDetailByRentNo(String rentNo) {
     return sellerFarmService.findBuyerDetailByRentNo(rentNo);
   }
+ 
 }

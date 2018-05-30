@@ -1,12 +1,14 @@
 package org.spider.batassugi.service;
 
+import java.sql.Date;
+
+import java.util.List;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,6 +23,20 @@ public class MemberServiceServiceTest {
 
   @Test
   public void memberServiceTest() {
+    System.out.println(memberDao.getAllMemberInfo());
+    List<MemberInfoVo> list = memberDao.getAllMemberInfo();
+    String stopdate=list.get(0).getMemberVo().getStopdate();
+    System.out.println();
+    
+    Date toDate = Date.valueOf(stopdate);
+    System.out.println(toDate);
+    String sysDate = memberDao.getSysdate();
+    Date sysdate = Date.valueOf(sysDate);
+    
+    
+    
+    
+    
     // 멤버 로그인 테스트
 
     /*MemberVo vo = new MemberVo();

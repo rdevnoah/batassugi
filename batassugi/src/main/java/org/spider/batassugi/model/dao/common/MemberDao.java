@@ -1,5 +1,6 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -119,10 +120,7 @@ public class MemberDao implements MemberDaoIf {
     return template.selectList("crops.getAllCropsList");
   }
 
-  @Override
-  public void updateMemberState(Map<String, String> map) {
-    template.update("member.updateMemberState",map);
-  }
+
 
   @Override
   public String findStateNumberById(String reportedId) {
@@ -142,6 +140,27 @@ public void updateMemberStateNumberPlus(String reportedId) {
   @Override
   public void updateMemberStateNumber2Plus(String reportedId) {
   	template.update("member.updateMemberStateNumber2Plus",reportedId);
+  }
+
+  @Override
+  public List<MemberInfoVo> getAllMemberInfo() {
+    return template.selectList("member.getAllMemberInfoList");
+  }
+
+  @Override
+  public String getSysdate() {
+    return template.selectOne("member.getSysdate");
+  }
+
+  @Override
+  public void updateMemberStateRelease(String id) {
+    template.update("member.updateMemberStateRelease", id);
+  }
+
+  @Override
+  public void updateMemberStopDate(String id) {
+    template.update("member.updateMemberStopDate",id);
+    
   }
 
 }
