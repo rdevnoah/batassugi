@@ -15,7 +15,9 @@ CREATE TABLE member_state
 CREATE SEQUENCE member_state_SEQ nocache;
 
 -- 멤버 상태 정보 추가 : 탈퇴 로그인 안되게
-insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'활동',sysdate);
+insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'활동');
+insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'정지',sysdate);
+insert into member_state(state_number,state_set,stopdate) values(member_state_SEQ.nextval,'탈퇴',sysdate);
 
 -- 멤버 테이블 생성
 CREATE TABLE spider_member
@@ -25,7 +27,7 @@ CREATE TABLE spider_member
     password        VARCHAR2(30)    NOT NULL, 
     nickname        VARCHAR2(30)    NOT NULL, 
     member_level    VARCHAR2(20)    DEFAULT '초급' NOT NULL, 
-    state_number    NUMBER          NOT NULL, 
+    state_number    NUMBER          DEFAULT '1' NOT NULL, 
     CONSTRAINT SPIDER_MEMBER_PK PRIMARY KEY (id),
     CONSTRAINT FK_spider_member_state_number_ FOREIGN KEY (state_number) REFERENCES member_state (state_number)
 );

@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   <!-- 멤버 아이디찾기 - 로그인 익셉션처리를 위해 필요함 -->
   <select id="findMemberById" resultType="memberVo">
-    select id, password from spider_member
+    select id, password, state_number as state from spider_member
     where id=#{value}
   </select>
   
@@ -134,7 +134,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     set state_set=#{state}, stopdate=sysdate
     where state_number=#{stateNumber}
   </update>
-  
+  <update id="updateMemberStateNumberPlus">
+  	update SPIDER_MEMBER
+  	set state_number=state_number+1
+  	where id=#{value}
+  </update>
+  <update id="updateMemberStateNumber2Plus">
+  	update SPIDER_MEMBER
+  	set state_number=state_number+2
+  	where id=#{value}
+  </update>
+  <update id="updateMemberStateNumberMinus">
+  	update SPIDER_MEMBER
+  	set state_number=state_number-1
+  	where id=#{value}
+  </update>
   <!-- 멤버 상태 번호 가져오기 -->
   <select id="findStateNumberById" resultType="string">
     select state_number from spider_member where id=#{value}
