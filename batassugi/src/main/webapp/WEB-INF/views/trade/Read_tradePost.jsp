@@ -79,7 +79,7 @@
 				</nav>
 			</div>
 			<div class="text-center">
-				<form class="form-inline" action="findtradePostBySearch" method="post" id="searchForm" onsubmit="return false;">
+				<form class="form-inline" action="findtradePostBySearch" method="post" id="searchForm1" onsubmit="return false;">
 				<div class="form-group">
 					<select class="form-control" name="searchType" required="required" id="searchType">
 						<option value="tradeTitle">제목</option>
@@ -104,7 +104,7 @@
 <script>
 $(document).ready(function() {	
 	'${fail}' !== '' && BootstrapDialog.alert('${fail}').setType('danger');
-	 $('#searchForm').on('submit',function(){
+	 $('#searchForm1').on('submit',function(){
 	      var $searchType = $(this).children('.form-group:nth(0)').children('#searchType').val();
 	      var $keyword = $(this).children('.form-group:nth(1)').children('#keyword').val().replace(/\s/g, '');
 	      sendPost('findtradePostBySearch', {'keyword':$keyword,'searchType':$searchType})
