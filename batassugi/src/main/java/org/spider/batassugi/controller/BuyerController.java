@@ -55,7 +55,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * 2018. 5. 17.  "SM HyeonGil Kim"  거래게시판 글 조회수 처리 완료
  * 2018. 5. 18.  "SM HyeonGil Kim"  거래게시판 댓글 리스트, 댓글 작성 완료
  * 2018. 5. 29.  "SM HyeonGil Kim"  거래게시판 검색 기능 완료
- * 2018. 5. 30.  "SM HyeonGil Kim"  거래게시판 댓글 삭제 기능 완료
+ * 2018. 5. 30.  "SM HyeonGil Kim"  거래게시판 댓글 삭제, 댓글 갯수 출력 기능 완료
  *      </pre>
  */
 @Controller
@@ -414,12 +414,13 @@ public class BuyerController {
   }
   
   /**
-   * 작성자가 댓글 삭제가능한 메서드.
+  * 작성자가 댓글 삭제가능한 메서드.
    * 
    * @author "SM HyeonGil Kim"
    * @param replyNo 댓글 번호.
    * @param tradeNo 게시글 번호.
-   * @return
+   * @param model 뷰에 전달할 객체.
+   * @return trade/Read_tradePostDetail.tiles
    */
   @RequestMapping("common/deleteReply")
   public String deleteReplyByReplyNo(String replyNo, String tradeNo, Model model) {
