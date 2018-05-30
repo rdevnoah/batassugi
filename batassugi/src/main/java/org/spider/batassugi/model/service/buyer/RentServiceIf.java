@@ -1,7 +1,9 @@
 package org.spider.batassugi.model.service.buyer;
 
+import java.util.List;
 import org.spider.batassugi.model.vo.buyer.RentListVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.buyer.SearchRentListVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 
 /**
@@ -36,7 +38,7 @@ public interface RentServiceIf {
    * @return int
    */
   public int registerRentByRentVo(RentVo rentVo);
-  
+
   /**
    * 상세정보에 뿌려질 데이터를 전달하기 위한 메서드.
    * 
@@ -54,5 +56,21 @@ public interface RentServiceIf {
    */
   public RentListVo getRentList(String pageNum);
 
-
+  /**
+   * 대여신청 게시판에서 작물검색시 자동완성 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @return List
+   */
+  public List<String> getCropsList();
+  
+  /**
+   * 대여신청 게시판에서 주소검색시 자동완성 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @return List
+   */
+  public List<String> getFarmAddressList();
+  
+  public SearchRentListVo findRentListByKeyword(String pageNum, SearchRentListVo searchVo);
 }

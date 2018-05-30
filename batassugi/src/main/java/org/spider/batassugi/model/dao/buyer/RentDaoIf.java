@@ -3,6 +3,7 @@ package org.spider.batassugi.model.dao.buyer;
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.buyer.SearchRentListVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 
@@ -40,7 +41,7 @@ public interface RentDaoIf {
    * @return int
    */
   public int registerRentByRentVo(RentVo rentVo);
-  
+
   /**
    * 대여신청을 하고 농지대여 평수를 대여한만큼 업데이트하는 메서드.
    * 
@@ -49,7 +50,7 @@ public interface RentDaoIf {
    */
   public int updateRecruitSizeByRecruitNo(RentVo rentVo);
 
-  
+
   /*
    * 구매자가 대여신청을 눌렀을때 대여신청 상세정보뷰를 출력해주는 메서드.
    * 
@@ -85,4 +86,24 @@ public interface RentDaoIf {
    * @return int
    */
   public int totalRentListCount();
+
+  /**
+   * 대여신청 게시판 작물검색시 자동완성 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @return List
+   */
+  public List<String> getCropsList();
+
+  /**
+   * 대여신청 게시판 주소검색시 자동완성 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @return List
+   */
+  public List<String> getFarmAddressList();
+  
+  public List<RecruitVo> findRentListByKeyword(SearchRentListVo searchVo);
+
+  public int findTotalRentListCountByKeyword(SearchRentListVo searchVo);
 }

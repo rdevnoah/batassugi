@@ -3,8 +3,10 @@ var $a = $('a'),
 	$rentCancel = $('.rentCancel'),
 	$sellerInfo = $('.sellerInfo'),
 	$applySeller = $('#applySeller'),
-	$applyingSeller = $('#applyingSeller');
-	
+	$applyingSeller = $('#applyingSeller'),
+	$success = $('body').find('#success').text();
+
+$success !== '' && BootstrapDialog.alert($success);
 // 메뉴버튼 슬라이드 애니메이션
 $('#sidebarCollapse').on('click', function() {
 	$('#sidebar').toggleClass('active');

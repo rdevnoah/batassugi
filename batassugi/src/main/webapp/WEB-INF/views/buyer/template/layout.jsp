@@ -51,8 +51,6 @@
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/buyer.js"></script>
 	<script>
-		//대여신청 성공시 RedirectAttribute 객체를 받아서 메세지 출력
-		'${success}' !== '' ? BootstrapDialog.alert('${success}') : ''; // RedirectAttribute 객체가 있다면 모달로 메세지 출력
 		elApplyVo({
 			applyDate : '${applySellerVo.applyDate}',
 			applyState : '${applySellerVo.applyState}',

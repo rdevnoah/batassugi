@@ -58,8 +58,6 @@
     </div> <%-- col-xs-8 vcenter --%>
    </div>  <%-- row --%>
 </div> <%-- container --%>
-
-
 <script type="text/javascript">
 $(document).ready(function () {
    var i = 1;

@@ -65,3 +65,4 @@
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
+	<div class="hidden">${success}</div>
