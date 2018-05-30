@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>간단한 지도 표시하기</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=CPZCmp4alq4FoU2ImgEa"></script>
+</head>
+
 <%-- 메인영역 입니다 --%>
 <div class="container-fluid">
 	<div class="row">
@@ -67,10 +76,26 @@
 		<br>
 		</h5>
 		<br>
+		<h3>밭아쓰기를 찾아주세요!</h3>
+		<br> 
+		<div id="map" style="width:100%;height:400px;"></div>
 		<br>
 		<br>
 		<br>
-		</div> <%-- col-xs-12 --%>l
-	</div> <%-- row --%>
+		<br>
+		<br>
+		</div> <!-- col-xs-12 -->
+	</div> <!-- row -->
 </div>
 
+<script>
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.402142, 127.107016),
+    zoom: 11
+});
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(37.402142, 127.107016),
+    map: map
+});
+var map = new naver.maps.Map('map', mapOptions);
+</script>
