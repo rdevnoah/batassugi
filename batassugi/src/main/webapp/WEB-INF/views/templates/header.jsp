@@ -104,9 +104,6 @@ $(document).ready(function () {
                  (city1=='Jeju') && (city2='제주')
                  
                  $('#results').append("<div>&nbsp;" + city2 + " " + response['current_observation']['temp_c'] + "℃ </div>");
-             },
-             error: function (request, status, error) {
-                 alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
              }
          });
    }
