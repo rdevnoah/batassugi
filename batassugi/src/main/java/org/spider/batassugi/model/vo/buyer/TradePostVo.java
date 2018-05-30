@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "Team Spider"    최초작성
  * 2018. 5. 16.  "SM HyeonGil Kim"  MultipartFile file 추가
+ * 2018. 5. 30.  "SM HyeonGil Kim"  String replyCnt 추가
  *      </pre>
  */
 public class TradePostVo {
@@ -31,6 +32,7 @@ public class TradePostVo {
   private String tradeContent;
   private String tradePhoto;
   private String regdate;
+  private String replyCnt;
   private MemberVo memberVo;
   private  MultipartFile file;
 
@@ -48,11 +50,13 @@ public class TradePostVo {
    * @param tradeContent 거래 게시판 내용.
    * @param tradePhoto 거래 게시판 내용 사진.
    * @param memberVo 거래 게시판 작성한 회원 정보.
+   * @param replyCnt 거래 게시판 댓글 갯수.
    * @param file 파일업로드.
    */
-  
+
   public TradePostVo(int tradeNo, String tradeKind, int tradeHits, String tradeTitle,
-      String tradeContent, String tradePhoto, MemberVo memberVo, MultipartFile file) {
+      String tradeContent, String tradePhoto, String regdate, String replyCnt, MemberVo memberVo,
+      MultipartFile file) {
     super();
     this.tradeNo = tradeNo;
     this.tradeKind = tradeKind;
@@ -60,72 +64,82 @@ public class TradePostVo {
     this.tradeTitle = tradeTitle;
     this.tradeContent = tradeContent;
     this.tradePhoto = tradePhoto;
+    this.regdate = regdate;
+    this.replyCnt = replyCnt;
     this.memberVo = memberVo;
     this.file = file;
   }
-
-  public Integer getTradeNo() {
+  
+  public int getTradeNo() {
     return tradeNo;
   }
-
-  public void setTradeNo(Integer tradeNo) {
+  
+  public void setTradeNo(int tradeNo) {
     this.tradeNo = tradeNo;
   }
-
+  
   public String getTradeKind() {
     return tradeKind;
   }
-
+  
   public void setTradeKind(String tradeKind) {
     this.tradeKind = tradeKind;
   }
-
-  public Integer getTradeHits() {
+  
+  public int getTradeHits() {
     return tradeHits;
   }
-
-  public void setTradeHits(Integer tradeHits) {
+  
+  public void setTradeHits(int tradeHits) {
     this.tradeHits = tradeHits;
   }
-
+  
   public String getTradeTitle() {
     return tradeTitle;
   }
-
+  
   public void setTradeTitle(String tradeTitle) {
     this.tradeTitle = tradeTitle;
   }
-
+  
   public String getTradeContent() {
     return tradeContent;
   }
-
+  
   public void setTradeContent(String tradeContent) {
     this.tradeContent = tradeContent;
   }
-
+  
   public String getTradePhoto() {
     return tradePhoto;
   }
-
+  
   public void setTradePhoto(String tradePhoto) {
     this.tradePhoto = tradePhoto;
   }
-
-  public MemberVo getMemberVo() {
-    return memberVo;
-  }
-
-  public void setMemberVo(MemberVo memberVo) {
-    this.memberVo = memberVo;
-  }
-
+  
   public String getRegdate() {
     return regdate;
   }
-
+  
   public void setRegdate(String regdate) {
     this.regdate = regdate;
+  }
+  
+  public String getReplyCnt() {
+    return replyCnt;
+  }
+  
+  public void setReplyCnt(String replyCnt) {
+    this.replyCnt = replyCnt;
+  }
+  
+  public MemberVo getMemberVo() {
+    return memberVo;
+  }
+  
+  public void setMemberVo(MemberVo memberVo) {
+    this.memberVo = memberVo;
   }
   
   public MultipartFile getFile() {
@@ -135,12 +149,12 @@ public class TradePostVo {
   public void setFile(MultipartFile file) {
     this.file = file;
   }
-  
   @Override
   public String toString() {
     return "TradePostVo [tradeNo=" + tradeNo + ", tradeKind=" + tradeKind + ", tradeHits="
         + tradeHits + ", tradeTitle=" + tradeTitle + ", tradeContent=" + tradeContent
-        + ", tradePhoto=" + tradePhoto + ", regdate=" + regdate + ", memberVo=" + memberVo + "]";
+        + ", tradePhoto=" + tradePhoto + ", regdate=" + regdate + ", replyCnt=" + replyCnt
+        + ", memberVo=" + memberVo + ", file=" + file + "]";
   }
 
 }

@@ -73,11 +73,11 @@ public class MemberDao implements MemberDaoIf {
     return template.selectOne("member.checkNickname",nickname);
   }
 
-  @Override
-  public void registerMemberState(MemberStateVo mstVo) {
-    template.insert("member.registerMemberState",mstVo);
-    
-  }
+//  @Override
+//  public void registerMemberState(MemberStateVo mstVo) {
+//    template.insert("member.registerMemberState",mstVo);
+//    
+//  }
 
   @Override
   public void registerLikeCrop(Map<String, String> map) {

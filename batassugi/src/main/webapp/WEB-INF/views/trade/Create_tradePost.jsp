@@ -71,7 +71,6 @@ $(document).ready(function() {
 			return false;
 		}
 	});
-	
 	$("#writeCancel").click(function() {
 		location.href = "${pageContext.request.contextPath}/common/tradePost";
 	});

@@ -53,5 +53,10 @@ public class TradePostCommentDao implements TradePostCommentDaoIf {
   public void deleteReplyByTradNo(int tradeNo) {
     template.delete("comment.deleteReplyByTradNo", tradeNo);
   }
+
+  @Override
+  public void deleteReplyByReplyNo(int replyNo) {
+    template.delete("comment.deleteReplyByReplyNo", replyNo);
+  }
   
 }

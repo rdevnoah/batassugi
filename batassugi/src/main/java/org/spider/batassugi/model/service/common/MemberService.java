@@ -65,10 +65,10 @@ public class MemberService implements MemberServiceIf, PathInfo {
     return memberDao.login(vo);
   }
 
-  @Override
-  public void registerMemberState(MemberStateVo mstVo) {
-    memberDao.registerMemberState(mstVo);
-  }
+//  @Override
+//  public void registerMemberState(MemberStateVo mstVo) {
+//    memberDao.registerMemberState(mstVo);
+//  }
 
   @Override
   public String registerImg(MemberInfoVo vo) throws Exception, IOException {

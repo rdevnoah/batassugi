@@ -80,7 +80,6 @@
 				   } //callback
 			}); // BootstrapDialog.confirm
 		} // modalConfrim 
-		
     	$("#updateBtn").click(function(){  
     		modalConfrim("게시물을 수정하시겠습니까?", "${pageContext.request.contextPath}/common/updateBoardForm" , {"tradeNo": "${requestScope.tvo.tradeNo}"});	
     	}); 	
@@ -116,20 +115,38 @@
                     BootstrapDialog.alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 }
             });
-        });  	 	 
+        });
   	 	function listReply2(){
   	 	    $.ajax({
   	 	        type: "get",
   	 	        url: "${pageContext.request.contextPath}/commentList?tradeNo=${requestScope.tvo.tradeNo}",
   	 	        success: function(result){
   	 	            var $replyList = " ";
+  	 	            var i = 0;
   	 	            $.each(result, function(i, data) {
-  	 	            	$replyList += '<form class="form-inline"><div class="form-group"><label>'+data.memberVo.nickname+'('+data.replyRegdate+')'+'</label></div></form>';
-  	 	            	$replyList += '<form class="form-inline"><div class="form-group"><label>'+data.replyComment+'</label></div></form><hr>';
-  	 	            })
+  	 	            		$replyList += '<form class="form-inline"><div class="form-group replyDiv"><div class="hidden replyNo">'+data.replyNo+'</div>'
+  	 	            		$replyList += '<label class="replyNick'+i+'">'+data.memberVo.nickname+'</label>'
+  	 	            		$replyList += '<span>('+data.replyRegdate+')</span><span class="'+i+'"></span>' 
+  	 	            		$replyList += '</div></form>';
+  	  	 	            	$replyList += '<form class="form-inline"><div class="form-group"><label>'+data.replyComment+'</label></div></form><hr>';
+  	  	 	            	i++;
+  	 	            }) // each
   	 	            $("#listReply").html($replyList);
-  	 	        }
-  	 	    });
-  	 	}
+  	 	            var replyDiv = $('#listReply').find(' .replyDiv');
+  	 	            var sessionNick = '${sessionScope.mvo.memberVo.nickname}';
+  	 	            for (var i = 0; i < replyDiv.length; i++) {
+  	 	            	var replyNick = $('#listReply').find('.replyNick'+i).text();
+  	 	            	if(replyNick == sessionNick) {
+  	 	            	 $('#listReply').find('.'+i).html('&nbsp;&nbsp;&nbsp;&nbsp;<a class="delRelpy">삭제</a>')
+  	 	            	 $('#listReply').find('.'+i).on('click',function(){
+  	 	            		var replyNo = $(this).parents().children('.replyNo').text();
+  	 	            		var tradeNo="${requestScope.tvo.tradeNo}";
+  	 	            		modalConfrim("댓글을 삭제하시겠습니까?","${pageContext.request.contextPath}/common/deleteReply" , {"replyNo": replyNo, "tradeNo": tradeNo});
+  	 	            	 });
+  	 	            	} // if
+					} // for
+  	 	        } // success
+  	 	    }); // ajax
+  	 	} // listReply2
 }); //  $(document).ready(function(){}
 </script>

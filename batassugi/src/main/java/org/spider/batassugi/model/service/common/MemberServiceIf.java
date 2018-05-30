@@ -88,7 +88,7 @@ public interface MemberServiceIf {
    * @author "PL_Seonhwa"
    * @param mstVo 회원 상태 번호를 받아올 VO.
    */
-  public void registerMemberState(MemberStateVo mstVo);
+//  public void registerMemberState(MemberStateVo mstVo);
 
   /**
    * 로그인 후 멤버 기호 작물을 vo에 넣어줌.

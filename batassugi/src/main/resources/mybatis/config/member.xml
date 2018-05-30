@@ -7,17 +7,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 회원등록 -->
 
   <!-- 멤버 상태 등록 -->
-  <insert id="registerMemberState" parameterType="memberStateVo">
+  <!-- <insert id="registerMemberState" parameterType="memberStateVo">
     <selectKey resultType="string" keyProperty="stateNumber" order="BEFORE">
         select member_state_SEQ.nextval FROM DUAL        
     </selectKey>    
   insert into member_state(state_number,state_set,stopdate) values(#{stateNumber},#{stateSet},sysdate)
   </insert>
-
+ -->
   <!-- 멤버 기본정보 등록 -->
   <insert id="registerBasic">
     insert into spider_member
-    (id,name,password,nickname,state_number)values(#{memberVo.id},#{memberVo.name},#{memberVo.password},#{memberVo.nickname},#{memberVo.state})
+    (id,name,password,nickname,state_number)values(#{memberVo.id},#{memberVo.name},#{memberVo.password},#{memberVo.nickname},1)
   </insert>
 
   <!-- 멤버 추가정보 등록 -->

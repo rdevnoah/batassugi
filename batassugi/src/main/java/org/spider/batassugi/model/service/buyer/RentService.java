@@ -7,6 +7,7 @@ import org.spider.batassugi.model.dao.buyer.RentDaoIf;
 import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.RentListVo;
 import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.buyer.SearchRentListVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,40 @@ public class RentService implements RentServiceIf {
       recruitlist.add(recruitVo);
     }
     return new RentListVo(pb, recruitlist);
+  }
+
+  @Override
+  public List<String> getCropsList() {
+    return rentDao.getCropsList();
+  }
+
+  @Override
+  public List<String> getFarmAddressList() {
+    return rentDao.getFarmAddressList();
+  }
+
+  @Override
+  public SearchRentListVo findRentListByKeyword(String pageNum, SearchRentListVo searchVo) {
+    BuyerPagingBean pb = null;
+    int findTotalRentListCount = 
+        rentDao.findTotalRentListCountByKeyword(searchVo); // 대여신청 게시글의 총 개수를 얻어옴.
+    if (pageNum == null) {
+      pb = new BuyerPagingBean(findTotalRentListCount);
+    } else {
+      pb = new BuyerPagingBean(Integer.parseInt(pageNum), findTotalRentListCount);
+    }
+    pb.setContentNumberPerPage(4);
+    searchVo.setPagingBean(pb);
+    List<RecruitVo> list = rentDao.findRentListByKeyword(searchVo); // 대여신청 게시글 목록을 list에 담음
+    List<RecruitVo> recruitlist = new ArrayList<>(); // arrayList 선언
+    List<CropsVo> cropslist = null;
+    for (RecruitVo recruitVo : list) {
+      int farmNo = recruitVo.getFarmVo().getFarmNo();
+      cropslist = rentDao.findFarmAvailableCropsListByFarmNo(farmNo); // 재배가능 작물정보를 list에 담음.
+      recruitVo.getFarmVo().setCropsVo(cropslist); // 대여신청Vo객체에 작물정보list를 set
+      recruitlist.add(recruitVo);
+    }
+    return new SearchRentListVo(pb, recruitlist);
   }
 
 }

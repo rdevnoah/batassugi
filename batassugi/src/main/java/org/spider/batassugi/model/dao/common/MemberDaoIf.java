@@ -84,13 +84,13 @@ public interface MemberDaoIf {
    */
   public int checkNickname(String nickname);
 
-  /**
-   * 회원 가입시 회원상태 입력.
-   * 
-   * @author "PL_Seonhwa"
-   * @param mstVo
-   */
-  public void registerMemberState(MemberStateVo mstVo);
+//  /**
+//   * 회원 가입시 회원상태 입력.
+//   * 
+//   * @author "PL_Seonhwa"
+//   * @param mstVo
+//   */
+//  public void registerMemberState(MemberStateVo mstVo);
 
   /**
    * 회원 가입시 회원기호 작물 입력.

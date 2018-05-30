@@ -71,14 +71,17 @@
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
+	<div class="hidden">${success}</div>
+
 	
 	<script>
 		$(document).ready(function(){
 			$(".scheduleBtn").on('click', function(e){
-				alert($(this).val());
 				sendPost('${pageContext.request.contextPath}/buyer/findBuyerScheduleByRentNo', {
 					'rentNo' : $(this).val()
 				})		
 			})
 		})
 	</script>
+
+

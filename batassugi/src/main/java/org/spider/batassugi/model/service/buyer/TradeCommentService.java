@@ -46,4 +46,8 @@ public class TradeCommentService implements TradeCommentServiceIf {
     return tcvo;
   }
 
+  @Override
+  public void deleteReplyByReplyNo(int replyNo) {
+    tradePostCommentDao.deleteReplyByReplyNo(replyNo);
+  }
 }

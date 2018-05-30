@@ -17,7 +17,9 @@
 						<div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${list.farmVo.farmAddress}</span></div>
 						<p class="cropsList">
 							<c:forEach items="${list.farmVo.cropsVo}" var="crops">
-								<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
+								<a data-placement="top" data-toggle="popover" data-trigger="hover" title="" data-content="${crops.cropsName}">
+									<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
+								</a>
 							</c:forEach>
 						</p>
 						<!-- 						
@@ -33,7 +35,7 @@
 						-->
 						<c:choose>
 							<c:when test="${list.recruitSize >= 10}">
-								<button class="btn btn-primary btn-block">대여하기</button>
+								<button class="btn btn-primary btn-block rentBtn">대여하기</button>
 							</c:when>
 							<c:otherwise>
 								<button class="btn btn-primary btn-block disabled">대여하기</button>
@@ -75,25 +77,35 @@
 				</ul> <%-- pagination rentPagination --%>
 			</div> <%-- nav --%>
 		</div> <%-- text-center --%>
+		<div class="col-xs-12 text-center">
+			<form id="searchForm" class="form-inline" onsubmit="return false;">
+				<div class="form-group">
+					<select id="searchCategory" class="form-control" required>
+						<option value="">종류</option>
+						<option value="crops">작물</option>
+						<option value="address">주소</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="text" id="searchKeyword" class="form-control" placeholder="검색" required autocomplete="off">
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+				</div>
+			</form>
+		</div>
+		<h1></h1>
+		<div class="hidden" id="startPageOfPageGroup">${pb.startPageOfPageGroup-1}</div>
+		<div class="hidden" id="endPageOfPageGroup">${pb.endPageOfPageGroup+1}</div>
+		<div class="hidden" id="searchVo"><c:if test="${empty searchVo}">getRentList</c:if><c:if test="${!empty searchVo}">findRentListByKeyword</c:if></div>
+		<div class="hidden" id="keyword">${searchVo.keyword}</div>
+		<div class="hidden" id="category">${searchVo.category}</div>
+		<div class="hidden" id="fail">${fail}</div>
+		<div class="hidden" id="success">${success}</div>
 	</div> <%-- row --%>
 </div> <%-- container --%>
 <script>
-// 대여신청 성공시 RedirectAttribute 객체를 받아서 메세지 출력
-'${success}' !== '' ? BootstrapDialog.alert('${success}') : ''; // RedirectAttribute 객체가 있다면 모달로 메세지 출력 
-$(document).ready(function() {
-	// 대여신청게시판 페이징
-	$rentPaginationA.on('click',function() {
-		rentList.paging($(this), '${pb.startPageOfPageGroup-1}', '${pb.endPageOfPageGroup+1}', 'getRentList');
-	});
-	// 대여신청하기 버튼 이벤트 상세정보페이지로 이동
-	$rent.on('click', function() {
-		var $recruitNo = $(this).parents('.content').find('span:nth(0)').text(), // 대여신청번호.
-			$thisClass = $(this).attr('class'), // 대여신청하기 버튼
-			path = 'findRentDetailByRecruitNo', // 전송할 url주소
-			param = {'recruitNo' : $recruitNo}; // 전송할 파라미터 객체
-		// 대여신청하기버튼이 활성화가 되어있으면, detailView로 이동, 버튼이 비활성화가 되어있으면 모달메세지 출력
-		$thisClass == "btn btn-primary btn-block" ?	
-				rentList.detail($(this), path, param) : BootstrapDialog.alert("대여불가!").setType('danger')
-	});
-});
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
 </script>

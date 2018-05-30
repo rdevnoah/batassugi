@@ -139,7 +139,7 @@ public class AccuseService implements AccuseServiceIf, PathInfo {
     accusePostDao.updateAccuseStateInfo(accusePostVo);
   }
 
-  @Scheduled(cron = "* * 18 * * *")
+  @Scheduled(cron = "0 0 2 * * *")
   @Override
   public void updateAccuseRelease() {
     List<MemberInfoVo> memberList = memberDao.getAllMemberInfo();

@@ -319,8 +319,7 @@ drop sequence member_state_SEQ;
 select * from MEMBER_STATE
 
 select * from rent
-
-
+select * from spider_member where id='zzagam2'
 select f.farm_address, rc.recruit_startdate, rc.recruit_enddate 
 from spider_member m, farm f, recruit rc
 where m.id=f.id and f.farm_no=rc.farm_no

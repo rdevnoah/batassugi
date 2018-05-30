@@ -121,10 +121,10 @@ public class HomeController {
   @RequestMapping("register")
   public String register(@ModelAttribute("memberInfoVo") MemberInfoVo vo) {
     // 1. memberState등록
-    MemberStateVo mstVo = new MemberStateVo(null, "활동", null);
-    memberService.registerMemberState(mstVo);
-    // - member상태번호를 셋팅
-    vo.getMemberVo().setState(mstVo.getStateNumber());
+//    MemberStateVo mstVo = new MemberStateVo(null, "활동", null);
+//    memberService.registerMemberState(mstVo);
+//    // - member상태번호를 셋팅
+//    vo.getMemberVo().setState(mstVo.getStateNumber());
 
     // 2. 프로필 이미지 업로드
     String path = "default.png";

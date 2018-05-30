@@ -54,6 +54,58 @@
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 	</c:if>
 </div>
+        <div id="results"></div>
     </div> <%-- col-xs-8 vcenter --%>
    </div>  <%-- row --%>
 </div> <%-- container --%>
+<script type="text/javascript">
+$(document).ready(function () {
+   var i = 1;
+   var city = 'Seoul';
+   
+   function cityChange(callback){
+      callback()
+      return setInterval(callback, 3000)
+   }
+   cityChange(cityData)
+   
+   function cityData() {
+      (i == 1) && (city = 'Seoul'),
+      (i == 2) && (city = 'Incheon'),
+      (i == 3) && (city = 'Chuncheon'),
+      (i == 4) && (city = 'Daejeon'),
+      (i == 5) && (city = 'Jeonju'),
+      (i == 6) && (city = 'Gwangju'),
+      (i == 7) && (city = 'Daegu'),
+      (i == 8) && (city = 'Busan'),
+      (i == 9) && (city = 'Jeju'),
+      (i == 9) && (i=0)
+      i++
+      weather(city)
+   }
+   
+   function weather(city) {
+      $.ajax({
+             url: "http://api.wunderground.com/api/9400484a81217f6c/geolookup/conditions/q/KR/"+city+".json",
+             dataType: "json",
+             success: function (response) {
+                 $('#results').empty();
+                 $('#results').append("<div>"+"<img src=\"" + response['current_observation']['icon_url'] + "\" width=7%></div>");
+                 var city1 = response['location']['city']
+                 var city2 = '';
+                 (city1=='Seoul') && (city2='서울'),
+                 (city1=='Incheon') && (city2='인천'),
+                 (city1=='Chuncheon') && (city2='춘천'),
+                 (city1=='Daejeon') && (city2='대전'),
+                 (city1=='Jeonju') && (city2='전주'),
+                 (city1=='Gwangju') && (city2='광주'),
+                 (city1=='Daegu') && (city2='대구'),
+                 (city1=='Busan') && (city2='부산'),
+                 (city1=='Jeju') && (city2='제주')
+                 
+                 $('#results').append("<div>&nbsp;" + city2 + " " + response['current_observation']['temp_c'] + "℃ </div>");
+             }
+         });
+   }
+});
+</script>

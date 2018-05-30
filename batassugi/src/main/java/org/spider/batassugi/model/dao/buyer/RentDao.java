@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.spider.batassugi.model.vo.buyer.BuyerPagingBean;
 import org.spider.batassugi.model.vo.buyer.RentVo;
+import org.spider.batassugi.model.vo.buyer.SearchRentListVo;
 import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Repository;
@@ -35,7 +36,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class RentDao implements RentDaoIf {
-  
+
   @Resource
   private SqlSessionTemplate template;
 
@@ -43,12 +44,12 @@ public class RentDao implements RentDaoIf {
   public int registerRentByRentVo(RentVo rentVo) {
     return template.insert("rent.registerRentByRentVo", rentVo);
   }
-  
+
   @Override
   public int updateRecruitSizeByRecruitNo(RentVo rentVo) {
     return template.update("rent.updateRecruitSizeByRecruitNo", rentVo);
   }
-  
+
   @Override
   public RecruitVo findRentDetailByRecruitNo(int recruitNo) {
     return template.selectOne("rent.findRentDetailByRecruitNo", recruitNo);
@@ -61,13 +62,32 @@ public class RentDao implements RentDaoIf {
 
   @Override
   public List<RecruitVo> getRentList(BuyerPagingBean pb) {
-    return template.selectList("rent.getRentList",pb);
+    return template.selectList("rent.getRentList", pb);
   }
 
   @Override
   public int totalRentListCount() {
-    return template.selectOne("rent.totalRentListCount");
+    return template.selectOne("rent.getTotalRentListCount");
   }
 
-  
+  @Override
+  public List<String> getCropsList() {
+    return template.selectList("rent.getCropsList");
+  }
+
+  @Override
+  public List<String> getFarmAddressList() {
+    return template.selectList("rent.getFarmAddressList");
+  }
+
+  @Override
+  public List<RecruitVo> findRentListByKeyword(SearchRentListVo searchVo) {
+    return template.selectList("rent.findRentListByKeyword", searchVo);
+  }
+
+  @Override
+  public int findTotalRentListCountByKeyword(SearchRentListVo searchVo) {
+    return template.selectOne("rent.findTotalRentListCountByKeyword", searchVo);
+  }
+
 }
