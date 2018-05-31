@@ -40,7 +40,7 @@
 						
 						
 						<div class="form-group regGroup col-xs-10">
-							<label class="form-label" style="font-weight:normal;">농지 등록 주소 </label>
+							<label class="form-label" style="font-weight:normal;">농지 등록 주소 </label> 
 							<input type="text" id="sample6_address" name="farmAddress" class="form-control" readonly style="background-color: #FFFFFF;">
 							<button type="button" class="btn btn-primary" onclick="sample6_execDaumPostcode()">주소선택</button>
 						</div>
@@ -72,7 +72,6 @@
 	</div>
 </div>
 <script>
-
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -107,6 +106,7 @@ function sample6_execDaumPostcode() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample6_address').value = fullAddr;
+            $('#sample6_address').css('width', $('#sample6_address')[0].scrollWidth + 10);
         }
     }).open();
 }
@@ -166,6 +166,12 @@ function ResetImgvalue() {
 }
 
 $(document).ready(function() {
+	
+	$('#sample6_address').on('keyup', function(e){
+		alert("dd")
+	    $(this).attr('size', $('#sample6_address').val().length);
+	});
+	
 	var $cropsSelect = $('#cropsSelect')
 		,$cropsList = $('.cropsList')
     	,$farmRegister = $('#farmRegister')

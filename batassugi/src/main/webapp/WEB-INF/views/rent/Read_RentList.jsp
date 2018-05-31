@@ -14,7 +14,7 @@
 						<div class="text-danger"><i class="fa fa-calendar-check-o fa-lg"></i> <span>${list.recruitEnddate}</span> 까지</div>
 						<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${list.recruitSize}</span>평</div>
 						<!-- <div><i class="fa fa-comment-o fa-lg"></i> <span>서현에 위치한 농장을 대여 해드립니다</span></div> -->
-						<div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${list.farmVo.farmAddress}</span></div>
+						<div style="height: 50px; display: inline-block;">&nbsp;<span><i class="fa fa-map-marker fa-lg"></i> &nbsp;${list.farmVo.farmAddress}</span></div>
 						<p class="cropsList">
 							<c:forEach items="${list.farmVo.cropsVo}" var="crops">
 								<a data-placement="top" data-toggle="popover" data-trigger="hover" title="" data-content="${crops.cropsName}">

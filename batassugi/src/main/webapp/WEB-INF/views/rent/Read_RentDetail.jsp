@@ -41,14 +41,8 @@
 							</select> <%-- form-control --%>
 						</div> <%-- form-group col-xs-4 --%>
 						
-						<%-- 농지주소 --%>
-						<div class="form-group col-xs-offset-1 col-xs-3">
-							<label>주소 : </label>
-							<input class="form-control" type="text" value="${recruitVo.farmVo.farmAddress}" readonly style="width: 30%;">
-						</div> <%-- form-group col-xs-offset-1 col-xs-3 --%>
-						
 						<%-- 농지임대자의 전화번호 --%>
-						<div class="form-group col-xs-4">
+						<div class="form-group col-xs-offset-1 col-xs-3">
 							<label>전화번호 : </label>
 							<input class="form-control" type="text" value="${recruitVo.farmVo.memberInfoVo.tel}" readonly style="width: 33%;">
 						</div> <%-- form-group col-xs-4 --%>
@@ -56,8 +50,14 @@
 						<%-- 평당 월 가격 --%>
 						<div class="form-group col-xs-4">
 							<label>평당 월 가격 : </label>
-							<input class="form-control" type="text" value="${recruitVo.recruitSize}" readonly style="width: 45%;">
+							<input class="form-control" type="text" value="${recruitVo.recruitSize}" readonly style="width: 10%;">
 						</div> <%-- form-group col-xs-4 --%>
+						
+							<%-- 농지주소 --%>
+						<div class="form-group col-xs-offset-1 col-xs-8">
+							<label>주소 : </label>
+							<input class="form-control" type="text" value="${recruitVo.farmVo.farmAddress}" readonly style="width: 90%;">
+						</div> <%-- form-group col-xs-offset-1 col-xs-3 --%>
 						
 						<%-- 상세내용 --%>
 						<div class="form-group col-xs-offset-1 col-xs-10">

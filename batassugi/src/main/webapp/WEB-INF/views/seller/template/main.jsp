@@ -12,7 +12,7 @@
 						<div class="caption">
 							<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${farmVo.farmEnddate}</span> 까지</div>
 							<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${farmVo.farmSize}평</span></div>
-							<div><i class="fa fa-map-marker fa-2x"></i> &nbsp;<span>${farmVo.farmAddress}</span></div>
+							<div style="height: 50px; display: inline-block;"><span><i class="fa fa-map-marker fa-2x"></i> &nbsp;${farmVo.farmAddress}</span></div>
 								<p class="cropsList">
 									<c:forEach items="${farmVo.cropsVo}" var="crops">
 									<a data-placement="top" data-toggle="popover" data-trigger="hover" title="" data-content="${crops.cropsName}">

@@ -117,8 +117,8 @@
                <div class="form-group">
                 <label class="control-label col-sm-3">주소<span class="text-danger">*</span></label>
                 <div class="col-md-7 col-sm-8">
-                  <div class="input-group">
-					<input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색"><br>
+                  <div class="input-group col-xs-offset-1">
+					<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-primary btn-sm" value="주소 검색"><br>
 					<input type="text" class="form-control" name="address" id="sample6_address" placeholder="주소를 검색하세요" readonly="readonly">
                     <span class="input-group-addon"></span>
                   </div>
@@ -256,6 +256,7 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_address').value = fullAddr;
+                $('#sample6_address').css('width', $('#sample6_address')[0].scrollWidth + 10);
             }
         }).open();
     }

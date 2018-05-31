@@ -126,7 +126,7 @@
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-8">
 									<div class="input-group">
-										<button type="button" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
+										<button type="button" class="btn btn-primary btn-sm" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
 										<input type="text" class="form-control" name="address"
 											id="sample6_address" readonly="readonly" value="${mvo.address}">
 									</div>
@@ -261,6 +261,7 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_address').value = fullAddr;
+                $('#sample6_address').css('width', $('#sample6_address')[0].scrollWidth + 10);
             }
         }).open();
     }
@@ -289,6 +290,7 @@
 	}
      
     $(document).ready(function() {
+    	$('#sample6_address').css('width', $('#sample6_address')[0].scrollWidth + 10);
     		//DB에 저장된 checkbox리스트 가져와서 체크하기
     		$.each(${mvo.likeCrops}, function(index,value) { 
     			var cropId='likeCrops'+value;
