@@ -213,7 +213,7 @@ $rentForm.on('submit', function() {
 	$searchCategory.on('change',function() {
 		var $this = $(this).val()
 		$("#searchKeyword").autocomplete({
-			source: $this != "" ? $this == 'crops' ? searchList('getCropsList') : searchList('getFarmAddressList') : [""],
+			source: $this != "" ? $this == 'crops' && searchList('getCropsList') : [""],
 			focus: function(event, ui) {
 				$("#searchKeyword").val(ui.item.label);
 				},
