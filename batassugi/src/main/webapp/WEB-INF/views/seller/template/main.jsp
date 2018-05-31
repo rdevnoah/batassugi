@@ -8,18 +8,18 @@
 			<c:forEach items="${farmList}" var="farmVo" varStatus="i">
 				<div class="col-xs-3">
 					<div class="thumbnail rent">
-						<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${farmVo.image}" style="height: 230px;">
+						<img src="${pageContext.request.contextPath}/resources/img/farm_photo/${farmVo.image}" style="height: 150px;">
 						<div class="caption">
 							<div><i class="fa fa-calendar-check-o fa-lg"></i> <span>${farmVo.farmEnddate}</span> 까지</div>
 							<div><i class="fa fa-fort-awesome fa-lg"></i> <span>${farmVo.farmSize}평</span></div>
-							<div>&nbsp;<i class="fa fa-map-marker fa-lg"></i> &nbsp;<span>${farmVo.farmAddress}</span></div>
-								
-								<c:forEach items="${farmVo.cropsVo}" var="crops">
-									<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
-								
-								</c:forEach>
-								
-								
+							<div><i class="fa fa-map-marker fa-2x"></i> &nbsp;<span>${farmVo.farmAddress}</span></div>
+								<p class="cropsList">
+									<c:forEach items="${farmVo.cropsVo}" var="crops">
+									<a data-placement="top" data-toggle="popover" data-trigger="hover" title="" data-content="${crops.cropsName}">
+										<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
+									</a>
+									</c:forEach>
+								</p>
 							<div>
 								<h4>
 								<c:if test="${farmVo.labels.size()==0 }">
@@ -128,6 +128,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/highcharts/highcharts.js"></script>
 <script>
 $(document).ready(function() {
+    $('[data-toggle="popover"]').popover()
 	var $data;
 	var $farmNo;
 	$(".detailFarm").on('click', function(e) {

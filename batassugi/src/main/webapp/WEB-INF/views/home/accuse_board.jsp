@@ -86,15 +86,15 @@
           	<div class="form-group">
           		<label class="control-label col-sm-3">
 	          		<img src="${pageContext.request.contextPath}/resources/img/accuse_img/default.png" width="100px" id="previewImg"/><br>
-	                미리보기
+                <span>미리보기</span>
 	          	</label>
-	          	<div class="col-md-8 col-sm-8">
-                  <div class="input-group">
-                    <span class="input-group-addon" id="file_upload"></span> 
-                    <input type="file" name="file" id="file" class="form-control upload" placeholder="증빙자료를 첨부해주세요" required="required"
-                     onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
-                    <button type="button" onclick="ResetImgvalue();" id="cancelButton">취소</button>
-                    </div>
+	          	<div class="col-xs-8">
+					<div class="filebox">
+						<input class="upload-name" value="증빙자료를 첨부해주세요" disabled="disabled">
+						<label class="btn btn-primary" for="file">업로드</label>
+						<button type="button" class="btn btn-danger" onclick="ResetImgvalue();" id="cancelButton" style="margin-top: 0px;">취소</button>
+						<input type="file" name="file" id="file" class="form-control upload upload-hidden" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" accept=".gif, .jpg, .png" required>
+					</div>
                 </div>
 			</div>
             </div>
@@ -104,7 +104,7 @@
         </div>	<!-- 판넬 폼 종료 -->
          <%--제출 버튼 --%>
         	<div class="col-xs-12 registerBtn">
-                <input name="submit" type="submit" value="신고하기" class="btn btn-primary" style="background-color: red">
+                <input name="submit" type="submit" value="신고하기" class="btn btn-danger">
               </div>
       </form><%-- form 영역 --%>
     </div><%-- 메인영역 --%>
@@ -131,6 +131,7 @@
      function ResetImgvalue() {
      	// 프로필 이미지 리셋
  	 	$("#file").val("");
+     	$(".upload-name").val("증빙자료를 첨부해주세요")
      	// 미리보기 이미지 리셋
      	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/accuse_img/default.png");
      	 if ($('#previewImg').attr('class')=="animated fadeIn") {
@@ -161,5 +162,10 @@
       		         return false;
      		      }
      		   });//submit
+     		  $('.filebox .upload-hidden').on('change', function() { // input type 파일명 넣어주는 event
+                  var $filename;
+                  $(this).val() != '' ? $filename = $(this)[0].files[0].name : $filename = '증빙자료를 첨부해주세요';
+                  $(this).siblings('.upload-name').val($filename); 
+            });
  	})//ready
 </script>

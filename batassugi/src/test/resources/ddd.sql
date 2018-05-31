@@ -377,7 +377,9 @@ drop table accuse
     AND RT.id = 'test12'
     ORDER BY RT.rent_startdate DESC
     
-    update rent set rent_startdate = to_date('2018-04-23','yyyy-mm-dd') where rent_status = '승인'
+    select
+    
+    update rent set rent_startdate = to_date('2018-04-23','yyyy-mm-dd') where rent_status = '대여중' 
     
     SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
@@ -501,3 +503,6 @@ select id, password, state_number from spider_member
     select * from rent
     
     update rent set rent_status='대여중' where rent_no = 1
+    
+    
+    select * from farm

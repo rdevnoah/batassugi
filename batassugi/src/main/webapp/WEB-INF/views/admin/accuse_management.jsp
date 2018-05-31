@@ -44,7 +44,7 @@
 		<ul class="pagination justify-content-center">
 			<!-- Previous -->
 			<c:if test="${paging.previousPageGroup==false}">
-				<li class="page-item  disabled"><span class="page-link">Previous</span></li>
+				<li class="page-item  disabled"><span class="page-link"><i class="fa fa-angle-left"></i></span></li>
 			</c:if>
 			<c:if test="${paging.previousPageGroup}">
 				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/adminAccuse?nowPage=${paging.startPageOfPageGroup-1}">Previous</a></li>
@@ -63,7 +63,7 @@
 			</c:forEach>
 			<!-- next -->
 			<c:if test="${paging.nextPageGroup==false}">
-				<li class="page-item  disabled"><span class="page-link">Next</span></li>
+				<li class="page-item  disabled"><span class="page-link"><i class="fa fa-angle-right"></i></span></li>
 			</c:if>
 			<c:if test="${paging.nextPageGroup}">
 				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/adminAccuse?nowPage=${paging.endPageOfPageGroup+1}">Next</a></li>

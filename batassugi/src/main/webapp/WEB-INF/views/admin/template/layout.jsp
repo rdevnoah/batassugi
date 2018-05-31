@@ -10,65 +10,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><tiles:insertAttribute name="admin_title" ignore="true" /></title>
-<!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<%-- Favicon --%>
-<%-- <link href="${pageContext.request.contextPath}/resources/favicon.ico" rel="shortcut icon" type="image/x-icon"> --%>
-
-<!-- Our Custom CSS -->
-<link href="${pageContext.request.contextPath}/resources/css/admin.css" rel="stylesheet">
-
-<%-- Bootstrap-dialog --%>
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css" rel="stylesheet">
-<%-- Animate --%>
-<link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
-
-
-<%-- Jquery v3.3.1 --%>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
 <%-- Bootstrap v3.3.7 --%>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <%-- Bootstrap-dialog --%>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
+<link
+	href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css"
+	rel="stylesheet">
+<%-- Animate --%>
+<link
+	href="${pageContext.request.contextPath}/resources/css/animate.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/animate.css"
+	rel="stylesheet">
+<%-- Favicon --%>
+<link
+	href="${pageContext.request.contextPath}/resources/img/favicon.ico"
+	rel="shortcut icon" type="image/x-icon">
+<!-- Our Custom CSS -->
+<link href="${pageContext.request.contextPath}/resources/css/admin.css"
+	rel="stylesheet">
+
+<!-- fullCalendar CSS -->
+<link
+	href='${pageContext.request.contextPath}/resources/css/fullcalendar/fullcalendar.min.css'
+	rel='stylesheet' />
+<link
+	href='${pageContext.request.contextPath}/resources/css/fullcalendar/fullcalendar.print.min.css'
+	rel='stylesheet' media='print' />
+
+<%-- fullCalendar JS --%>
+<script
+	src='${pageContext.request.contextPath}/resources/js/fullcalendar/moment.min.js'></script>
+<%-- Jquery v3.3.1 --%>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
+<%-- fullCalendar JS --%>
+<script
+	src='${pageContext.request.contextPath}/resources/js/fullcalendar/fullcalendar.min.js'></script>
+<%-- Bootstrap v3.3.7 --%>
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+<%-- Bootstrap-dialog --%>
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap-dialog.js"></script>
 <%-- Parallax --%>
-<script src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
+<%-- Font-awesome v4.7.0 --%>
+<script src="https://use.fontawesome.com/a5d5d71388.js"></script>
 </head>
 <body>
-	
-
-	<!-- jQuery CDN -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
-	<!-- Bootstrap Js CDN -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
- 	<div class="wrapper">
-		
+	<div class="wrapper">
 		<%-- 사이드바 --%>
 		<tiles:insertAttribute name="admin_left" />
-		
+
 		<div id="content">
 			<%-- 헤더 --%>
 			<tiles:insertAttribute name="admin_header" />
 			<%-- 본문 --%>
-       		<tiles:insertAttribute name="admin_main" />
-    	</div>
+			<tiles:insertAttribute name="admin_main" />
+		</div>
 	</div>
-
-	
-
-         <!-- Bootstrap Js CDN -->
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-                  <script type="text/javascript">
-             $(document).ready(function () {
-                 $('#sidebarCollapse').on('click', function () {
-                     $('#sidebar').toggleClass('active');
-                     $(this).toggleClass('active');
-                 });
-             });
-         </script>
-
-	
-    
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar').toggleClass('active');
+				$(this).toggleClass('active');
+			});
+		});
+	</script>
 </body>
 </html>

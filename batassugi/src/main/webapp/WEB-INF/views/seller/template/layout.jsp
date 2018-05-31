@@ -11,12 +11,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title><tiles:insertAttribute name="seller_title" ignore="true" /></title>
 <%-- Bootstrap v3.3.7 --%>
-<%-- <link href="${pageContext.request.contextPath}/resources/css/bootstrap-ukyi.css" rel="stylesheet"> --%>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet">
 <%-- Bootstrap-dialog --%>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap-dialog.css" rel="stylesheet">
 <%-- Animate --%>
-<link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet">
 <%-- Favicon --%>
 <link href="${pageContext.request.contextPath}/resources/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -40,6 +38,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/parallax.js"></script>
 <%-- Font-awesome v4.7.0 --%>
 <script src="https://use.fontawesome.com/a5d5d71388.js"></script>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 
 

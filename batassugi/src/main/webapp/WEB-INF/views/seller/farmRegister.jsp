@@ -1,133 +1,199 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script type="text/javascript">
-	$(document).ready(function() {
-		   $("#farmRegister").click(function() {
-			   if ($('#farmSize').val()==''){
-				   BootstrapDialog.alert('등록할 농지의 크기를 입력하세요');
-			   }else if ($('#farmAddress').val()==''){
-				   BootstrapDialog.alert('주소를 입력하세요');
-			   }else{
-				   $('#farm_register').submit();
-			   }
-		   });	
-	})
-
-	function LoadImg(value) {
-         if(value.files && value.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                   $('#previewImg').attr('src', e.target.result);                    
-              }
-              reader.readAsDataURL(value.files[0]);
-         }
-         $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png");
-         if ($('#previewImg').attr('class')=="animated fadeIn") {
-           $('#previewImg').removeClass("animated fadeIn")
-      } else {
-         $('#previewImg').addClass("animated fadeIn")
-      }
-    }
-    
-    function ResetImgvalue() {
-      // 프로필 이미지 리셋
-       $("#file").val("");
-      // 미리보기 이미지 리셋
-      $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png");
-       if ($('#previewImg').attr('class')=="animated fadeIn") {
-          $('#previewImg').removeClass("animated fadeIn")
-      } else {
-         $('#previewImg').addClass("animated fadeIn")
-      }
-   }
-
-   function checkRegisterFarm(){
-	   var endDate = new Date();
-	   endDate = $("#endDate").val();
-	   var nowDate = nowdateCal();
-	   if ($('input:checkbox[name=cropsNo]:checked').length==0){
-		   BootstrapDialog.alert("하나 이상의 작물을 선택하세요");
-		   return false;
-	   }else if (endDate < nowDate){
-		   BootstrapDialog.alert("등록 만료 날짜를 다시 확인해주세요");
-		   return false;
-	   }else{
-		   return true;
-	   } 
-		    
-   }
-   function nowdateCal() {
-	   var date = new Date();
-	    var year = date.getFullYear(); //년도
-	    var month = date.getMonth()+1; //월
-	    var day = date.getDate(); //일
-	    if ((month+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해
-	    	month = "0" + month;
-	    }
-	    if ((day+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해
-	        day = "0" + day;
-	    }
-	    var getToday = year+"-"+month+"-"+day; // 오늘 날짜 (2017-02-07)
-	    return getToday;
-	}
-</script>
-
 <div class="container-fluid">
-	<!-- 관리 전체영역 -->
-	<div class="manage_content">
-		<!-- 관리 타이틀 -->
-		<div class="manage_title">
-			<span id="manage_title_big">농지등록</span>
-			<span id="manage_title_small">판매자가 농지를 등록하는 페이지입니다.</span> 
-		</div><!-- 관리 타이틀 -->
-		
-		<%-- contents부분 --%>
-	<div class="farm_contents">
-			<form action="${pageContext.request.contextPath}/seller/farm_register" id="farm_register" method="post"  enctype="multipart/form-data" onsubmit="return checkRegisterFarm()">
-		<div class="row main">
-			<div class="col-md-3 input_img">
-				<div class="img_Preview">프로필 미리보기</div>
-				<img src="${pageContext.request.contextPath}/resources/img/logo.png" width="150px" id="previewImg"/><br>
-         		<div id="imgBtn">
-	         		<label id="rgBtn"> 이미지 등록
-	         			<input type="file" name="file" id="file" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" aria-describedby="file_upload">
-			 		</label>
-			 		<label id="ccBtn"> 이미지 취소
-			 			<input type="button" onclick="ResetImgvalue();" value="이미지취소">
-			 		</label>
-		 		</div>
-			</div>
-		
-		<div class="col-md-9">
-            <span class="applyContent">농지 등록평수 <input type="number" name="farmSize" id='farmSize' min="1" required="required"></span><br>
-            <span class="applyContent">농지 등록날짜 <input type="text" name="farmStartdate" value="${requestScope.date }" required="required" readonly="readOnly"></span><br>
-            <span class="applyContent">농지 만료날짜 <input type="date" id="endDate" name="farmEnddate" required="required" ></span><br>
-            <span class="applyContent">농지 등록주소 <input type="text" name="farmAddress" id='farmAddress' required="required" ></span><br>
-             
-            가능 작물선택 
-            
-               <c:forEach items="${cropsList}" var="crops">
-               <span class="applyContent">
-               <div id="ChoiceCrops">
-               <input type="checkbox" id = "crops_checked" name="cropsNo" value="${crops.cropsNo}">${crops.cropsName}<br>
-               </div>
-                </span>
-               </c:forEach>
-            <br>
-        	 </div> <%-- col-sm-offset-2 col-sm-8 --%>
-        	 </div> <%-- row main --%>
-			</div><%-- contents부분 --%>
-        	
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" id="farmRegister">등록</button>
-			</div>
-         </form>
-        
-      
-	</div><!--관리 전체영역 -->
-</div><!-- container -->
+	<div class="row">
+		<div class="col-xs-12">
+			<form class="form-inline" action="${pageContext.request.contextPath}/seller/farm_register" id="farmRegister" method="post" enctype="multipart/form-data" onsubmit="return checkRegisterFarm()">
+				<div class="" id="choise"></div>
+				<div class="panel panel-warning">
+					<div class="panel panel-heading">
+						<span style="font-size: 20px;">농지등록</span><small> 판매자가 농지를 등록하는 페이지입니다.</small>
+					</div>
+					<div class="panel panel-body">
+							
+						<div class="form-group regGroup col-xs-2 text-center">
+							<h3 style="margin-top: 0px;">농지사진</h3>
+							<img id="previewImg" src="${pageContext.request.contextPath}/resources/img/logo.png" id="previewImg" style="height: 150px; margin-bottom: 10px;"/>
+							<div class="filebox">
+								<label class="btn btn-primary" for="file">업로드</label>
+								<input type="file" name="file" id="file" class="form-control upload upload-hidden" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" accept=".gif, .jpg, .png" required>
+								<button type="button" class="btn btn-danger" onclick="ResetImgvalue();">취소</button>
+							</div>
+						</div>
+						
+						<div class="form-group regGroup col-xs-10">
+							<label class="form-label" style="font-weight:normal;">농지 등록 평수 </label>
+							<input type="number" name="farmSize" id='farmSize' min="1" class="form-control" required>
+						</div>
+						
+						<div class="form-group regGroup col-xs-10">
+							<label class="form-label" style="font-weight:normal;">농지 등록 날짜 </label>
+							<input type="text" name="farmStartdate" value="${requestScope.date}" class="form-control" readonly style="background-color: #FFFFFF;">
+						</div>
+						
+						
+						<div class="form-group regGroup col-xs-10">
+							<label class="form-label" style="font-weight:normal;">농지 만료 날짜 </label>
+							<input id="endDate" type="date" name="farmEnddate" class="form-control" required>
+						</div>
+						
+						
+						<div class="form-group regGroup col-xs-10">
+							<label class="form-label" style="font-weight:normal;">농지 등록 주소 </label>
+							<input type="text" id="sample6_address" name="farmAddress" class="form-control" readonly style="background-color: #FFFFFF;">
+							<button type="button" class="btn btn-primary" onclick="sample6_execDaumPostcode()">주소선택</button>
+						</div>
+						
+						<div class="form-group regGroup col-xs-10">
+							<label class="form-label" style="font-weight:normal;">가능 작물 선택 </label>
+							<select id="cropsSelect" class="form-control" required>
+								<option value="">---------선택---------</option>
+								<c:forEach items="${cropsList}" var="crops">
+								<option value="${crops.cropsNo}">${crops.cropsName}</option>
+								</c:forEach>
+							</select>
+						</div>
+						
+						<div class="form-group regGroup col-xs-3">
+							<span class="cropsList">
+							</span>
+						</div>
+						
+						<div class="form-group regGroup col-xs-12 text-center">
+							<div class="col-xs-offset-2 col-xs-2">
+								<button type="submit" class="btn btn-primary btn-block">등록</button>
+							</div>
+						</div>
+					</div> <%-- panel panel-body --%>
+				</div> <%-- panel panel-warning --%>
+			</form> <%-- form-inline --%>
+		</div>
+	</div>
+</div>
+<script>
 
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample6_address').value = fullAddr;
+        }
+    }).open();
+}
+
+function checkRegisterFarm(){
+	var endDate = new Date();
+	endDate = $("#endDate").val();
+	var nowDate = nowdateCal();
+	if (endDate < nowDate){
+		BootstrapDialog.alert("등록 만료 날짜를 다시 확인해주세요");
+		return false;
+	}else{
+		return true;
+	} 
+}
+function nowdateCal() {
+	var date = new Date();
+	var year = date.getFullYear(); //년도
+	var month = date.getMonth()+1; //월
+	var day = date.getDate(); //일
+	if ((month+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해\
+		month = "0" + month;
+	}
+	if ((day+"").length < 2) {       // 일이 한자리 수인 경우 앞에 0을 붙여주기 위해
+    	day = "0" + day;
+	}
+	var getToday = year+"-"+month+"-"+day; // 오늘 날짜 (2017-02-07)
+	return getToday;
+}
+
+function LoadImg(value) {
+	if(value.files && value.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			$('#previewImg').attr('src', e.target.result);                    
+			}
+		reader.readAsDataURL(value.files[0]);
+		}
+	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/logo.png");
+	if ($('#previewImg').attr('class')=="animated fadeIn") {
+		$('#previewImg').removeClass("animated fadeIn")
+	} else {
+		$('#previewImg').addClass("animated fadeIn")
+	}
+}
+  
+function ResetImgvalue() {
+	// 프로필 이미지 리셋
+	$("#file").val("");
+	// 미리보기 이미지 리셋
+	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/logo.png");
+	if ($('#previewImg').attr('class')=="animated fadeIn") {
+		$('#previewImg').removeClass("animated fadeIn")
+	} else {
+		$('#previewImg').addClass("animated fadeIn")
+	}
+}
+
+$(document).ready(function() {
+	var $cropsSelect = $('#cropsSelect')
+		,$cropsList = $('.cropsList')
+    	,$farmRegister = $('#farmRegister')
+		,$choise = $('body').find('#choise');
+    
+	$cropsSelect.on('change', function() {
+    	var $cropsName = $(this).find("option[value='" + $(this).val() + "']").text()
+    		,$cropsA = $('<a id="'+$cropsName+'" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="'+$cropsName+'">')
+    		,$cropsImg = $('<img class="'+$cropsName+'" src="${pageContext.request.contextPath}/resources/img/crops_illur/'+$cropsName+'.png">')
+			,$inputCrops = $('<input id="'+$cropsName+'" type="hidden" name="cropsNo" value="'+$(this).val()+'" />')
+			
+		if ($(this).val() !== "" && $(this).parents().find('.cropsList img').length < 7) {
+	    	if($cropsName != $cropsList.find('#'+$cropsName).attr('id')) {
+	    		$cropsList.append($cropsA.append($cropsImg))
+	    		$choise.append($inputCrops)
+	    	} // if
+		} // if
+   		$('[data-toggle="popover"]').popover()
+   		
+	    $('.'+$cropsName).on('click',function(){
+	    	$(this).parents().find('#'+$cropsName).popover('destroy')
+	    	$(this).parents().find('#'+$cropsName).remove()
+	    	$choise.find('#'+$cropsName).remove()
+	    }) // click
+    }) // change
+    
+})
+</script>
 
 
 
