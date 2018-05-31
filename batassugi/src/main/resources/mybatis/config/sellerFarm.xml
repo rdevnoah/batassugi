@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <select id="findRentSizeByFarmNo" parameterType="string" resultType="string">
     select sum(r.rent_size) from rent r, recruit rc, farm f
-    where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo} and r.rent_status='승인'
+    where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo} and r.rent_status='대여중'
   </select>
 </mapper>
  

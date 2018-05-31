@@ -3,24 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%-- 이 파일은 header입니다. header에는 별도의 외부링크 추가 금지--%>
-
-<div id="mySidenav" class="sidenav">
-	<a id="closeSide" href="javascript:void(0)" class="closebtn">&times;</a>
-	<a>메뉴1</a>
-	<a>메뉴2</a>
-	<a>메뉴3</a>
-	<a>메뉴4</a>
-</div> <%-- mySidenav --%>
-
 <div class="container">
    <%-- 가장 위쪽 헤더 --%>
 	<div class="row">
+		<div class="col-xs-1" id="results" style="margin-top: 30px;"></div>
 	    <div class="col-xs-2 mainLogo">
 			<a href="${pageContext.request.contextPath}/">
 				<img src=" ${pageContext.request.contextPath}/resources/img/logo.png" class="img-responsive mainLogo" />
 			</a>
 		</div><!--
-	    --><div class="col-xs-10 vcenter">
+	    --><div class="col-xs-9 vcenter">
    		<ul>
    			<li style="border-left:0px !important;"><a class="choice" href="${pageContext.request.contextPath}/">Home</a></li>
    			<li><a href="${pageContext.request.contextPath}/home/introduction_website">사이트소개</a></li>
@@ -54,7 +46,7 @@
 			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 	</c:if>
 </div>
-        <div id="results"></div>
+
     </div> <%-- col-xs-8 vcenter --%>
    </div>  <%-- row --%>
 </div> <%-- container --%>
@@ -90,7 +82,7 @@ $(document).ready(function () {
              dataType: "json",
              success: function (response) {
                  $('#results').empty();
-                 $('#results').append("<div>"+"<img src=\"" + response['current_observation']['icon_url'] + "\" width=7%></div>");
+                 $('#results').append("<div>"+"<img src=\"" + response['current_observation']['icon_url'] + "\" style='width: 70%;'></div>");
                  var city1 = response['location']['city']
                  var city2 = '';
                  (city1=='Seoul') && (city2='서울'),
@@ -103,7 +95,7 @@ $(document).ready(function () {
                  (city1=='Busan') && (city2='부산'),
                  (city1=='Jeju') && (city2='제주')
                  
-                 $('#results').append("<div>&nbsp;" + city2 + " " + response['current_observation']['temp_c'] + "℃ </div>");
+                 $('#results').append("<div>&nbsp;&nbsp;" + city2 + " " + response['current_observation']['temp_c'] + "℃ </div>");
              }
          });
    }

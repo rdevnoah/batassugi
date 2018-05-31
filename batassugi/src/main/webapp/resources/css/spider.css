@@ -72,8 +72,7 @@ a {
 }
 .mainLogo img {
 	height: 150px;
-	width: 150px;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 /* 조선화 : 헤더 로그인 정보 */
@@ -101,6 +100,7 @@ a {
 }
 
 .vcenter ul{
+
    float:right;
 }
 .vcenter ul li{
@@ -116,6 +116,8 @@ a {
 .vcenter {
    display: inline-block;
    vertical-align: middle;
+   	margin-top: 50px;
+	margin-bottom: 30px;	
    float: none;
 }
 

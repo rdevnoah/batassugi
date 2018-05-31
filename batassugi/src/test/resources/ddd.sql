@@ -496,3 +496,8 @@ select id, password, state_number from spider_member
     AND A.crops_no = C.crops_no
     AND rnum BETWEEN #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber}
     ORDER BY R.recruit_no DESC
+
+    
+    select * from rent
+    
+    update rent set rent_status='대여중' where rent_no = 1

@@ -69,7 +69,7 @@ i, span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: linear-gradient(to bottom, #e94b3c 0%, #5c110a 100%);
+    background: linear-gradient(to bottom, #FFC952 0%, #ffb513 100%);
     color: #fff;
     transition: all 0.3s;
 }
@@ -120,7 +120,7 @@ i, span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #e62a19;
+    background: #ffbf31;
 }
 
 #sidebar .sidebar-header strong {
@@ -130,7 +130,7 @@ i, span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #ff8000;
+    border-bottom: 1px solid #FFC952;
 }
 
 #sidebar ul li a {
@@ -139,7 +139,7 @@ i, span {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #a11e12;
+    color: #FFC952;
     background: #fff;
 }
 #sidebar ul li a i {
