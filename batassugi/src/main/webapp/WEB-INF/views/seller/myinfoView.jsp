@@ -128,7 +128,7 @@
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-8">
 									<div class="input-group">
-									<input type="button" onclick="sample6_execDaumPostcode()" value="주소 수정"><br>
+									<button type="button" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
 										<input type="text" class="form-control" name="address"
 											id="sample6_address" readonly="readonly" value="${mvo.address}">
 									</div>
@@ -240,7 +240,7 @@
 
                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    fullAddr = data.roadAddress;
+                    fullAddr = data.jibunAddress;
 
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     fullAddr = data.jibunAddress;
@@ -409,5 +409,5 @@
 	 		         return false;
 			      }
     		   });//submit
-	})//ready
+	});//ready
 </script>
