@@ -128,10 +128,10 @@
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-8">
 									<div class="input-group">
-									<button type="button" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
-										<input type="text" class="form-control" name="address"
-											id="sample6_address" readonly="readonly" value="${mvo.address}">
+										<input type="text" class="form-control" name="address" 
+											id="sample6_address" readonly="readonly" value="${mvo.address}" style="width: 100%;">
 									</div>
+									<button type="button" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
 								</div>
 							</div>
 
