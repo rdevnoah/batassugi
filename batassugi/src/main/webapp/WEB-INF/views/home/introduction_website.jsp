@@ -97,5 +97,4 @@ var marker = new naver.maps.Marker({
     position: new naver.maps.LatLng(37.402142, 127.107016),
     map: map
 });
-var map = new naver.maps.Map('map', mapOptions);
 </script>
