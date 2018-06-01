@@ -1,9 +1,7 @@
 package org.spider.batassugi.controller;
 
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.spider.batassugi.model.service.common.CommonServiceIf;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ public class CommonController {
 
   @Resource
   private CommonServiceIf commonService;
-  
+
   /**
    * 농작물 사전 클릭시 작물 리스트를 불러오는 컨트롤러.
    * 
@@ -30,12 +28,11 @@ public class CommonController {
     model.addAttribute("icon", list);
     return "home/crops_dictionary.tiles";
   }
-  
+
   /**
    * 농작물 사전에서 아이콘을 클릭 시, 농작물 상세정보를 불러오는 컨트롤러.
    * 
    * @author "DL KimJieun"
-   * @param model info 변수에 cropsInfoVo를 담아줌.
    * @param cropsNo 사용자가 클릭한 농작물아이콘의 농작물번호를 받아옴.
    * @return
    */

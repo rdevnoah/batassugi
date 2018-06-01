@@ -16,7 +16,7 @@ import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * 클래스 설명 : 반드시 마침표를 찍습니다.
+ * 판매자의 권한이 아닌 사용자의 접근을 제어하기 위한 Interceptor입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.controller
@@ -44,14 +44,14 @@ public class CheckSellerInterceptor extends HandlerInterceptorAdapter {
     HttpSession session = request.getSession(false);
     MemberInfoVo vo = (MemberInfoVo) session.getAttribute("mvo");
     if (session != null && session.getAttribute("mvo") != null) {
-        if(vo.getMemberVo().getmemberLevel().equals("판매자")){
-          return true;
-        }else {
-          response.sendRedirect(request.getContextPath()+"/home/nosession");
-          return false;
-        }
+      if (vo.getMemberVo().getmemberLevel().equals("판매자")) {
+        return true;
+      } else {
+        response.sendRedirect(request.getContextPath() + "/home/nosession");
+        return false;
+      }
     } else {
-      response.sendRedirect(request.getContextPath()+"/home/nosession");
+      response.sendRedirect(request.getContextPath() + "/home/nosession");
       return false;
     }
   }
