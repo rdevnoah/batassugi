@@ -98,10 +98,18 @@ public class MemberService implements MemberServiceIf, PathInfo {
 
   @Override
   @Transactional
-  public void register(MemberInfoVo vo) {
+  public void register(MemberInfoVo vo, String[] likeCropsNo) {
+    
     memberDao.registerBasic(vo);
     memberDao.registerExtend(vo);
-
+    
+    // 기호 작물 정보를 가져와서 기호작물을 넣어준다. 
+    List<CropsVo> updateCrops = new ArrayList<CropsVo>();
+    for (int i = 0; i < likeCropsNo.length; i++) {
+      updateCrops.add(new CropsVo(likeCropsNo[i]));
+    }
+    vo.setLikeCrops(updateCrops);
+    
     if (vo.getLikeCrops() != null) {
       List<CropsVo> likeCrops = vo.getLikeCrops();
 
@@ -207,5 +215,8 @@ public class MemberService implements MemberServiceIf, PathInfo {
   public MemberInfoVo updateMemberInfo(MemberInfoVo uvo) {
     return null;
   }
+
+  @Override
+  public void register(MemberInfoVo vo) {}
 
 }

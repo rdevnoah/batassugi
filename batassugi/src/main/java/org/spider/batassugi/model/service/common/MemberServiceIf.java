@@ -88,7 +88,7 @@ public interface MemberServiceIf {
    * @author "PL_Seonhwa"
    * @param mstVo 회원 상태 번호를 받아올 VO.
    */
-//  public void registerMemberState(MemberStateVo mstVo);
+  // public void registerMemberState(MemberStateVo mstVo);
 
   /**
    * 로그인 후 멤버 기호 작물을 vo에 넣어줌.
@@ -107,7 +107,7 @@ public interface MemberServiceIf {
    */
   public MemberInfoVo updateMemberInfo(MemberInfoVo uvo);
 
-  
+
   /**
    * 회원기호 작물 입력을 위하여 DB에서 작물 리스트를 가져오는 메소드.
    * 
@@ -118,6 +118,7 @@ public interface MemberServiceIf {
 
   /**
    * 여기에 설명을 쓰시오.
+   * 
    * @author "SL SangUk Lee"
    * @param uvo
    * @param likeCropsNo
@@ -125,5 +126,14 @@ public interface MemberServiceIf {
    */
   MemberInfoVo updateMemberInfo(MemberInfoVo uvo, String[] likeCropsNo);
 
- 
+  /**
+   * 여기에 설명을 쓰시오.
+   * 
+   * @author "SL SangUk Lee"
+   * @param vo
+   * @param likeCropsNo
+   */
+  void register(MemberInfoVo vo, String[] likeCropsNo);
+
+
 }

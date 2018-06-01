@@ -1,6 +1,5 @@
 package org.spider.batassugi.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -11,7 +10,6 @@ import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.service.admin.AccuseServiceIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
 import org.spider.batassugi.model.vo.admin.AccusePostVo;
-import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Controller;
@@ -120,7 +118,7 @@ public class HomeController {
    * @return
    */
   @RequestMapping("register")
-  public String register(@ModelAttribute("memberInfoVo") MemberInfoVo vo) {
+  public String register(@ModelAttribute("memberInfoVo") MemberInfoVo vo, String[] likeCropsNo) {
     // 1. memberState등록
     // MemberStateVo mstVo = new MemberStateVo(null, "활동", null);
     // memberService.registerMemberState(mstVo);
@@ -140,7 +138,7 @@ public class HomeController {
     // - 이미지 처리 결과 경로를 vo에 넣음
     vo.setImage(path);
     // 3. DB에 데이터 적용
-    memberService.register(vo);
+    memberService.register(vo, likeCropsNo);
     return "redirect:home/register_success";
   }
 

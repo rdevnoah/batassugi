@@ -4,7 +4,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/updateMemberInfo" method="post" name="updateMemberInfo" id="register" enctype="multipart/form-data">
+			<form class="form-horizontal"
+				action="${pageContext.request.contextPath}/admin/updateMemberInfo"
+				method="post" name="updateMemberInfo" id="register"
+				enctype="multipart/form-data">
 				<%-- 판넬 헤드 : 회원가입 --%>
 				<div class="panel-heading">
 					<div class="panel-title text-left">
@@ -24,9 +27,8 @@
 						<div class="col-md-6">
 							<%-- 아이디 --%>
 							<div class="form-group formFirst">
-								<label class="control-label col-sm-3">아이디
-									<span class="text-danger">*</span>
-								</label>
+								<label class="control-label col-sm-3">아이디 <span
+									class="text-danger">*</span></label>
 								<div class="col-md-8 col-sm-9">
 									<div class="input-group">
 										<input type="text" class="form-control" name="memberVo.id"
@@ -126,9 +128,9 @@
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-8">
 									<div class="input-group">
-										<button type="button" class="btn btn-primary btn-sm" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
-										<input type="text" class="form-control" name="address"
-											id="sample6_address" readonly="readonly" value="${mvo.address}">
+									<button type="button" class="btn btn-primary btn-sm" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
+										<input type="text" class="form-control" name="address" 
+											id="sample6_address" readonly="readonly" value="${mvo.address}" style="width: 100%;">
 									</div>
 								</div>
 							</div>
@@ -190,16 +192,37 @@
 						<%-- 기호작물 --%>
 						<div class="col-md-6">
 							<div class="form-group formFirst">
-								<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span
+								<label class="control-label col-sm-3">기호 작물(3개까지 선택) <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
-									<div class="input-group">
+									<%-- <div class="input-group">
 										<c:forEach var="item" items="${list}">
 											<label> <input name="likeCrops"
 												id="likeCrops${item.cropsVo.cropsNo}" type="checkbox"
 												value="${item.cropsVo.cropsNo}">
 												${item.cropsVo.cropsName}
 											</label>
+										</c:forEach>
+									</div> --%>
+									<div class="col-xs-8">
+									<select id="cropsSelect" class="form-control">
+										<option value="">-------선택-------</option>
+										<c:forEach items="${list}" var="item">
+										<option value="${item.cropsVo.cropsNo}">${item.cropsVo.cropsName}</option>
+										</c:forEach>
+									</select>
+									<span class="cropsList" style="display: inline;">
+										<c:forEach items="${mvo.likeCrops}" var="crops">
+							    		   <a id="${crops.cropsName}" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="${crops.cropsName}">
+								    		   <img class="${crops.cropsName}" src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
+							    		   </a>
+										</c:forEach>
+    		   
+										</span>
+										<c:forEach items="${mvo.likeCrops}" var="crops">
+											<div class="" id="choise">
+												<input id="${crops.cropsName}" type="hidden" name="likeCropsNo" value="${crops.cropsNo}" />
+											</div>
 										</c:forEach>
 									</div>
 								</div>
@@ -211,7 +234,8 @@
 					<%--제출 버튼 --%>
 					<div class="form-group">
 						<div class="col-xs-offset-3 col-xs-10">
-							<input name="submit" type="submit" value="회원정보수정" class="btn btn-primary">
+							<input name="submit" type="submit" value="회원정보수정"
+								class="btn btn-primary">
 						</div>
 					</div>
 				</div>
@@ -226,6 +250,7 @@
 <%-- 전체 container --%>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -265,18 +290,15 @@
             }
         }).open();
     }
-</script>
-
-<script>
 
 	function autoSize(elt) {
 		var value = $(elt).val();
-        $('body').append('<span id="virtual_dom">' + value + '</span>'); 
-       	var inputWidth =  $('#virtual_dom').width() + 30; // 글자 하나의 대략적인 크기 
-       	$(elt).css('width', inputWidth); 
-        $('#virtual_dom').remove();
+	    $('body').append('<span id="virtual_dom">' + value + '</span>'); 
+	   	var inputWidth =  $('#virtual_dom').width() + 30; // 글자 하나의 대략적인 크기 
+	   	$(elt).css('width', inputWidth); 
+	    $('#virtual_dom').remove();
 	}
-	
+
 	// 업로드 이미지 가져오기
      function LoadImg(value) {
           if(value.files && value.files[0]) {
@@ -286,36 +308,47 @@
                }
                reader.readAsDataURL(value.files[0]);
           }
-          $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png").toggleClass('animated fadeIn');
+          $('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png");
+          if ($('#previewImg').attr('class')=="animated fadeIn") {
+     		 $('#previewImg').removeClass("animated fadeIn")
+ 		} else {
+ 			$('#previewImg').addClass("animated fadeIn")
+ 		}
      }
      
      
      function ResetImgvalue() {
     	// 프로필 이미지 리셋
 	 	$("#file").val("");
-    	$('.upload-name').val('파일선택')
+	 	$('.upload-name').val('파일선택')
     	// 미리보기 이미지 리셋
-    	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}").toggleClass('animated fadeIn');
+    	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}");
+    	 if ($('#previewImg').attr('class')=="animated fadeIn") {
+    		 $('#previewImg').removeClass("animated fadeIn")
+		} else {
+			$('#previewImg').addClass("animated fadeIn")
+		}
 	}
      
     $(document).ready(function() {
-    	autoSize($('#sample6_address'))
+    	
+    	 autoSize($('#sample6_address'))
     		//DB에 저장된 checkbox리스트 가져와서 체크하기
-    		$.each(${mvo.likeCrops}, function(index,value) { 
+    		/* $.each(${mvo.likeCrops}, function(index,value) { 
     			var cropId='likeCrops'+value;
     			$("input:checkbox[id="+cropId+"]").prop("checked", true); 
-    		});
+    		}); */
     	
     		//checkbox 개수제한
     		
-    	$("input[name='likeCrops']").on("click" , function(){
+    	/* $("input[name='likeCrops']").on("click" , function(){
 			var cnt = $("input:checked[name='likeCrops']").length;
 			if(cnt > 3){
 				
 				$(this).prop("checked" , false);
 				BootstrapDialog.alert("선택은 3개까지 가능합니다.");
 			}
-		});
+		}); */
     	
     		
     	   // 패스워드 confirm 확인
@@ -374,50 +407,100 @@
     	            }else{               
     	               $("#checknicknameView").html(nickname+"는 사용 가능한 닉네임입니다.").css("color","#1e878d");      
     	               checkResultnickname=nickname;
-    	            }               
+    	            }         
     	         }//success      
     	      });//ajax
     	   });//keyup  
     		       		   
     		   
-   		   //submit		   
-   		   $("#register").submit(function(){
-   		      if (checkResultPassword=="") {
-   		    	  BootstrapDialog.alert({
-  		        	   type : 'danger',
-  		        	   title : '비밀번호 확인',
-  		        	   message : '비밀번호 확인을 다시 하세요',
-  		        		size:"size-small"
-  		       	}); 
-   		         return false;
-   		      }
-   		      else if(checkResultnickname==""){
-   		    	  BootstrapDialog.alert({
-  		        	   type : 'danger',
-  		        	   title : '닉네임 확인',
-  		        	   message : '닉네임 중복체크를 다시 하세요',
-  		        	   size:"size-small"
-  		       	}); 
+    		   //submit		   
+    		   $("#register").submit(function(){
+    			   if ($(this).find('.cropsList img').length == 0) {
+			    	  BootstrapDialog.alert({
+			    		  type : 'danger',
+			    		  title : '기호작물 확인',
+			    		  message : '기호작물을 최소 1개이상 선택하세요',
+			    		  size : 'size-small'
+			    	  })
+			    	  return false;
+			      }
+    		     if (checkResultPassword=="") {
+    		    	  BootstrapDialog.alert({
+   		        	   type : 'danger',
+   		        	   title : '비밀번호 확인',
+   		        	   message : '비밀번호 확인을 다시 하세요',
+   		        		size:"size-small"
+   		       	}); 
     		         return false;
-   		      }
-		      else if( $("#sample6_address").val()==""){
-		    	  BootstrapDialog.alert({
-		        	   type : 'danger',
-		        	   title : '주소 확인',
-		        	   message : '주소를 입력해주세요',
-		        	   size:"size-small"
-		       	}); 
- 		         return false;
-		      }
-   		   });//submit
+    		      }
+    		      else if(checkResultnickname==""){
+    		    	  BootstrapDialog.alert({
+   		        	   type : 'danger',
+   		        	   title : '닉네임 확인',
+   		        	   message : '닉네임 중복체크를 다시 하세요',
+   		        	   size:"size-small"
+   		       	}); 
+     		         return false;
+    		      }
+			      else if( $("#sample6_address").val()==""){
+			    	  BootstrapDialog.alert({
+			        	   type : 'danger',
+			        	   title : '주소 확인',
+			        	   message : '주소를 입력해주세요',
+			        	   size:"size-small"
+			       	}); 
+	 		         return false;
+			      }
+			      
+    		   });//submit
+    		   
+    		   var $cropsSelect = $('#cropsSelect')
+    			,$cropsList = $('.cropsList')
+    	    	,$farmRegister = $('#farmRegister')
+    			,$choise = $('body').find('#choise');
+    	    
+   		   $('[data-toggle="popover"]').popover()
+   		   $('.cropsList a').on('click',function(){
+   			   var $cropsName = $(this).attr('id')
+   		    	$(this).parents().find('#'+$cropsName).popover('destroy')
+   		    	$(this).parents().find('#'+$cropsName).remove()
+   		    	$choise.find('#'+$cropsName).remove()
+   		    }) // click
+   		    
+   		   
+    		$cropsSelect.on('change', function() {
+    			if($(this).val() !== ""){
+	    	    	var $cropsName = $(this).find("option[value='" + $(this).val() + "']").text()
+	    	    		,$cropsA = $('<a id="'+$cropsName+'" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="'+$cropsName+'"></a>')
+	    	    		,$cropsImg = $('<img class="'+$cropsName+'" src="${pageContext.request.contextPath}/resources/img/crops_illur/'+$cropsName+'.png">')
+	    				,$inputCrops = $('<input id="'+$cropsName+'" type="hidden" name="likeCropsNo" value="'+$(this).val()+'" />')
+    			}
+    			if ($(this).parents().find('.cropsList img').length < 3) {
+    		    	if($cropsName != $cropsList.find('#'+$cropsName).attr('id')) {
+    		    		$cropsList.append($cropsA.append($cropsImg))
+    		    		$choise.append($inputCrops)
+    		    	} // if
+    			} // if
+    	   		$('[data-toggle="popover"]').popover()
+    	   		
+    		    $('.'+$cropsName).on('click',function(){
+    		    	$(this).parents().find('#'+$cropsName).popover('destroy')
+    		    	$(this).parents().find('#'+$cropsName).remove()
+    		    	$choise.find('#'+$cropsName).remove()
+    		    }) // click
+    	    }) // change
+    	    
    		   var fileTarget = $('.filebox .upload-hidden'); 
    		   fileTarget.on('change', function(){ // 값이 변경되면 
-   			   if(window.FileReader){ // modern browser 
+   			 /*   if(window.FileReader){ // modern browser 
    				   var filename = $(this)[0].files[0].name; 
    			   } else { // old IE 
    				   var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
   				   } // 추출한 파일명 삽입 
-  				   $(this).siblings('.upload-name').val(filename); 
+  				   $(this).siblings('.upload-name').val(filename);  */
+  	              var $filename;
+  	              $(this).val() != '' ? $filename = $(this)[0].files[0].name : $filename = '파일선택';
+  	              $(this).siblings('.upload-name').val($filename); 
    			});
-	})//ready
+	});//ready
 </script>

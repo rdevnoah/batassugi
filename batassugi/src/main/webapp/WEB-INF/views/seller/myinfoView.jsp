@@ -178,10 +178,12 @@
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<div class="input-group formFirst">
-										<input type="file" name="file" id="file"
-											class="form-control upload" placeholder="프로필을 넣어주세요"
-											onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
-										<button type="button" onclick="ResetImgvalue();">취소</button>
+										<div class="filebox">
+											<input class="upload-name" value="파일선택" disabled="disabled">
+											<label class="btn btn-primary" for="file">업로드</label>
+											<input type="file" name="file" id="file" class="form-control upload upload-hidden" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
+											<button type="button" class="btn btn-danger" onclick="ResetImgvalue();">취소</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -318,6 +320,7 @@
      function ResetImgvalue() {
     	// 프로필 이미지 리셋
 	 	$("#file").val("");
+	 	$('.upload-name').val('파일선택')
     	// 미리보기 이미지 리셋
     	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}");
     	 if ($('#previewImg').attr('class')=="animated fadeIn") {
@@ -486,5 +489,18 @@
     		    	$choise.find('#'+$cropsName).remove()
     		    }) // click
     	    }) // change
+    	    
+   		   var fileTarget = $('.filebox .upload-hidden'); 
+   		   fileTarget.on('change', function(){ // 값이 변경되면 
+   			 /*   if(window.FileReader){ // modern browser 
+   				   var filename = $(this)[0].files[0].name; 
+   			   } else { // old IE 
+   				   var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+  				   } // 추출한 파일명 삽입 
+  				   $(this).siblings('.upload-name').val(filename);  */
+  	              var $filename;
+  	              $(this).val() != '' ? $filename = $(this)[0].files[0].name : $filename = '파일선택';
+  	              $(this).siblings('.upload-name').val($filename); 
+   			});
 	});//ready
 </script>

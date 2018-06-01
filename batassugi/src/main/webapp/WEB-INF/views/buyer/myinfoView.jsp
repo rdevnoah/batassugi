@@ -129,8 +129,8 @@
 								<div class="col-md-7 col-sm-8">
 									<div class="input-group">
 									<button type="button" class="btn btn-primary btn-sm" onclick="sample6_execDaumPostcode()">주소 수정</button><br>
-										<input type="text" class="form-control" name="address"
-											id="sample6_address" readonly="readonly" value="${mvo.address}">
+										<input type="text" class="form-control" name="address" 
+											id="sample6_address" readonly="readonly" value="${mvo.address}" style="width: 100%;">
 									</div>
 								</div>
 							</div>
@@ -178,10 +178,12 @@
 								</label>
 								<div class="col-md-8 col-sm-8">
 									<div class="input-group formFirst">
-										<input type="file" name="file" id="file"
-											class="form-control upload" placeholder="프로필을 넣어주세요"
-											onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
-										<button type="button" onclick="ResetImgvalue();">취소</button>
+										<div class="filebox">
+											<input class="upload-name" value="파일선택" disabled="disabled">
+											<label class="btn btn-primary" for="file">업로드</label>
+											<input type="file" name="file" id="file" class="form-control upload upload-hidden" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
+											<button type="button" class="btn btn-danger" onclick="ResetImgvalue();">취소</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -190,16 +192,37 @@
 						<%-- 기호작물 --%>
 						<div class="col-md-6">
 							<div class="form-group formFirst">
-								<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span
+								<label class="control-label col-sm-3">기호 작물(3개까지 선택) <span
 									class="text-danger">*</span></label>
 								<div class="col-md-7 col-sm-9">
-									<div class="input-group">
+									<%-- <div class="input-group">
 										<c:forEach var="item" items="${list}">
 											<label> <input name="likeCrops"
 												id="likeCrops${item.cropsVo.cropsNo}" type="checkbox"
 												value="${item.cropsVo.cropsNo}">
 												${item.cropsVo.cropsName}
 											</label>
+										</c:forEach>
+									</div> --%>
+									<div class="col-xs-8">
+									<select id="cropsSelect" class="form-control">
+										<option value="">-------선택-------</option>
+										<c:forEach items="${list}" var="item">
+										<option value="${item.cropsVo.cropsNo}">${item.cropsVo.cropsName}</option>
+										</c:forEach>
+									</select>
+									<span class="cropsList" style="display: inline;">
+										<c:forEach items="${mvo.likeCrops}" var="crops">
+							    		   <a id="${crops.cropsName}" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="${crops.cropsName}">
+								    		   <img class="${crops.cropsName}" src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
+							    		   </a>
+										</c:forEach>
+    		   
+										</span>
+										<c:forEach items="${mvo.likeCrops}" var="crops">
+											<div class="" id="choise">
+												<input id="${crops.cropsName}" type="hidden" name="likeCropsNo" value="${crops.cropsNo}" />
+											</div>
 										</c:forEach>
 									</div>
 								</div>
@@ -227,6 +250,7 @@
 <%-- 전체 container --%>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -266,9 +290,6 @@
             }
         }).open();
     }
-</script>
-
-<script>
 
 	function autoSize(elt) {
 		var value = $(elt).val();
@@ -277,7 +298,7 @@
 	   	$(elt).css('width', inputWidth); 
 	    $('#virtual_dom').remove();
 	}
-	
+
 	// 업로드 이미지 가져오기
      function LoadImg(value) {
           if(value.files && value.files[0]) {
@@ -299,6 +320,7 @@
      function ResetImgvalue() {
     	// 프로필 이미지 리셋
 	 	$("#file").val("");
+	 	$('.upload-name').val('파일선택')
     	// 미리보기 이미지 리셋
     	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/${mvo.image}");
     	 if ($('#previewImg').attr('class')=="animated fadeIn") {
@@ -309,23 +331,24 @@
 	}
      
     $(document).ready(function() {
+    	
     	 autoSize($('#sample6_address'))
     		//DB에 저장된 checkbox리스트 가져와서 체크하기
-    		$.each(${mvo.likeCrops}, function(index,value) { 
+    		/* $.each(${mvo.likeCrops}, function(index,value) { 
     			var cropId='likeCrops'+value;
     			$("input:checkbox[id="+cropId+"]").prop("checked", true); 
-    		});
+    		}); */
     	
     		//checkbox 개수제한
     		
-    	$("input[name='likeCrops']").on("click" , function(){
+    	/* $("input[name='likeCrops']").on("click" , function(){
 			var cnt = $("input:checked[name='likeCrops']").length;
 			if(cnt > 3){
 				
 				$(this).prop("checked" , false);
 				BootstrapDialog.alert("선택은 3개까지 가능합니다.");
 			}
-		});
+		}); */
     	
     		
     	   // 패스워드 confirm 확인
@@ -384,7 +407,7 @@
     	            }else{               
     	               $("#checknicknameView").html(nickname+"는 사용 가능한 닉네임입니다.").css("color","#1e878d");      
     	               checkResultnickname=nickname;
-    	            }               
+    	            }         
     	         }//success      
     	      });//ajax
     	   });//keyup  
@@ -392,6 +415,15 @@
     		   
     		   //submit		   
     		   $("#register").submit(function(){
+    			   if ($(this).find('.cropsList img').length == 0) {
+			    	  BootstrapDialog.alert({
+			    		  type : 'danger',
+			    		  title : '기호작물 확인',
+			    		  message : '기호작물을 최소 1개이상 선택하세요',
+			    		  size : 'size-small'
+			    	  })
+			    	  return false;
+			      }
     		     if (checkResultPassword=="") {
     		    	  BootstrapDialog.alert({
    		        	   type : 'danger',
@@ -410,15 +442,65 @@
    		       	}); 
      		         return false;
     		      }
-    		      else if( $("#sample6_address").val()==""){
-    		    	  BootstrapDialog.alert({
-    		        	   type : 'danger',
-    		        	   title : '주소 확인',
-    		        	   message : '주소를 입력해주세요',
-    		        	   size:"size-small"
-    		       	}); 
-     		         return false;
-    		      }
+			      else if( $("#sample6_address").val()==""){
+			    	  BootstrapDialog.alert({
+			        	   type : 'danger',
+			        	   title : '주소 확인',
+			        	   message : '주소를 입력해주세요',
+			        	   size:"size-small"
+			       	}); 
+	 		         return false;
+			      }
+			      
     		   });//submit
+    		   
+    		   var $cropsSelect = $('#cropsSelect')
+    			,$cropsList = $('.cropsList')
+    	    	,$farmRegister = $('#farmRegister')
+    			,$choise = $('body').find('#choise');
+    	    
+   		   $('[data-toggle="popover"]').popover()
+   		   $('.cropsList a').on('click',function(){
+   			   var $cropsName = $(this).attr('id')
+   		    	$(this).parents().find('#'+$cropsName).popover('destroy')
+   		    	$(this).parents().find('#'+$cropsName).remove()
+   		    	$choise.find('#'+$cropsName).remove()
+   		    }) // click
+   		    
+   		   
+    		$cropsSelect.on('change', function() {
+    			if($(this).val() !== ""){
+	    	    	var $cropsName = $(this).find("option[value='" + $(this).val() + "']").text()
+	    	    		,$cropsA = $('<a id="'+$cropsName+'" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="'+$cropsName+'"></a>')
+	    	    		,$cropsImg = $('<img class="'+$cropsName+'" src="${pageContext.request.contextPath}/resources/img/crops_illur/'+$cropsName+'.png">')
+	    				,$inputCrops = $('<input id="'+$cropsName+'" type="hidden" name="likeCropsNo" value="'+$(this).val()+'" />')
+    			}
+    			if ($(this).parents().find('.cropsList img').length < 3) {
+    		    	if($cropsName != $cropsList.find('#'+$cropsName).attr('id')) {
+    		    		$cropsList.append($cropsA.append($cropsImg))
+    		    		$choise.append($inputCrops)
+    		    	} // if
+    			} // if
+    	   		$('[data-toggle="popover"]').popover()
+    	   		
+    		    $('.'+$cropsName).on('click',function(){
+    		    	$(this).parents().find('#'+$cropsName).popover('destroy')
+    		    	$(this).parents().find('#'+$cropsName).remove()
+    		    	$choise.find('#'+$cropsName).remove()
+    		    }) // click
+    	    }) // change
+    	    
+   		   var fileTarget = $('.filebox .upload-hidden'); 
+   		   fileTarget.on('change', function(){ // 값이 변경되면 
+   			 /*   if(window.FileReader){ // modern browser 
+   				   var filename = $(this)[0].files[0].name; 
+   			   } else { // old IE 
+   				   var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+  				   } // 추출한 파일명 삽입 
+  				   $(this).siblings('.upload-name').val(filename);  */
+  	              var $filename;
+  	              $(this).val() != '' ? $filename = $(this)[0].files[0].name : $filename = '파일선택';
+  	              $(this).siblings('.upload-name').val($filename); 
+   			});
 	});//ready
 </script>
