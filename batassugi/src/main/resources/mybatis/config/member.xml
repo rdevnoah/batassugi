@@ -59,8 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
   
   <!-- 회원 기호 작물 리스트로 가져오기 -->
-  <select id="findLikeCropsById" resultType="String">
-    select crops_no from  member_like_crops where id=#{memberVo.id}
+  <select id="findLikeCropsById" resultType="cropsVo">
+    select M.crops_no AS cropsNo, C.crops_name AS cropsName 
+    from member_like_crops M, crops C 
+    where M.crops_no = C.crops_no 
+    and M.id=#{memberVo.id}
   </select>
   
   <!-- 멤버 아이디 중복확인 -->

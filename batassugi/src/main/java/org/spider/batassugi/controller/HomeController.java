@@ -11,7 +11,6 @@ import org.spider.batassugi.model.service.admin.AccuseServiceIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
 import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +48,7 @@ public class HomeController {
   private MemberServiceIf memberService;
   @Resource
   private AccuseServiceIf accuseService;
-  
+
   /**
    * 기본 페이지로 이동.
    * 
@@ -89,9 +88,9 @@ public class HomeController {
     try {
       HttpSession session = request.getSession();
       MemberInfoVo mvo = memberService.login(vo);
-      //멤버 기호작물 List에 넣기
+      // 멤버 기호작물 List에 넣기
       memberService.findLikeCropsById(mvo);
-      
+
       session.setAttribute("mvo", mvo);
       Cookie[] cookies = request.getCookies();
       for (int i = 0; i < cookies.length; i++) {
@@ -119,12 +118,12 @@ public class HomeController {
    * @return
    */
   @RequestMapping("register")
-  public String register(@ModelAttribute("memberInfoVo") MemberInfoVo vo) {
+  public String register(@ModelAttribute("memberInfoVo") MemberInfoVo vo, String[] likeCropsNo) {
     // 1. memberState등록
-//    MemberStateVo mstVo = new MemberStateVo(null, "활동", null);
-//    memberService.registerMemberState(mstVo);
-//    // - member상태번호를 셋팅
-//    vo.getMemberVo().setState(mstVo.getStateNumber());
+    // MemberStateVo mstVo = new MemberStateVo(null, "활동", null);
+    // memberService.registerMemberState(mstVo);
+    // // - member상태번호를 셋팅
+    // vo.getMemberVo().setState(mstVo.getStateNumber());
 
     // 2. 프로필 이미지 업로드
     String path = "default.png";
@@ -139,7 +138,7 @@ public class HomeController {
     // - 이미지 처리 결과 경로를 vo에 넣음
     vo.setImage(path);
     // 3. DB에 데이터 적용
-    memberService.register(vo);
+    memberService.register(vo, likeCropsNo);
     return "redirect:home/register_success";
   }
 
@@ -186,7 +185,7 @@ public class HomeController {
   public Object checkNickname(String nickname) {
     return memberService.checkNickname(nickname);
   }
-  
+
   /**
    * 회원정보 등록폼으로 이동.
    * 
@@ -199,7 +198,7 @@ public class HomeController {
     model.addAttribute("list", memberService.getAllCropsList());
     return "home/registerView.tiles";
   }
-  
+
 
   @RequestMapping("common/accuse")
   public String registerAccuseInfo(AccusePostVo accusePostVo) {
@@ -217,22 +216,22 @@ public class HomeController {
     accuseService.registerAccuseInfo(accusePostVo);
     return "redirect:/home/accuse_success.tiles";
   }
-  
+
   /**
    * 회원정보 수정폼으로 이동.
    * 
    * @author "PL_Seonhwa"
-   * @param model
+   * @param model 모델객체.
    * @return
    */
   @RequestMapping("{dirName}/myinfoView")
-  public String adminMyinfoView(@PathVariable String dirName,Model model) {
+  public String adminMyinfoView(@PathVariable String dirName, Model model) {
     model.addAttribute("list", memberService.getAllCropsList());
-    if(dirName=="admin") {
+    if (dirName == "admin") {
       return dirName + "/myinfoView.tiles";
-    }else if(dirName=="seller") {
+    } else if (dirName == "seller") {
       return dirName + "/myinfoView.tiles";
-    }else {
+    } else {
       return dirName + "/myinfoView.tiles";
     }
   }
@@ -247,21 +246,21 @@ public class HomeController {
    */
   @RequestMapping("{dirName}/updateMemberInfo")
   public String updateMemberInfo(@ModelAttribute("memberInfoVo") MemberInfoVo uvo,
-      HttpServletRequest request,@PathVariable String dirName ) {
-    MemberInfoVo memberInfoVo = memberService.updateMemberInfo(uvo);
+      HttpServletRequest request, @PathVariable String dirName, String[] likeCropsNo) {
+    MemberInfoVo memberInfoVo = memberService.updateMemberInfo(uvo, likeCropsNo);
     memberService.findLikeCropsById(memberInfoVo);
     HttpSession session = request.getSession();
     session.setAttribute("mvo", memberInfoVo);
     return "redirect:updateMember_success";
   }
-  
-  
+
+
   @RequestMapping("common/accuse_board")
   public String getAllMemberList(Model model, HttpServletRequest request) {
-   MemberInfoVo mvo = (MemberInfoVo)request.getSession(false).getAttribute("mvo");
- 
-   List<MemberInfoVo> list = accuseService.getAllMemberList(mvo.getMemberVo().getId());
-   model.addAttribute("list", list);
-  return "home/accuse_board.tiles";
- }
+    MemberInfoVo mvo = (MemberInfoVo) request.getSession(false).getAttribute("mvo");
+
+    List<MemberInfoVo> list = accuseService.getAllMemberList(mvo.getMemberVo().getId());
+    model.addAttribute("list", list);
+    return "home/accuse_board.tiles";
+  }
 }

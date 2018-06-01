@@ -244,3 +244,13 @@ $harvestLevel.on('click', function() {
 	var harvestChange = setInterval(harvestChangeFn, 1000); // setInterval을 1초마다 실행
 	$harvestModal.open(); // 모달을 호출
 })
+
+function autoSize(elt) {
+		var value = $(elt).val();
+	    $('body').append('<span id="virtual_dom">' + value + '</span>'); 
+	   	var inputWidth =  $('#virtual_dom').width() + 30; // 글자 하나의 대략적인 크기 
+	   	$(elt).css('width', inputWidth); 
+	    $('#virtual_dom').remove();
+}
+
+autoSize($('#farmAddress'))

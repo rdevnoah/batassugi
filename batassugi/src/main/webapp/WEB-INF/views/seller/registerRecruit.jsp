@@ -13,37 +13,39 @@
             <div class="panel-body"><%-- 평수 --%>
               <div class="form-group col-xs-offset-1 col-xs-3">
                 <label>평수 : </label>
-                <input type="number" name="recruitSize" class="form-control" min="10" max="${recruitMap.rentSize}" required style="width: 30%;"><label class="text-danger">/ ${recruitMap.rentSize}</label>
+                <input type="number" name="recruitSize" class="form-control" min="10" max="${recruitMap.rentSize}" required style=" border: solid 0px">
+                <label class="text-danger">/ ${recruitMap.rentSize}</label>
               </div> <%-- form-group col-xs-offset-1 col-xs-3 --%>
               <%--재배가능농작물 --%>
               <div class="form-group col-xs-4">
                 <label>모집종료일 : </label>
-                <input type="date" id="recruitEnddate" required name="recruitEnddate">
+                <input type="date" id="recruitEnddate" required name="recruitEnddate" style=" border: solid 0px">
               </div> <%-- form-group col-xs-4 --%>
               <%-- 대여기간 --%>
               <div class="form-group col-xs-4">
                 <label>대여기간 : </label>
-                <input class="form-control" type="text" name="maxRentMonth" value="${recruitMap.maxMonth}" readonly style="width: 30%;">
+                <input id="regRentMonth" class="form-control" type="text" name="maxRentMonth" value="${recruitMap.maxMonth}" readonly  style="background-color: #ffffff; border: solid 0px;">
               </div> <%-- form-group col-xs-4 --%>
-              <%-- 농지주소 --%>
-              <div class="form-group col-xs-offset-1 col-xs-3">
-                <label>주소 : </label>
-                <input class="form-control" type="text" value="${recruitMap.farmVo.farmVo.farmAddress}" readonly style="width: 30%;">
-              </div> <%-- form-group col-xs-offset-1 col-xs-3 --%>
+              
               <%-- 농지임대자의 전화번호 --%>
-              <div class="form-group col-xs-4">
+              <div class="form-group col-xs-offset-1 col-xs-3">
                 <label>모집분류 : </label>
-                <input class="form-control" type="text" name="recruitKind" value="대여" readonly style="width: 33%;">
+                <input id="regKind" class="form-control" type="text" name="recruitKind" value="대여" readonly style="background-color: #ffffff; border: solid 0px">
               </div> <%-- form-group col-xs-4 --%>
               <%-- 평당 월 가격 --%>
               <div class="form-group col-xs-4">
                 <label>평당 월 가격 : </label>
-                  <input class="form-control" type="number" min="0" name="price" required="required" style="width: 45%;" placeholder="가격을 입력하세요">
+                  <input class="form-control" type="number" min="0" name="price" required="required" placeholder="가격을 입력하세요" style=" border: solid 0px">
               </div> <%-- form-group col-xs-4 --%>
+              <%-- 농지주소 --%>
+              <div class="form-group col-xs-offset-1 col-xs-8">
+                <label>주소 : </label>
+                <input id="regAddress" class="form-control" type="text" value="${recruitMap.farmVo.farmVo.farmAddress}" readonly style="background-color: #ffffff; border: solid 0px">
+              </div> <%-- form-group col-xs-offset-1 col-xs-3 --%>
               <%-- 상세내용 --%>
               <div class="form-group col-xs-offset-1 col-xs-10"><br>
                 <h5>상세내용</h5>
-                <textarea name="recruitContent" required="required" style="width : 100%; border: solid 1px; height: 100px; overflow-y: scroll;"></textarea>
+                <textarea name="recruitContent" required="required" style="width : 100%; border: solid 1px; border-color: lightgray; height: 100px; overflow-y: scroll;"></textarea>
               </div>
             </div> <%-- form-group col-xs-offset-1 col-xs-10 --%>
           </div> <%-- panel-body --%>
@@ -58,6 +60,23 @@
   </div> <%-- row --%> 
   
   <script>
+  var arrayElt = ['#regAddress','#regRentMonth','#regKind'];	
+  function autoSize(elt) {
+		var value = $(elt).val();
+	    $('body').append('<span id="virtual_dom">' + value + '</span>'); 
+	    var inputWidth = $('#virtual_dom').width();
+	    /\D/g.test(value) ? $(elt).css('width', (inputWidth+40)) : $(elt).css('width', (inputWidth+25)) 
+	    $('#virtual_dom').remove();
+	}
+	
+	function arrayAutoSize(arrayElt) {
+		$.each(arrayElt, function(i, elt) {
+			autoSize(elt)
+		})
+	}
+	
+	arrayAutoSize(arrayElt)
+	
   	function recruitCheck(){
   	  var enddate = new Date();
 	   enddate = $("#recruitEnddate").val();

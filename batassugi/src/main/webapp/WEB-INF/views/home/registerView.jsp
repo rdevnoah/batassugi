@@ -24,7 +24,7 @@
          	<%-- 1단 --%> 	
             <div class="col-md-6">
               <%-- 아이디 --%>
-              <div class="form-group">
+              <div class="form-group formFirst">
                 <label class="control-label col-sm-3">아이디 <span class="text-danger">*</span></label>
                 <div class="col-md-8 col-sm-9">
                   <div class="input-group">
@@ -92,7 +92,7 @@
             <%-- 2단 --%>            
             <div class="col-md-6">
               <%-- 회원 이메일 --%>
-               <div class="form-group">
+               <div class="form-group formFirst">
                 <label class="control-label col-sm-3"> 이메일 <span class="text-danger">*</span></label>
                 <div class="col-md-7 col-sm-9">
                   <div class="input-group">
@@ -175,34 +175,48 @@
 		 <div class="row">
            <%--1단 --%>
            <div class="subInfo">
-           <div class="col-md-6">
-          	<div class="form-group ">
-	          	<label class="control-label col-sm-3">
-	          		<img src="${pageContext.request.contextPath}/resources/img/profile_img/default.png" width="100px" id="previewImg"/><br>
-	                프로필 미리보기
-	          	</label>
-	          	<div class="col-md-8 col-sm-8">
-                  <div class="input-group">
-                    <span class="input-group-addon" id="file_upload"></span> 
-                    <input type="file" name="file" id="file" class="form-control upload" placeholder="프로필을 넣어주세요" 
-                     onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
-                    <button type="button" onclick="ResetImgvalue();" id="cancelButton">취소</button>
-                    </div>
-                </div>
-			</div>
-            </div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="control-label col-sm-3"> 
+						<img src="${pageContext.request.contextPath}/resources/img/profile_img/default.png"
+							width="100px" id="previewImg" /><br> 프로필 미리보기
+						</label>
+						<div class="col-md-8 col-sm-8">
+							<div class="input-group formFirst">
+								<div class="filebox"><div style="width: 30%;">&nbsp;</div>
+									<input class="upload-name" value="파일선택" disabled="disabled" style="margin-left: 30px;">
+									<label class="btn btn-primary" for="file">업로드</label>
+									<input type="file" name="file" id="file" class="form-control upload upload-hidden" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" aria-describedby="file_upload" accept=".gif, .jpg, .png">
+									<button type="button" class="btn btn-danger" onclick="ResetImgvalue();">취소</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
             <%-- 2단 --%> 
             <%-- 기호작물 --%>
             <div class="col-md-6">
             <div class="form-group">
           	<label class="control-label col-sm-3">기호 작물(3개까지 체크) <span class="text-danger">*</span></label>
                 <div class="col-md-7 col-sm-9">
-                  <div class="input-group">
+                  <%-- <div class="input-group">
                     <span class="input-group-addon"></span> 
                     <c:forEach var="item" items="${list}">
         				<label > <input name="likeCrops" id="likeCrops${item.cropsVo.cropsNo}" type="checkbox" value="${item.cropsVo.cropsNo}"> ${item.cropsVo.cropsName} </label>
        				 </c:forEach> 
-                  </div>
+                  </div> --%>
+                  <div class="col-xs-8">
+					<select id="cropsSelect" class="form-control" style="margin-left: 10px;">
+						<option value="">-----------선택-----------</option>
+						<c:forEach items="${list}" var="item">
+						<option value="${item.cropsVo.cropsNo}">${item.cropsVo.cropsName}</option>
+						</c:forEach>
+					</select>
+					<span class="regCropsList" style="display: inline;">
+					</span>
+					<div class="" id="choise">
+					</div>
+					</div>
                 </div>
 			</div>
             </div>
@@ -281,6 +295,7 @@
      function ResetImgvalue() {
     	// 프로필 이미지 리셋
 	 	$("#file").val("");
+	 	$('.upload-name').val('파일선택')
     	// 미리보기 이미지 리셋
     	$('#previewImg').attr('src', "${pageContext.request.contextPath}/resources/img/profile_img/default.png");
     	 if ($('#previewImg').attr('class')=="animated fadeIn") {
@@ -481,6 +496,47 @@
      		         return false;
     		      }
     		   });//submit
+    		   
+       		   var fileTarget = $('.filebox .upload-hidden'); 
+       		   fileTarget.on('change', function(){ // 값이 변경되면 
+       			 /*   if(window.FileReader){ // modern browser 
+       				   var filename = $(this)[0].files[0].name; 
+       			   } else { // old IE 
+       				   var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출 
+      				   } // 추출한 파일명 삽입 
+      				   $(this).siblings('.upload-name').val(filename);  */
+      	              var $filename;
+      	              $(this).val() != '' ? $filename = $(this)[0].files[0].name : $filename = '파일선택';
+      	              $(this).siblings('.upload-name').val($filename); 
+       			});
+       		   
+    		var $cropsSelect = $('#cropsSelect')
+   			,$cropsList = $('.regCropsList')
+   	    	,$farmRegister = $('#farmRegister')
+   			,$choise = $('body').find('#choise');
+    		
+       		$cropsSelect.on('change', function() {
+    			if($(this).val() !== ""){
+	    	    	var $cropsName = $(this).find("option[value='" + $(this).val() + "']").text()
+	    	    		,$cropsA = $('<a id="'+$cropsName+'" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="'+$cropsName+'"></a>')
+	    	    		,$cropsImg = $('<img class="'+$cropsName+'" src="${pageContext.request.contextPath}/resources/img/crops_illur/'+$cropsName+'.png">')
+	    				,$inputCrops = $('<input id="'+$cropsName+'" type="hidden" name="likeCropsNo" value="'+$(this).val()+'" />')
+    			}
+    			if ($(this).parents().find('.regCropsList img').length < 3) {
+    		    	if($cropsName != $cropsList.find('#'+$cropsName).attr('id')) {
+    		    		$cropsList.append($cropsA.append($cropsImg))
+    		    		$choise.append($inputCrops)
+    		    	} // if
+    			} // if
+    	   		$('[data-toggle="popover"]').popover()
+    	   		
+    		    $('.'+$cropsName).on('click',function(){
+    		    	$(this).parents().find('#'+$cropsName).popover('destroy')
+    		    	$(this).parents().find('#'+$cropsName).remove()
+    		    	$choise.find('#'+$cropsName).remove()
+    		    }) // click
+    	    }) // change
+    		   
 	})//ready
      
 	

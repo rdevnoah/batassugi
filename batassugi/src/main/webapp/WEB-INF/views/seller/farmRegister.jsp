@@ -106,9 +106,17 @@ function sample6_execDaumPostcode() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample6_address').value = fullAddr;
-            $('#sample6_address').css('width', $('#sample6_address')[0].scrollWidth + 10);
+            autoSize($('#sample6_address'))
         }
     }).open();
+}
+
+function autoSize(elt) {
+	var value = $(elt).val();
+    $('body').append('<span id="virtual_dom">' + value + '</span>'); 
+   	var inputWidth =  $('#virtual_dom').width() + 30; // 글자 하나의 대략적인 크기 
+   	$(elt).css('width', inputWidth); 
+    $('#virtual_dom').remove();
 }
 
 function checkRegisterFarm(){

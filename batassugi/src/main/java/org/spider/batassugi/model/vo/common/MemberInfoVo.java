@@ -2,6 +2,7 @@ package org.spider.batassugi.model.vo.common;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -35,7 +36,7 @@ public class MemberInfoVo {
   private String gender;
   private Date regdate;
   private String image;
-  private List<String> likeCrops;
+  private List<CropsVo> likeCrops;
   private MultipartFile file;
 
   public MemberInfoVo() {
@@ -58,7 +59,8 @@ public class MemberInfoVo {
    * @param file 사용자 프로필 이미지 업로드시 사용할 파일객체.
    */
   public MemberInfoVo(MemberVo memberVo, String email, String tel, String address, String birthday,
-      String gender, Date regdate, String image, List<String> likeCrops, MultipartFile file) {
+      String gender, Date regdate, String image, List<CropsVo> likeCrops,
+      MultipartFile file) {
     super();
     this.memberVo = memberVo;
     this.email = email;
@@ -136,11 +138,11 @@ public class MemberInfoVo {
     this.image = image;
   }
 
-  public List<String> getLikeCrops() {
+  public List<CropsVo> getLikeCrops() {
     return likeCrops;
   }
 
-  public void setLikeCrops(List<String> likeCrops) {
+  public void setLikeCrops(List<CropsVo> likeCrops) {
     this.likeCrops = likeCrops;
   }
 
@@ -160,6 +162,8 @@ public class MemberInfoVo {
   public void setId(String id) {
     this.id = id;
   }
+  
+  
 
   @Override
   public String toString() {

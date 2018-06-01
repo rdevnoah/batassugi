@@ -1,15 +1,12 @@
 package org.spider.batassugi.model.dao.common;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
-
 import org.mybatis.spring.SqlSessionTemplate;
-import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Repository;
 
@@ -91,7 +88,7 @@ public class MemberDao implements MemberDaoIf {
   }
 
   @Override
-  public List<String> findLikeCropsById(MemberInfoVo mvo) {
+  public List<CropsVo> findLikeCropsById(MemberInfoVo mvo) {
     return template.selectList("member.findLikeCropsById",mvo);
   }
 
