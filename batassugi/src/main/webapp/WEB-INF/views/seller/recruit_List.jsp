@@ -58,8 +58,8 @@
 				</c:if>
 			</div> <%-- 페이지 번호 div --%>
             <div>
-            	<button id="confirmBtn">승인</button>
-            	<button id="rejectBtn">거절</button>
+            	<button id="confirmBtn" class="btn btn-primary">승인</button>
+            	<button id="rejectBtn" class="btn btn-default">거절</button>
             </div> <%-- 승인, 거절 버튼 div --%>
         </div> <%-- col-sm-offset-2 col-sm-8 --%>
     </div> <%-- row main --%>

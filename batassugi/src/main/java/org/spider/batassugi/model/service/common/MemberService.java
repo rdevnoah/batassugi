@@ -2,6 +2,7 @@ package org.spider.batassugi.model.service.common;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,8 @@ import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.dao.common.PathInfo;
 import org.spider.batassugi.model.exception.LoginException;
 import org.spider.batassugi.model.vo.common.CropsInfoVo;
+import org.spider.batassugi.model.vo.common.CropsVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
-import org.spider.batassugi.model.vo.common.MemberStateVo;
 import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,9 +58,9 @@ public class MemberService implements MemberServiceIf, PathInfo {
       throw new LoginException("아이디가 존재하지 않습니다.");
     } else if (!password.equals(memberVo.getPassword())) {
       throw new LoginException("비밀번호가 다릅니다.");
-    } else if (Integer.parseInt(memberVo.getState())==2) {
-        throw new LoginException("3개월동안 활동이 중지된 회원입니다. 관리자에게 문의하세요.");
-    } else if (Integer.parseInt(memberVo.getState())==3) {
+    } else if (Integer.parseInt(memberVo.getState()) == 2) {
+      throw new LoginException("3개월동안 활동이 중지된 회원입니다. 관리자에게 문의하세요.");
+    } else if (Integer.parseInt(memberVo.getState()) == 3) {
       throw new LoginException("강제 탈퇴된 회원입니다.");
     }
     return memberDao.login(vo);
@@ -102,12 +103,13 @@ public class MemberService implements MemberServiceIf, PathInfo {
     memberDao.registerExtend(vo);
 
     if (vo.getLikeCrops() != null) {
-      List<String> likeCrops = vo.getLikeCrops();
+      List<CropsVo> likeCrops = vo.getLikeCrops();
 
-      for (String crops : likeCrops) {
+      for (CropsVo crops : likeCrops) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("id", vo.getMemberVo().getId());
-        map.put("crops", crops);
+        map.put("crops", crops.getCropsNo());
+        map.put("cropsName", crops.getCropsName());
         memberDao.registerLikeCrop(map);
       }
     }
@@ -138,14 +140,14 @@ public class MemberService implements MemberServiceIf, PathInfo {
 
     // 없으면 셋팅 안함, 있으면 List형태로 넣어줌
     if (cropsNumber > 0) {
-      List<String> cropsList = memberDao.findLikeCropsById(mvo);
+      List<CropsVo> cropsList = memberDao.findLikeCropsById(mvo);
       mvo.setLikeCrops(cropsList);
     }
   }
 
   @Override
   @Transactional
-  public MemberInfoVo updateMemberInfo(MemberInfoVo uvo) {
+  public MemberInfoVo updateMemberInfo(MemberInfoVo uvo, String[] likeCropsNo) {
     // 1. 기존회원정보 가져오기
     MemberInfoVo orgVo = memberDao.findMemberInfoById(uvo.getMemberVo().getId());
 
@@ -165,7 +167,14 @@ public class MemberService implements MemberServiceIf, PathInfo {
         e.printStackTrace();
       }
     }
-
+    
+    // 기호 작물 정보를 가져와서 기호작물을 넣어준다. 
+    List<CropsVo> updateCrops = new ArrayList<CropsVo>();
+    for (int i = 0; i < likeCropsNo.length; i++) {
+      updateCrops.add(new CropsVo(likeCropsNo[i]));
+    }
+    uvo.setLikeCrops(updateCrops);
+    
     // 4. DB에 정보 update
     memberDao.updateMember(uvo.getMemberVo());
     memberDao.updateMemberInfo(uvo);
@@ -175,11 +184,12 @@ public class MemberService implements MemberServiceIf, PathInfo {
       // - 기존 작물 지움
       memberDao.deleteLikeCrops(orgVo.getMemberVo().getId());
       // - 새로운 작물 등록
-      List<String> likeCrops = uvo.getLikeCrops();
-      for (String crops : likeCrops) {
+      List<CropsVo> likeCrops = uvo.getLikeCrops();
+      for (CropsVo crops : likeCrops) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("id", uvo.getMemberVo().getId());
-        map.put("crops", crops);
+        map.put("crops", crops.getCropsNo());
+        map.put("cropsName", crops.getCropsName());
         memberDao.registerLikeCrop(map);
       }
     }
@@ -191,6 +201,11 @@ public class MemberService implements MemberServiceIf, PathInfo {
   public List<CropsInfoVo> getAllCropsList() {
     List<CropsInfoVo> list = memberDao.getAllCropsList();
     return list;
+  }
+
+  @Override
+  public MemberInfoVo updateMemberInfo(MemberInfoVo uvo) {
+    return null;
   }
 
 }

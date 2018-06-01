@@ -262,13 +262,22 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_address').value = fullAddr;
-                $('#sample6_address').css('width', $('#sample6_address')[0].scrollWidth + 10);
+                autoSize($('#sample6_address'))
             }
         }).open();
     }
 </script>
 
 <script>
+
+	function autoSize(elt) {
+		var value = $(elt).val();
+	    $('body').append('<span id="virtual_dom">' + value + '</span>'); 
+	   	var inputWidth =  $('#virtual_dom').width() + 30; // 글자 하나의 대략적인 크기 
+	   	$(elt).css('width', inputWidth); 
+	    $('#virtual_dom').remove();
+	}
+	
 	// 업로드 이미지 가져오기
      function LoadImg(value) {
           if(value.files && value.files[0]) {
@@ -300,7 +309,7 @@
 	}
      
     $(document).ready(function() {
-    	$('#sample6_address').css('width', $('#sample6_address')[0].scrollWidth + 10);
+    	 autoSize($('#sample6_address'))
     		//DB에 저장된 checkbox리스트 가져와서 체크하기
     		$.each(${mvo.likeCrops}, function(index,value) { 
     			var cropId='likeCrops'+value;

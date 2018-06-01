@@ -16,7 +16,7 @@ var $closeSide = $('#closeSide'),
 	$searchCategory = $('#searchCategory'),
 	$searchForm = $('#searchForm'),
 	$fail = $('body').find('#fail').text(),
-	$success = $('body').find('#success').text();
+	$success = $('body').find('#success').text()
 	
 	
 // 대여신청 성공시 RedirectAttribute 객체를 받아서 메세지 출력
@@ -228,3 +228,20 @@ $rentForm.on('submit', function() {
 		var $keyword = $(this).children('.form-group:nth(1)').children('#searchKeyword').val().replace(/\s/g, '');
 		sendPost('findRentListByKeyword', {'keyword':$keyword,'category':$category})
 	})
+	var $textElt = ['#farmAddress','#farmTel','#farmPrice']
+
+	function autoSize(elt) {
+		var value = $(elt).val();
+	    $('body').append('<span id="virtual_dom">' + value + '</span>'); 
+	    var inputWidth = $('#virtual_dom').width();
+	    /\D/g.test(value) ? $(elt).css('width', (inputWidth+50)) : $(elt).css('width', (inputWidth+15)) 
+	    $('#virtual_dom').remove();
+	}
+	
+	function arrayAutoSize(arrayElt) {
+		$.each(arrayElt, function(i, elt) {
+			autoSize(elt)
+		})
+	}
+	
+	arrayAutoSize($textElt)

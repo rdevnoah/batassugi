@@ -116,5 +116,14 @@ public interface MemberServiceIf {
    */
   public List<CropsInfoVo> getAllCropsList();
 
+  /**
+   * 여기에 설명을 쓰시오.
+   * @author "SL SangUk Lee"
+   * @param uvo
+   * @param likeCropsNo
+   * @return
+   */
+  MemberInfoVo updateMemberInfo(MemberInfoVo uvo, String[] likeCropsNo);
+
  
 }

@@ -11,6 +11,9 @@ insert into member_state(state_number,state_set) values(1,'활동');
 insert into member_state(state_number,state_set) values(2,'중단');
 insert into member_state(state_number,state_set) values(3,'탈퇴'); 
 
+
+insert into member_like_crops (id, crops_No) values('zzagam2', '2')
+select * from member_like_crops
 select * from spider_member
 
 select * from accuse

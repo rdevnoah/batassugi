@@ -100,13 +100,16 @@
 										<td>평수 : </td><td><span id="farmSize"></span></td>
 									<tr>
 									<tr>
-										<td>농지 주소 : </td><td><span id="farmAddress"></span></td>
+										<td style="width: 35%;">농지 주소 : </td><td><span id="farmAddress" style="display: inline;"></span></td>
 									</tr>
 									<tr>
 										<td>등록만료일 : </td><td><span id="farmEnddate"></span></td>
 									</tr>
 									<tr>
-										<td>재배가능작물 : </td><td><span id="crops"></span></td>
+										<td>재배가능작물 </td><td></td>
+									</tr>
+									<tr class="text-left">
+										<td colspan="2"><span style="width: 27%;"></span><span id="crops"></span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -151,16 +154,22 @@ $(document).ready(function() {
 						$data.rentSize=0;
 					}
 					
-					var crops='';
-					for (var i=0 ; i < data.farmVo.cropsVo.length ; i++){
+					/* var crops=''; */
+					/* for (var i=0 ; i < data.farmVo.cropsVo.length ; i++){
 						crops+=data.farmVo.cropsVo[i].cropsName+' ';
-					}
-					
+					} */
+					var $crops =''
+						,$cropsImg = '';
 					$("#farmImage").html("<img src='${pageContext.request.contextPath}/resources/img/farm_photo/"+data.farmVo.image+"' style='height:170px;''>");
 					$("#farmSize").html(data.farmVo.farmSize);
 					$("#farmAddress").html(data.farmVo.farmAddress);
 					$("#farmEnddate").html(data.farmVo.farmEnddate);
-					$("#crops").html(crops);
+					$.each(data.farmVo.cropsVo,function(i, cropsVo){
+						$crops = $('<a id="'+cropsVo.cropsName+'" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="'+cropsVo.cropsName+'">')
+						$cropsImg = $('<img src="${pageContext.request.contextPath}/resources/img/crops_illur/'+cropsVo.cropsName+'.png">')
+						$('#crops').find('#'+cropsVo.cropsName).attr('data-content') !== cropsVo.cropsName && $("#crops").append($crops.append($cropsImg));
+					})
+					$('[data-toggle="popover"]').popover()
 					/* $("#crops").html(crops); */
 					var buyerTable='';
 					for (var i=0 ; i< data.rentList.length ; i++){
