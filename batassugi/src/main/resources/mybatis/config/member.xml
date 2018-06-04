@@ -125,15 +125,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
   </select>
   
-  
-  
+  <!-- scheduler를 활용해 자동으로 멤버의 정지를 해제해주기 위한 쿼리문입니다. -->
   <update id="updateMemberStateRelease" parameterType="string">
     update SPIDER_MEMBER
     set state_number=state_number-1
     where id=#{value}
   </update>
   
-  
+  <!-- 정지 해제를 위해 날짜 계산을 필요로 하기 때문에 오늘 날짜를 가져오는 쿼링문입니다. -->
   <select id="getSysdate" resultType="string">
     select to_char(sysdate,'yyyy-mm-dd') from dual
   </select>
@@ -154,24 +153,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     set password=#{password}, nickname=#{nickname} 
     where id=#{id}
   </update>
-  <!-- 멤버 상태 (정지날짜) 업데이트 -->
   
+  <!-- 멤버 상태 (정지날짜) 업데이트 -->
   <update id="updateMemberStateNumberPlus">
     update SPIDER_MEMBER
     set state_number=state_number+1, stopdate=sysdate
     where id=#{value}
   </update>
   <update id="updateMemberStateNumber2Plus">
-  update SPIDER_MEMBER
-  set state_number=state_number+2, stopdate=sysdate
-  where id=#{value}
+    update SPIDER_MEMBER
+    set state_number=state_number+2, stopdate=sysdate
+    where id=#{value}
   </update>
   <update id="updateMemberStateNumberMinus">
     update SPIDER_MEMBER
     set state_number=state_number-1, stopdate=null
     where id=#{value}
   </update>
-  
   <update id="updateMemberStopDate" parameterType="string">
     update spider_member
     set stopdate=sysdate where id=#{value}

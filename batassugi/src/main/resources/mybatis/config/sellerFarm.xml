@@ -64,10 +64,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     where m.id=mi.id and r.id=m.id and c.crops_no=r.crops_no and r.rent_no=#{rentNo}
   </select>
   
+  <!-- 모집하는 농지의 크기를 가져오기 위한 쿼리문입니다. -->
   <select id="findRecruitSizeByFarmNo" parameterType="string" resultType="string">
     select sum(recruit_size) as recruitSize from recruit where farm_no=#{farmNo}
   </select>
   
+  <!-- 대여 중인 농지의 크기를 가져오기 위한 쿼리문입니다. -->
   <select id="findRentSizeByFarmNo" parameterType="string" resultType="string">
     select sum(r.rent_size) from rent r, recruit rc, farm f
     where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo} and r.rent_status='대여중'
