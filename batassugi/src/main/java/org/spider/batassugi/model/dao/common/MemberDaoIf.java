@@ -169,23 +169,61 @@ public interface MemberDaoIf {
    * @return
    */
   public String findStateNumberById(String reportedId);
-
+  
+  /**
+   * 3번 이상 신고를 먹은 회원의 상태를 정지상태로 변경하기 위한 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param reportedId
+   */
   public void updateMemberStateNumberPlus(String reportedId);
 
+  /**
+   * 정지 기간인 3개월이 지났을 경우, 회원 상태를 활동으로 변경해주는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param reportedId
+   */
   public void updateMemberStateNumberMinus(String reportedId);
   
+  /**
+   * 5번 이상 신고된 회원을 탈퇴시키는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param reportedId
+   */
   public void updateMemberStateNumber2Plus(String reportedId);
 
-
+  /**
+   * 모든 회원의 정보를 불러오는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @return
+   */
   public List<MemberInfoVo> getAllMemberInfo();
 
-
+  /**
+   * 오늘 날짜를 불러오는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @return
+   */
   public String getSysdate();
 
-
+  /**
+   * 정지된지 3개월이 된 회원의 정지를 풀어주는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param id
+   */
   public void updateMemberStateRelease(String id);
 
-
+  /**
+   * 회원 정지 날짜를 업데이트하는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param id
+   */
   public void updateMemberStopDate(String id);
 
 

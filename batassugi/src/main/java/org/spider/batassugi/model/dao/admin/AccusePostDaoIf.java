@@ -5,11 +5,30 @@ import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.common.MemberInfoVo;
 
 public interface AccusePostDaoIf {
-
+	
+  /**
+   * 신고게시판에서 모든 멤버 아이디를 불러오기 위한 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param id
+   * @return
+   */
   public List<MemberInfoVo> getAllMemberList(String id);
 
+  /**
+   * 신고 게시판에서 입력된 정보를 DB에 저장하기 위한 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param accusePostVo
+   */
   public void registerAccuseInfo(AccusePostVo accusePostVo);
 
+  /**
+   * 모든 신고 리스트를 불러오는 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @return
+   */
   public List<AccusePostVo> getAllAccuseList();
 
 
