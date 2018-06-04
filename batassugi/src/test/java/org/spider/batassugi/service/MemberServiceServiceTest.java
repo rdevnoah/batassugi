@@ -1,14 +1,12 @@
 package org.spider.batassugi.service;
 
-import java.sql.Date;
-
-import java.util.List;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.spider.batassugi.model.dao.common.MemberDaoIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
-import org.spider.batassugi.model.vo.common.MemberInfoVo;import org.spider.batassugi.model.vo.common.MemberVo;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
+import org.spider.batassugi.model.vo.common.MemberVo;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -52,7 +50,7 @@ public class MemberServiceServiceTest {
     } catch (LoginException e) {
       e.printStackTrace();
     }*/
-    }
+  }
 
     // 멤버 로그인 테스튼
     //System.out.println(memberDao.login(vo));
@@ -68,12 +66,8 @@ public class MemberServiceServiceTest {
      */
 
     // 멤버 상태 등록
-   /* MemberStateVo mstVo=new MemberStateVo(null,"활동",null);
-=======
-    MemberStateVo mstVo = new MemberStateVo(null, "활동", null);
->>>>>>> refs/heads/develop_to_buyer
+    /* MemberStateVo mstVo=new MemberStateVo(null,"활동",null);
     memberService.registerMemberState(mstVo);
-<<<<<<< HEAD
     System.out.println(mstVo.getStateNumber()); */
     /*MemberVo avo = new MemberVo("admin", "1234", "서정우", "스승님", null, null, null);
     MemberInfoVo amvo = new MemberInfoVo(avo, "teacher@kosta.com", "01012345678", "경기도 판교",
@@ -85,13 +79,14 @@ public class MemberServiceServiceTest {
       System.out.println(crop);*/
     
     // 멤버 전체 정보 가져오기
-   /* MemberInfoVo orgMvo = memberDao.findMemberInfoById("admin");
+    /* MemberInfoVo orgMvo = memberDao.findMemberInfoById("admin");
     System.out.println(orgMvo)*/;
     
     // 멤버 업데이트 확인
     /*MemberVo memberVo=new MemberVo("admin","1234","관리자","관리자a", null, null, null);
     memberDao.updateMember(memberVo);
-    MemberInfoVo memberInfoVo=new MemberInfoVo(memberVo, "admin@kosta.com", "01012345679", "경기도 판교", null, null, null, "default.png", null, null);
+    MemberInfoVo memberInfoVo=new MemberInfoVo(memberVo, "admin@kosta.com", "01012345679", 
+    "경기도 판교", null, null, null, "default.png", null, null);
     memberDao.updateMemberInfo(memberInfoVo);
     System.out.println(memberInfoVo);
     System.out.println(memberDao.findMemberInfoById("admin"));

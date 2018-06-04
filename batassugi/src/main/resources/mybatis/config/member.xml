@@ -128,14 +128,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   
   <update id="updateMemberStateRelease" parameterType="string">
-  		update SPIDER_MEMBER
-  		set state_number=state_number-1
-  		where id=#{value}
+    update SPIDER_MEMBER
+    set state_number=state_number-1
+    where id=#{value}
   </update>
   
   
   <select id="getSysdate" resultType="string">
-  	select to_char(sysdate,'yyyy-mm-dd') from dual
+    select to_char(sysdate,'yyyy-mm-dd') from dual
   </select>
   
   <!-- 멤버 작물 리스트 삭제 -->
@@ -157,24 +157,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 멤버 상태 (정지날짜) 업데이트 -->
   
   <update id="updateMemberStateNumberPlus">
-  	update SPIDER_MEMBER
-  	set state_number=state_number+1, stopdate=sysdate
-  	where id=#{value}
+    update SPIDER_MEMBER
+    set state_number=state_number+1, stopdate=sysdate
+    where id=#{value}
   </update>
   <update id="updateMemberStateNumber2Plus">
-  	update SPIDER_MEMBER
-  	set state_number=state_number+2, stopdate=sysdate
-  	where id=#{value}
+  update SPIDER_MEMBER
+  set state_number=state_number+2, stopdate=sysdate
+  where id=#{value}
   </update>
   <update id="updateMemberStateNumberMinus">
-  	update SPIDER_MEMBER
-  	set state_number=state_number-1, stopdate=null
-  	where id=#{value}
+    update SPIDER_MEMBER
+    set state_number=state_number-1, stopdate=null
+    where id=#{value}
   </update>
   
   <update id="updateMemberStopDate" parameterType="string">
-  	update spider_member
-  	set stopdate=sysdate where id=#{value}
+    update spider_member
+    set stopdate=sysdate where id=#{value}
   </update>
   <!-- 멤버 상태 번호 가져오기 -->
   <select id="findStateNumberById" resultType="string">

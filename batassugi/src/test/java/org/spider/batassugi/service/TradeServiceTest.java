@@ -20,9 +20,10 @@ public class TradeServiceTest {
    * @author "SL SangUk Lee"
    */
   @Test
-  public void TradeServiceTest(){
+  public void tradeServiceTest() {
     int totalCount = tradePostDao.getTotalTradePostCount();
     System.out.println("거래게시판 총 개수 : " + totalCount);
-    System.out.println("페이징테스트 : " + tradePostDao.findTradePostList(new BuyerPagingBean(totalCount,2)));
+    System.out
+        .println("페이징테스트 : " + tradePostDao.findTradePostList(new BuyerPagingBean(totalCount, 2)));
   }
 }
