@@ -199,7 +199,13 @@ public class HomeController {
     return "home/registerView.tiles";
   }
 
-
+  /**
+   * 신고 처리를 위한 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param accusePostVo
+   * @return
+   */
   @RequestMapping("common/accuse")
   public String registerAccuseInfo(AccusePostVo accusePostVo) {
     String path = "default.png";
@@ -254,7 +260,14 @@ public class HomeController {
     return "redirect:updateMember_success";
   }
 
-
+  /**
+   * 신고게시판에서 모든 회원의 닉네임을 불러오기 위한 메소드.
+   * 
+   * @author "DL KimJieun"
+   * @param model
+   * @param request
+   * @return
+   */
   @RequestMapping("common/accuse_board")
   public String getAllMemberList(Model model, HttpServletRequest request) {
     MemberInfoVo mvo = (MemberInfoVo) request.getSession(false).getAttribute("mvo");
