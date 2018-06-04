@@ -220,7 +220,7 @@ $harvestLevel.on('click', function() {
 	($harvestStatus > 40 && $harvestStatus < 61) && (harvestNum = 3),
 	($harvestStatus > 60 && $harvestStatus < 81) && (harvestNum = 4),
 	$harvestStatus > 80 && (harvestNum = 5)
-		
+	
 	$harvestModal.realize(); // modal.open()메서드를 사용하면 자동으로 호출되지만, 모달이 호출되기전에 조작을 하기위해서 사용.
 	var $harvestImg = $harvestModal.getModalBody().find('.harvest'), // 모달안에 있는 img 태그
 		$progressBar = $harvestModal.getModalBody().find('.progress'), // 모달안에 있는 진행바 태그

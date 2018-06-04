@@ -42,12 +42,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *      <pre>
  * == Modification Information ==
  * 
- * Date         AUTHOR           NOTE
- * -----------  -------------    --------------------------------
- * 2018. 5. 14. "SM HyeonGil Kim"   최초작성
- * 2018. 5. 16. "SL SangUk Lee"     getRentList 메서드 추가 
- * 2018. 5. 17. "SL SangUk Lee"     findRentDetailByRecruitNo 메서드 추가
- * 2018. 5. 17. "SL SangUk Lee"     registerRentByRentVo 메서드 추가
+ * Date          AUTHOR             NOTE
+ * ------------  -----------------  --------------------------------
+ * 2018. 5. 14.  "SM HyeonGil Kim"  최초작성
+ * 2018. 5. 16.  "SL SangUk Lee"    getRentList 메서드 추가 
+ * 2018. 5. 17.  "SL SangUk Lee"    findRentDetailByRecruitNo 메서드 추가
+ * 2018. 5. 17.  "SL SangUk Lee"    registerRentByRentVo 메서드 추가
  * 2018. 5. 14.  "SM HyeonGil Kim"  최초작성
  * 2018. 5. 15.  "SL SangUk Lee"    거래게시판 매핑 메서드 추가
  * 2018. 5. 15.  "SL SangUk Lee"    거래게시판 목록, 페이징 완료

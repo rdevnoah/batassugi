@@ -348,6 +348,14 @@ input[type="file"], input[type="button"] {
 #crops_checked{
 	margin-left:2px;
 }
+.cropsList {
+	height: 80px;
+} 
+.cropsList>a {
+	padding-top: 5px;
+	display: inline-block !important;
+	width: 48px;
+}
      
 /* ---------------------------------------------------
     MEDIAQUERIES

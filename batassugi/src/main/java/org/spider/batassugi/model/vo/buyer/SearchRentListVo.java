@@ -17,9 +17,9 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
  *      <pre>
  * == Modification Information ==
  * 
- * Date         AUTHOR           NOTE
- * -----------  -------------    --------------------------------
- * 2018. 5. 29.  "SL SangUk Lee"    최초작성
+ * Date          AUTHOR            NOTE
+ * -----------   ---------------   --------------------------------
+ * 2018. 5. 29.  "SL SangUk Lee"   최초작성
  *      </pre>
  */
 public class SearchRentListVo extends RentListVo {

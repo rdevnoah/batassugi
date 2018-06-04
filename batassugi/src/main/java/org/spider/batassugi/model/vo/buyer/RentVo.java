@@ -17,10 +17,10 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
  *      <pre>
  * == Modification Information ==
  * 
- * Date         AUTHOR           NOTE
- * -----------  -------------    --------------------------------
- * 2018. 5. 14.  "SM HyeonGil Kim" 최초작성
- * 2018. 5. 17.  "SL SangUk Lee"   대여신청에 필요한 RecruitVo 생성자, 게터, 세터 추가
+ * Date          AUTHOR             NOTE
+ * -----------   ----------------   --------------------------------
+ * 2018. 5. 14.  "SM HyeonGil Kim"  최초작성
+ * 2018. 5. 17.  "SL SangUk Lee"    대여신청에 필요한 RecruitVo 생성자, 게터, 세터 추가
  *      </pre>
  */
 

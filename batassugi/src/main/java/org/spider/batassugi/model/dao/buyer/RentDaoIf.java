@@ -29,6 +29,10 @@ import org.spider.batassugi.model.vo.seller.RecruitVo;
  * 2018. 5. 17.  "SL SangUk Lee"    findFarmAvailableCropsListByFarmNo 메서드 추가
  * 2018. 5. 17.  "SL SangUk Lee"    getRentList 메서드 추가
  * 2018. 5. 17.  "SL SangUk Lee"    totalRentListCount 메서드 추가
+ * 2018. 5. 27.  "SL SangUk Lee"    findRentListByKeyword 메서드 추가
+ * 2018. 5. 28.  "SL SangUk Lee"    getCropsList 메서드 추가
+ * 2018. 5. 28.  "SL SangUk Lee"    getFarmAddressList 메서드 추가
+ * 2018. 5. 28.  "SL SangUk Lee"    findTotalRentListCountByKeyword 메서드 추가
  *      </pre>
  */
 public interface RentDaoIf {
@@ -102,8 +106,22 @@ public interface RentDaoIf {
    * @return List
    */
   public List<String> getFarmAddressList();
-  
+
+  /**
+   * 대여신청 게시판 검색 메서드.
+   * 
+   * @author "SL SangUk Lee"
+   * @param searchVo 검색 결과 정보.
+   * @return List
+   */
   public List<RecruitVo> findRentListByKeyword(SearchRentListVo searchVo);
 
+  /**
+   * 대여신청 게시판 검색한 결과 카운트.
+   * 
+   * @author "SL SangUk Lee"
+   * @param searchVo 검색 결과 정보.
+   * @return int
+   */
   public int findTotalRentListCountByKeyword(SearchRentListVo searchVo);
 }

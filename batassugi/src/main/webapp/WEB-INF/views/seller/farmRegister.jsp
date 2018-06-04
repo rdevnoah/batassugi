@@ -176,7 +176,6 @@ function ResetImgvalue() {
 $(document).ready(function() {
 	
 	$('#sample6_address').on('keyup', function(e){
-		alert("dd")
 	    $(this).attr('size', $('#sample6_address').val().length);
 	});
 	

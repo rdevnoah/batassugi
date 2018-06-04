@@ -15,7 +15,7 @@
 							<div style="height: 50px; display: inline-block;"><span><i class="fa fa-map-marker fa-2x"></i> &nbsp;${farmVo.farmAddress}</span></div>
 								<p class="cropsList">
 									<c:forEach items="${farmVo.cropsVo}" var="crops">
-									<a data-placement="top" data-toggle="popover" data-trigger="hover" title="" data-content="${crops.cropsName}">
+									<a class="btn btn-link" data-placement="top" data-toggle="popover" data-trigger="hover" title="" data-content="${crops.cropsName}">
 										<img src="${pageContext.request.contextPath}/resources/img/crops_illur/${crops.cropsName}.png">
 									</a>
 									</c:forEach>

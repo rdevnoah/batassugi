@@ -379,7 +379,7 @@ drop table accuse
     
     select
     
-    update rent set rent_startdate = to_date('2018-04-23','yyyy-mm-dd') where rent_status = '대여중' 
+    update rent set rent_startdate = to_date('2018-01-23','yyyy-mm-dd') where rent_status = '대여중' 
     
     SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
@@ -506,3 +506,5 @@ select id, password, state_number from spider_member
     
     
     select * from farm
+    
+    select * from spider_

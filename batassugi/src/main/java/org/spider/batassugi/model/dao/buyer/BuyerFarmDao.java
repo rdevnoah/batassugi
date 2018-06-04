@@ -25,11 +25,15 @@ import org.springframework.stereotype.Repository;
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
- * 2018. 5. 14.  "SM HyeonGil Kim"  최초작성
+ * 2018. 5. 18.  "SL SangUk Lee"    최초작성
  * 2018. 5. 19.  "SL SangUk Lee"    findRentFarmInfoById 메서드 추가
  * 2018. 5. 19.  "SL SangUk Lee"    deleteRentByRentNo 메서드 추가
  * 2018. 5. 20.  "SL SangUk Lee"    registerApplySeller 메서드 추가
  * 2018. 5. 20.  "SL SangUk Lee"    findApplySellerById 메서드 추가
+ * 2018. 5. 23.  "SL SangUk Lee"    updateRecruitSizeResetByRecruitNo 메서드 추가
+ * 2018. 5. 23.  "SL SangUk Lee"    updateApplySeller 메서드 추가
+ * 2018. 5. 26.  "SL SangUk Lee"    updateRentStatus 메서드 추가
+ * 2018. 5. 29.  "SL SangUk Lee"    updateMemberLevel 메서드 추가
  *      </pre>
  */
 @Repository
