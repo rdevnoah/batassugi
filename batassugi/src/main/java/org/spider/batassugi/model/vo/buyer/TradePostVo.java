@@ -149,6 +149,7 @@ public class TradePostVo {
   public void setFile(MultipartFile file) {
     this.file = file;
   }
+  
   @Override
   public String toString() {
     return "TradePostVo [tradeNo=" + tradeNo + ", tradeKind=" + tradeKind + ", tradeHits="
