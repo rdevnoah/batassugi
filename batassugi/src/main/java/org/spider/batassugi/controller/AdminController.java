@@ -1,19 +1,15 @@
 package org.spider.batassugi.controller;
 
 import java.util.List;
-import org.spider.batassugi.model.service.admin.AccuseServiceIf;
-import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import org.spider.batassugi.model.service.admin.AccuseServiceIf;
 import org.spider.batassugi.model.service.admin.AdminServiceIf;
 import org.spider.batassugi.model.service.common.MemberServiceIf;
+import org.spider.batassugi.model.vo.admin.AccusePostVo;
 import org.spider.batassugi.model.vo.buyer.ApplySellerVo;
-import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.spider.batassugi.model.vo.common.PagingBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,11 +39,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AdminController {
+  
   @Resource
   private MemberServiceIf memberService;
   @Resource
   private AdminServiceIf adminService;
-
   @Resource
   private AccuseServiceIf accuseService;
 
@@ -63,16 +59,22 @@ public class AdminController {
   }
 
 
-
+  /**
+   * 판매자 승인 처리 뷰로 이동하는 컨트롤러입니다.
+   * @author "PM KimYoungHo"
+   * @param model 모델객체입니다.
+   * @param nowPage 페이징 처리를 위해 현재 페이지를 저장합니다.
+   * @return
+   */
   @RequestMapping("admin/applySellerView")
   public String applySellerView(Model model, String nowPage) {
     if (nowPage == null) {
       nowPage = "1";
     }
     PagingBean pb = adminService.paging(nowPage);
-    List<ApplySellerVo> aList = adminService.findApplyListByPb(pb);
+    List<ApplySellerVo> accuseList = adminService.findApplyListByPb(pb);
     model.addAttribute("paging", pb);
-    model.addAttribute("applyList", aList);
+    model.addAttribute("applyList", accuseList);
     // model.addAttribute("applyList", adminService.getAllApplyList());
     return "admin/applySellerView.tiles";
   }
@@ -81,7 +83,7 @@ public class AdminController {
    * 페이징 처리해서 리스트 전송.
    * 
    * @author "PL_Seonhwa"
-   * @param model
+   * @param model 모델 객체입니다.
    * @return
    */
   @RequestMapping("admin/adminAccuse")
@@ -100,7 +102,7 @@ public class AdminController {
    * 판매신청 상세정보를 ajax로 전송.
    * 
    * @author "PL_Seonhwa"
-   * @param applyNo
+   * @param applyNo 판매자 신청 번호입니다.
    * @return
    */
   @RequestMapping("detailapply")
@@ -113,7 +115,7 @@ public class AdminController {
    * 판매 신청 처리.
    * 
    * @author "PL_Seonhwa"
-   * @param avo
+   * @param avo 판매자 신청 객체입니다.
    * @return
    */
   @RequestMapping("admin/applySellerPro")
@@ -126,7 +128,7 @@ public class AdminController {
    * 신고신청 상세정보를 ajax로 전송.
    * 
    * @author "PL_Seonhwa"
-   * @param accuseNo
+   * @param accuseNo 신고 번호입니다.
    * @return
    */
   @RequestMapping("admin/detailaccuse")
@@ -139,7 +141,7 @@ public class AdminController {
    * 신고처리 메소드.
    * 
    * @author "PL_Seonhwa"
-   * @param accusePostVo
+   * @param accusePostVo 신고 게시판의 글 번호입니다.
    * @return
    */
   @RequestMapping("admin/accusePro")
@@ -152,7 +154,7 @@ public class AdminController {
    * admin view 처리.
    * 
    * @author "PL_Seonhwa"
-   * @param viewName
+   * @param viewName 관리자의 tiles의 처리를 위한 viewName 객체입니다. 
    * @return
    */
   @RequestMapping("admin/{viewName}")

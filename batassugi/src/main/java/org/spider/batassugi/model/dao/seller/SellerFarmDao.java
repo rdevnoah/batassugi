@@ -32,7 +32,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class SellerFarmDao implements SellerFarmDaoIf {
-  
+
   @Resource
   private SqlSessionTemplate template;
 
@@ -79,7 +79,7 @@ public class SellerFarmDao implements SellerFarmDaoIf {
 
   @Override
   public List<String> findLabels(int farmNo) {
-    return template.selectList("sellerFarm.findLabels",farmNo);
+    return template.selectList("sellerFarm.findLabels", farmNo);
   }
 
   @Override
@@ -104,7 +104,7 @@ public class SellerFarmDao implements SellerFarmDaoIf {
 
   @Override
   public List<CropsVo> getAvailableCropsList(int farmNo) {
-    return template.selectList("getAvailableCropsList",farmNo);
+    return template.selectList("getAvailableCropsList", farmNo);
   }
 
   @Override
@@ -116,5 +116,5 @@ public class SellerFarmDao implements SellerFarmDaoIf {
   public Object findRentSizeByFarmNo(String farmNo) {
     return template.selectOne("sellerFarm.findRentSizeByFarmNo", farmNo);
   }
-  
+
 }

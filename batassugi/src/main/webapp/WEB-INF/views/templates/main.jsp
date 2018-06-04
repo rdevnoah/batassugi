@@ -76,7 +76,7 @@
 	  <!-- 두번째 컨텐츠 -->
 	  <div class="col-sm-3 main_content">
 	  	<div class="main_content_heading">
-	  		<span class="main_icon"><i class="fa fa-globe fa-4x" aria-hidden="true"></i></i></i></span><br>
+	  		<span class="main_icon"><i class="fa fa-globe fa-4x" aria-hidden="true"></i></span><br>
 	      	<span class="main_title">농자천하지대본</span>
 	  	</div>
 	  	<div class="main_content_body">

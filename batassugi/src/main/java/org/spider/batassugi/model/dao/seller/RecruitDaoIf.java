@@ -61,7 +61,10 @@ public interface RecruitDaoIf {
    */
   void updateRentStatusReject(String rentNo);
 
+  /**
+   * 구매자가 농지 대여신청을 하고 난 후 모집 크기를 update 시켜주는 메소드입니다.
+   * @author "PM KimYoungHo"
+   * @param rentNo 대여번호입니다.
+   */
   void updateRecruitSize(String rentNo);
-  
-
 }

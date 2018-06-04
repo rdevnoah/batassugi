@@ -58,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     AND r.recruit_no = #{recruitNo}
   </select>
   
+  
   <select id="getRentList" resultMap="recruitVoRM" parameterType="buyerPagingBean">
     SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
@@ -72,12 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY rnum DESC
   </select>
   
+  <!-- 페이징 처리를 위해 총 대여 개수를 가져옵니다. -->
   <select id="totalRentListCount" resultType="int">
     SELECT count(*)
     FROM recruit
   </select>
   
-  
+  <!-- 농지의 재배 가능 작물을 가져오기 위한 쿼리입니다. -->
   <select id="findFarmAvailableCropsListByFarmNo" resultType="cropsVo" parameterType="int">
     SELECT c.crops_no AS cropsNo, c.crops_name AS cropsName, c.crops_level AS cropsLevel
     FROM farm f, recruit r, AVAILABLE_CROPS a, crops c

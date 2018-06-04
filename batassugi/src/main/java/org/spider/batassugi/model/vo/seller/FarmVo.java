@@ -44,14 +44,21 @@ public class FarmVo {
     super();
   }
 
-  
-  
-
- 
-
-
-
-
+  /**
+   * 생성자 오버로딩입니다.
+   * 
+   * @param farmNo 농지번호.
+   * @param memberInfoVo 사용자 상세정보 객체.
+   * @param farmSize 농지 크기.
+   * @param farmAddress 농지 주소.
+   * @param farmStartdate 농지 등록일.
+   * @param farmEnddate 농지 등록 만료일.
+   * @param image 농지 사진.
+   * @param cropsNo 농지 재배 가능 작물 이름 객체.
+   * @param cropsVo 농지 재배 가능 작물 객체.
+   * @param labels 농지 상태 라벨 저장.
+   * @param file 파일 객체.
+   */
   public FarmVo(int farmNo, MemberInfoVo memberInfoVo, int farmSize, String farmAddress,
       String farmStartdate, String farmEnddate, String image, List<String> cropsNo,
       List<CropsVo> cropsVo, List<String> labels, MultipartFile file) {
@@ -68,14 +75,6 @@ public class FarmVo {
     this.labels = labels;
     this.file = file;
   }
-
-
-
-
-
-
-
-
 
   /**
    * 생성자 오버로딩.
@@ -98,15 +97,12 @@ public class FarmVo {
     this.farmEnddate = farmEnddate;
   }
 
-
-
   /**
    * 농지정보 및 농작물 정보를 가져오는 생성자.
    * 
    * @author "GL_SangKyoung"
-   * @param farmNo 농지번호. <<<<<<< HEAD
-   * @param memberInfoVo 회원 아이디 =======
-   * @param memberInfoVo 회원정보가 담겨있는 객체. >>>>>>> refs/heads/develop_to_buyer
+   * @param farmNo 농지번호.
+   * @param memberInfoVo 회원정보가 담겨있는 객체.
    * @param farmSize 농지사이즈.
    * @param farmAddress 농지주소.
    * @param farmStartdate 농지등록날짜.
@@ -196,7 +192,6 @@ public class FarmVo {
 
   public void setFarmSize(int farmSize) {
     this.farmSize = farmSize;
-
   }
 
   public String getFarmStartdate() {
@@ -215,12 +210,9 @@ public class FarmVo {
     this.farmEnddate = farmEnddate;
   }
 
-
-
   public FarmVo() {
     super();
   }
-
 
   public void setMemberInfoVo(MemberInfoVo memberInfoVo) {
     this.memberInfoVo = memberInfoVo;
@@ -234,7 +226,6 @@ public class FarmVo {
     this.farmAddress = farmAddress;
   }
 
-
   public List<String> getCropsNo() {
     return cropsNo;
   }
@@ -242,7 +233,6 @@ public class FarmVo {
   public void setCropsNo(List<String> cropsNo) {
     this.cropsNo = cropsNo;
   }
-
 
   public List<String> getLabels() {
     return labels;
@@ -252,55 +242,21 @@ public class FarmVo {
     this.labels = labels;
   }
 
-  
-  
   public String getImage() {
     return image;
   }
-
-
-
-
-
-
-
-
 
   public void setImage(String image) {
     this.image = image;
   }
 
-
-
-
-
-
-
-
-
   public MultipartFile getFile() {
     return file;
   }
 
-
-
-
-
-
-
-
-
   public void setFile(MultipartFile file) {
     this.file = file;
   }
-
-
-
-
-
-
-
-
 
   @Override
   public String toString() {

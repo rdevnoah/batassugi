@@ -103,7 +103,8 @@ public class SellerController {
    * @param model Model 객체입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/registerFarmForm")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
+      value = "seller/registerFarmForm")
   public String registerFarmForm(Model model) {
     List<CropsVo> list = sellerFarmService.getCropsData();
     String date = sellerFarmService.getNow_Date();
@@ -121,7 +122,8 @@ public class SellerController {
    * @param farmNo 농지 번호입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/registerRecruitForm")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
+      value = "seller/registerRecruitForm")
   public String registerRecruitForm(Model model, String farmNo) {
     Map<String, Object> map = recruitService.findRentSizeAndFarmNoAndCropsAndMaxMonth(farmNo);
     model.addAttribute("recruitMap", map);
@@ -153,7 +155,8 @@ public class SellerController {
    * @param farmNo recruitVo 안의 farmVo의 farmNo를 세팅해주기 위해 입력받은 농지번호 값입니다.
    * @return
    */
-  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "seller/registerRecruit")
+  @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET},
+      value = "seller/registerRecruit")
   public String registerRecruit(RecruitVo vo, int farmNo) {
     vo.setFarmVo(new FarmVo(farmNo, null, 0, null, null, null));
     recruitService.registerRecruit(vo);
@@ -219,5 +222,5 @@ public class SellerController {
   public Object findBuyerDetailByRentNo(String rentNo) {
     return sellerFarmService.findBuyerDetailByRentNo(rentNo);
   }
- 
+
 }

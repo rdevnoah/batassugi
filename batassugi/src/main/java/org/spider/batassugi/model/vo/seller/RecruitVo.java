@@ -22,10 +22,7 @@ import org.spider.batassugi.model.vo.buyer.RentVo;
  * 2018. 5. 14.  "GL_SangKyoung"    최초작성
  * 2018. 5. 15.  "PM KimYoungHo"    Integer 타입 전체 primitive 타입인 int형으로 변경완료. Date 타입은 String으로 변경
  * 2018. 5. 15.  "PM KimYoungHo"    모집 등록 시 최대 대여 기간을 농지 등록의 마감날짜와 현재날짜의 월 계산을 통해 저장하는 변수 추가
-<<<<<<< HEAD
-=======
  * 2018. 5. 17.  "SL SangUkLee"     mybatis 에러문제로 생성자, get,set 메서드 수정
->>>>>>> refs/heads/develop_to_buyer
  *      </pre>
  */
 public class RecruitVo {
@@ -48,29 +45,19 @@ public class RecruitVo {
   }
 
   /**
-   * 전체 데이터 모두 포함(maxRentMonth)한 생성자입니다. 주로 구매자의 대여신청 페이지에서 사용하게 될 생성자입니다. <<<<<<< HEAD
+   * 모든 인스턴스 변수를 포함한 생성자입니다.
    * 
-   * @param recruitNo 모집번호입니다.
-   * @param farmVo 모집하는 밭의 정보가 저장된 객체입니다.
-   * @param recruitKind 모집종류입니다.
+   * @param recruitNo 모집 번호입니다.
+   * @param farmVo 농지 번호입니다.
+   * @param recruitKind 모집 종류입니다.
    * @param recruitStartdate 모집 시작일입니다.
-   * @param recruitEnddate 모집 마감일입니다.
+   * @param recruitEnddate 모집 종료일입니다.
    * @param price 평당 월 가격입니다.
    * @param recruitContent 모집 내용입니다.
-   * @param recruitStatus 모집 상태입니다. 모집중인지, 모집완료인지를 표현합니다.
-   * @param recruitSize 모집하는 총 평수입니다.
-   * @param rentVo 대여를 신청한 구매자들의 rentVo의 List변수입니다. =======
-   * 
-   * @param recruitNo 모집번호입니다.
-   * @param farmVo 모집하는 밭의 정보가 저장된 객체입니다.
-   * @param recruitKind 모집종류입니다.
-   * @param recruitStartdate 모집 시작일입니다.
-   * @param recruitEnddate 모집 마감일입니다.
-   * @param price 평당 월 가격입니다.
-   * @param recruitContent 모집 내용입니다.
-   * @param recruitStatus 모집 상태입니다. 모집중인지, 모집완료인지를 표현합니다.
-   * @param recruitSize 모집하는 총 평수입니다. >>>>>>> refs/heads/develop_to_buyer
-   * @param maxRentMonth 최대 대여 개월수를 저장합니다. 주로 구매자에서 사용합니다.
+   * @param recruitStatus 모집 상태입니다.
+   * @param recruitSize 모집 농지 크기입니다.
+   * @param rentVo 모집에 저장 될 대여인들의 정보 객체입니다.
+   * @param maxRentMonth 최대 대여 개월 수를 저장합니다.
    */
   public RecruitVo(int recruitNo, FarmVo farmVo, String recruitKind, String recruitStartdate,
       String recruitEnddate, int price, String recruitContent, String recruitStatus,
@@ -89,19 +76,20 @@ public class RecruitVo {
     this.maxRentMonth = maxRentMonth;
   }
 
+
   /**
-   * maxRentMonth를 제외한 생성자입니다. 주로 판매자가 모집을 insert 할 때 사용합니다.
+   * 생성자 오버로딩입니다.
    * 
    * @param recruitNo 모집번호입니다.
-   * @param farmVo 모집하는 밭의 정보가 저장된 객체입니다.
-   * @param recruitKind 모집종류입니다.
+   * @param farmVo 농지번호입니다.
+   * @param recruitKind 모집 종류입니다.
    * @param recruitStartdate 모집 시작일입니다.
-   * @param recruitEnddate 모집 마감일입니다.
-   * @param price 평당 월 가격입니다.
+   * @param recruitEnddate 모집 종료일입니다.
+   * @param price 평달 월 가격입니다.
    * @param recruitContent 모집 내용입니다.
-   * @param recruitStatus 모집 상태입니다. 모집중인지, 모집완료인지를 표현합니다.
-   * @param recruitSize 모집하는 총 평수입니다.
-   * @param rentVo 대여를 신청한 구매자들의 rentVo의 List변수입니다.
+   * @param recruitStatus 모집 상태입니다.
+   * @param recruitSize 모집 크기입니다.
+   * @param maxRentMonth 최대 대여 개월 수 입니다.
    */
   public RecruitVo(int recruitNo, FarmVo farmVo, String recruitKind, String recruitStartdate,
       String recruitEnddate, int price, String recruitContent, String recruitStatus,

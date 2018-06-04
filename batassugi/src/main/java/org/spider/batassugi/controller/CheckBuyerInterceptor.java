@@ -16,7 +16,7 @@ import org.spider.batassugi.model.vo.common.MemberInfoVo;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * 클래스 설명 : 반드시 마침표를 찍습니다.
+ * 구매자의 권한이 없는 사용자의 접근을 제어하기 위한 Interceptor입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.controller
@@ -40,11 +40,10 @@ public class CheckBuyerInterceptor extends HandlerInterceptorAdapter {
    * buyer 권한이 없는 작업은 모두 튕겨냄.
    * 
    * @author "PL_Seonhwa"
-   * @param request
-   * @param response
-   * @param handler
+   * @param request HttpServletRequest 객체입니다.
+   * @param response HttpServletResponse 객체입니다.
+   * @param handler Handler 객체입니다.
    * @return
-   * @throws Exception
    */
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
@@ -53,9 +52,11 @@ public class CheckBuyerInterceptor extends HandlerInterceptorAdapter {
     if (session != null && session.getAttribute("mvo") != null) {
       MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
       // 구매자가 아니면 튕겨라
-      if (mvo.getMemberVo().getmemberLevel().equals("초급") || mvo.getMemberVo().getmemberLevel().equals("중급") ||mvo.getMemberVo().getmemberLevel().equals("고급")) {
+      if (mvo.getMemberVo().getmemberLevel().equals("초급")
+          || mvo.getMemberVo().getmemberLevel().equals("중급")
+          || mvo.getMemberVo().getmemberLevel().equals("고급")) {
         return true;
-      }else {
+      } else {
         response.sendRedirect(request.getContextPath() + "/home/nosession");
         return false;
       }
