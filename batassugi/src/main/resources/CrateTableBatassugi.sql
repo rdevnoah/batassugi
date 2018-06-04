@@ -122,7 +122,7 @@ CREATE TABLE apply_seller
     apply_date			DATE			NOT NULL,
     apply_state         VARCHAR2(20)    DEFAULT '미처리' NOT NULL, 
     apply_resultdate    DATE            NULL, 
-    apply_reason        VARCHAR2(50)    NULL, 
+    apply_reason        VARCHAR2(500)   NULL, 
     CONSTRAINT APPLY_FAMMER_PK PRIMARY KEY (apply_no),
     CONSTRAINT FK_apply_fammer_id_member_id FOREIGN KEY (id) REFERENCES spider_member (id)
 );

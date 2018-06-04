@@ -37,7 +37,7 @@
 								</c:forEach>
 								</h4>
 							</div>
-							<button class="btn btn-primary btn-block detailFarm" value="${farmVo.farmNo}">상세보기</button>
+							<button class="btn btn-primary btn-block detailViewBtn" value="${farmVo.farmNo}">상세보기</button>
 						</div> <%-- caption --%>
 					</div> <%-- thumbnail --%>
 				</div> <%-- col-xs-4 --%>
@@ -134,14 +134,14 @@ $(document).ready(function() {
     $('[data-toggle="popover"]').popover()
 	var $data;
 	var $farmNo;
-	$(".detailFarm").on('click', function(e) {
+	$(".detailViewBtn").on('click', function(e) {
 		$farmNo=e.target.value;
 		$("#myModalFarmDetail").modal();
 	})
 	 $("#myModalFarmDetail").on('show.bs.modal', function(e){
 			 $.ajax({
 				type : 'post',
-				url:'getDetailFarm',
+				url:'${pageContext.request.contextPath}/seller/getDetailFarm',
 				data : 'farmNo='+$farmNo,
 				async : false,
 				success : function(data) {
@@ -160,14 +160,17 @@ $(document).ready(function() {
 					} */
 					var $crops =''
 						,$cropsImg = '';
-					$("#farmImage").html("<img src='${pageContext.request.contextPath}/resources/img/farm_photo/"+data.farmVo.image+"' style='height:170px;''>");
+					$("#farmImage").html("<img src='${pageContext.request.contextPath}/resources/img/farm_photo/"+data.farmVo.image+"' style='height:100px;''>");
 					$("#farmSize").html(data.farmVo.farmSize);
 					$("#farmAddress").html(data.farmVo.farmAddress);
 					$("#farmEnddate").html(data.farmVo.farmEnddate);
+					$("#crops").html("");
 					$.each(data.farmVo.cropsVo,function(i, cropsVo){
 						$crops = $('<a id="'+cropsVo.cropsName+'" class="btn btn-link" data-placement="bottom" data-toggle="popover" data-container="body" data-trigger="hover" title="" data-content="'+cropsVo.cropsName+'">')
 						$cropsImg = $('<img src="${pageContext.request.contextPath}/resources/img/crops_illur/'+cropsVo.cropsName+'.png">')
-						$('#crops').find('#'+cropsVo.cropsName).attr('data-content') !== cropsVo.cropsName && $("#crops").append($crops.append($cropsImg));
+						if($('#crops').find('#'+cropsVo.cropsName).attr('data-content') !== cropsVo.cropsName) {
+							$("#crops").append($crops.append($cropsImg));
+						}
 					})
 					$('[data-toggle="popover"]').popover()
 					/* $("#crops").html(crops); */

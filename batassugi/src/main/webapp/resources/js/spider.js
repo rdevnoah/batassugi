@@ -15,8 +15,8 @@ var $closeSide = $('#closeSide'),
 	$cropsList = $('.cropsList'),
 	$searchCategory = $('#searchCategory'),
 	$searchForm = $('#searchForm'),
-	$fail = $('body').find('#fail').text(),
-	$success = $('body').find('#success').text()
+	$fail = $('#fail').text(),
+	$success = $('#success').text()
 	
 	
 // 대여신청 성공시 RedirectAttribute 객체를 받아서 메세지 출력
@@ -172,7 +172,7 @@ $rentForm.on('submit', function() {
 			path = 'findRentDetailByRecruitNo', // 전송할 url주소
 			param = {'recruitNo' : $recruitNo}; // 전송할 파라미터 객체
 		// 대여신청하기버튼이 활성화가 되어있으면, detailView로 이동, 버튼이 비활성화가 되어있으면 모달메세지 출력
-		$thisClass != "btn btn-primary btn-block disabled" ?	
+		$thisClass != "btn btn-danger btn-block rentBtn disabled" ?	
 				rentList.detail($(this), path, param) : BootstrapDialog.alert("대여불가!").setType('danger')
 	});
 

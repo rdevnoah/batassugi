@@ -14,7 +14,7 @@
 							
 						<div class="form-group regGroup col-xs-2 text-center">
 							<h3 style="margin-top: 0px;">농지사진</h3>
-							<img id="previewImg" src="${pageContext.request.contextPath}/resources/img/logo.png" id="previewImg" style="height: 150px; margin-bottom: 10px;"/>
+							<img id="previewImg" src="${pageContext.request.contextPath}/resources/img/logo.png" id="previewImg" style="height: 130px; margin-bottom: 10px;"/>
 							<div class="filebox">
 								<label class="btn btn-primary" for="file">업로드</label>
 								<input type="file" name="file" id="file" class="form-control upload upload-hidden" placeholder="프로필을 넣어주세요" onchange="LoadImg(this);" accept=".gif, .jpg, .png" required>
@@ -22,30 +22,30 @@
 							</div>
 						</div>
 						
-						<div class="form-group regGroup col-xs-10">
+						<div class="form-group regGroup col-xs-offset-1 col-xs-9">
 							<label class="form-label" style="font-weight:normal;">농지 등록 평수 </label>
 							<input type="number" name="farmSize" id='farmSize' min="1" class="form-control" required>
 						</div>
 						
-						<div class="form-group regGroup col-xs-10">
+						<div class="form-group regGroup col-xs-offset-1 col-xs-9">
 							<label class="form-label" style="font-weight:normal;">농지 등록 날짜 </label>
 							<input type="text" name="farmStartdate" value="${requestScope.date}" class="form-control" readonly style="background-color: #FFFFFF;">
 						</div>
 						
 						
-						<div class="form-group regGroup col-xs-10">
+						<div class="form-group regGroup col-xs-offset-1 col-xs-9">
 							<label class="form-label" style="font-weight:normal;">농지 만료 날짜 </label>
 							<input id="endDate" type="date" name="farmEnddate" class="form-control" required>
 						</div>
 						
 						
-						<div class="form-group regGroup col-xs-10">
+						<div class="form-group regGroup col-xs-offset-1 col-xs-9">
 							<label class="form-label" style="font-weight:normal;">농지 등록 주소 </label> 
 							<input type="text" id="sample6_address" name="farmAddress" class="form-control" readonly style="background-color: #FFFFFF;">
 							<button type="button" class="btn btn-primary" onclick="sample6_execDaumPostcode()">주소선택</button>
 						</div>
 						
-						<div class="form-group regGroup col-xs-10">
+						<div class="form-group regGroup col-xs-offset-1 col-xs-9">
 							<label class="form-label" style="font-weight:normal;">가능 작물 선택 </label>
 							<select id="cropsSelect" class="form-control" required>
 								<option value="">---------선택---------</option>
@@ -55,12 +55,12 @@
 							</select>
 						</div>
 						
-						<div class="form-group regGroup col-xs-3">
+						<div class="form-group regGroup col-xs-offset-3 col-xs-3">
 							<span class="cropsList">
 							</span>
 						</div>
 						
-						<div class="form-group regGroup col-xs-12 text-center">
+						<div class="form-group regGroup col-xs-offset-1 col-xs-11 text-center">
 							<div class="col-xs-offset-2 col-xs-2">
 								<button type="submit" class="btn btn-primary btn-block">등록</button>
 							</div>

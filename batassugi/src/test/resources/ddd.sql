@@ -377,9 +377,11 @@ drop table accuse
     AND RT.id = 'test12'
     ORDER BY RT.rent_startdate DESC
     
-    select
+    select * from rent order by rent_no desc
     
-    update rent set rent_startdate = to_date('2018-01-23','yyyy-mm-dd') where rent_status = '대여중' 
+    update rent set rent_startdate = to_date('2017-08-23','yyyy-mm-dd') where rent_status = '대여중'
+    
+    
     
     SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
@@ -418,8 +420,12 @@ select id, password, state_number from spider_member
     
     UPDATE spider_member
     SET member_level = '초급'
-    WHERE id = 'test12'
+    WHERE id = 'buyer3'
 
+    
+    delete from rent where id = 'buyer2'
+    
+    select * from rent
     
    SELECT DISTINCT(R.recruit_no) AS recruitNo, R.recruit_kind AS recruitKind, 
     to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
@@ -508,3 +514,43 @@ select id, password, state_number from spider_member
     select * from farm
     
     select * from spider_
+    
+    
+    SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, R.recruit_size AS recruitSize, 
+    ROUND(MONTHS_BETWEEN(F.farm_enddate, R.recruit_startdate)) AS maxRentMonth, 
+    R.price AS price, R.recruit_content AS recruitContent, R.recruit_status AS recruitStatus, 
+    R.farm_no AS FarmNo, F.farm_address AS farmAddress, to_char(F.farm_enddate,'yy.mm.dd') AS farmEnddate,
+    M.name, M.nickname, I.tel, I.email
+    FROM recruit R, farm F, spider_member M, member_info I 
+    WHERE r.farm_no = F.farm_no
+    AND F.id = M.id 
+    AND M.id = I.id 
+    AND ROUND(MONTHS_BETWEEN(f.farm_enddate, r.recruit_startdate)) > 0
+    AND r.recruit_no = 1
+    
+    
+    select * from recruit
+    
+    delete from recruit
+    
+    delete from rent
+    
+      SELECT C.crops_no AS cropsNo, C.crops_name AS cropsName, 
+    C.crops_level AS cropsLevel, R.recruit_kind AS recruitKind, 
+    R.recruit_no AS recruitNo, R.recruit_size AS recruitSize, F.farm_address AS farmAddress, 
+    M.nickname, M.name, I.email, I.tel, I.image,
+    RT.rent_no AS rentNo, RT. rent_size AS rentSize, 
+    RT.rent_month AS rentMonth, RT.rent_status AS rentStatus, 
+    to_char(RT.rent_startdate,'yy.mm.dd') AS rentStartdate,
+    round(((sysdate-RT.rent_startdate)/(30*RT.rent_month))*100) as harvestStatus
+    FROM rent RT, recruit R, spider_member M, member_info I, farm F, crops C
+    WHERE RT.recruit_no = R.recruit_no
+    AND C.crops_no = RT.crops_no
+    AND R.farm_no = F.farm_no 
+    AND F.id = M.id
+    AND M.id = I.id
+    AND RT.id = 'abc'
+    ORDER BY RT.rent_startdate DESC
+    
+    
+    

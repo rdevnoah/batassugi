@@ -38,7 +38,7 @@
 								<button class="btn btn-primary btn-block rentBtn">대여하기</button>
 							</c:when>
 							<c:otherwise>
-								<button class="btn btn-primary btn-block disabled">대여하기</button>
+								<button class="btn btn-danger btn-block rentBtn disabled">대여불가</button>
 							</c:otherwise>
 						</c:choose>
 					</div> <%-- caption --%>

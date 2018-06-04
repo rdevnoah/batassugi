@@ -36,7 +36,7 @@
 							<td>${list.cropsVo.cropsName}</td>
 							<td>
 								<a class="harvestLevel text-success">
-									<c:if test="${list.rentStatus != '대기'}">
+									<c:if test="${list.rentStatus == '대여중' || list.rentStatus == '대여만료'}">
 										<span class="hidden">${list.harvestStatus}</span>
 										<span>수확상태 확인</span>
 									</c:if>
@@ -71,7 +71,7 @@
 			</div> <%-- col-sm-offset-2 col-sm-8 --%>
 		</div> <%-- row main --%>
 	</div> <%-- container-fluid --%>
-	<div class="hidden">${success}</div>
+	<div class="hidden" id ="success">${success}</div>
 
 	
 	<script>

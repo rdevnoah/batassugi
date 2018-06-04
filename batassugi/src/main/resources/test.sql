@@ -21,6 +21,15 @@ select * from accuse
 select * from recruit
 
 
+ select r.rent_no as rentNo, r.recruit_no as recruitNo, r.rent_size as rentSize, r.id, r.rent_month as rentMonth, 
+    r.rent_status as rentStatus from (
+    select row_number() over(order by rent_no desc) as rnum, r.rent_no, r.id, r.recruit_no, r.rent_size, r.rent_month, r.rent_status 
+    from rent r, recruit rc, farm f where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=8
+    )r 
+    where rnum between 1 and 1
+
+
+select * from farm
 select mi.id, m.nickname
 	from MEMBER_INFO mi, SPIDER_MEMBER m
 	where m.id=mi.id and m.id!='admin' and m.id!='test1'

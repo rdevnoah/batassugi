@@ -48,11 +48,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
   <!-- 해당 페이지에 출력 될 대여의 목록을 얻어오는 쿼리문입니다. -->
   <select id="findRentPagingList" parameterType="map" resultType="rentVo">
-    select r.rent_no as rentNo, r.recruit_no as recruitNo, r.rent_size as rentSize, r.id, r.rent_month as rentMonth, 
+    SELECT r.rent_no as rentNo, r.recruit_no as recruitNo, r.rent_size as rentSize, r.id, r.rent_month as rentMonth, 
     r.rent_status as rentStatus from (
-    select row_number() over(order by rent_no desc) as rnum, rent_no, id, recruit_no, rent_size, rent_month, rent_status from rent
-    )r, recruit rc, farm f where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo} and
-    rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+     SELECT row_number() OVER(order by rent_no desc) as rnum, r.rent_no, r.id, r.recruit_no, r.rent_size, r.rent_month, r.rent_status 
+     FROM rent r, recruit rc, farm f 
+     WHERE r.recruit_no = rc.recruit_no 
+     AND rc.farm_no=f.farm_no 
+     AND f.farm_no = #{farmNo}
+    )r 
+    WHERE rnum between #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber}
+    
   </select>
   
   <!-- 신청현황에서 상세보기를 눌렀을 때 상세정보를 얻어오는 쿼리문입니다. -->

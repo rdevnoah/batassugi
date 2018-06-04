@@ -27,7 +27,7 @@
 							<td>${rent.rentMonth}</td>
 							<td><button class="detailBuyerBtn" value="${rent.rentNo}">보기</button></td>
 							<td>
-								<c:if test="${rent.rentStatus=='대여중'}">
+								<c:if test="${rent.rentStatus=='대여중' || rent.rentStatus=='대여만료'}">
 									<h5><span class="label label-success">승인</span></h5>
 								</c:if>
 								<c:if test="${rent.rentStatus=='거절'}">
