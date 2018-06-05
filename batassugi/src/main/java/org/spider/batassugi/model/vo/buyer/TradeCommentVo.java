@@ -1,12 +1,32 @@
 package org.spider.batassugi.model.vo.buyer;
 
-import java.util.Date;
+import org.spider.batassugi.model.vo.common.MemberVo;
+
+/**
+ * 구매자가 거래 게시판 작성한 거래글 댓글을 저장하는 클래스입니다.
+ * 
+ * @title 밭아쓰기
+ * @packagename : org.spider.batassugi.model.vo.buyer
+ * @filename : TradeCommentVo.java
+ * @author : "SM HyeonGil Kim"
+ * @since : 2018. 5. 18.
+ * @version : 1.0
+ * @see
+ * 
+ *      <pre>
+ * == Modification Information ==
+ * 
+ * Date         AUTHOR           NOTE
+ * -----------  -------------    --------------------------------
+ * 2018. 5. 18.  "SM HyeonGil Kim"    최초작성
+ *      </pre>
+ */
 
 public class TradeCommentVo {
   private Integer replyNo;
   private Integer parentReply;
-  private String id;
-  private Date replyRegdate;
+  private MemberVo memberVo;
+  private String replyRegdate;
   private Integer tradeNo;
   private String replyComment;
 
@@ -16,21 +36,23 @@ public class TradeCommentVo {
   }
 
   /**
-   * 코멘트 게시판.
+   * 댓글 정보.
    * 
-   * @param replyNo 넣어주세요.
-   * @param parentReply 넣어주세요.
-   * @param id 넣어주세요. 
-   * @param replyRegdate 넣어주세요.
-   * @param tradeNo 넣어주세요.
-   * @param replyComment 넣어주세요.
+   * @author "SM HyeonGil Kim"
+   * @param replyNo 댓글 번호.
+   * @param parentReply 댓글 부모.
+   * @param memberVo 거래 게시판에 댓글작성한 회원 정보.
+   * @param replyRegdate 댓글 작성 날짜.
+   * @param tradeNo 거래 게시판 번호.
+   * @param replyComment 댓글 내용.
    */
-  public TradeCommentVo(Integer replyNo, Integer parentReply, String id, Date replyRegdate,
-      Integer tradeNo, String replyComment) {
+
+  public TradeCommentVo(Integer replyNo, Integer parentReply, MemberVo memberVo,
+      String replyRegdate, Integer tradeNo, String replyComment) {
     super();
     this.replyNo = replyNo;
     this.parentReply = parentReply;
-    this.id = id;
+    this.memberVo = memberVo;
     this.replyRegdate = replyRegdate;
     this.tradeNo = tradeNo;
     this.replyComment = replyComment;
@@ -52,19 +74,19 @@ public class TradeCommentVo {
     this.parentReply = parentReply;
   }
 
-  public String getId() {
-    return id;
+  public MemberVo getMemberVo() {
+    return memberVo;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setMemberVo(MemberVo memberVo) {
+    this.memberVo = memberVo;
   }
 
-  public Date getReplyRegdate() {
+  public String getReplyRegdate() {
     return replyRegdate;
   }
 
-  public void setReplyRegdate(Date replyRegdate) {
+  public void setReplyRegdate(String replyRegdate) {
     this.replyRegdate = replyRegdate;
   }
 
@@ -86,8 +108,8 @@ public class TradeCommentVo {
 
   @Override
   public String toString() {
-    return "TradeCommentVo [replyNo=" + replyNo + ", parentReply=" + parentReply + ", id=" + id
-        + ", replyRegdate=" + replyRegdate + ", tradeNo=" + tradeNo + ", replyComment="
+    return "TradeCommentVo [replyNo=" + replyNo + ", parentReply=" + parentReply + ", memberVo="
+        + memberVo + ", replyRegdate=" + replyRegdate + ", tradeNo=" + tradeNo + ", replyComment="
         + replyComment + "]";
   }
 

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * 클래스 설명 : 반드시 마침표를 찍습니다.
+ * 로그인하지 않은 사용자의 접근을 제어하기 위한 Interceptor입니다.
  * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.controller
@@ -44,7 +44,7 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
     if (session != null && session.getAttribute("mvo") != null) {
       return true;
     } else {
-      response.sendRedirect("/");
+      response.sendRedirect(request.getContextPath() + "/home/nosession");
       return false;
     }
   }

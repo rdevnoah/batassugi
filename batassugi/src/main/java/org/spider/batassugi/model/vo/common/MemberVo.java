@@ -41,11 +41,10 @@ public class MemberVo {
    * @param name 회원이름.
    * @param nickname 회원닉네임.
    * @param memberLevel 회원 레벨. 레벨1 -초급, 레벨2 - 중급, 레벨3 - 고급, 레벨4 - 농부, 레벨5 - 관리자.
-   * @param state 멤버 상태.
-   * @param stopdate 정지 멤버일 경우 정지 날짜
+   * @param state 
+   * @param stopdate 
    */
-  public MemberVo(String id, String password, String name, String nickname, String memberLevel,
-      String state, String stopdate) {
+  public MemberVo(String id, String password, String name, String nickname, String memberLevel, String state, String stopdate) {
     super();
     this.id = id;
     this.password = password;
@@ -117,8 +116,10 @@ public class MemberVo {
     return "MemberVo [id=" + id + ", password=" + password + ", name=" + name + ", nickname="
         + nickname + ", memberLevel=" + memberLevel + ", state=" + state + ", stopdate=" + stopdate
         + "]";
+
   }
 
 
-
 }
+
+

@@ -1,0 +1,66 @@
+package org.spider.batassugi.controller;
+
+
+/*
+ * Spring Handler Interceptor : DispatcherServlet이 해당 컨트롤러를 호출하기 전,후에 요청과 응답을 제어하는 역할을 한다.
+ * 
+ * 컨트롤러 실행전 preHandle(request,response,handler) 컨트롤러 실행후 postHandle(request,response,handler) 응답완료
+ * afterCompletion(request,response,handler) Spring에서 제공하는 HandlerInterceptorAdapter 를 상속받아 위와 같은
+ * 메서드를 오버라이딩해서 사용한다
+ * 
+ */
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.spider.batassugi.model.vo.common.MemberInfoVo;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+/**
+ * 관리자의 권한이 없는 사용자는 접근하지 못하게 처리하기 위한 Interceptor입니다.
+ * 
+ * @title 밭아쓰기
+ * @packagename : org.spider.batassugi.controller
+ * @filename : CheckLoginInterceptor.java
+ * @author : "Team Spider"
+ * @since : 2018. 5. 12.
+ * @version : 1.0
+ * @see
+ * 
+ *      <pre>
+ * == Modification Information ==
+ * 
+ * Date         AUTHOR           NOTE
+ * -----------  -------------    --------------------------------
+ * 2018. 5. 12.  "Team Spider"    최초작성
+ *      </pre>
+ */
+public class CheckAdminInterceptor extends HandlerInterceptorAdapter {
+
+  /**
+   * buyer 권한이 없는 작업은 모두 튕겨냄.
+   * 
+   * @author "PL_Seonhwa"
+   * @param request HttpServletRequest 객체입니다.
+   * @param response HttpServletResponse 객체입니다.
+   * @param handler Handler 객체입니다.
+   * @return
+   */
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+      throws Exception {
+    HttpSession session = request.getSession(false);
+
+    if (session != null && session.getAttribute("mvo") != null) {
+      MemberInfoVo mvo = (MemberInfoVo) session.getAttribute("mvo");
+      // 관리자가 아니면 튕겨라
+      if (!mvo.getMemberVo().getmemberLevel().equals("관리자")) {
+        response.sendRedirect(request.getContextPath() + "/home/nosession");
+        return false;
+      }
+      return true;
+    } else {
+      // 세션 없어도 튕겨라
+      response.sendRedirect(request.getContextPath() + "/home/nosession");
+      return false;
+    }
+  }
+}

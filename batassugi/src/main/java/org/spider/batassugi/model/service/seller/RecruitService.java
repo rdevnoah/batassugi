@@ -1,5 +1,12 @@
 package org.spider.batassugi.model.service.seller;
 
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Resource;
+import org.spider.batassugi.model.dao.seller.RecruitDaoIf;
+import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
+import org.spider.batassugi.model.vo.seller.FarmVo;
+import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +29,54 @@ import org.springframework.stereotype.Service;
  *      </pre>
  */
 @Service
-public class RecruitService {
+public class RecruitService implements RecruitServiceIf {
+  @Resource
+  private RecruitDaoIf recruitDao;
+
+  @Resource
+  private SellerFarmDaoIf sellerFarmDao;
+
+  @Override
+  public void registerRecruit(RecruitVo vo) {
+    recruitDao.registerRecruit(vo);
+  }
+
+  @Override
+  public String findRestFarmSizeByFarmNo(String farmNo) {
+    return recruitDao.findRestFarmSizeByFarmNo(farmNo);
+  }
+
+  @Override
+  public Map<String, Object> findRentSizeAndFarmNoAndCropsAndMaxMonth(String farmNo) {
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("farmNo", farmNo);
+    map.put("rentSize", recruitDao.findRestFarmSizeByFarmNo(farmNo));
+
+    Map<String, Object> map2 = new HashMap<String, Object>();
+    FarmVo vo = sellerFarmDao.findFarmDetail(farmNo);
+    vo.setCropsVo(sellerFarmDao.findAvailableCropsList(Integer.parseInt(farmNo)));
+    map2.put("farmVo", vo);
+    map2.put("rentList", sellerFarmDao.findRentByFarmNo(farmNo));
+
+    map.put("farmVo", map2);
+
+    map.put("maxMonth", recruitDao.findMaxMonth(farmNo));
+    return map;
+  }
+
+  @Override
+  public void updateRentStatusConfirm(String[] rentNo) {
+    for (int i = 0; i < rentNo.length; i++) {
+      recruitDao.updateRentStatusConfirm(rentNo[i]);
+    }
+  }
+
+  @Override
+  public void updateRentStatusReject(String[] rentNo) {
+    for (int i = 0; i < rentNo.length; i++) {
+      recruitDao.updateRentStatusReject(rentNo[i]);
+      recruitDao.updateRecruitSize(rentNo[i]);
+    }
+  }
 
 }

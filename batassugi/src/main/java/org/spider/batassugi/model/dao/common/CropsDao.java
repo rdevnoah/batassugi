@@ -1,7 +1,9 @@
 package org.spider.batassugi.model.dao.common;
 
+import java.util.List;
 import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.spider.batassugi.model.vo.common.CropsInfoVo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,10 +23,21 @@ import org.springframework.stereotype.Repository;
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 12.  "Team Spider"    최초작성
+ * 2018. 5. 16.  "DL KimJieun"      getCropsIconList() 메소드 추가
  *      </pre>
  */
 @Repository
-public class CropsDao {
+public class CropsDao implements CropsDaoIf {
   @Resource
   private SqlSessionTemplate template;
+
+  @Override
+  public List<CropsInfoVo> getCropsIconList() {
+    return template.selectList("crops.getIconList");
+  }
+
+  @Override
+  public CropsInfoVo getCropsDetail(String cropsNo) {
+    return template.selectOne("crops.getCropsDetail", cropsNo);
+  }
 }

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sellerFarm">
+  
+  <!-- 해당 아이디의 판매자의 등록한 농지들 List를 얻어오는 쿼리문입니다. -->
+  <select id="findSellerFarmList" parameterType="string" resultType="farmVo"><!-- farmVo에 밭정보 먼저 저장 -->
+    select farm_no as farmNo, farm_address as farmAddress, farm_size as farmSize, to_char(farm_Enddate, 'yyyy-mm-dd') as farmEnddate , image 
+    from farm
+    where id=#{id}
+  </select>
+
+  <!-- 판매자가 등록한 농지의 재배가능한 작물을 얻어오기 위한 쿼리문입니다. -->
+  <select id="findAvailableCropsList" parameterType="int" resultType="cropsVo"><!-- 이 후 farmVo에 있는 재배가능한 작물들인 cropsVo를 저장한다. -->
+    select c.crops_no as cropsNo, c.crops_name as cropsName 
+    from AVAILABLE_CROPS a, crops c, farm f
+    where f.farm_no=a.farm_no and a.crops_no=c.crops_no and f.farm_no=#{farmNo}
+  </select>
+  
+  <!-- 해당 농지의 상세정보를 얻어오는 쿼리문입니다. -->
+  <select id="findFarmDetail" parameterType="string" resultType="farmVo">
+    select farm_no as farmNo, farm_size as farmSize, farm_address as farmAddress, to_char(farm_enddate, 'yyyy-mm-dd') farmEnddate, image 
+    from farm
+    where farm_no=#{farmNo}
+  </select>
+  
+  <!-- 해당 농지의 대여인 정보를 얻어오기 위한 쿼리문입니다. -->
+  <select id="findRentByFarmNo" parameterType="string" resultType="rentVo">
+    select m.nickname as id, r.rent_size as rentSize from spider_member m, rent r, recruit c
+    where r.id=m.id and c.recruit_no=r.recruit_no and c.farm_no=#{farmNo} and r.rent_status='대여중'
+  </select>
+  
+  <!-- 농지에 상태를 Label로 표현하기 위해 상태정보를 String으로 얻어오는 쿼리문입니다. -->
+  <select id="findLabels" parameterType="int" resultType="string">
+    select distinct recruit_status from recruit where farm_no=#{farmNo} union all select distinct r.rent_status
+    from rent r, recruit c, farm f
+    where r.recruit_no=c.recruit_no and c.farm_no=f.farm_no and f.farm_no=#{farmNo}
+  </select>
+  
+  <!-- 페이징 처리를 위해 전체 대여 개수를 가져오는 쿼리문입니다. -->
+  <select id="getTotalRentListByFarmNo" parameterType="string" resultType="int">
+    select count(*)
+    from rent r, farm f, recruit rc
+    where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo}
+  </select>
+  
+  <!-- 해당 페이지에 출력 될 대여의 목록을 얻어오는 쿼리문입니다. -->
+  <select id="findRentPagingList" parameterType="map" resultType="rentVo">
+    SELECT r.rent_no as rentNo, r.recruit_no as recruitNo, r.rent_size as rentSize, r.id, r.rent_month as rentMonth, 
+    r.rent_status as rentStatus from (
+     SELECT row_number() OVER(order by rent_no desc) as rnum, r.rent_no, r.id, r.recruit_no, r.rent_size, r.rent_month, r.rent_status 
+     FROM rent r, recruit rc, farm f 
+     WHERE r.recruit_no = rc.recruit_no 
+     AND rc.farm_no=f.farm_no 
+     AND f.farm_no = #{farmNo}
+    )r 
+    WHERE rnum between #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber}
+    
+  </select>
+  
+  <!-- 신청현황에서 상세보기를 눌렀을 때 상세정보를 얻어오는 쿼리문입니다. -->
+  <select id="findBuyerDetailByRentNo" parameterType="string" resultType="map">
+    select m.nickname as NICKNAME, mi.tel as TEL, mi.image as IMAGE, 
+    to_char(ADD_MONTHS(r.rent_startdate,r.rent_month),'yyyy-mm-dd') as RENTENDDATE, c.crops_name as CROPSNAME, 
+    round(((sysdate-r.rent_startdate)/(30*r.rent_month))*100) as harvestStatus 
+    from spider_member m, member_info mi, rent r, crops c
+    where m.id=mi.id and r.id=m.id and c.crops_no=r.crops_no and r.rent_no=#{rentNo}
+  </select>
+  
+  <!-- 모집하는 농지의 크기를 가져오기 위한 쿼리문입니다. -->
+  <select id="findRecruitSizeByFarmNo" parameterType="string" resultType="string">
+    select sum(recruit_size) as recruitSize from recruit where farm_no=#{farmNo}
+  </select>
+  
+  <!-- 대여 중인 농지의 크기를 가져오기 위한 쿼리문입니다. -->
+  <select id="findRentSizeByFarmNo" parameterType="string" resultType="string">
+    select sum(r.rent_size) from rent r, recruit rc, farm f
+    where r.recruit_no=rc.recruit_no and rc.farm_no=f.farm_no and f.farm_no=#{farmNo} and r.rent_status='대여중'
+  </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

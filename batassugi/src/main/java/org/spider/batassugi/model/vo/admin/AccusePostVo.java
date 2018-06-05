@@ -1,22 +1,24 @@
 package org.spider.batassugi.model.vo.admin;
 
-import java.util.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 public class AccusePostVo {
-  private Integer accuseNo;
+  private String accuseNo;
   private String accuseCategory;
   private String accuseId;
   private String reportedId;
-  private Date accuseDate;
+  private String accuseDate;
   private String accuseReason;
   private String accuseProof;
-  private Date accuseResultday;
+  private String accuseState;
+  private String accuseResultday;
   private String resultReason;
+  private MultipartFile file;
 
   public AccusePostVo() {
     super();
   }
-
+  
   /**
    * 메소드 설명 : 신고게시판VO.
    * 
@@ -27,12 +29,13 @@ public class AccusePostVo {
    * @param accuseDate 신고일자.
    * @param accuseReason 신고사유.
    * @param accuseProof 신고증빙.
+   * @param accuseState 신고 처리 상태.
    * @param accuseResultday 신고처리일자.
    * @param resultReason 신고처리사유(거절시).
    */
-  public AccusePostVo(Integer accuseNo, String accuseCategory, String accuseId, String reportedId,
-      Date accuseDate, String accuseReason, String accuseProof, Date accuseResultday,
-      String resultReason) {
+  public AccusePostVo(String accuseNo, String accuseCategory, String accuseId, String reportedId,
+      String accuseDate, String accuseReason, String accuseProof, String accuseState,
+      String accuseResultday, String resultReason, MultipartFile file) {
     super();
     this.accuseNo = accuseNo;
     this.accuseCategory = accuseCategory;
@@ -41,15 +44,17 @@ public class AccusePostVo {
     this.accuseDate = accuseDate;
     this.accuseReason = accuseReason;
     this.accuseProof = accuseProof;
+    this.accuseState = accuseState;
     this.accuseResultday = accuseResultday;
     this.resultReason = resultReason;
+    this.file = file;
   }
 
-  public Integer getAccuseNo() {
+  public String getAccuseNo() {
     return accuseNo;
   }
 
-  public void setAccuseNo(Integer accuseNo) {
+  public void setAccuseNo(String accuseNo) {
     this.accuseNo = accuseNo;
   }
 
@@ -77,11 +82,11 @@ public class AccusePostVo {
     this.reportedId = reportedId;
   }
 
-  public Date getAccuseDate() {
+  public String getAccuseDate() {
     return accuseDate;
   }
 
-  public void setAccuseDate(Date accuseDate) {
+  public void setAccuseDate(String accuseDate) {
     this.accuseDate = accuseDate;
   }
 
@@ -101,11 +106,19 @@ public class AccusePostVo {
     this.accuseProof = accuseProof;
   }
 
-  public Date getAccuseResultday() {
+  public String getAccuseState() {
+    return accuseState;
+  }
+
+  public void setAccuseState(String accuseState) {
+    this.accuseState = accuseState;
+  }
+
+  public String getAccuseResultday() {
     return accuseResultday;
   }
 
-  public void setAccuseResultday(Date accuseResultday) {
+  public void setAccuseResultday(String accuseResultday) {
     this.accuseResultday = accuseResultday;
   }
 
@@ -117,13 +130,20 @@ public class AccusePostVo {
     this.resultReason = resultReason;
   }
 
+  public MultipartFile getFile() {
+    return file;
+  }
+
+  public void setFile(MultipartFile file) {
+    this.file = file;
+  }
+
   @Override
   public String toString() {
     return "AccusePostVo [accuseNo=" + accuseNo + ", accuseCategory=" + accuseCategory
         + ", accuseId=" + accuseId + ", reportedId=" + reportedId + ", accuseDate=" + accuseDate
-        + ", accuseReason=" + accuseReason + ", accuseProof=" + accuseProof + ", accuseResultday="
-        + accuseResultday + ", resultReason=" + resultReason + "]";
+        + ", accuseReason=" + accuseReason + ", accuseProof=" + accuseProof + ", accuseState="
+        + accuseState + ", accuseResultday=" + accuseResultday + ", resultReason=" + resultReason
+        + ", file=" + file + "]";
   }
-
-
 }

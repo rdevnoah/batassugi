@@ -1,67 +1,70 @@
 package org.spider.batassugi.model.vo.seller;
 
-import java.util.Date;
 import java.util.List;
 import org.spider.batassugi.model.vo.buyer.RentVo;
 
 /**
  * 모집정보를 처리해주는 VO입니다.
+ * 
  * @title 밭아쓰기
  * @packagename : org.spider.batassugi.model.vo.seller
  * @filename : RecruitVo.java
  * @author : "GL_SangKyoung"
  * @since : 2018. 5. 14.
  * @version : 1.0
- * @see 
+ * @see
  * 
- * <pre>
+ *      <pre>
  * == Modification Information ==
  * 
  * Date         AUTHOR           NOTE
  * -----------  -------------    --------------------------------
  * 2018. 5. 14.  "GL_SangKyoung"    최초작성
- * </pre>
+ * 2018. 5. 15.  "PM KimYoungHo"    Integer 타입 전체 primitive 타입인 int형으로 변경완료. Date 타입은 String으로 변경
+ * 2018. 5. 15.  "PM KimYoungHo"    모집 등록 시 최대 대여 기간을 농지 등록의 마감날짜와 현재날짜의 월 계산을 통해 저장하는 변수 추가
+ * 2018. 5. 17.  "SL SangUkLee"     mybatis 에러문제로 생성자, get,set 메서드 수정
+ *      </pre>
  */
 public class RecruitVo {
-  private Integer recruitNo;
-  private Integer farmNo;
+  private int recruitNo;
+  private FarmVo farmVo;
   private String recruitKind;
-  private Date recruitStartdate;
-  private Date recruitEnddate;
-  private Integer price;
+  private String recruitStartdate;
+  private String recruitEnddate;
+  private int price;
   private String recruitContent;
   private String recruitStatus;
-  private Integer recruitSize;
-  private String id;
+  private int recruitSize;
   private List<RentVo> rentVo;
+  private int maxRentMonth; // recruit와 farm 이 조인 farm 테이블의 enddate 와 sysdate를 차이를 달로 계산해서 저장하고 있는다.
+
+
 
   public RecruitVo() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   /**
-   * 모집 정보를 가져오는 생성자.
+   * 모든 인스턴스 변수를 포함한 생성자입니다.
    * 
-   * @author "GL_SangKyoung"
-   * @param recruitNo   모집번호
-   * @param farmNo  농지번호
-   * @param recruitKind 농지종류(주말농장,일반)
-   * @param recruitStartdate    모집시작일
-   * @param recruitEnddate  모집종료일
-   * @param price   평당가격
-   * @param recruitContent  모집내용
-   * @param recruitStatus   모집상태
-   * @param recruitSize 대여평수 
-   * @param id  회원정보
-   * @param rentVo  대여정보 가져오기위한 rentVo
+   * @param recruitNo 모집 번호입니다.
+   * @param farmVo 농지 번호입니다.
+   * @param recruitKind 모집 종류입니다.
+   * @param recruitStartdate 모집 시작일입니다.
+   * @param recruitEnddate 모집 종료일입니다.
+   * @param price 평당 월 가격입니다.
+   * @param recruitContent 모집 내용입니다.
+   * @param recruitStatus 모집 상태입니다.
+   * @param recruitSize 모집 농지 크기입니다.
+   * @param rentVo 모집에 저장 될 대여인들의 정보 객체입니다.
+   * @param maxRentMonth 최대 대여 개월 수를 저장합니다.
    */
-  public RecruitVo(Integer recruitNo, Integer farmNo, String recruitKind, Date recruitStartdate,
-      Date recruitEnddate, Integer price, String recruitContent, String recruitStatus,
-      Integer recruitSize, String id, List<RentVo> rentVo) {
+  public RecruitVo(int recruitNo, FarmVo farmVo, String recruitKind, String recruitStartdate,
+      String recruitEnddate, int price, String recruitContent, String recruitStatus,
+      int recruitSize, List<RentVo> rentVo, int maxRentMonth) {
     super();
     this.recruitNo = recruitNo;
-    this.farmNo = farmNo;
+    this.farmVo = farmVo;
     this.recruitKind = recruitKind;
     this.recruitStartdate = recruitStartdate;
     this.recruitEnddate = recruitEnddate;
@@ -69,24 +72,55 @@ public class RecruitVo {
     this.recruitContent = recruitContent;
     this.recruitStatus = recruitStatus;
     this.recruitSize = recruitSize;
-    this.id = id;
     this.rentVo = rentVo;
+    this.maxRentMonth = maxRentMonth;
   }
 
-  public Integer getRecruitNo() {
+
+  /**
+   * 생성자 오버로딩입니다.
+   * 
+   * @param recruitNo 모집번호입니다.
+   * @param farmVo 농지번호입니다.
+   * @param recruitKind 모집 종류입니다.
+   * @param recruitStartdate 모집 시작일입니다.
+   * @param recruitEnddate 모집 종료일입니다.
+   * @param price 평달 월 가격입니다.
+   * @param recruitContent 모집 내용입니다.
+   * @param recruitStatus 모집 상태입니다.
+   * @param recruitSize 모집 크기입니다.
+   * @param maxRentMonth 최대 대여 개월 수 입니다.
+   */
+  public RecruitVo(int recruitNo, FarmVo farmVo, String recruitKind, String recruitStartdate,
+      String recruitEnddate, int price, String recruitContent, String recruitStatus,
+      int recruitSize, int maxRentMonth) {
+    super();
+    this.recruitNo = recruitNo;
+    this.farmVo = farmVo;
+    this.recruitKind = recruitKind;
+    this.recruitStartdate = recruitStartdate;
+    this.recruitEnddate = recruitEnddate;
+    this.price = price;
+    this.recruitContent = recruitContent;
+    this.recruitStatus = recruitStatus;
+    this.recruitSize = recruitSize;
+    this.maxRentMonth = maxRentMonth;
+  }
+
+  public int getRecruitNo() {
     return recruitNo;
   }
 
-  public void setRecruitNo(Integer recruitNo) {
+  public void setRecruitNo(int recruitNo) {
     this.recruitNo = recruitNo;
   }
 
-  public Integer getFarmNo() {
-    return farmNo;
+  public FarmVo getFarmVo() {
+    return farmVo;
   }
 
-  public void setFarmNo(Integer farmNo) {
-    this.farmNo = farmNo;
+  public void setFarmVo(FarmVo farmVo) {
+    this.farmVo = farmVo;
   }
 
   public String getRecruitKind() {
@@ -97,27 +131,27 @@ public class RecruitVo {
     this.recruitKind = recruitKind;
   }
 
-  public Date getRecruitStartdate() {
+  public String getRecruitStartdate() {
     return recruitStartdate;
   }
 
-  public void setRecruitStartdate(Date recruitStartdate) {
+  public void setRecruitStartdate(String recruitStartdate) {
     this.recruitStartdate = recruitStartdate;
   }
 
-  public Date getRecruitEnddate() {
+  public String getRecruitEnddate() {
     return recruitEnddate;
   }
 
-  public void setRecruitEnddate(Date recruitEnddate) {
+  public void setRecruitEnddate(String recruitEnddate) {
     this.recruitEnddate = recruitEnddate;
   }
 
-  public Integer getPrice() {
+  public int getPrice() {
     return price;
   }
 
-  public void setPrice(Integer price) {
+  public void setPrice(int price) {
     this.price = price;
   }
 
@@ -137,24 +171,24 @@ public class RecruitVo {
     this.recruitStatus = recruitStatus;
   }
 
-  public Integer getRecruitSize() {
+  public int getRecruitSize() {
     return recruitSize;
   }
 
-  public void setRecruitSize(Integer recruitSize) {
+  public void setRecruitSize(int recruitSize) {
     this.recruitSize = recruitSize;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
   }
 
   public List<RentVo> getRentVo() {
     return rentVo;
+  }
+
+  public int getMaxRentMonth() {
+    return maxRentMonth;
+  }
+
+  public void setMaxRentMonth(int maxRentMonth) {
+    this.maxRentMonth = maxRentMonth;
   }
 
   public void setRentVo(List<RentVo> rentVo) {
@@ -163,11 +197,11 @@ public class RecruitVo {
 
   @Override
   public String toString() {
-    return "RecruitVo [recruitNo=" + recruitNo + ", farmNo=" + farmNo + ", recruitKind="
+    return "RecruitVo [recruitNo=" + recruitNo + ", farmVo=" + farmVo + ", recruitKind="
         + recruitKind + ", recruitStartdate=" + recruitStartdate + ", recruitEnddate="
         + recruitEnddate + ", price=" + price + ", recruitContent=" + recruitContent
-        + ", recruitStatus=" + recruitStatus + ", recruitSize=" + recruitSize + ", id=" + id
-        + ", rentVo=" + rentVo + "]";
+        + ", recruitStatus=" + recruitStatus + ", recruitSize=" + recruitSize + ", rentVo=" + rentVo
+        + ", maxRentMonth=" + maxRentMonth + "]";
   }
 
 }

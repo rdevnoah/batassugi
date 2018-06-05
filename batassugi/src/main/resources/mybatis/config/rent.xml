@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rent">
+  <insert id="registerRentByRentVo" parameterType="rentVo">
+    <selectKey keyProperty="rentNo" resultType="int" order="BEFORE">
+      SELECT rent_SEQ.nextval FROM dual
+    </selectKey>
+    INSERT INTO rent(rent_no, crops_no, id, recruit_no, rent_size, rent_month) 
+    VALUES(#{rentNo}, #{cropsVo.cropsNo}, #{id}, #{recruitVo.recruitNo}, #{rentSize}, #{rentMonth})
+  </insert>
+  
+  <update id="updateRecruitSizeByRecruitNo" parameterType="rentVo">
+    UPDATE recruit SET recruit_size = recruit_size-#{rentSize}
+    WHERE recruit_no = #{recruitVo.recruitNo}
+  </update>
+  
+  <update id="updateRecruitSizeResetByRecruitNo">
+    UPDATE recruit SET recruit_size = recruit_size+#{rentSize}
+    WHERE recruit_no = #{recruitNo}
+  </update>
+  
+  
+  <resultMap type="recruitVo" id="recruitVoRM">
+    <result column="farmNo" property="farmVo.farmNo" />
+    <result column="image" property="farmVo.image" />
+    <result column="farmAddress" property="farmVo.farmAddress" />
+    <result column="farmEnddate" property="farmVo.farmEnddate" />
+    <result column="id" property="farmVo.memberInfoVo.memberVo.id" />
+    <result column="name" property="farmVo.memberInfoVo.memberVo.name" />
+    <result column="nickname" property="farmVo.memberInfoVo.memberVo.nickname" />
+    <result column="tel" property="farmVo.memberInfoVo.tel" />
+    <result column="email" property="farmVo.memberInfoVo.email" />
+  </resultMap>
+  <select id="findRentDetailByRecruitNo" resultMap="recruitVoRM" parameterType="int">
+    SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, R.recruit_size AS recruitSize, 
+    ROUND(MONTHS_BETWEEN(F.farm_enddate, R.recruit_startdate)) AS maxRentMonth, 
+    R.price AS price, R.recruit_content AS recruitContent, R.recruit_status AS recruitStatus, 
+    R.farm_no AS FarmNo, F.farm_address AS farmAddress, to_char(F.farm_enddate,'yy.mm.dd') AS farmEnddate,
+    M.name, M.nickname, I.tel, I.email
+    FROM recruit R, farm F, spider_member M, member_info I 
+    WHERE r.farm_no = F.farm_no
+    AND F.id = M.id 
+    AND M.id = I.id 
+    AND ROUND(MONTHS_BETWEEN(f.farm_enddate, r.recruit_startdate)) > 0
+    AND r.recruit_no = #{recruitNo}
+  </select>
+  
+  <select id="getRentList" resultMap="recruitVoRM" parameterType="buyerPagingBean">
+    SELECT R.recruit_no AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress, F.image as image, M.nickname
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, recruit_no, recruit_kind, 
+      recruit_enddate, recruit_status, recruit_size, farm_no 
+      FROM recruit)R, farm F, spider_member M
+    WHERE R.farm_no = F.farm_no
+    AND F.id = M.id
+    AND rnum BETWEEN #{startRowNumber} AND #{endRowNumber}
+    ORDER BY R.recruit_no DESC
+  </select>
+  
+  <select id="getTotalRentListCount" resultType="int">
+    SELECT count(*)
+    FROM recruit
+  </select>
+  
+  <select id="findFarmAvailableCropsListByFarmNo" resultType="cropsVo" parameterType="int">
+    SELECT distinct(c.crops_no) AS cropsNo, c.crops_name AS cropsName, c.crops_level AS cropsLevel
+    FROM farm f, recruit r, AVAILABLE_CROPS a, crops c
+    WHERE r.farm_no = f.farm_no 
+    AND f.farm_no = a.farm_no 
+    AND a.crops_no = c.crops_no
+    AND f.farm_no = #{farmNo}
+  </select>
+  
+  <select id="getCropsList" resultType="string">
+    SELECT DISTINCT(crops_name) AS cropsName 
+    FROM crops
+  </select>
+  
+  <select id="getFarmAddressList" resultType="string">
+    SELECT DISTINCT(farm_address) AS farmAddress 
+    FROM farm
+  </select>
+  
+  <select id="findTotalRentListCountByKeyword" resultType="int" parameterType="searchRentListVo">
+    SELECT count(*)
+    <choose>
+      <when test="category.equals('address')">
+        FROM recruit R, farm F
+        WHERE REPLACE(F.farm_address, ' ', '') LIKE '%' || #{keyword} || '%'
+        AND R.farm_no = F.farm_no
+      </when>
+      <when test="category.equals('crops')">
+        FROM recruit R, farm F, available_crops A, crops C
+        WHERE C.crops_name = #{keyword}
+        AND R.farm_no = F.farm_no
+        AND F.farm_no = A.farm_no
+        AND A.crops_no = C.crops_no
+      </when>
+      <otherwise>
+        FROM recruit R
+      </otherwise>
+    </choose>
+  </select>
+  
+  <select id="findRentListByKeyword" resultMap="recruitVoRM" parameterType="searchRentListVo">
+   SELECT DISTINCT(R.recruit_no) AS recruitNo, R.recruit_kind AS recruitKind, 
+    to_char(R.recruit_enddate, 'yy.mm.dd') AS recruitEnddate, 
+    R.recruit_status AS recruitStatus, R.recruit_size AS recruitSize, R.farm_no AS farmNo,
+    F.farm_address AS farmAddress, F.image as image, M.nickname
+    FROM (
+      SELECT row_number() OVER(ORDER BY recruit_no DESC) AS rnum, R.recruit_no, R.recruit_kind, 
+      R.recruit_enddate, R.recruit_status, R.recruit_size, R.farm_no
+      <choose>
+        <when test="category.equals('crops')">
+          FROM recruit R, farm F, available_crops A, crops C 
+          WHERE R.farm_no = F.farm_no 
+          AND F.farm_no = A.farm_no 
+          AND A.crops_no = C.crops_no
+          AND C.crops_name = #{keyword}
+        </when>
+        <when test="category.equals('address')">
+          FROM recruit R, farm F
+          WHERE R.farm_no = F.farm_no 
+          AND REPLACE(F.farm_address, ' ', '') LIKE '%' || #{keyword} || '%'
+        </when>
+      </choose>)R, farm F, spider_member M, available_crops A, crops C
+    WHERE R.farm_no = F.farm_no
+    AND F.id = M.id
+    AND F.farm_no = A.farm_no
+    AND A.crops_no = C.crops_no
+    AND rnum BETWEEN #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber}
+    ORDER BY R.recruit_no DESC
+  </select>
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
