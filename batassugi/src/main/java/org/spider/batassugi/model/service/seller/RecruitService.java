@@ -8,6 +8,7 @@ import org.spider.batassugi.model.dao.seller.SellerFarmDaoIf;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.spider.batassugi.model.vo.seller.RecruitVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 판매자가 등록한 농지의 구매자를 모집하는 일련의 서비스를 정의합니다.
@@ -46,6 +47,7 @@ public class RecruitService implements RecruitServiceIf {
     return recruitDao.findRestFarmSizeByFarmNo(farmNo);
   }
 
+  @Transactional
   @Override
   public Map<String, Object> findRentSizeAndFarmNoAndCropsAndMaxMonth(String farmNo) {
     Map<String, Object> map = new HashMap<String, Object>();
@@ -64,6 +66,7 @@ public class RecruitService implements RecruitServiceIf {
     return map;
   }
 
+  @Transactional
   @Override
   public void updateRentStatusConfirm(String[] rentNo) {
     for (int i = 0; i < rentNo.length; i++) {
@@ -71,6 +74,7 @@ public class RecruitService implements RecruitServiceIf {
     }
   }
 
+  @Transactional
   @Override
   public void updateRentStatusReject(String[] rentNo) {
     for (int i = 0; i < rentNo.length; i++) {

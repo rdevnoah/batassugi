@@ -15,6 +15,7 @@ import org.spider.batassugi.model.vo.common.PagingBean;
 import org.spider.batassugi.model.vo.seller.FarmVo;
 import org.spider.batassugi.model.vo.seller.ListVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -46,6 +47,7 @@ public class SellerFarmService implements SellerFarmServiceIf, PathInfo {
   @Resource
   private RecruitDaoIf recruitDao;
 
+  @Transactional
   @Override
   public void farmInsert(FarmVo fvo) {
     fvo.getMemberInfoVo().setId(fvo.getMemberInfoVo().getMemberVo().getId());
@@ -58,6 +60,7 @@ public class SellerFarmService implements SellerFarmServiceIf, PathInfo {
     }
   }
 
+  @Transactional
   @Override
   public List<FarmVo> findSellerFarmList(String id) {
     List<FarmVo> farmList = sellerFarmDao.findSellerFarmList(id);
@@ -70,6 +73,7 @@ public class SellerFarmService implements SellerFarmServiceIf, PathInfo {
     return farmList;
   }
 
+  @Transactional
   @Override
   public Map<String, Object> findFarmDetail(String farmNo) {
     Map<String, Object> map = new HashMap<String, Object>();
@@ -99,6 +103,7 @@ public class SellerFarmService implements SellerFarmServiceIf, PathInfo {
 
   }
 
+  @Transactional
   @Override
   public ListVo findRecruitListByFarmNo(String farmNo, String nowPage) {
     ListVo listVo = new ListVo();
@@ -118,6 +123,7 @@ public class SellerFarmService implements SellerFarmServiceIf, PathInfo {
 
   }
 
+  @Transactional
   @Override
   public Object findBuyerDetailByRentNo(String rentNo) {
     Map<String, String> map = sellerFarmDao.findBuyerDetailByRentNo(rentNo);
